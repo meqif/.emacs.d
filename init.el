@@ -149,6 +149,7 @@
 ;; Highlight ag's search results
 (setq ag-highlight-search t)
 
+;; Enable IDO mode
 (when (> emacs-major-version 21)
   (ido-mode t)
   (setq ido-enable-prefix nil
@@ -172,6 +173,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
     (abort-recursive-edit)))
 
-;; Smex
+;; Enable smex
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
