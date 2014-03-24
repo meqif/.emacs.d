@@ -41,6 +41,32 @@
 ;; Never insert tabs
 (set-default 'indent-tabs-mode nil)
 
+;; Default directory
+(setq default-directory "~/")
+
+;; Fix path
+(setenv "PATH" (concat (getenv "PATH") ":~/homebrew/bin:/usr/local/texlive/2013/bin/x86_64-darwin"))
+(setq exec-path (append exec-path '("~/homebrew/bin")))
+(setq exec-path (append exec-path '("/usr/local/texlive/2013/bin/x86_64-darwin")))
+
+;; Use Aspell for spellcheck
+(setq ispell-program-name "~/homebrew/bin/aspell")
+(setq ispell-list-command "--list")
+
+;; Default language is Portuguese.
+(setq ispell-dictionary "pt_PT")
+
+;; Flyspell messages slow down the spellchecking process
+(setq flyspell-issue-message-flag nil)
+
+;; Save a list of recent files visited. (open recent file with C-x f)
+(recentf-mode 1)
+(setq recentf-max-saved-items 100) ;; just 20 is too recent
+
+;; Save minibuffer history
+(savehist-mode 1)
+(setq history-length 1000)
+
 ;; Packages
 
 (require 'cask "~/homebrew/Cellar/cask/0.6.0/cask.el")
@@ -100,37 +126,7 @@
 ;; Enable rainbow delimiters globally
 (setq global-rainbow-delimiters-mode t)
 
-;; Default directory
-(setq default-directory "~/")
-
-;;;;;;;;;;;;;;;;;;;;;;;
-;; Spellchecking
-;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Use Aspell for spellcheck
-(setq ispell-program-name "~/homebrew/bin/aspell")
-(setq ispell-list-command "--list")
-
-;; Default language is Portuguese.
-(setq ispell-dictionary "pt_PT")
-
-;; Flyspell messages slow down the spellchecking process
-(setq flyspell-issue-message-flag nil)
-
-;; Fix path
-(setenv "PATH" (concat (getenv "PATH") ":~/homebrew/bin:/usr/local/texlive/2013/bin/x86_64-darwin"))
-(setq exec-path (append exec-path '("~/homebrew/bin")))
-(setq exec-path (append exec-path '("/usr/local/texlive/2013/bin/x86_64-darwin")))
-
 (require 'setup-latex)
-
-;; Save a list of recent files visited. (open recent file with C-x f)
-(recentf-mode 1)
-(setq recentf-max-saved-items 100) ;; just 20 is too recent
-
-;; Save minibuffer history
-(savehist-mode 1)
-(setq history-length 1000)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
