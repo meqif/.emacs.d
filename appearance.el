@@ -57,4 +57,9 @@
         (column-number-mode "%c    ")
 )))
 
+;; Unclutter modeline
+(require 'diminish)
+(eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
+(eval-after-load "smartparens" '(diminish 'smartparens-mode))
+
 (provide 'appearance)

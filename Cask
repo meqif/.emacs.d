@@ -1,10 +1,11 @@
-(source gnu)
 (source melpa)
+(source gnu)
 
 (depends-on "ag")
 (depends-on "auctex")
 (depends-on "cask")
 (depends-on "dash")
+(depends-on "diminish")
 (depends-on "enh-ruby-mode")
 (depends-on "epl")
 (depends-on "evil")
