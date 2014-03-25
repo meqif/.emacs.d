@@ -12,6 +12,9 @@
 ;; Show keystrokes in progress
 (setq echo-keystrokes 0.1)
 
+;; Tabs
+(setq-default tab-width 4)
+
 ;; Disable backup
 (setq backup-inhibited t)
 
