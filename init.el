@@ -132,6 +132,7 @@
 ;; Enable rainbow delimiters globally
 (setq global-rainbow-delimiters-mode t)
 
+(require 'setup-c)
 (require 'setup-latex)
 
 (custom-set-variables
