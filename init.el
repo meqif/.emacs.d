@@ -70,6 +70,9 @@
 (savehist-mode 1)
 (setq history-length 1000)
 
+;; Ensure there's an empty line at the end of the file
+(setq-default require-final-newline t)
+
 ;; Packages
 
 (require 'cask "~/homebrew/Cellar/cask/0.6.0/cask.el")
