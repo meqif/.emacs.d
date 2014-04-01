@@ -26,6 +26,9 @@
 (add-hook 'LaTeX-mode-hook (lambda()
   (define-key LaTeX-mode-map (kbd "§") 'flyspell-buffer)))
 
+;; Autosave before compiling
+(setq TeX-save-query nil)
+
 ;; Enable RefTeX
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
