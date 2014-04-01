@@ -3,6 +3,7 @@
 
 (depends-on "ag")
 (depends-on "auctex")
+(depends-on "auto-complete")
 (depends-on "cask")
 (depends-on "dash")
 (depends-on "diminish")
