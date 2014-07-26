@@ -78,7 +78,7 @@
 
 ;; Packages
 
-(require 'cask "~/homebrew/Cellar/cask/0.6.0/cask.el")
+(require 'cask "~/homebrew/Cellar/cask/0.7.0/cask.el")
 (cask-initialize)
 (require 'pallet)
 
