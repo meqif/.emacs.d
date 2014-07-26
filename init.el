@@ -73,6 +73,9 @@
 ;; Ensure there's an empty line at the end of the file
 (setq-default require-final-newline t)
 
+;; Destroy trailing whitespace on exit
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; Packages
 
 (require 'cask "~/homebrew/Cellar/cask/0.6.0/cask.el")
