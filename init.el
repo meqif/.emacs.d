@@ -179,3 +179,21 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; Enable smex
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
+
+
+;; Comment or uncomment current line or region
+(defun comment-eclipse ()
+  (interactive)
+  (let ((start (line-beginning-position))
+        (end (line-end-position)))
+    (when (region-active-p)
+      (setq start (save-excursion
+                    (goto-char (region-beginning))
+                    (beginning-of-line)
+                    (point))
+            end (save-excursion
+                  (goto-char (region-end))
+                  (end-of-line)
+                  (point))))
+    (comment-or-uncomment-region start end)))
+(global-set-key (kbd "s-/") 'comment-eclipse)
