@@ -26,6 +26,15 @@
 (add-hook 'LaTeX-mode-hook (lambda()
   (define-key LaTeX-mode-map (kbd "§") 'flyspell-buffer)))
 
+(defun flyspell-check-next-highlighted-word ()
+  "Custom function to spell check next highlighted word"
+  (interactive)
+  (flyspell-goto-next-error)
+  (ispell-word)
+  )
+(global-set-key (kbd "<f5>") 'flyspell-check-next-highlighted-word)
+
+
 ;; Autosave before compiling
 (setq TeX-save-query nil)
 
