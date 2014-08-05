@@ -12,6 +12,7 @@
 (depends-on "evil")
 (depends-on "evil-leader")
 (depends-on "f")
+(depends-on "flx-ido")
 (depends-on "highlight-indentation")
 (depends-on "inf-ruby")
 (depends-on "js-comint")
