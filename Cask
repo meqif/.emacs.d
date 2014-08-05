@@ -10,6 +10,7 @@
 (depends-on "enh-ruby-mode")
 (depends-on "epl")
 (depends-on "evil")
+(depends-on "evil-leader")
 (depends-on "f")
 (depends-on "highlight-indentation")
 (depends-on "inf-ruby")

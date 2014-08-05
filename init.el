@@ -98,6 +98,10 @@
 (require 'smartparens-config)
 (smartparens-global-mode 1)
 
+;; Evil mode
+(global-evil-leader-mode)
+(evil-leader/set-key "f" 'projectile-find-file)
+
 ;; Enable evil mode
 (evil-mode 1)
 
