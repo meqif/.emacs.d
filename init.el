@@ -94,6 +94,9 @@
 ; (require 'setup-package)
 ; no longer needed because I'm using cask & pallet
 
+;; Awesome project navigation
+(projectile-global-mode)
+
 ;; Load default smartparens configuration
 (require 'smartparens-config)
 (smartparens-global-mode 1)
