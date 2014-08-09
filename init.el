@@ -210,3 +210,15 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
                   (point))))
     (comment-or-uncomment-region start end)))
 (global-set-key (kbd "s-/") 'comment-eclipse)
+
+;; Use only own snippets, do not use bundled ones
+(setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+
+;; Don't mess with the indentation
+(setq yas-indent-line 'fixed)
+
+;; Snippets everywhere
+(yas-global-mode 1)
+
+;; No need to be so verbose
+(setq yas-verbosity 1)

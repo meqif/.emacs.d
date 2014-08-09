@@ -32,3 +32,4 @@
 (depends-on "skewer-mode")
 (depends-on "smartparens")
 (depends-on "smex")
+(depends-on "yasnippet")

@@ -1,0 +1,11 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: todo
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+//   __________  ____  ____
+//  /_  __/ __ \/ __ \/ __ \
+//   / / / / / / / / / / / /
+//  / / / /_/ / /_/ / /_/ /
+// /_/  \____/_____/\____/
+//
+// $0
