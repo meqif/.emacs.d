@@ -41,6 +41,9 @@
 ;; Lines should be 80 characters wide, not 72
 (setq fill-column 80)
 
+;; Make fill-paragraph (Alt-Q and gq) respect the line width
+(setq fill-column 80)
+
 ;; Never insert tabs
 (set-default 'indent-tabs-mode nil)
 
