@@ -222,3 +222,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;; No need to be so verbose
 (setq yas-verbosity 1)
+
+;; Make imenu rescan automatically
+(setq imenu-auto-scan t)
