@@ -225,3 +225,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;; Make imenu rescan automatically
 (setq imenu-auto-scan t)
+
+;; Split undo-tree side-by-side, like decent people do.
+(defadvice undo-tree-visualize (around undo-tree-split-side-by-side activate)
+  "Split undo-tree side-by-side"
+  (let ((split-height-threshold nil)
+        (split-width-threshold 0))
+  ad-do-it))
