@@ -106,6 +106,8 @@
 (global-evil-leader-mode)
 (evil-leader/set-key "f" 'projectile-find-file)
 
+(evil-surround-mode t)
+
 ;; Enable evil mode
 (evil-mode 1)
 
