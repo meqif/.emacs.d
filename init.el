@@ -147,6 +147,7 @@
 
 (require 'setup-c)
 (require 'setup-latex)
+(require 'setup-markdown)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
