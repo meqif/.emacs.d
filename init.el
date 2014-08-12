@@ -106,7 +106,7 @@
 (global-evil-leader-mode)
 (evil-leader/set-key "f" 'projectile-find-file)
 
-(evil-surround-mode t)
+(global-evil-surround-mode 1)
 
 ;; Enable evil mode
 (evil-mode 1)
@@ -219,7 +219,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (setq yas-verbosity 1)
 
 ;; Make imenu rescan automatically
-(setq imenu-auto-scan t)
+(setq imenu-auto-rescan t)
 
 ;; Split undo-tree side-by-side, like decent people do.
 (defadvice undo-tree-visualize (around undo-tree-split-side-by-side activate)
