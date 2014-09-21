@@ -61,5 +61,6 @@
 (require 'diminish)
 (eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
+(eval-after-load "magit" '(diminish 'magit-auto-revert-mode))
 
 (provide 'appearance)
