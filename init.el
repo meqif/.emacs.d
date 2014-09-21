@@ -79,7 +79,7 @@
 
 ;; Packages
 
-(require 'cask "~/homebrew/Cellar/cask/0.7.0/cask.el")
+(require 'cask "~/homebrew/opt/cask/cask.el")
 (cask-initialize)
 (require 'pallet)
 
