@@ -152,9 +152,9 @@
 (require 'yasnippet)
 
 ;; Language-specific setup files
-(require 'setup-c)
-(require 'setup-latex)
-(require 'setup-markdown)
+(eval-after-load 'c-mode '(require 'setup-c))
+(eval-after-load 'LaTeX-mode '(require 'setup-latex))
+(eval-after-load 'markdown-mode '(require 'setup-markdown))
 (eval-after-load 'js2-mode '(require 'setup-javascript))
 
 
