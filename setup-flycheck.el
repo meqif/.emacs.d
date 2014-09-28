@@ -1,3 +1,5 @@
+(require 'flycheck)
+
 ; Show error message immediately
 (setq-default flycheck-display-errors-delay 0)
 
