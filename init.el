@@ -96,6 +96,7 @@
 
 ;; Awesome project navigation
 (projectile-global-mode)
+(add-to-list 'projectile-globally-ignored-directories "node_modules")
 
 ;; Load default smartparens configuration
 (require 'smartparens-config)
