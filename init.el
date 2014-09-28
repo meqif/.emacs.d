@@ -203,3 +203,11 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;; Emmet
 (add-hook 'sgml-mode-hook 'emmet-mode)
+
+;; Utils
+(defun convert-snake-case-to-camel-case (inputString)
+  " Convert string in snake_case to CamelCase"
+  (let (parts)
+    (setq parts (split-string inputString "-\\|_"))
+    (mapconcat 'upcase-initials parts "")
+  ))
