@@ -14,6 +14,9 @@
 
 (setq ns-function-modifier 'hyper)
 
+; Let right alt work as usual
+(setq ns-right-option-modifier 'none)
+
 ;; Portuguese mac-keyboard alt-keys)
 (define-key key-translation-map (kbd "H-8") (kbd "["))
 (define-key key-translation-map (kbd "H-(") (kbd "{"))
