@@ -149,6 +149,10 @@
 ;; Enable rainbow delimiters globally
 (global-rainbow-delimiters-mode)
 
+;; Setup extensions
+(require 'yasnippet)
+
+;; Language-specific setup files
 (require 'setup-c)
 (require 'setup-latex)
 (require 'setup-markdown)
@@ -195,18 +199,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
             (setq beg (line-beginning-position) end (line-end-position)))
         (comment-or-uncomment-region beg end)))
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
-
-;; Use only own snippets, do not use bundled ones
-(setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-
-;; Don't mess with the indentation
-(setq yas-indent-line 'fixed)
-
-;; Snippets everywhere
-(yas-global-mode 1)
-
-;; No need to be so verbose
-(setq yas-verbosity 1)
 
 ;; Make imenu rescan automatically
 (setq imenu-auto-rescan t)
