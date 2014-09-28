@@ -200,3 +200,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   ad-do-it))
 
 (require 'mode-mappings)
+
+;; Emmet
+(add-hook 'sgml-mode-hook 'emmet-mode)
