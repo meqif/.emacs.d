@@ -48,11 +48,6 @@
 ;; Default directory
 (setq default-directory "~/")
 
-;; Fix path
-(setenv "PATH" (concat (getenv "PATH") ":~/homebrew/bin:/usr/local/texlive/2013/bin/x86_64-darwin"))
-(setq exec-path (append exec-path '("~/homebrew/bin")))
-(setq exec-path (append exec-path '("/usr/local/texlive/2013/bin/x86_64-darwin")))
-
 ;; Use Aspell for spellcheck
 (setq ispell-program-name "~/homebrew/bin/aspell")
 (setq ispell-list-command "--list")
@@ -82,6 +77,10 @@
 (require 'cask "~/homebrew/opt/cask/cask.el")
 (cask-initialize)
 (require 'pallet)
+
+;; Fix path
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 ;; Keybindings
 
