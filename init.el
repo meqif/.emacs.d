@@ -132,7 +132,7 @@
 (global-rainbow-delimiters-mode)
 
 ;; Setup extensions
-(require 'yasnippet)
+(require 'setup-yasnippet)
 
 ;; Language-specific setup files
 (eval-after-load 'c-mode '(require 'setup-c))
