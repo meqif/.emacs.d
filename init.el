@@ -204,6 +204,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; Emmet
 (add-hook 'sgml-mode-hook 'emmet-mode)
 
+;; Disable evil mode in terminal
+(add-hook 'term-mode-hook 'evil-emacs-state)
+
 ;; Utils
 (defun convert-snake-case-to-camel-case (inputString)
   " Convert string in snake_case to CamelCase"
