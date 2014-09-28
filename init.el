@@ -221,4 +221,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
         (split-width-threshold 0))
   ad-do-it))
 
+(eval-after-load 'js2-mode '(require 'setup-javascript))
+
 (require 'mode-mappings)
