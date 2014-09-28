@@ -38,6 +38,9 @@
 ;; Autosave before compiling
 (setq TeX-save-query nil)
 
+;; Enable word wrapping
+(setq-local word-wrap t)
+
 ;; Enable RefTeX
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
@@ -53,5 +56,9 @@
              (?o . "\\citepr[]{%l}")
              (?n . "\\nocite{%l}")
              (?a . "\\autocite[]{%l}")))))
+
+
+;; Expand command regexp with biblatex stuff
+;; (setq flyspell-tex-command-regexp)
 
 (provide 'setup-latex)
