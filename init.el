@@ -220,3 +220,5 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (let ((split-height-threshold nil)
         (split-width-threshold 0))
   ad-do-it))
+
+(require 'mode-mappings)
