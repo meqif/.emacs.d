@@ -87,7 +87,6 @@
   (exec-path-from-shell-initialize))
 
 ;; Keybindings
-
 (require 'keybindings)
 
 ;; Appearance
@@ -156,6 +155,8 @@
 (require 'setup-c)
 (require 'setup-latex)
 (require 'setup-markdown)
+(eval-after-load 'js2-mode '(require 'setup-javascript))
+
 
 ;; Highlight ag's search results
 (setq ag-highlight-search t)
@@ -212,7 +213,5 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (let ((split-height-threshold nil)
         (split-width-threshold 0))
   ad-do-it))
-
-(eval-after-load 'js2-mode '(require 'setup-javascript))
 
 (require 'mode-mappings)
