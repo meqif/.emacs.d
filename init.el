@@ -157,6 +157,8 @@
 (eval-after-load 'markdown-mode '(require 'setup-markdown))
 (eval-after-load 'js2-mode '(require 'setup-javascript))
 
+;; Load stuff on demand
+(autoload 'flycheck-mode "setup-flycheck" nil t)
 
 ;; Highlight ag's search results
 (setq ag-highlight-search t)
