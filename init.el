@@ -212,5 +212,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   " Convert string in snake_case to CamelCase"
   (let (parts)
     (setq parts (split-string inputString "-\\|_"))
-    (mapconcat 'upcase-initials parts "")
+    (if (= 1 (length parts))
+        (car parts)
+        (mapconcat 'upcase-initials parts ""))
   ))
