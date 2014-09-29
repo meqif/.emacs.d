@@ -173,18 +173,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 
-
-;; Comment or uncomment current line or region
-(defun comment-or-uncomment-region-or-line ()
-    "Comments or uncomments the region or the current line if there's no active region."
-    (interactive)
-    (let (beg end)
-        (if (region-active-p)
-            (setq beg (region-beginning) end (region-end))
-            (setq beg (line-beginning-position) end (line-end-position)))
-        (comment-or-uncomment-region beg end)))
-(global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
-
 ;; Make imenu rescan automatically
 (setq imenu-auto-rescan t)
 
@@ -207,6 +195,19 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (add-hook 'term-mode-hook 'evil-emacs-state)
 
 ;; Utils
+
+(defun comment-or-uncomment-region-or-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+    (interactive)
+    (let (beg end)
+        (if (region-active-p)
+            (setq beg (region-beginning) end (region-end))
+            (setq beg (line-beginning-position) end (line-end-position)))
+        (comment-or-uncomment-region beg end)))
+
+;; Comment or uncomment current line or region
+(global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
+
 (defun to-camel-case (inputString)
   "Convert string to CamelCase"
   (let (parts)
