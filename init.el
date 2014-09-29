@@ -128,8 +128,8 @@
 (add-hook 'rust-mode-hook 'electric-indent-mode)
 (add-hook 'js2-mode-hook 'electric-indent-mode)
 
-;; Enable rainbow delimiters globally
-(global-rainbow-delimiters-mode)
+;; Enable rainbow delimiters in all programming modes
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 ;; Setup extensions
 (require 'setup-yasnippet)
