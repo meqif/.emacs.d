@@ -207,8 +207,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (add-hook 'term-mode-hook 'evil-emacs-state)
 
 ;; Utils
-(defun convert-snake-case-to-camel-case (inputString)
-  " Convert string in snake_case to CamelCase"
+(defun to-camel-case (inputString)
+  "Convert string to CamelCase"
   (let (parts)
     (setq parts (split-string inputString "-\\|_"))
     (if (= 1 (length parts))
