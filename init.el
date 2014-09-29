@@ -197,7 +197,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; Utils
 
 (defun comment-or-uncomment-region-or-line ()
-    "Comments or uncomments the region or the current line if there's no active region."
+    "Comment or uncomment the region or the current line if there's no active region."
     (interactive)
     (let (beg end)
         (if (region-active-p)
@@ -209,7 +209,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
 
 (defun to-camel-case (inputString)
-  "Convert string to CamelCase"
+  "Convert string to CamelCase."
   (let (parts)
     (setq parts (split-string inputString "-\\|_"))
     (if (= 1 (length parts))
