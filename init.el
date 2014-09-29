@@ -213,5 +213,4 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     (setq parts (split-string inputString "-\\|_"))
     (if (= 1 (length parts))
         (car parts)
-        (mapconcat 'upcase-initials parts ""))
-  ))
+        (mapconcat 'upcase-initials parts ""))))
