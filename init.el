@@ -124,9 +124,8 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
-;; Electric indent
-(add-hook 'rust-mode-hook 'electric-indent-mode)
-(add-hook 'js2-mode-hook 'electric-indent-mode)
+;; Enable electric indent in all programming modes
+(add-hook 'prog-mode-hook 'electric-indent-mode)
 
 ;; Enable rainbow delimiters in all programming modes
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
