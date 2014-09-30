@@ -33,29 +33,6 @@
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 
-(setq mode-line-format
-      (quote
-       (" "
-        mode-line-mule-info
-        mode-line-modified
-        mode-line-frame-identification
-        mode-line-buffer-identification
-        "   "
-        global-mode-string
-        "   %[("
-        ;; mode-line-mode-name is a function
-        ;; that copies the mode name and adds text
-        ;; properties to make it mouse-sensitive.
-        (:eval (mode-line-mode-name))
-        mode-line-process
-        minor-mode-alist
-        "%n"
-        ")%]  "
-        (which-func-mode ("" which-func-format " "))
-        (line-number-mode "%l")
-	","
-        (column-number-mode "%c    ")
-)))
 
 ;; Unclutter modeline
 (require 'diminish)
