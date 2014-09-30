@@ -1,4 +1,6 @@
 (add-hook 'markdown-mode-hook (lambda ()
+    ;; Enable word wrapping
+    (setq word-wrap t)
     (setq reftex-mode)
     (setq reftex-cite-format
         '(
