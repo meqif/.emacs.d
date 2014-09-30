@@ -1,6 +1,8 @@
 (add-hook 'markdown-mode-hook (lambda ()
     ;; Enable word wrapping
     (setq word-wrap t)
+    ;; Enable reftex citations
+    ;; This is particularly useful when writing papers to convert with pandoc
     (setq reftex-mode)
     (setq reftex-cite-format
         '(
