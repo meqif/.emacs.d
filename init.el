@@ -138,21 +138,6 @@
         ido-use-filename-at-point nil
         ido-max-prospects 10))
 
-; Map escape to cancel (like C-g)...
-;; (define-key isearch-mode-map [escape] 'isearch-abort)   ;; isearch
-;; (global-set-key [escape] 'keyboard-escape-quit)         ;; everywhere else
-
-;; esc quits
-(defun minibuffer-keyboard-quit ()
-  "Abort recursive edit.
-In Delete Selection mode, if the mark is active, just deactivate it;
-then it takes a second \\[keyboard-quit] to abort the minibuffer."
-  (interactive)
-  (if (and delete-selection-mode transient-mark-mode mark-active)
-      (setq deactivate-mark  t)
-    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
-    (abort-recursive-edit)))
-
 ;; Enable smex
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
