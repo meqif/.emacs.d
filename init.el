@@ -19,15 +19,8 @@
 ;; Default directory
 (setq default-directory "~/")
 
-;; Use Aspell for spellcheck
-(setq ispell-program-name "~/homebrew/bin/aspell")
-(setq ispell-list-command "--list")
-
-;; Default language is Portuguese.
-(setq ispell-dictionary "pt_PT")
-
-;; Flyspell messages slow down the spellchecking process
-(setq flyspell-issue-message-flag nil)
+;; Flyspell 4 gud speel
+(require 'setup-flyspell)
 
 ;; Save a list of recent files visited. (open recent file with C-x f)
 (recentf-mode 1)
