@@ -105,24 +105,7 @@
 (require 'smartparens-config)
 (smartparens-global-mode 1)
 
-;; Evil mode
-(global-evil-leader-mode)
-(evil-leader/set-key "f" 'projectile-find-file)
-
-(global-evil-surround-mode 1)
-
-;; Enable evil mode
-(evil-mode 1)
-
-;;; esc quits
-
-(define-key evil-normal-state-map [escape] 'keyboard-quit)
-(define-key evil-visual-state-map [escape] 'keyboard-quit)
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+(require 'setup-evil)
 
 ;; Enable electric indent in all programming modes
 (add-hook 'prog-mode-hook 'electric-indent-mode)
@@ -191,9 +174,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;; Emmet
 (add-hook 'sgml-mode-hook 'emmet-mode)
-
-;; Disable evil mode in terminal
-(add-hook 'term-mode-hook 'evil-emacs-state)
 
 ;; Utils
 (require 'setup-utils)
