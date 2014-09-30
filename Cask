@@ -17,6 +17,7 @@
 (depends-on "f")
 (depends-on "flx-ido")
 (depends-on "flycheck")
+(depends-on "flycheck-rust")
 (depends-on "helm")
 (depends-on "helm-ls-git")
 (depends-on "helm-projectile")
