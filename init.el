@@ -19,9 +19,6 @@
 ;; Default directory
 (setq default-directory "~/")
 
-;; Flyspell 4 gud speel
-(require 'setup-flyspell)
-
 ;; Packages
 
 (require 'cask "~/homebrew/opt/cask/cask.el")
@@ -72,6 +69,7 @@
 
 ;; Load stuff on demand
 (autoload 'flycheck-mode "setup-flycheck" nil t)
+(autoload 'flyspell-mode "setup-flyspell" nil t)
 
 ;; Highlight ag's search results
 (setq ag-highlight-search t)
