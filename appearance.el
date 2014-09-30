@@ -37,6 +37,9 @@
 (eval-after-load "nyan-mode" (setq-default nyan-bar-length 16))
 (autoload 'nyan-create "nyan-mode") ; Nyan doesn't how to autoload :(
 
+;; Enable nyan cat :3
+(nyan-mode)
+
 (defvar mein-projectile-mode-line
   '(:propertize
     (:eval (when (ignore-errors (projectile-project-root))
