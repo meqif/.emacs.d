@@ -4,16 +4,8 @@
 
 (global-linum-mode 1)
 
-; (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0")
-; (require 'color-theme)
-; (color-theme-initialize)
-;
-; (load "~/.emacs.d/colorschemes/color-theme-molokai.el")
-; (color-theme-molokai)
-
 (setq custom-theme-directory "~/.emacs.d/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
-;(load-theme 'default-black t)
 (load-theme 'solarized-light t)
 
 ;; mac friendly font
