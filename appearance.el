@@ -37,6 +37,24 @@
 (eval-after-load "nyan-mode" (setq-default nyan-bar-length 16))
 (autoload 'nyan-create "nyan-mode") ; Nyan doesn't how to autoload :(
 
+(defvar mein-projectile-mode-line
+  '(:propertize
+    (:eval (when (ignore-errors (projectile-project-root))
+             ;; (concat " " (projectile-project-name))))
+             (projectile-project-name)))
+    face font-lock-constant-face)
+  "Mode line format for Projectile.")
+(put 'mein-projectile-mode-line 'risky-local-variable t)
+
+(defvar mein-vc-mode-line
+  '(" " (:propertize
+         ;; Strip the backend name from the VC status information
+         (:eval (let ((backend (symbol-name (vc-backend (buffer-file-name)))))
+                  (substring vc-mode (+ (length backend) 2))))
+         face font-lock-variable-name-face))
+  "Mode line format for VC Mode.")
+(put 'mein-vc-mode-line 'risky-local-variable t)
+
 (setq-default mode-line-format
               '("%e" mode-line-front-space
                 ;; Standard info about the current buffer
@@ -48,7 +66,12 @@
                 mode-line-buffer-identification " " mode-line-position
                 ;; Show evil-mode state
                 evil-mode-line-tag
+                ;; Project information
+                mein-projectile-mode-line
+                ;; Version control information
+                mein-vc-mode-line
                 ;; Misc information
+                " "
                 mode-line-misc-info
                 ;; Finally, the modes
                 " " mode-line-modes mode-line-end-spaces
@@ -66,6 +89,7 @@
 (eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
 (eval-after-load "magit" '(diminish 'magit-auto-revert-mode))
+(eval-after-load "projectile" '(diminish 'projectile-mode))
 
 (defmacro rename-modeline (package-name mode new-name)
   `(eval-after-load ,package-name
