@@ -32,14 +32,11 @@
 ;; Enable nyan cat :3
 (nyan-mode)
 
-(defvar mein-projectile-mode-line
-  '(:propertize
-    (:eval (when (ignore-errors (projectile-project-root))
-             ;; (concat " " (projectile-project-name))))
-             (projectile-project-name)))
-    face font-lock-constant-face)
-  "Mode line format for Projectile.")
-(put 'mein-projectile-mode-line 'risky-local-variable t)
+;; Customize Projectile mode line
+(setq
+ projectile-mode-line '(:propertize
+                        (:eval (concat " " (projectile-project-name)))
+                        face font-lock-constant-face))
 
 (defvar mein-vc-mode-line
   '(" " (:propertize
@@ -62,7 +59,7 @@
                 ;; Show evil-mode state
                 evil-mode-line-tag
                 ;; Project information
-                mein-projectile-mode-line
+                (projectile-mode projectile-mode-line)
                 ;; Version control information
                 mein-vc-mode-line
                 ;; Misc information
