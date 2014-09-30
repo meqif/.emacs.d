@@ -41,4 +41,6 @@
 (depends-on "skewer-mode")
 (depends-on "smartparens")
 (depends-on "smex")
+(depends-on "toml-mode")
+(depends-on "yaml-mode")
 (depends-on "yasnippet")
