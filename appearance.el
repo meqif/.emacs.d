@@ -85,7 +85,6 @@
                 (line-number-mode
                  ("%l" (column-number-mode ":%c"))))
               )
-(setq-local mode-line-format (default-value 'mode-line-format))
 
 ;; Unclutter modeline
 (require 'diminish)
