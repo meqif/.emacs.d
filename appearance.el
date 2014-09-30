@@ -61,7 +61,7 @@
                 ;; Project information
                 (projectile-mode projectile-mode-line)
                 ;; Version control information
-                mein-vc-mode-line
+                (vc-mode mein-vc-mode-line)
                 ;; Misc information
                 " "
                 mode-line-misc-info
