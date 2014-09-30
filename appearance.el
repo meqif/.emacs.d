@@ -77,7 +77,7 @@
                 " " mode-line-modes mode-line-end-spaces
                 )
               mode-line-position
-              '((:eval (nyan-create))
+              '((:eval (when nyan-mode (nyan-create)))
                 " "
                 (line-number-mode
                  ("%l" (column-number-mode ":%c"))))
