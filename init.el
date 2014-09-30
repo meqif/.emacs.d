@@ -48,15 +48,8 @@
 (require 'smartparens-config)
 (smartparens-global-mode 1)
 
-(require 'setup-evil)
-
-;; Enable electric indent in all programming modes
-(add-hook 'prog-mode-hook 'electric-indent-mode)
-
-;; Enable rainbow delimiters in all programming modes
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
 ;; Setup extensions
+(require 'setup-evil)
 (require 'setup-yasnippet)
 (require 'setup-ido)
 
@@ -91,9 +84,16 @@
         (split-width-threshold 0))
   ad-do-it))
 
+;; Some files need their modes explicitly set
 (require 'mode-mappings)
 
-;; Emmet
+;; Enable electric indent in all programming modes
+(add-hook 'prog-mode-hook 'electric-indent-mode)
+
+;; Enable rainbow delimiters in all programming modes
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+;; Enable Emmet in tag soup modes
 (add-hook 'sgml-mode-hook 'emmet-mode)
 
 ;; Utils
