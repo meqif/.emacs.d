@@ -33,6 +33,33 @@
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 
+;; Shorten nyan cat bar length
+(eval-after-load "nyan-mode" (setq-default nyan-bar-length 16))
+(autoload 'nyan-create "nyan-mode") ; Nyan doesn't how to autoload :(
+
+(setq-default mode-line-format
+              '("%e" mode-line-front-space
+                ;; Standard info about the current buffer
+                mode-line-mule-info
+                mode-line-client
+                mode-line-modified
+                mode-line-remote
+                mode-line-frame-identification
+                mode-line-buffer-identification " " mode-line-position
+                ;; Show evil-mode state
+                evil-mode-line-tag
+                ;; Misc information
+                mode-line-misc-info
+                ;; Finally, the modes
+                " " mode-line-modes mode-line-end-spaces
+                )
+              mode-line-position
+              '((:eval (nyan-create))
+                " "
+                (line-number-mode
+                 ("%l" (column-number-mode ":%c"))))
+              )
+(setq-local mode-line-format (default-value 'mode-line-format))
 
 ;; Unclutter modeline
 (require 'diminish)
