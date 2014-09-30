@@ -115,6 +115,7 @@
 
 ;; Setup extensions
 (require 'setup-yasnippet)
+(require 'setup-ido)
 
 ;; Language-specific setup files
 (eval-after-load 'c-mode '(require 'setup-c))
@@ -128,15 +129,6 @@
 
 ;; Highlight ag's search results
 (setq ag-highlight-search t)
-
-;; Enable IDO mode
-(when (> emacs-major-version 21)
-  (ido-mode t)
-  (setq ido-enable-prefix nil
-        ido-enable-flex-matching t
-        ido-create-new-buffer 'always
-        ido-use-filename-at-point nil
-        ido-max-prospects 10))
 
 ;; Enable smex
 (smex-initialize)
