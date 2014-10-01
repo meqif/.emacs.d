@@ -40,8 +40,7 @@
 ; no longer needed because I'm using cask & pallet
 
 ;; Awesome project navigation
-(projectile-global-mode)
-(add-to-list 'projectile-globally-ignored-directories "node_modules")
+(require 'setup-projectile)
 
 ;; Load default smartparens configuration
 (require 'smartparens-config)
