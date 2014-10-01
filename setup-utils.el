@@ -1,3 +1,6 @@
+;;----------------------------------------------------------------------------
+;; Comment or uncomment current line or active region
+;;----------------------------------------------------------------------------
 (defun comment-or-uncomment-region-or-line ()
     "Comment or uncomment the region or the current line if there's no active region."
     (interactive)
@@ -8,6 +11,9 @@
         (comment-or-uncomment-region beg end)))
 
 
+;;----------------------------------------------------------------------------
+;; Convert string to CamelCase
+;;----------------------------------------------------------------------------
 (defun to-camel-case (inputString)
   "Convert string to CamelCase."
   (let (parts)
