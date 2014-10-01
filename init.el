@@ -97,3 +97,9 @@
 
 ;; Utils
 (require 'setup-utils)
+
+;; Misc
+
+;; Highlight the current entry in browse-kill-ring
+(eval-after-load "browse-kill-ring"
+  '(setq browse-kill-ring-highlight-current-entry t))
