@@ -15,7 +15,7 @@
 ;; Convert string to CamelCase
 ;;----------------------------------------------------------------------------
 (defun to-camel-case (inputString)
-  "Convert string to CamelCase."
+  "Convert string to CamelCase if it has multiple parts."
   (let (parts)
     (setq parts (split-string inputString "-\\|_"))
     (if (= 1 (length parts))
