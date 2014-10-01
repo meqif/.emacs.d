@@ -6,6 +6,9 @@
 ;; Quick shortcut to projectile-find-file
 (evil-leader/set-key "f" 'projectile-find-file)
 
+;; Quick shortcut to browse-kill-ring
+(evil-leader/set-key "p" 'browse-kill-ring)
+
 ;; Evil surround is a must
 (global-evil-surround-mode 1)
 
