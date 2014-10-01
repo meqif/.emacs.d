@@ -29,4 +29,9 @@
 (define-key key-translation-map (kbd "M-(") (kbd "{"))
 (define-key key-translation-map (kbd "M-)") (kbd "}"))
 
+;; Misc
+
+;; Kill current buffer without prompting
+(global-set-key (kbd "H-k") 'kill-this-buffer)
+
 (provide 'keybindings)
