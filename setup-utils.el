@@ -7,8 +7,6 @@
             (setq beg (line-beginning-position) end (line-end-position)))
         (comment-or-uncomment-region beg end)))
 
-;; Comment or uncomment current line or region
-(global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
 
 (defun to-camel-case (inputString)
   "Convert string to CamelCase."
