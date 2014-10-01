@@ -20,7 +20,6 @@
 (setq default-directory "~/")
 
 ;; Packages
-
 (require 'cask "~/homebrew/opt/cask/cask.el")
 (cask-initialize)
 (require 'pallet)
@@ -52,6 +51,7 @@
 (require 'setup-evil)
 (require 'setup-yasnippet)
 (require 'setup-ido)
+(require 'setup-recentf)
 
 ;; Language-specific setup files
 (eval-after-load 'c-mode '(require 'setup-c))
