@@ -51,6 +51,7 @@
 (require 'setup-yasnippet)
 (require 'setup-ido)
 (require 'setup-recentf)
+(require 'uniquify)
 
 ;; Language-specific setup files
 (eval-after-load 'c-mode '(require 'setup-c))
