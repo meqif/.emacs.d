@@ -39,7 +39,10 @@
 ;; Customize Projectile mode line
 (setq
  projectile-mode-line '(:propertize
-                        (:eval (concat " " (projectile-project-name)))
+                        (:eval
+                         (if (string= (projectile-project-name) (getenv "USER"))
+                             '(" ¬_¬")
+                           (concat " " (projectile-project-name))))
                         face font-lock-constant-face))
 
 (defvar mein-vc-mode-line
