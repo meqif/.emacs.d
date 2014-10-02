@@ -19,9 +19,8 @@
   (setq meqif/default-font "-apple-Source Code Pro-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
   (setq magnars/presentation-font "-apple-Monaco-medium-normal-normal-*-28-*-*-*-m-0-iso10646-1")
   (set-face-attribute 'default nil :font meqif/default-font)
+  (set-frame-size (selected-frame) 120 40)
 )
-
-(when window-system (set-frame-size (selected-frame) 120 40))
 
 ;; Highlight current line
 (global-hl-line-mode 1)
