@@ -45,5 +45,7 @@
 (depends-on "smartparens")
 (depends-on "smex")
 (depends-on "toml-mode")
+(depends-on "wgrep")
+(depends-on "wgrep-ag")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")

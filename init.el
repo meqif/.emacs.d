@@ -51,6 +51,7 @@
 (require 'setup-yasnippet)
 (require 'setup-ido)
 (require 'setup-recentf)
+(require 'setup-wgrep)
 (require 'uniquify)
 
 ;; Language-specific setup files
