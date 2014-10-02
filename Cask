@@ -1,6 +1,7 @@
 (source gnu)
 (source melpa)
 
+(depends-on "ace-jump-mode")
 (depends-on "ag")
 (depends-on "auctex")
 (depends-on "auto-complete")

@@ -26,4 +26,10 @@
 ;; Comment or uncomment current line or region
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
 
+;; Ace-jump-mode keybindings
+(eval-after-load "ace-jump-mode"
+  '(progn
+     (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+     (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)))
+
 (provide 'keybindings)
