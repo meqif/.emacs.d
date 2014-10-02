@@ -8,9 +8,28 @@
   (before theme-dont-propagate activate)
   (mapc #'disable-theme custom-enabled-themes))
 
+;; Custom tweaks to solarized-theme
+(setq
+ ;; Fix underscored mode-line
+ x-underline-at-descent-line t
+ ;; Don't use as much bold
+ solarized-use-less-bold t
+ ;; Disable variable pitch fonts in Solarized theme
+ solarized-use-variable-pitch nil
+ ;; Don't add too much colours to the fringe
+ solarized-emphasize-indicators nil
+ ;; Fix the fringe and linum
+ solarized-distinct-fringe-background t)
+
+;; I prefer the show-paren faces of the official solarized theme to bbatsov's
+;; version
+(custom-set-faces
+ '(show-paren-match ((t (:background "#e9e2cb" :foreground "#259185" :weight bold))))
+ '(show-paren-mismatch ((t (:background "#81908f" :foreground "#c60007" :weight bold)))))
+
 ;; Load theme
-(setq custom-theme-directory "~/.emacs.d/themes")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
+;; (setq custom-theme-directory "~/.emacs.d/themes")
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
 (load-theme 'solarized-light t)
 
 ;; mac friendly font
