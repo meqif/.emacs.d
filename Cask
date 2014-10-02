@@ -8,6 +8,7 @@
 (depends-on "browse-kill-ring")
 (depends-on "cask")
 (depends-on "dash")
+(depends-on "diff-hl")
 (depends-on "diminish")
 (depends-on "emmet-mode")
 (depends-on "enh-ruby-mode")
