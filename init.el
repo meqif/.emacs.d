@@ -53,6 +53,8 @@
 (require 'setup-recentf)
 (require 'setup-wgrep)
 (require 'uniquify)
+(require 'expand-region)
+(require 'multiple-cursors)
 
 ;; Language-specific setup files
 (eval-after-load 'c-mode '(require 'setup-c))

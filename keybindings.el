@@ -32,4 +32,12 @@
      (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
      (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)))
 
+;; Expand region
+(global-set-key (kbd "C-ç") 'er/expand-region)
+
+;; Multiple cursors
+(global-set-key (kbd "C-º") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-ª") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-º") 'mc/mark-all-like-this)
+
 (provide 'keybindings)
