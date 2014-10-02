@@ -1,9 +1,14 @@
 ;; Appearance
 
 ; I like line numbers, thankyouverymuch.
-
 (global-linum-mode 1)
 
+;; Clean previous themes definitions when loading a theme
+(defadvice load-theme
+  (before theme-dont-propagate activate)
+  (mapc #'disable-theme custom-enabled-themes))
+
+;; Load theme
 (setq custom-theme-directory "~/.emacs.d/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
 (load-theme 'solarized-light t)
