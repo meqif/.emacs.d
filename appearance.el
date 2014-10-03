@@ -18,8 +18,6 @@
  solarized-use-less-bold t
  ;; Disable variable pitch fonts in Solarized theme
  solarized-use-variable-pitch nil
- ;; Don't add too much colours to the fringe
- solarized-emphasize-indicators nil
  ;; Fix the fringe and linum
  solarized-distinct-fringe-background t)
 
