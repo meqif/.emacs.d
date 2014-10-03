@@ -48,6 +48,9 @@
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 
+;; Make show-paren highlight the entire expression
+(setq show-paren-style 'expression)
+
 ;; Shorten nyan cat bar length
 (eval-after-load "nyan-mode" (setq-default nyan-bar-length 16))
 (autoload 'nyan-create "nyan-mode") ; Nyan doesn't how to autoload :(
