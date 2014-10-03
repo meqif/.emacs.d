@@ -58,21 +58,29 @@
 ;; Enable nyan cat :3
 (nyan-mode)
 
+;; Customize mode-line project face
+(copy-face 'font-lock-constant-face 'project-face)
+(set-face-attribute 'project-face nil :foreground "#19D0FF")
+
+;; Customize mode-line project branch face
+(copy-face 'project-face 'branch-face)
+(set-face-attribute 'branch-face nil :bold nil)
+
 ;; Customize Projectile mode line
-(setq
- projectile-mode-line '(:propertize
-                        (:eval
-                         (if (string= (projectile-project-name) (getenv "USER"))
-                             '(" ¬_¬")
-                           (concat " " (projectile-project-name))))
-                        face font-lock-constant-face))
+(setq projectile-mode-line
+ '(:propertize
+   (:eval
+    (if (string= (projectile-project-name) (getenv "USER"))
+        '(" ¬_¬")
+      (concat " " (projectile-project-name))))
+   face project-face))
 
 (defvar mein-vc-mode-line
   '(" " (:propertize
          ;; Strip the backend name from the VC status information
          (:eval (let ((backend (symbol-name (vc-backend (buffer-file-name)))))
                   (substring vc-mode (+ (length backend) 2))))
-         face font-lock-variable-name-face))
+         face branch-face))
   "Mode line format for VC Mode.")
 (put 'mein-vc-mode-line 'risky-local-variable t)
 
