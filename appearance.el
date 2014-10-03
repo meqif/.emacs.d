@@ -10,6 +10,8 @@
 
 ;; Custom tweaks to solarized-theme
 (setq
+ ;; Make the mode-line high contrast
+ solarized-high-contrast-mode-line t
  ;; Fix underscored mode-line
  x-underline-at-descent-line t
  ;; Don't use as much bold
