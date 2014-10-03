@@ -42,4 +42,28 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; Disable evil mode in terminal
 (add-hook 'term-mode-hook 'evil-emacs-state)
 
+;; Make ':bd' kill the buffer but not close the window.
+;;
+;; This function is exactly the same as `evil-delete-buffer` with
+;; the code that closes the windows deleted.
+;;
+;; Source: https://lists.ourproject.org/pipermail/implementations-list/2013-March/001807.html
+;; Credit: Frank Fischer
+(evil-define-command evil-delete-buffer-keep-windows
+  (buffer &optional bang)
+  (interactive "<b><!>")
+  (with-current-buffer (or buffer (current-buffer))
+    (when bang
+      (set-buffer-modified-p nil)
+      (dolist (process (process-list))
+        (when (eq (process-buffer process)
+                  (current-buffer))
+          (set-process-query-on-exit-flag process nil))))
+    (if (and (fboundp 'server-edit)
+             (boundp 'server-buffer-clients)
+             server-buffer-clients)
+        (server-edit)
+      (kill-buffer nil))))
+(evil-ex-define-cmd "bd[elete]" 'evil-delete-buffer-keep-windows)
+
 (provide 'setup-evil)
