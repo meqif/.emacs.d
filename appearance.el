@@ -23,15 +23,11 @@
  ;; Fix the fringe and linum
  solarized-distinct-fringe-background t)
 
-;; I prefer the show-paren faces of the official solarized theme to bbatsov's
-;; version
-(custom-set-faces
- '(show-paren-match ((t (:background "#e9e2cb" :foreground "#259185" :weight bold))))
- '(show-paren-mismatch ((t (:background "#81908f" :foreground "#c60007" :weight bold)))))
-
 ;; Load theme
 ;; (setq custom-theme-directory "~/.emacs.d/themes")
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
+(require 'solarized "~/.emacs.d/themes/solarized-emacs/solarized.el")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-emacs")
 (load-theme 'solarized-light t)
 
 ;; mac friendly font

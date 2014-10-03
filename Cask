@@ -47,7 +47,6 @@
 (depends-on "skewer-mode")
 (depends-on "smartparens")
 (depends-on "smex")
-(depends-on "solarized-theme")
 (depends-on "toml-mode")
 (depends-on "wgrep")
 (depends-on "wgrep-ag")
