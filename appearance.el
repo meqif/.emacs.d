@@ -98,8 +98,7 @@
               '((:eval (when nyan-mode (nyan-create)))
                 " "
                 (line-number-mode
-                 ("%l" (column-number-mode ":%c"))))
-              )
+                 ("%l" (column-number-mode ":%c")))))
 
 ;; Unclutter modeline
 (require 'diminish)
