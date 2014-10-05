@@ -34,8 +34,6 @@
 ;; Appearance
 (require 'appearance)
 
-;; Plugins
-
 ; (require 'setup-package)
 ; no longer needed because I'm using cask & pallet
 
@@ -67,37 +65,8 @@
 (autoload 'flycheck-mode "setup-flycheck" nil t)
 (autoload 'flyspell-mode "setup-flyspell" nil t)
 
-;; Highlight ag's search results
-(setq ag-highlight-search t)
-
-;; Enable smex
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-
-;; Make imenu rescan automatically
-(setq imenu-auto-rescan t)
-
-;; Make imenu work on larger files
-(setq imenu-auto-rescan-maxout 120000)
-
-;; Split undo-tree side-by-side, like decent people do.
-(defadvice undo-tree-visualize (around undo-tree-split-side-by-side activate)
-  "Split undo-tree side-by-side"
-  (let ((split-height-threshold nil)
-        (split-width-threshold 0))
-  ad-do-it))
-
 ;; Some files need their modes explicitly set
 (require 'mode-mappings)
-
-;; Enable electric indent in all programming modes
-(add-hook 'prog-mode-hook 'electric-indent-mode)
-
-;; Enable rainbow delimiters in all programming modes
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
-;; Enable Emmet in tag soup modes
-(add-hook 'sgml-mode-hook 'emmet-mode)
 
 ;; Utils
 (require 'setup-utils)
