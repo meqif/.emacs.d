@@ -22,10 +22,7 @@
  solarized-distinct-fringe-background t)
 
 ;; Load theme
-;; (setq custom-theme-directory "~/.emacs.d/themes")
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
-(require 'solarized "~/.emacs.d/themes/solarized-emacs/solarized.el")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-emacs")
+(require 'solarized)
 (load-theme 'solarized-light t)
 
 ;; mac friendly font
