@@ -64,7 +64,6 @@
 Moves cursor to indentation point or, if already there, to the
 beginning of the line."
   (interactive)
-  ;; Should save indentation point for comparison purposes
   (let ((start-point (point)) indentation-point)
     (save-excursion
       (goto-char (line-beginning-position))
