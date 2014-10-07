@@ -57,11 +57,12 @@
 
 ;;----------------------------------------------------------------------------
 ;; Move cursor to indentation or start of line, depending on current position
-;; If beyond indentation or at start of line, move to indentation
-;; If at indentation, move to start of line
-;; If between start of line and indentation ???
 ;;----------------------------------------------------------------------------
 (defun meqif/move-to-beginning-of-indentation ()
+  "Move cursor to indentation or start of line.
+
+Moves cursor to indentation point or, if already there, to the
+beginning of the line."
   (interactive)
   ;; Should save indentation point for comparison purposes
   (let ((start-point (point)) indentation-point)
@@ -69,17 +70,11 @@
       (goto-char (line-beginning-position))
       (skip-chars-forward "\t ")
       (setq indentation-point (point)))
-    ;; If at the beginning of the line
-    (if (equal start-point (line-beginning-position))
-        ;; Skip to the beginning of indentation
-        (goto-char indentation-point)
-      ;; Else if at indentation, jump to beginning of line
-      (if (equal start-point indentation-point)
-          (goto-char (line-beginning-position))
-      ;; Else jump to indentation point
-      (progn
+    ;; If at indentation point, jump to beginning of line
+    (if (equal start-point indentation-point)
         (goto-char (line-beginning-position))
-        (skip-chars-forward "\t "))))))
+      ;; Otherwise just to the indentation point
+      (goto-char indentation-point))))
 
 (global-set-key (kbd "C-a") 'meqif/move-to-beginning-of-indentation)
 (define-key evil-normal-state-map "0" 'meqif/move-to-beginning-of-indentation)
