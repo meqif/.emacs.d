@@ -55,4 +55,25 @@
         (rename-buffer new-name)
         (set-visited-file-name new-name)))))
 
+;;----------------------------------------------------------------------------
+;; Move cursor to indentation or start of line, depending on current position
+;; If beyond indentation or at start of line, move to indentation
+;; If at indentation, move to start of line
+;; If between start of line and indentation ???
+;;----------------------------------------------------------------------------
+(defun meqif/move-to-beginning-of-indentation ()
+  (interactive)
+  ;; If at the beginning of the line
+  (if (= (point) (line-beginning-position))
+      ;; Skip to the beginning of indentation
+      (skip-chars-forward "\t ")
+    ;; Else jump there
+    (goto-char (line-beginning-position))))
+
+(global-set-key (kbd "C-a") 'meqif/move-to-beginning-of-indentation)
+(eval-after-load 'evil-mode-hook
+                 '(lambda ()
+                    (define-key evil-normal-state-map "0" 'meqif/move-to-beginning-of-indentation)))
+
+
 (provide 'setup-utils)
