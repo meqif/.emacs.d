@@ -63,17 +63,26 @@
 ;;----------------------------------------------------------------------------
 (defun meqif/move-to-beginning-of-indentation ()
   (interactive)
-  ;; If at the beginning of the line
-  (if (= (point) (line-beginning-position))
-      ;; Skip to the beginning of indentation
+  ;; Should save indentation point for comparison purposes
+  (let ((start-point (point)) indentation-point)
+    (save-excursion
+      (goto-char (line-beginning-position))
       (skip-chars-forward "\t ")
-    ;; Else jump there
-    (goto-char (line-beginning-position))))
+      (setq indentation-point (point)))
+    ;; If at the beginning of the line
+    (if (equal start-point (line-beginning-position))
+        ;; Skip to the beginning of indentation
+        (goto-char indentation-point)
+      ;; Else if at indentation, jump to beginning of line
+      (if (equal start-point indentation-point)
+          (goto-char (line-beginning-position))
+      ;; Else jump to indentation point
+      (progn
+        (goto-char (line-beginning-position))
+        (skip-chars-forward "\t "))))))
 
 (global-set-key (kbd "C-a") 'meqif/move-to-beginning-of-indentation)
-(eval-after-load 'evil-mode-hook
-                 '(lambda ()
-                    (define-key evil-normal-state-map "0" 'meqif/move-to-beginning-of-indentation)))
+(define-key evil-normal-state-map "0" 'meqif/move-to-beginning-of-indentation)
 
 
 (provide 'setup-utils)
