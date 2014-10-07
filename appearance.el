@@ -129,4 +129,8 @@ already in fullscreen"
 
 (rename-modeline "js2-mode" js2-mode "JS2")
 
+;; Tweak display-time mode-line format
+(setq display-time-24hr-format t)
+(setq display-time-default-load-average nil)
+
 (provide 'appearance)
