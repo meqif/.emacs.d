@@ -40,4 +40,11 @@
 (global-set-key (kbd "C-ª") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-º") 'mc/mark-all-like-this)
 
+;; Make C-a and evil's "0" jump to the indentation point at first, since that's
+;; what I usually mean by "jump to beginning of the line". Doing it again does
+;; jump to the beginning of the line.
+(global-set-key (kbd "C-a") 'meqif/move-to-beginning-of-indentation)
+(eval-after-load "evil"
+  '(define-key evil-normal-state-map "0" 'meqif/move-to-beginning-of-indentation))
+
 (provide 'keybindings)

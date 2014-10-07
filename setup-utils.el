@@ -76,8 +76,4 @@ beginning of the line."
       ;; Otherwise just to the indentation point
       (goto-char indentation-point))))
 
-(global-set-key (kbd "C-a") 'meqif/move-to-beginning-of-indentation)
-(define-key evil-normal-state-map "0" 'meqif/move-to-beginning-of-indentation)
-
-
 (provide 'setup-utils)

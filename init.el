@@ -28,6 +28,9 @@
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
+;; Utils
+(require 'setup-utils)
+
 ;; Keybindings
 (require 'keybindings)
 
@@ -67,9 +70,6 @@
 
 ;; Some files need their modes explicitly set
 (require 'mode-mappings)
-
-;; Utils
-(require 'setup-utils)
 
 ;; Misc
 (require 'my-misc)
