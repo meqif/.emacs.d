@@ -63,6 +63,7 @@
 (eval-after-load 'markdown-mode '(require 'setup-markdown))
 (eval-after-load 'js2-mode '(require 'setup-javascript))
 (eval-after-load 'rust-mode '(require 'setup-rust))
+(eval-after-load 'org-mode '(require 'setup-org-mode))
 
 ;; Load stuff on demand
 (autoload 'flycheck-mode "setup-flycheck" nil t)
