@@ -13,11 +13,12 @@
   ;; default command: oldstyle latex via dvi
   (setq texcmd "latexmk -dvi -pdfps -quiet %f")
   ;; pdflatex -> .pdf
-  (if (string-match "LATEX_CMD: pdflatex" (buffer-string))
-      (setq texcmd "latexmk -pdf -quiet %f"))
-  ;; xelatex -> .pdf
-  (if (string-match "LATEX_CMD: xelatex" (buffer-string))
-      (setq texcmd "latexmk -pdflatex=xelatex -pdf -quiet %f"))
+  (cond
+   ((string-match "LATEX_CMD: pdflatex" (buffer-string))
+       (setq texcmd "latexmk -pdf -quiet %f"))
+   ;; xelatex -> .pdf
+   ((string-match "LATEX_CMD: xelatex" (buffer-string))
+    (setq texcmd "latexmk -pdflatex=xelatex -pdf -quiet %f")))
   ;; LaTeX compilation command
   (setq org-latex-to-pdf-process (list texcmd)))
 
