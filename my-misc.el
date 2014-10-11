@@ -38,4 +38,8 @@
         (split-width-threshold 0))
   ad-do-it))
 
+;; Stop org-mode from replacing my window-moving keys
+;; Has to be defined before loading org-mode
+(setq org-replace-disputed-keys t)
+
 (provide 'my-misc)
