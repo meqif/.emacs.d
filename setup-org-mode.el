@@ -18,12 +18,13 @@
        (setq texcmd "latexmk -pdf -quiet %f"))
    ;; xelatex -> .pdf
    ((string-match "LATEX_CMD: xelatex" (buffer-string))
-    (setq texcmd "latexmk -pdflatex=xelatex -pdf -quiet %f")))
+    (setq texcmd "latexmk -pdflatex=xelatex -pdf -quiet %f"))
+   ((string-match "LATEX_CMD: lualatex" (buffer-string))
+    (setq texcmd "latexmk -pdflatex=lualatex -pdf -quiet %f")))
   ;; LaTeX compilation command
   (setq org-latex-to-pdf-process (list texcmd)))
 
 (add-hook 'org-export-latex-after-initial-vars-hook 'my-auto-tex-cmd)
-
 
 ;; Specify default packages to be included in every tex file, whether pdflatex or xelatex
 (setq org-export-latex-packages-alist
@@ -47,29 +48,24 @@
               (""     "amssymb"   t)
               (""     "hyperref"  nil)))
 
-      ;; Packages to include when xelatex is used
-      (if (string-match "LATEX_CMD: xelatex" (buffer-string))
-          (setq org-export-latex-default-packages-alist
-                '(("" "fontspec" t)
-                  ("" "xunicode" t)
-                  ("" "url" t)
-                  ("" "rotating" t)
-                  ("american" "babel" t)
-                  ("babel" "csquotes" t)
-                  ("" "soul" t)
-                  ("xetex" "hyperref" nil)
-                  )))
-
-      (if (string-match "LATEX_CMD: xelatex" (buffer-string))
-          (setq org-export-latex-classes
-                (cons '("article"
-                        "\\documentclass[11pt,article,oneside]{memoir}"
-                        ("\\section{%s}" . "\\section*{%s}")
-                        ("\\subsection{%s}" . "\\subsection*{%s}")
-                        ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                        ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                        ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-                      org-export-latex-classes))))
+      ;; Packages to include when xelatex or lualatex is used
+      (if (or (string-match "LATEX_CMD: xelatex" (buffer-string))
+              (string-match "LATEX_CMD: lualatex" (buffer-string)))
+          (progn
+            (setq org-export-latex-default-packages-alist
+                  '(("" "fontspec" t)
+                    ("" "url" t)
+                    ("" "hyperref" nil)
+                    ))
+            (setq org-export-latex-classes
+                  (cons '("article"
+                          "\\documentclass[11pt,article,oneside]{memoir}"
+                          ("\\section{%s}" . "\\section*{%s}")
+                          ("\\subsection{%s}" . "\\subsection*{%s}")
+                          ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                          ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                          ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+                        org-export-latex-classes)))))
 
 (add-hook 'org-export-latex-after-initial-vars-hook 'my-auto-tex-parameters)
 
