@@ -28,8 +28,8 @@
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
-;; Utils
-(require 'setup-utils)
+;; Functions
+(require 'defuns)
 
 ;; Keybindings
 (require 'keybindings)

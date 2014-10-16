@@ -75,4 +75,4 @@ beginning of the line."
       ;; Otherwise just to the indentation point
       (goto-char indentation-point))))
 
-(provide 'setup-utils)
+(provide 'defuns)
