@@ -1,3 +1,5 @@
+(require 'dash)
+
 (add-hook 'markdown-mode-hook (lambda ()
     ;; Enable word wrapping
     (setq word-wrap t)
@@ -35,21 +37,21 @@
 ))
 
 ;; Better headings
-;; (set-face-attribute 'markdown-header-face-1 nil :inherit markdown-header-face :height 2.0)
-;; (set-face-attribute 'markdown-header-face-2 nil :inherit markdown-header-face :height 1.5)
-;; (set-face-attribute 'markdown-header-face-3 nil :inherit markdown-header-face :height 1.25)
-
-(mapcar '(lambda (entry)
-           (let ((face-name (car entry))
-                 (face-attr (cadr entry))
-                 (face-attr-value (car (cddr entry))))
+(-each
+    '((markdown-header-face-1 :height 2.2)
+      (markdown-header-face-2 :height 1.7)
+      (markdown-header-face-3 :height 1.5)
+      (markdown-header-face-4 :height 1.3)
+      (markdown-header-face-5 :height 1.1))
+  (lambda (entry)
+     (let ((face-name (car entry)))
+       ;; Apply each pair of attribute-value to the current heading
+       (-each (-partition 2 (cdr entry))
+         (lambda (pair)
+           (let ((face-attr (car pair))
+                 (face-attr-value (cadr pair)))
              (set-face-attribute face-name nil
                                  :inherit markdown-header-face
-                                 face-attr face-attr-value)))
-        '((markdown-header-face-1 :height 2.2)
-          (markdown-header-face-2 :height 1.7)
-          (markdown-header-face-3 :height 1.5)
-          (markdown-header-face-4 :height 1.3)
-          (markdown-header-face-5 :height 1.1)))
+                                 face-attr face-attr-value)))))))
 
 (provide 'setup-markdown)
