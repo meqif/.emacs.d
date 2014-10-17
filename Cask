@@ -23,6 +23,7 @@
 (depends-on "flycheck")
 (depends-on "flycheck-rust")
 (depends-on "helm")
+(depends-on "helm-bibtex")
 (depends-on "helm-ls-git")
 (depends-on "helm-projectile")
 (depends-on "highlight-indentation")

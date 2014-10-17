@@ -75,5 +75,16 @@
 ;; Misc
 (require 'my-misc)
 
+;; Bibliography stuff
+(eval-after-load "helm-bibtex"
+  '(progn
+     (setq helm-bibtex-bibliography "bibliography.bib")
+     ;; Use LaTeX autocite even in org-mode.
+     (add-to-list 'helm-bibtex-format-citation-functions
+                  '(org-mode .
+                             (lambda (keys)
+                               (format "\\autocite{%s}" (s-join ", " keys)))))
+     (setq reftex-default-bibliography '("bibliography.bib"))))
+
 ;; Some more modes that should be in emacs mode
 (add-to-list 'evil-emacs-state-modes 'flycheck-error-list-mode)
