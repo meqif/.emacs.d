@@ -74,3 +74,6 @@
 
 ;; Misc
 (require 'my-misc)
+
+;; Some more modes that should be in emacs mode
+(add-to-list 'evil-emacs-state-modes 'flycheck-error-list-mode)
