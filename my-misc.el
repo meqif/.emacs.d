@@ -38,6 +38,13 @@
         (split-width-threshold 0))
   ad-do-it))
 
+(defun meqif/cycle-windows ()
+  "Cycle between windows in the same frame"
+  (interactive)
+  (other-window 1 t))
+(global-set-key (kbd "C-x C-\\") 'meqif/cycle-windows)
+(global-set-key (kbd "H-\\") 'meqif/cycle-windows)
+
 ;; Stop org-mode from replacing my window-moving keys
 ;; Has to be defined before loading org-mode
 (setq org-replace-disputed-keys t)
