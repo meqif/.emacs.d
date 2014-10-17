@@ -20,10 +20,10 @@
 (setq TeX-engine 'luatex) ; LuaTeX works great, although it's slow
 
 ;; Enable spellcheck for LaTeX
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'latex-mode-hook 'flyspell-mode)
 
 ;; Quick spellcheck shortcut
-(add-hook 'LaTeX-mode-hook (lambda()
+(add-hook 'latex-mode-hook (lambda()
   (define-key LaTeX-mode-map (kbd "§") 'flyspell-buffer)))
 
 (defun flyspell-check-next-highlighted-word ()
@@ -42,7 +42,7 @@
 (setq-local word-wrap t)
 
 ;; Enable RefTeX
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(add-hook 'latex-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
 ;; Add biblatex style cite formats
