@@ -49,4 +49,7 @@
 ;; Has to be defined before loading org-mode
 (setq org-replace-disputed-keys t)
 
+(defmacro version>= (a b)
+  `(not (version< ,a ,b)))
+
 (provide 'my-misc)
