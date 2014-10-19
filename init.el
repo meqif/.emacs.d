@@ -7,8 +7,7 @@
 (setq inhibit-startup-message t)
 
 ;; Set path to dependencies
-(setq lisp-dir
-(expand-file-name "lisp" user-emacs-directory))
+(setq lisp-dir (expand-file-name "lisp" user-emacs-directory))
 
 ;; Set up load path
 (add-to-list 'load-path lisp-dir)
