@@ -97,9 +97,8 @@
 
 (when (version>= emacs-version "24.4")
   ;; Add modes introduced in Emacs 24.4 to those that should be in emacs mode
-  (progn
-    (--each '(special-mode messages-buffer-mode)
-      (add-to-list 'evil-emacs-state-modes it)))
+  (--each '(special-mode messages-buffer-mode finder-mode)
+    (add-to-list 'evil-emacs-state-modes it))
 
   ;; Work-around for broken indentation in evil-mode
   (eval-after-load "evil"
