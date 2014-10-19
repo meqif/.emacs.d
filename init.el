@@ -88,3 +88,14 @@
 
 ;; Some more modes that should be in emacs mode
 (add-to-list 'evil-emacs-state-modes 'flycheck-error-list-mode)
+
+;; Add modes introduced in Emacs 24.4 to those that should be in emacs mode
+(when (version>= emacs-version "24.4")
+  (progn
+    (--each '(special-mode messages-buffer-mode)
+      (add-to-list 'evil-emacs-state-modes it)))
+  ;; (global-prettify-symbols-mode 1)
+  ;; (add-hook 'js2-mode-hook
+  ;;           (lambda ()
+  ;;             (push '("function" . ?ƒ) prettify-symbols-alist)))
+  )
