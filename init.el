@@ -27,6 +27,9 @@
 (cask-initialize)
 (require 'pallet)
 
+(require 'dash)
+(eval-after-load "dash" '(dash-enable-font-lock))
+
 ;; Fix path
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
