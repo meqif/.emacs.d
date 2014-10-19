@@ -6,11 +6,15 @@
 ;; Disable splash screen
 (setq inhibit-startup-message t)
 
-;; Dependencies
-(add-to-list 'load-path user-emacs-directory)
+;; Set path to dependencies
+(setq lisp-dir
+(expand-file-name "lisp" user-emacs-directory))
+
+;; Set up load path
+(add-to-list 'load-path lisp-dir)
 
 ;; Keep emacs Custom-settings in separate file
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file (expand-file-name "custom.el" lisp-dir))
 (load custom-file)
 
 ;; Bring some sanity in
