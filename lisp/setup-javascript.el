@@ -9,12 +9,12 @@
 (add-hook 'js2-mode-hook (lambda () (flycheck-mode 1)))
 
 ;; Use lambda for anonymous functions
-(font-lock-add-keywords
- 'js2-mode `(("\\(function\\) *("
-              (0 (progn (compose-region (match-beginning 1)
-                                        (match-end 1) "\u0192") ; f
-                                        ;; (match-end 1) "\u03bb") ; lambda
-                        nil)))))
+;; (font-lock-add-keywords
+;;  'js2-mode `(("\\(function\\) *("
+;;               (0 (progn (compose-region (match-beginning 1)
+;;                                         (match-end 1) "\u0192") ; f
+;;                                         ;; (match-end 1) "\u03bb") ; lambda
+;;                         nil)))))
 
 
 (provide 'setup-javascript)

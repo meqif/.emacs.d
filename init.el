@@ -107,8 +107,9 @@
        (define-key evil-insert-state-map [remap newline] 'newline)
        (define-key evil-insert-state-map [remap newline-and-indent] 'newline-and-indent)))
 
-  ;; (global-prettify-symbols-mode 1)
-  ;; (add-hook 'js2-mode-hook
-  ;;           (lambda ()
-  ;;             (push '("function" . ?ƒ) prettify-symbols-alist)))
+  ;; Enable prettify symbols mode
+  (global-prettify-symbols-mode +1)
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              (push '("function" . ?ƒ) prettify-symbols-alist)))
   )
