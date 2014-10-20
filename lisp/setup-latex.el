@@ -1,3 +1,5 @@
+(require 'flyspell)
+
 ;; Default options
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
