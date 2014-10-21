@@ -65,7 +65,7 @@
 
 ;; Language-specific setup files
 (eval-after-load 'c-mode '(require 'setup-c))
-(eval-after-load 'LaTeX-mode '(require 'setup-latex))
+(eval-after-load 'tex-mode '(require 'setup-latex))
 (eval-after-load 'markdown-mode '(require 'setup-markdown))
 (eval-after-load 'js2-mode '(require 'setup-javascript))
 (eval-after-load 'rust-mode '(require 'setup-rust))
