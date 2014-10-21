@@ -66,4 +66,9 @@
 ;; Enable wordwrap
 (add-hook 'LaTeX-mode-hook 'visual-line-mode)
 
+;; Set XeLaTeX as the default command
+(add-hook 'LaTeX-mode-hook
+          (lambda ()
+            (setq TeX-command-default "XeLaTeX")))
+
 (provide 'setup-latex)
