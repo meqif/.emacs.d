@@ -43,9 +43,6 @@
 ;; Appearance
 (require 'appearance)
 
-; (require 'setup-package)
-; no longer needed because I'm using cask & pallet
-
 ;; Awesome project navigation
 (require 'setup-projectile)
 
