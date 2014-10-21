@@ -90,13 +90,10 @@
      (setq reftex-default-bibliography '("bibliography.bib"))))
 
 ;; Some more modes that should be in emacs mode
-(add-to-list 'evil-emacs-state-modes 'flycheck-error-list-mode)
+(--each '(flycheck-error-list-mode special-mode messages-buffer-mode finder-mode)
+  (when (fboundp it) (add-to-list 'evil-emacs-state-modes it)))
 
 (when (version>= emacs-version "24.4")
-  ;; Add modes introduced in Emacs 24.4 to those that should be in emacs mode
-  (--each '(special-mode messages-buffer-mode finder-mode)
-    (add-to-list 'evil-emacs-state-modes it))
-
   ;; Work-around for broken indentation in evil-mode
   (eval-after-load "evil"
     '(progn
