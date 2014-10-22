@@ -81,7 +81,7 @@
 
 ;; Some more modes that should be in emacs mode
 (--each '(flycheck-error-list-mode special-mode messages-buffer-mode finder-mode)
-  (when (fboundp it) (add-to-list 'evil-emacs-state-modes it)))
+  (add-to-list 'evil-emacs-state-modes it))
 
 (when (version>= emacs-version "24.4")
   ;; Work-around for broken indentation in evil-mode
