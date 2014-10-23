@@ -23,9 +23,6 @@
 ;; Bring some sanity in
 (require 'sane-defaults)
 
-;; Default directory
-(setq default-directory "~/")
-
 ;; Packages
 (require 'cask "~/homebrew/opt/cask/cask.el")
 (cask-initialize)
