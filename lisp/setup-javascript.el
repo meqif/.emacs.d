@@ -15,6 +15,9 @@
 ;;                                         (match-end 1) "\u0192") ; f
 ;;                                         ;; (match-end 1) "\u03bb") ; lambda
 ;;                         nil)))))
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (push '("function" . ?ƒ) prettify-symbols-alist)))
 
 
 (provide 'setup-javascript)

@@ -133,4 +133,7 @@ already in fullscreen"
 (setq display-time-24hr-format t)
 (setq display-time-default-load-average nil)
 
+;; Enable prettify symbols mode
+(global-prettify-symbols-mode +1)
+
 (provide 'appearance)
