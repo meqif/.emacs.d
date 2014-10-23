@@ -72,11 +72,9 @@
              'js2-mode      'setup-javascript
              'rust-mode     'setup-rust
              'org-mode      'setup-org-mode
-             'helm-bibtex   'setup-helm-bibtex)
-
-;; Load stuff on demand
-(autoload 'flycheck-mode "setup-flycheck" nil t)
-(autoload 'flyspell-mode "setup-flyspell" nil t)
+             'helm-bibtex   'setup-helm-bibtex
+             'flycheck      'setup-flycheck
+             'flyspell      'setup-flyspell)
 
 ;; Some files need their modes explicitly set
 (require 'mode-mappings)
