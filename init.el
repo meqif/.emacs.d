@@ -84,12 +84,6 @@
   (add-to-list 'evil-emacs-state-modes it))
 
 (when (version>= emacs-version "24.4")
-  ;; Work-around for broken indentation in evil-mode
-  (eval-after-load "evil"
-    '(progn
-       (define-key evil-insert-state-map [remap newline] 'newline)
-       (define-key evil-insert-state-map [remap newline-and-indent] 'newline-and-indent)))
-
   ;; Enable prettify symbols mode
   (global-prettify-symbols-mode +1)
   (add-hook 'js2-mode-hook
