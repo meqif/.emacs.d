@@ -62,13 +62,13 @@
 (require 'ace-jump-mode)
 
 ;; Language-specific setup files
-(eval-after-load 'c-mode '(require 'setup-c))
-(eval-after-load 'tex-mode '(require 'setup-latex))
-(eval-after-load 'markdown-mode '(require 'setup-markdown))
-(eval-after-load 'js2-mode '(require 'setup-javascript))
-(eval-after-load 'rust-mode '(require 'setup-rust))
-(eval-after-load 'org-mode '(require 'setup-org-mode))
-(eval-after-load 'helm-bibtex '(require 'setup-helm-bibtex))
+(load-config 'c-mode        'setup-c
+             'tex-mode      'setup-latex
+             'markdown-mode 'setup-markdown
+             'js2-mode      'setup-javascript
+             'rust-mode     'setup-rust
+             'org-mode      'setup-org-mode
+             'helm-bibtex   'setup-helm-bibtex)
 
 ;; Load stuff on demand
 (autoload 'flycheck-mode "setup-flycheck" nil t)

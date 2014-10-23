@@ -75,4 +75,14 @@ beginning of the line."
       ;; Otherwise just to the indentation point
       (goto-char indentation-point))))
 
+;; Quick and easy require'ing in eval-after-load
+(defmacro load-config (&rest arglist)
+  (declare (debug t) (indent 2))
+  (cons 'progn
+        (--map
+         (-let* (((feature filename . rest) it))
+           `(eval-after-load ,feature
+              `(funcall (function ,(lambda () (require ,filename))))))
+         (-partition 2 arglist))))
+
 (provide 'defuns)
