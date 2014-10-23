@@ -79,10 +79,6 @@
 ;; Misc
 (require 'my-misc)
 
-;; Some more modes that should be in emacs mode
-(--each '(flycheck-error-list-mode special-mode messages-buffer-mode finder-mode)
-  (add-to-list 'evil-emacs-state-modes it))
-
 (when (version>= emacs-version "24.4")
   ;; Enable prettify symbols mode
   (global-prettify-symbols-mode +1)

@@ -1,4 +1,6 @@
 (require 'evil)
+(require 'my-misc)
+(require 'dash)
 
 ;; We need more evil leadership, your wickedness, Sir.
 (global-evil-leader-mode)
@@ -67,9 +69,17 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (evil-ex-define-cmd "bd[elete]" 'evil-delete-buffer-keep-windows)
 
 ;; Work-around for broken indentation in 24.4
-(require 'my-misc)
 (when (version>= emacs-version "24.4")
   (define-key evil-insert-state-map [remap newline] 'newline)
   (define-key evil-insert-state-map [remap newline-and-indent] 'newline-and-indent))
+
+;; Some more modes that should be in emacs mode
+(--each
+    '(flycheck-error-list-mode
+      special-mode
+      messages-buffer-mode
+      finder-mode
+      compilation-mode)
+  (add-to-list 'evil-emacs-state-modes it))
 
 (provide 'setup-evil)
