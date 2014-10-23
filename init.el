@@ -59,6 +59,7 @@
 (require 'uniquify)
 (require 'expand-region)
 (require 'multiple-cursors)
+(require 'ace-jump-mode)
 
 ;; Language-specific setup files
 (eval-after-load 'c-mode '(require 'setup-c))
