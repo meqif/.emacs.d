@@ -52,4 +52,8 @@
 (defmacro version>= (a b)
   `(not (version< ,a ,b)))
 
+;; Don't hide the output of evaluated code
+(setq eval-expression-print-level nil
+      eval-expression-print-length nil)
+
 (provide 'my-misc)
