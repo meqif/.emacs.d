@@ -63,15 +63,15 @@
 (require 'ace-jump-mode)
 
 ;; Language-specific setup files
-(load-config 'c-mode        'setup-c
-             'tex-mode      'setup-latex
-             'markdown-mode 'setup-markdown
-             'js2-mode      'setup-javascript
-             'rust-mode     'setup-rust
-             'org-mode      'setup-org-mode
-             'helm-bibtex   'setup-helm-bibtex
-             'flycheck      'setup-flycheck
-             'flyspell      'setup-flyspell)
+(load-config 'c-mode 'setup-c
+  'tex-mode      'setup-latex
+  'markdown-mode 'setup-markdown
+  'js2-mode      'setup-javascript
+  'rust-mode     'setup-rust
+  'org           'setup-org-mode
+  'helm-bibtex   'setup-helm-bibtex
+  'flycheck      'setup-flycheck
+  'flyspell      'setup-flyspell)
 
 ;; Some files need their modes explicitly set
 (require 'mode-mappings)
