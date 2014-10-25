@@ -80,7 +80,7 @@ beginning of the line."
   (declare (debug t) (indent 2))
   (cons 'progn
         (--map
-         (-let* (((feature filename . rest) it))
+         (-let* (((feature filename) it))
            `(eval-after-load ,feature
               `(funcall (function ,(lambda () (require ,filename))))))
          (-partition 2 arglist))))
