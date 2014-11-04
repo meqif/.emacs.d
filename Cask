@@ -36,6 +36,7 @@
 (depends-on "markdown-mode")
 (depends-on "monokai-theme")
 (depends-on "multiple-cursors")
+(depends-on "mustache-mode")
 (depends-on "nyan-mode")
 (depends-on "package-build")
 (depends-on "pallet")
