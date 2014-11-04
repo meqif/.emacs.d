@@ -47,4 +47,7 @@
 (eval-after-load "evil"
   '(define-key evil-normal-state-map "0" 'meqif/move-to-beginning-of-indentation))
 
+(eval-after-load "helm-imenu"
+  '(global-set-key (kbd "s-r") 'helm-imenu))
+
 (provide 'keybindings)
