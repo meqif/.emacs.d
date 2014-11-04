@@ -121,6 +121,7 @@ already in fullscreen"
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
 (eval-after-load "magit" '(diminish 'magit-auto-revert-mode))
 (eval-after-load "projectile" '(diminish 'projectile-mode))
+(eval-after-load "whitespace" '(diminish 'whitespace-mode))
 
 (defmacro rename-modeline (package-name mode new-name)
   `(eval-after-load ,package-name
