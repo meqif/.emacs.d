@@ -80,6 +80,8 @@
 ;; Misc
 (require 'my-misc)
 
+(global-aggressive-indent-mode)
+
 ;; Highlight excessively long lines
 (require 'whitespace)
 (setq whitespace-line-column 80)

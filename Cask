@@ -3,6 +3,7 @@
 
 (depends-on "ace-jump-mode")
 (depends-on "ag")
+(depends-on "aggressive-indent")
 (depends-on "auctex")
 (depends-on "auto-complete")
 (depends-on "browse-kill-ring")
@@ -37,6 +38,7 @@
 (depends-on "monokai-theme")
 (depends-on "multiple-cursors")
 (depends-on "mustache-mode")
+(depends-on "names")
 (depends-on "nyan-mode")
 (depends-on "package-build")
 (depends-on "pallet")
