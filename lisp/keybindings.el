@@ -50,4 +50,6 @@
 (eval-after-load "helm-imenu"
   '(global-set-key (kbd "s-r") 'helm-imenu))
 
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 (provide 'keybindings)
