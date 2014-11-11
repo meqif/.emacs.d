@@ -61,6 +61,7 @@
 (require 'expand-region)
 (require 'multiple-cursors)
 (require 'ace-jump-mode)
+(require 'helm-imenu)
 
 ;; Language-specific setup files
 (load-config 'c-mode 'setup-c
