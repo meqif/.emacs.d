@@ -41,9 +41,10 @@
 Make frame fullscreen and change the default font unless it's
 already in fullscreen"
   (interactive)
-  (unless (memq (frame-parameter nil 'fullscreen) '(fullscreen fullboth))
-    (set-face-attribute 'default nil :font meqif/fullscreen-font)
-    (toggle-frame-fullscreen)))
+  ;; (if (memq (frame-parameter nil 'fullscreen) '(fullscreen fullboth))
+  ;; (set-face-attribute 'default nil :font meqif/default-font)
+  ;; (set-face-attribute 'default nil :font meqif/fullscreen-font))
+  (toggle-frame-fullscreen))
 
 ;; Highlight current line
 (global-hl-line-mode 1)
