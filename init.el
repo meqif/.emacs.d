@@ -90,3 +90,5 @@
 (setq whitespace-line-column 80)
 (setq whitespace-style '(face lines-tail))
 (add-hook 'prog-mode-hook 'whitespace-mode)
+
+(add-to-list 'auto-mode-alist '("\\.hjs\\'" . mustache-mode))
