@@ -20,11 +20,11 @@
             (push '("function" . ?ƒ) prettify-symbols-alist)))
 
 ;; Make JSON files indent with two spaces, Node Style
-(add-hook 'js2-mode-hook
-          (lambda ()
-            (when (and (stringp buffer-file-name)
-                       (string-match "\\.json\\'" buffer-file-name)))
-            (setq js2-basic-offset 2)
-            (setq tab-width 2)))
+;; (add-hook 'js2-mode-hook
+;;           (lambda ()
+;;             (when (and (stringp buffer-file-name)
+;;                        (string-match "\\.json\\'" buffer-file-name)))
+;;             (setq js2-basic-offset 2)
+;;             (setq tab-width 2)))
 
 (provide 'setup-javascript)
