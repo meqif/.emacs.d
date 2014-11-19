@@ -64,6 +64,7 @@
 (require 'ace-jump-mode)
 (require 'helm-imenu)
 (require 'setup-html)
+(require 'setup-company)
 
 ;; Language-specific setup files
 (load-config 'c-mode 'setup-c
