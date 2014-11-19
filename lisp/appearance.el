@@ -138,4 +138,11 @@ already in fullscreen"
 ;; Enable prettify symbols mode
 (global-prettify-symbols-mode +1)
 
+(defun font-lock-comment-annotations ()
+  "Highlight a bunch of well known comment annotations."
+  (font-lock-add-keywords
+   nil '(("\\<\\(FIX\\(ME\\)?\\|TODO\\):"
+          1 font-lock-warning-face t))))
+(add-hook 'prog-mode-hook 'font-lock-comment-annotations)
+
 (provide 'appearance)
