@@ -15,9 +15,6 @@
 ;; Enable rainbow delimiters in all programming modes
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
-;; Enable Emmet in tag soup modes
-(add-hook 'sgml-mode-hook 'emmet-mode)
-
 ;; Highlight ag's search results
 (setq ag-highlight-search t)
 

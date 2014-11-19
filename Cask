@@ -53,6 +53,7 @@
 (depends-on "smartparens")
 (depends-on "smex")
 (depends-on "solarized-theme" :git "https://github.com/meqif/solarized-emacs.git" :files ("*" (:exclude ".git")))
+(depends-on "tagedit")
 (depends-on "toml-mode")
 (depends-on "wgrep")
 (depends-on "wgrep-ag")

@@ -62,6 +62,7 @@
 (require 'multiple-cursors)
 (require 'ace-jump-mode)
 (require 'helm-imenu)
+(require 'setup-html)
 
 ;; Language-specific setup files
 (load-config 'c-mode 'setup-c
@@ -91,4 +92,3 @@
 (setq whitespace-style '(face lines-tail))
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
-(add-to-list 'auto-mode-alist '("\\.hjs\\'" . mustache-mode))
