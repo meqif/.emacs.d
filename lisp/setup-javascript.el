@@ -17,7 +17,10 @@
 ;;                         nil)))))
 (add-hook 'js2-mode-hook
           (lambda ()
-            (push '("function" . ?ƒ) prettify-symbols-alist)))
+            ;; Use symbol for anonymous functions
+            (push '("function" . ?ƒ) prettify-symbols-alist)
+            ;; Enable ternjs (requires tern to be installed through npm)
+            (tern-mode t)))
 
 ;; Make JSON files indent with two spaces, Node Style
 ;; (add-hook 'js2-mode-hook
