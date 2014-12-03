@@ -85,4 +85,21 @@ beginning of the line."
               `(funcall (function ,(lambda () (require ,filename))))))
          (-partition 2 arglist))))
 
+(defun meqif/TeX-surround-with-quotes ()
+  "Surround current region or word with TeX quotes."
+  (interactive)
+  (save-excursion
+    (let (pos1 pos2 bounds)
+      (if (use-region-p)
+          (setq pos1 (region-beginning)
+                pos2 (region-end))
+        (progn
+          (setq bounds (bounds-of-thing-at-point 'word)
+                pos1 (car bounds)
+                pos2 (cdr bounds))))
+      (goto-char pos2)
+      (insert TeX-close-quote)
+      (goto-char pos1)
+      (insert TeX-open-quote))))
+
 (provide 'defuns)
