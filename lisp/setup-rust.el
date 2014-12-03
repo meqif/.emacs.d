@@ -14,5 +14,7 @@
             (whitespace-mode -1)
             (whitespace-mode 1)))
 
+;; Add brackets to smartparens pair list
+(sp-local-pair 'rust-mode "<" ">")
 
 (provide 'setup-rust)
