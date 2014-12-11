@@ -27,6 +27,7 @@
 (depends-on "flx-ido")
 (depends-on "flycheck")
 (depends-on "flycheck-rust")
+(depends-on "haskell-mode")
 (depends-on "helm")
 (depends-on "helm-bibtex")
 (depends-on "helm-ls-git")
