@@ -13,6 +13,7 @@
 (depends-on "dash")
 (depends-on "diff-hl")
 (depends-on "diminish")
+(depends-on "ebib")
 (depends-on "emmet-mode")
 (depends-on "enh-ruby-mode")
 (depends-on "epl")
