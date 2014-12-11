@@ -60,6 +60,7 @@
 (depends-on "tagedit")
 (depends-on "tern")
 (depends-on "toml-mode")
+(depends-on "tuareg")
 (depends-on "wgrep")
 (depends-on "wgrep-ag")
 (depends-on "yaml-mode")
