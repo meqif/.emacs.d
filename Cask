@@ -46,6 +46,7 @@
 (depends-on "nyan-mode")
 (depends-on "package-build")
 (depends-on "pallet")
+(depends-on "parsebib")
 (depends-on "popup")
 (depends-on "projectile")
 (depends-on "rainbow-delimiters")
