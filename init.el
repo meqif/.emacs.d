@@ -94,3 +94,6 @@
 (setq whitespace-style '(face lines-tail))
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
+;; emacs-refactor
+(add-hook 'prog-mode-hook 'emr-initialize)
+(define-key prog-mode-map (kbd "M-RET") 'emr-show-refactor-menu)

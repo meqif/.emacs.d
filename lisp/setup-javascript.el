@@ -1,3 +1,6 @@
+;; Load js2-refactor
+(require 'js2-refactor)
+
 (setq-default js2-global-externs
               '("module" "export" "require" "describe" "it" "before" "after"))
 
