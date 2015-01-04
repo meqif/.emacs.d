@@ -51,6 +51,7 @@
 (depends-on "nyan-mode")
 (depends-on "package-build")
 (depends-on "pallet")
+(depends-on "paradox")
 (depends-on "parsebib")
 (depends-on "popup")
 (depends-on "projectile")
