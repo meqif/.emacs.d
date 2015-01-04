@@ -2,6 +2,7 @@
 (source melpa)
 
 (depends-on "ace-jump-mode")
+(depends-on "adoc-mode")
 (depends-on "ag")
 (depends-on "aggressive-indent")
 (depends-on "async")
