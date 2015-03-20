@@ -46,8 +46,12 @@
 ;; Appearance
 (require 'appearance)
 
+;; Unclutter modeline
+(use-package diminish)
+
 ;; Awesome project navigation
 (use-package projectile
+  :diminish projectile-mode
   :init
   (projectile-global-mode)
   (add-to-list 'projectile-globally-ignored-directories "node_modules"))
@@ -242,6 +246,7 @@
     (setq flyspell-issue-message-flag nil)))
 
 (use-package js2-mode
+  :diminish (js2-mode "JS2")
   :mode ("\\.js$" "\\.json$"))
 
 ;; Easier kill-ring viewing
@@ -262,6 +267,7 @@
 
 ;; Highlight excessively long lines
 (use-package whitespace
+  :diminish whitespace-mode
   :config
   (progn
     (setq whitespace-line-column 80
@@ -269,8 +275,13 @@
     (add-hook 'prog-mode-hook 'whitespace-mode)))
 
 (use-package undo-tree
+  :diminish undo-tree-mode
   ;; Show timestamps
   :config (setq undo-tree-visualizer-timestamps t))
+
+(use-package magit
+  :defer t
+  :diminish magit-auto-revert-mode)
 
 (use-package enh-ruby-mode
   ;; Don't deep indent arrays and hashes

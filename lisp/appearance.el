@@ -116,21 +116,6 @@ already in fullscreen"
                 (line-number-mode
                  ("%l" (column-number-mode ":%c")))))
 
-;; Unclutter modeline
-(require 'diminish)
-(eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
-(eval-after-load "smartparens" '(diminish 'smartparens-mode))
-(eval-after-load "magit" '(diminish 'magit-auto-revert-mode))
-(eval-after-load "projectile" '(diminish 'projectile-mode))
-(eval-after-load "whitespace" '(diminish 'whitespace-mode))
-
-(defmacro rename-modeline (package-name mode new-name)
-  `(eval-after-load ,package-name
-     '(defadvice ,mode (after rename-modeline activate)
-        (setq mode-name ,new-name))))
-
-(rename-modeline "js2-mode" js2-mode "JS2")
-
 ;; Tweak display-time mode-line format
 (setq display-time-24hr-format t)
 (setq display-time-default-load-average nil)
