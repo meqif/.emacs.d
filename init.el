@@ -67,7 +67,6 @@
 (require 'multiple-cursors)
 (require 'ace-jump-mode)
 (require 'helm-imenu)
-(require 'setup-html)
 
 ;; Save a list of recent files visited
 (use-package recentf
@@ -150,6 +149,30 @@
   'markdown-mode 'setup-markdown
   'js2-mode      'setup-javascript
   'helm-bibtex   'setup-helm-bibtex)
+
+(use-package sgml-mode
+  :config
+  (progn
+    ;; Enable tagedit
+    (use-package tagedit)
+    ;; Auto-close tags and other goodies
+    (tagedit-add-experimental-features)
+    (add-hook 'html-mode-hook (lambda () (tagedit-mode 1)))
+    (add-hook 'mustache-mode (lambda () (tagedit-mode 1)))))
+
+(use-package emmet-mode
+  :config
+  (progn
+    ;; Enable Emmet in tag soup modes
+    (add-hook 'sgml-mode-hook 'emmet-mode)
+    (add-hook 'mustache-mode-hook 'emmet-mode)))
+
+(use-package mustache-mode
+  :mode "\\.hjs\\'")
+
+(use-package scss-mode
+  ;; Don't autocompile SCSS, I usually have task runners doing that
+  :config (setq scss-compile-at-save nil))
 
 (use-package rust-mode
   :config
