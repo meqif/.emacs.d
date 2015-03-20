@@ -200,10 +200,12 @@
     (add-to-list 'aggressive-indent-excluded-modes 'rust-mode)))
 
 ;; Highlight excessively long lines
-(require 'whitespace)
-(setq whitespace-line-column 80)
-(setq whitespace-style '(face lines-tail))
-(add-hook 'prog-mode-hook 'whitespace-mode)
+(use-package whitespace
+  :config
+  (progn
+    (setq whitespace-line-column 80
+          whitespace-style '(face lines-tail))
+    (add-hook 'prog-mode-hook 'whitespace-mode)))
 
 ;; emacs-refactor
 (add-hook 'prog-mode-hook 'emr-initialize)
