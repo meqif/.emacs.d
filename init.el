@@ -284,3 +284,7 @@
 ;; NERDtree clone
 (use-package neotree
   :config (setq neo-theme 'nerd))
+
+;; Better interactive search
+(use-package swiper
+  :init (global-set-key (kbd "C-s") 'swiper))
