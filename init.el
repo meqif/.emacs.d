@@ -230,15 +230,16 @@
 
 (use-package flyspell
   :init
-  ;; Use Aspell for spellcheck
-  (setq ispell-program-name "~/homebrew/bin/aspell")
-  (setq ispell-list-command "--list")
+  (progn
+    ;; Use Aspell for spellcheck
+    (setq ispell-program-name "~/homebrew/bin/aspell")
+    (setq ispell-list-command "--list")
 
-  ;; Default language is Portuguese.
-  (setq ispell-dictionary "pt_PT")
+    ;; Default language is Portuguese.
+    (setq ispell-dictionary "pt_PT")
 
-  ;; Flyspell messages slow down the spellchecking process
-  (setq flyspell-issue-message-flag nil))
+    ;; Flyspell messages slow down the spellchecking process
+    (setq flyspell-issue-message-flag nil)))
 
 (use-package js2-mode
   :mode ("\\.js$" "\\.json$"))
