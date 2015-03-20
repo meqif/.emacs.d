@@ -60,13 +60,18 @@
 (require 'setup-evil)
 (require 'setup-yasnippet)
 (require 'setup-ido)
-(require 'setup-recentf)
 (require 'expand-region)
 (require 'multiple-cursors)
 (require 'ace-jump-mode)
 (require 'helm-imenu)
 (require 'setup-html)
 (require 'setup-company)
+
+;; Save a list of recent files visited
+(use-package recentf
+  :init
+  (recentf-mode t)
+  (setq recentf-max-saved-items 100)) ;; just 20 is too recent
 
 ;; Unique buffer names
 (use-package uniquify
