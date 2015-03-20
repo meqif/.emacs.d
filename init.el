@@ -30,8 +30,8 @@
 (pallet-mode t)
 (require 'use-package)
 
-(require 'dash)
-(eval-after-load "dash" '(dash-enable-font-lock))
+(use-package dash
+  :config (dash-enable-font-lock))
 
 ;; Fix path
 (when (memq window-system '(mac ns))
