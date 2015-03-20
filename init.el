@@ -83,13 +83,20 @@
   :config
   (setq-default flycheck-display-errors-delay 0.5))
 
+(use-package org
+  :init
+  (progn
+    ;; Don't truncate lines
+    (setq org-startup-truncated nil)
+    ;; Enable wordwrap
+    (add-hook 'org-mode-hook 'visual-line-mode)))
+
 ;; Language-specific setup files
 (load-config 'c-mode 'setup-c
   'tex-mode      'setup-latex
   'markdown-mode 'setup-markdown
   'js2-mode      'setup-javascript
   'rust-mode     'setup-rust
-  'org           'setup-org-mode
   'helm-bibtex   'setup-helm-bibtex
   'flyspell      'setup-flyspell)
 
