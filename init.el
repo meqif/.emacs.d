@@ -65,13 +65,30 @@
 (require 'ace-jump-mode)
 (require 'helm-imenu)
 (require 'setup-html)
-(require 'setup-company)
 
 ;; Save a list of recent files visited
 (use-package recentf
   :init
   (recentf-mode t)
   (setq recentf-max-saved-items 100)) ;; just 20 is too recent
+
+;; Misery loves this
+(use-package company
+  :config
+  (progn
+    ;; Enable company mode for every programming major mode
+    (add-hook 'prog-mode-hook 'company-mode)
+    ;; Offer completions quickly
+    (set 'company-idle-delay 0.1)
+
+    ;; Add tern.js backend
+    (add-to-list 'company-backends 'company-tern)
+
+    ;; Fix lowercase candidates
+    (use-package company-dabbrev-code
+      :config
+      (add-to-list 'company-dabbrev-code-modes 'rust-mode))))
+
 
 ;; Unique buffer names
 (use-package uniquify
