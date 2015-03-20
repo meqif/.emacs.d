@@ -145,8 +145,19 @@
   'markdown-mode 'setup-markdown
   'js2-mode      'setup-javascript
   'rust-mode     'setup-rust
-  'helm-bibtex   'setup-helm-bibtex
-  'flyspell      'setup-flyspell)
+  'helm-bibtex   'setup-helm-bibtex)
+
+(use-package flyspell
+  :init
+  ;; Use Aspell for spellcheck
+  (setq ispell-program-name "~/homebrew/bin/aspell")
+  (setq ispell-list-command "--list")
+
+  ;; Default language is Portuguese.
+  (setq ispell-dictionary "pt_PT")
+
+  ;; Flyspell messages slow down the spellchecking process
+  (setq flyspell-issue-message-flag nil))
 
 ;; Some files need their modes explicitly set
 (require 'mode-mappings)
