@@ -281,3 +281,6 @@
   ;; Always update in background
   :config (setq paradox-execute-asynchronously t))
 
+;; NERDtree clone
+(use-package neotree
+  :config (setq neo-theme 'nerd))
