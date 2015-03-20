@@ -73,6 +73,7 @@
 
 ;; Misery loves this
 (use-package company
+  :diminish company-mode
   :config
   (progn
     ;; Enable company mode for every programming major mode
