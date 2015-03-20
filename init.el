@@ -47,7 +47,10 @@
 (require 'appearance)
 
 ;; Awesome project navigation
-(require 'setup-projectile)
+(use-package projectile
+  :init
+  (projectile-global-mode)
+  (add-to-list 'projectile-globally-ignored-directories "node_modules"))
 
 ;; Load default smartparens configuration
 (require 'smartparens-config)
