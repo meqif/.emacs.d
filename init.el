@@ -275,3 +275,9 @@
 ;; emacs-refactor
 (add-hook 'prog-mode-hook 'emr-initialize)
 (define-key prog-mode-map (kbd "M-RET") 'emr-show-refactor-menu)
+
+;; Better package management
+(use-package paradox
+  ;; Always update in background
+  :config (setq paradox-execute-asynchronously t))
+
