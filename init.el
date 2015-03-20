@@ -79,6 +79,10 @@
     (autoload 'wgrep-ag-setup "wgrep-ag")
     (add-hook 'ag-mode-hook 'wgrep-ag-setup)))
 
+(use-package flycheck
+  :config
+  (setq-default flycheck-display-errors-delay 0.5))
+
 ;; Language-specific setup files
 (load-config 'c-mode 'setup-c
   'tex-mode      'setup-latex
@@ -87,7 +91,6 @@
   'rust-mode     'setup-rust
   'org           'setup-org-mode
   'helm-bibtex   'setup-helm-bibtex
-  'flycheck      'setup-flycheck
   'flyspell      'setup-flyspell)
 
 ;; Some files need their modes explicitly set
