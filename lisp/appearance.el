@@ -33,7 +33,7 @@
         meqif/fullscreen-font "-apple-Fira Mono-medium-normal-normal-*-16-*-*-*-m-0-iso10646-1"
         magnars/presentation-font "-apple-Monaco-medium-normal-normal-*-28-*-*-*-m-0-iso10646-1")
   (set-face-attribute 'default nil :font meqif/default-font)
-  (set-frame-size (selected-frame) 120 40))
+  (set-frame-size (selected-frame) 120 38))
 
 (defun gogo-fullscreen ()
   "Change to fullscreen mode.
