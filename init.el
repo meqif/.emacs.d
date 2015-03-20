@@ -63,10 +63,23 @@
 ;; Setup extensions
 (require 'setup-evil)
 (require 'setup-ido)
-(require 'expand-region)
-(require 'multiple-cursors)
-(require 'ace-jump-mode)
-(require 'helm-imenu)
+
+(use-package helm-imenu
+  :bind ("s-r" . helm-imenu))
+
+(use-package ace-jump-mode
+  :bind ("C-c SPC" . ace-jump-mode)
+  :config
+  (progn
+    (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)))
+
+(use-package expand-region
+  :bind ("C-ç" . er/expand-region))
+
+(use-package multiple-cursors
+  :bind (("C-º" . mc/mark-next-like-this)
+         ("C-ª" . mc/mark-previous-like-this)
+         ("C-c C-º" . mc/mark-all-like-this)))
 
 ;; Save a list of recent files visited
 (use-package recentf
