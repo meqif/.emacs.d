@@ -58,7 +58,6 @@
 
 ;; Setup extensions
 (require 'setup-evil)
-(require 'setup-yasnippet)
 (require 'setup-ido)
 (require 'expand-region)
 (require 'multiple-cursors)
@@ -89,7 +88,6 @@
       :config
       (add-to-list 'company-dabbrev-code-modes 'rust-mode))))
 
-
 ;; Unique buffer names
 (use-package uniquify
   ;; Make uniquify rename buffers like in path name notation
@@ -119,6 +117,27 @@
              "* %?")))
     ;; Enable wordwrap
     (add-hook 'org-mode-hook 'visual-line-mode)))
+
+(use-package yasnippet
+  :config
+  (progn
+    ;; Use only own snippets, do not use bundled ones
+    (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+
+    ;; Don't mess with the indentation
+    (setq yas-indent-line 'fixed)
+
+    ;; No need to be so verbose
+    (setq yas-verbosity 1)
+
+    ;; Snippets everywhere
+    (yas-global-mode 1)
+
+    (add-hook 'snippet-mode-hook
+              (lambda ()
+                ;; Temporarily disable required newline at the end of file
+                ;; This fixes the problem with an extra newline when expanding snippets
+                (set (make-local-variable 'require-final-newline) nil)))))
 
 ;; Language-specific setup files
 (load-config 'c-mode 'setup-c
