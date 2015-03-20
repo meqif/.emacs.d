@@ -61,7 +61,6 @@
 (require 'setup-yasnippet)
 (require 'setup-ido)
 (require 'setup-recentf)
-(require 'setup-wgrep)
 (require 'expand-region)
 (require 'multiple-cursors)
 (require 'ace-jump-mode)
@@ -73,6 +72,12 @@
 (use-package uniquify
   ;; Make uniquify rename buffers like in path name notation
   :config (setq uniquify-buffer-name-style 'forward))
+
+(use-package wgrep
+  :config
+  (progn
+    (autoload 'wgrep-ag-setup "wgrep-ag")
+    (add-hook 'ag-mode-hook 'wgrep-ag-setup)))
 
 ;; Language-specific setup files
 (load-config 'c-mode 'setup-c
