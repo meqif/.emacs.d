@@ -207,6 +207,10 @@
           whitespace-style '(face lines-tail))
     (add-hook 'prog-mode-hook 'whitespace-mode)))
 
+(use-package undo-tree
+  ;; Show timestamps
+  :config (setq undo-tree-visualizer-timestamps t))
+
 ;; emacs-refactor
 (add-hook 'prog-mode-hook 'emr-initialize)
 (define-key prog-mode-map (kbd "M-RET") 'emr-show-refactor-menu)
