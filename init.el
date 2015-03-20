@@ -52,9 +52,13 @@
   (projectile-global-mode)
   (add-to-list 'projectile-globally-ignored-directories "node_modules"))
 
-;; Load default smartparens configuration
-(require 'smartparens-config)
-(smartparens-global-mode 1)
+(use-package smartparens
+  :diminish smartparens-mode
+  :init
+  (progn
+    (smartparens-global-mode t)
+    ;; Load default smartparens configuration
+    (use-package smartparens-config)))
 
 ;; Setup extensions
 (require 'setup-evil)
