@@ -144,11 +144,22 @@
                 (set (make-local-variable 'require-final-newline) nil)))))
 
 ;; Language-specific setup files
-(load-config 'c-mode 'setup-c
+(load-config
   'tex-mode      'setup-latex
   'markdown-mode 'setup-markdown
   'js2-mode      'setup-javascript
   'helm-bibtex   'setup-helm-bibtex)
+
+(use-package cc-mode
+  :init
+  (add-hook 'c-mode-hook
+            #'(lambda ()
+                (setq c-basic-offset 4
+                      c-default-style "linux")
+                ;; Automatically indent on RET
+                (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
+                ;; Backspace also deletes a whole indentation level
+                (setq c-backspace-function 'backward-delete-char))))
 
 (use-package sgml-mode
   :config
