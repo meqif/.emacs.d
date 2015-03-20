@@ -243,6 +243,11 @@
 (use-package js2-mode
   :mode ("\\.js$" "\\.json$"))
 
+;; Easier kill-ring viewing
+(use-package browse-kill-ring
+  ;; Highlight the current entry in browse-kill-ring
+  :config (setq browse-kill-ring-highlight-current-entry t))
+
 ;; Misc
 (require 'my-misc)
 
