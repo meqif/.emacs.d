@@ -62,13 +62,17 @@
 (require 'setup-ido)
 (require 'setup-recentf)
 (require 'setup-wgrep)
-(require 'uniquify)
 (require 'expand-region)
 (require 'multiple-cursors)
 (require 'ace-jump-mode)
 (require 'helm-imenu)
 (require 'setup-html)
 (require 'setup-company)
+
+;; Unique buffer names
+(use-package uniquify
+  ;; Make uniquify rename buffers like in path name notation
+  :config (setq uniquify-buffer-name-style 'forward))
 
 ;; Language-specific setup files
 (load-config 'c-mode 'setup-c
