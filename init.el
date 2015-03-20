@@ -288,3 +288,6 @@
 ;; Better interactive search
 (use-package swiper
   :init (global-set-key (kbd "C-s") 'swiper))
+
+;; Enable paredit for Emacs Lisp
+(add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
