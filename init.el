@@ -87,7 +87,14 @@
   :init
   (progn
     ;; Don't truncate lines
-    (setq org-startup-truncated nil)
+    (setq org-startup-truncated nil
+          org-capture-templates
+          '(("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
+             "* TODO %?\n  %i\n  %a")
+            ("j" "Dissertation" entry (file+datetree "~/org/dissertation.org")
+             "* %?\nEntered on %U\n  %i\n  %a")
+            ("b" "Blog post idea" entry (file+headline "~/org/blog/post_ideas.org" "Ideas")
+             "* %?")))
     ;; Enable wordwrap
     (add-hook 'org-mode-hook 'visual-line-mode)))
 
