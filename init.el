@@ -28,6 +28,7 @@
 (cask-initialize)
 (require 'pallet)
 (pallet-mode t)
+(require 'use-package)
 
 (require 'dash)
 (eval-after-load "dash" '(dash-enable-font-lock))
