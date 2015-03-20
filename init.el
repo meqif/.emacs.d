@@ -276,6 +276,10 @@
 (add-hook 'prog-mode-hook 'emr-initialize)
 (define-key prog-mode-map (kbd "M-RET") 'emr-show-refactor-menu)
 
+(use-package enh-ruby-mode
+  ;; Don't deep indent arrays and hashes
+  :config (setq enh-ruby-deep-ident-paren nil))
+
 ;; Better package management
 (use-package paradox
   ;; Always update in background
