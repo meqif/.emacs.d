@@ -185,8 +185,8 @@
   ;; Flyspell messages slow down the spellchecking process
   (setq flyspell-issue-message-flag nil))
 
-;; Some files need their modes explicitly set
-(require 'mode-mappings)
+(use-package js2-mode
+  :mode ("\\.js$" "\\.json$"))
 
 ;; Misc
 (require 'my-misc)
