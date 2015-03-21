@@ -172,8 +172,22 @@
 (load-config
   'tex-mode      'setup-latex
   'markdown-mode 'setup-markdown
-  'js2-mode      'setup-javascript
-  'helm-bibtex   'setup-helm-bibtex)
+  'js2-mode      'setup-javascript)
+
+(use-package helm-bibtex
+  :defer t
+  :config
+  (progn
+    (use-package reftex :defer t)
+
+    ;; Set default bibliography file
+    (setq helm-bibtex-bibliography "bibliography.bib")
+    (add-to-list 'reftex-default-bibliography "bibliography.bib")
+
+    ;; Use LaTeX autocite even in org-mode.
+    (add-to-list 'helm-bibtex-format-citation-functions
+                 '(org-mode . (lambda (keys)
+                                (format "\\autocite{%s}" (s-join ", " keys)))))))
 
 (use-package cc-mode
   :init
