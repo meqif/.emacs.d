@@ -17,7 +17,6 @@
 (depends-on "diminish")
 (depends-on "ebib")
 (depends-on "emmet-mode")
-(depends-on "emr")
 (depends-on "enh-ruby-mode")
 (depends-on "epl")
 (depends-on "evil")
