@@ -25,8 +25,13 @@
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
 ;; Quick spellcheck shortcut
-(add-hook 'LaTeX-mode-hook (lambda()
-  (define-key LaTeX-mode-map (kbd "§") 'flyspell-buffer)))
+(add-hook 'LaTeX-mode-hook
+          (lambda()
+            (define-key LaTeX-mode-map (kbd "§") 'flyspell-buffer)
+            (define-key LaTeX-mode-map (kbd "C-c b") 'helm-bibtex)
+            (define-key LaTeX-mode-map (kbd "<M-up>") 'outline-move-subtree-up)
+            (define-key LaTeX-mode-map (kbd "<M-down>") 'outline-move-subtree-down)
+            (define-key LaTeX-mode-map (kbd "C-c t") #'(lambda () (interactive) (TeX-insert-macro "todo")))))
 
 (defun flyspell-check-next-highlighted-word ()
   "Custom function to spell check next highlighted word"
