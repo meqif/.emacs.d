@@ -80,15 +80,18 @@
   :bind ("s-r" . helm-imenu))
 
 (use-package ace-jump-mode
+  :defer t
   :bind ("C-c SPC" . ace-jump-mode)
   :config
   (progn
     (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)))
 
 (use-package expand-region
+  :defer t
   :bind ("C-ç" . er/expand-region))
 
 (use-package multiple-cursors
+  :defer t
   :bind (("C-º" . mc/mark-next-like-this)
          ("C-ª" . mc/mark-previous-like-this)
          ("C-c C-º" . mc/mark-all-like-this)))
