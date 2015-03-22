@@ -148,7 +148,24 @@
             ("b" "Blog post idea" entry (file+headline "~/org/blog/post_ideas.org" "Ideas")
              "* %?")))
     ;; Enable wordwrap
-    (add-hook 'org-mode-hook 'visual-line-mode)))
+    (add-hook 'org-mode-hook 'visual-line-mode)
+
+    ;; Organizing stuff
+    ;; http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
+
+    ;; Set default notes file
+    (setq org-default-notes-file "~/organizer.org")
+
+    ;; Shortcut to open notes file
+    (global-set-key (kbd "C-c o")
+                    (lambda () (interactive) (find-file "~/org/tasks.org")))
+    (global-set-key (kbd "C-c d")
+                    (lambda () (interactive) (find-file "~/org/dissertation.org")))
+    (global-set-key (kbd "C-c b")
+                    (lambda () (interactive) (find-file "~/org/blog/post_ideas.org")))
+
+    ;; Shortcut to capture notes
+    (global-set-key (kbd "C-c c") 'org-capture)))
 
 (use-package yasnippet
   :config
