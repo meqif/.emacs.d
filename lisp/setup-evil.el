@@ -82,7 +82,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       special-mode
       messages-buffer-mode
       finder-mode
-      compilation-mode)
+      compilation-mode
+      paradox-menu-mode
+      neotree-mode)
   (add-to-list 'evil-emacs-state-modes it))
 
 (provide 'setup-evil)
