@@ -35,4 +35,11 @@
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+;; Quickly jump to scratch buffer
+(global-set-key
+ (kbd "s-t")
+ #'(lambda ()
+     (interactive)
+     (switch-to-buffer (get-buffer-create "*scratch*"))))
+
 (provide 'keybindings)
