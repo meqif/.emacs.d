@@ -44,9 +44,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
-;; Disable evil mode in terminal
-(add-hook 'term-mode-hook 'evil-emacs-state)
-
 ;; Make ':bd' kill the buffer but not close the window.
 ;;
 ;; This function is exactly the same as `evil-delete-buffer` with
@@ -79,6 +76,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; Some more modes that should be in emacs mode
 (--each
     '(flycheck-error-list-mode
+      term-mode
       special-mode
       messages-buffer-mode
       finder-mode
