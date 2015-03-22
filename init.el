@@ -315,4 +315,6 @@
   :init (global-set-key (kbd "C-s") 'swiper))
 
 ;; Enable paredit for Emacs Lisp
-(add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+(use-package paredit
+  :init
+  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
