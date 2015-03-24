@@ -76,4 +76,10 @@
           (lambda ()
             (setq TeX-command-default "XeLaTeX")))
 
+;; Add `` and '' to evil-surrond
+(add-hook 'LaTeX-mode-hook
+          (lambda ()
+            ;; 34 is the code for " (double quote)
+            (push '(34 . ("``" . "''")) evil-surround-pairs-alist)))
+
 (provide 'setup-latex)
