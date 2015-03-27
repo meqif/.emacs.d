@@ -24,7 +24,7 @@
 (require 'sane-defaults)
 
 ;; Packages
-(require 'cask "~/homebrew/opt/cask/cask.el")
+(require 'cask "~/homebrew/share/emacs/site-lisp/cask.el")
 (cask-initialize)
 (require 'pallet)
 (pallet-mode t)
