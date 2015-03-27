@@ -93,13 +93,12 @@
 
 (use-package expand-region
   :defer t
-  :bind ("C-ç" . er/expand-region))
+  :bind ("C-=" . er/expand-region))
 
 (use-package multiple-cursors
   :defer t
-  :bind (("C-º" . mc/mark-next-like-this)
-         ("C-ª" . mc/mark-previous-like-this)
-         ("C-c C-º" . mc/mark-all-like-this)))
+  :bind (("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)))
 
 ;; Save a list of recent files visited
 (use-package recentf
