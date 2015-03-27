@@ -271,22 +271,13 @@
     (sp-local-pair 'rust-mode "<" ">")
 
     ;; Handy keybindings
-    (define-key rust-mode-map (kbd "C-c C-c")
-      #'(lambda ()
-          (interactive)
-          (save-buffer)
-          (compile "cargo build")))
-    (define-key rust-mode-map (kbd "C-c C-t")
-      #'(lambda ()
-          (interactive)
-          (save-buffer)
-          (compile "cargo test")))
-    (define-key rust-mode-map (kbd "C-c C-b")
-      #'(lambda ()
-          (interactive)
-          (save-buffer)
-          (compile "cargo bench")))
-    ))
+    (--each
+        '(("C-c C-c" . "cargo build")
+          ("C-c C-t" . "cargo test")
+          ("C-c C-r" . "cargo run"))
+      (-let* (((keycombo . command) it))
+        (define-key rust-mode-map (kbd keycombo)
+          `(lambda () (interactive) (save-buffer) (compile ,command)))))))
 
 (use-package flyspell
   :init
