@@ -268,7 +268,25 @@
                 (whitespace-mode 1)))
 
     ;; Add brackets to smartparens pair list
-    (sp-local-pair 'rust-mode "<" ">")))
+    (sp-local-pair 'rust-mode "<" ">")
+
+    ;; Handy keybindings
+    (define-key rust-mode-map (kbd "C-c C-c")
+      #'(lambda ()
+          (interactive)
+          (save-buffer)
+          (compile "cargo build")))
+    (define-key rust-mode-map (kbd "C-c C-t")
+      #'(lambda ()
+          (interactive)
+          (save-buffer)
+          (compile "cargo test")))
+    (define-key rust-mode-map (kbd "C-c C-b")
+      #'(lambda ()
+          (interactive)
+          (save-buffer)
+          (compile "cargo bench")))
+    ))
 
 (use-package flyspell
   :init
