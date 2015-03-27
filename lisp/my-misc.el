@@ -14,10 +14,6 @@
 ;; Highlight ag's search results
 (setq ag-highlight-search t)
 
-;; Enable smex
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-
 ;; Make imenu rescan automatically
 (setq imenu-auto-rescan t)
 

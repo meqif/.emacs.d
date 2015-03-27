@@ -49,6 +49,11 @@
 ;; Unclutter modeline
 (use-package diminish)
 
+;; Smarter M-x
+(use-package smex
+  :init (smex-initialize)
+  :bind ("M-x" . smex))
+
 ;; Awesome project navigation
 (use-package projectile
   :diminish projectile-mode
