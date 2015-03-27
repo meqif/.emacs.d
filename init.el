@@ -360,29 +360,7 @@
      ("j" next-error "next")
      ("k" previous-error "prev")
      ("v" recenter-top-bottom "recenter")
-     ("q" nil "quit")))
-
-  ;; Window management
-  (global-set-key
-   (kbd "M-w")
-   (defhydra hydra-window (:color red)
-     "
-Split: _|_ vertical _-_ horizontal
- Move: _h_ left _j_ right _k_ up _l_ down
-Extra: _dw_ delete window"
-     ("h" windmove-left nil)
-     ("j" windmove-right nil)
-     ("k" windmove-up nil)
-     ("l" windmove-down nil)
-     ("|" (lambda ()
-            (interactive)
-            (split-window-right)
-            (windmove-right)) nil)
-     ("-" (lambda ()
-            (interactive)
-            (split-window-below)
-            (windmove-down)) nil)
-     ("dw" delete-window nil))))
+     ("q" nil "quit"))))
 
 (use-package ivy
   :config
