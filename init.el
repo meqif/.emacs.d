@@ -370,3 +370,8 @@ Extra: _dw_ delete window"
             (split-window-below)
             (windmove-down)) nil)
      ("dw" delete-window nil))))
+
+(use-package ivy
+  :config
+  ;; Allow quitting ivy with ESC
+  (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit))
