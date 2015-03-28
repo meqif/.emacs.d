@@ -357,8 +357,8 @@
    (defhydra hydra-error (:color red)
      "goto-error"
      ("h" first-error "first")
-     ("j" next-error "next")
-     ("k" previous-error "prev")
+     ("n" next-error "next")
+     ("p" previous-error "prev")
      ("v" recenter-top-bottom "recenter")
      ("q" nil "quit"))))
 
