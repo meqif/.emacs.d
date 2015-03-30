@@ -328,7 +328,15 @@
 
 (use-package magit
   :defer t
-  :diminish magit-auto-revert-mode)
+  :diminish magit-auto-revert-mode
+  :bind ("C-x g" . magit-status)
+  :config
+  (progn
+    (setq magit-set-upstream-on-push t)
+    ;; Verbose commits (show changes to be commited) by default
+    (advice-add #'magit-key-mode-popup-committing :after
+                (lambda ()
+                  (magit-key-mode-toggle-option 'committing "--verbose")))))
 
 (use-package enh-ruby-mode
   ;; Don't deep indent arrays and hashes
