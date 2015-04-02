@@ -374,3 +374,8 @@
   :config
   ;; Allow quitting ivy with ESC
   (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit))
+
+;; Macro expansion for ease of debugging
+(use-package macrostep
+  :defer t
+  :config (define-key emacs-lisp-mode-map (kbd "C-c e") 'macrostep-expand))
