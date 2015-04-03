@@ -40,8 +40,8 @@
   :defer t
 
 ;; Fix path
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+(use-package exec-path-from-shell
+  :config (exec-path-from-shell-initialize))
 
 ;; Functions
 (require 'defuns)
