@@ -80,7 +80,9 @@
 (require 'setup-evil)
 
 ;; Enable IDO mode
-(when (> emacs-major-version 21)
+(use-package ido
+  :demand t
+  :config
   (ido-mode t)
   (setq ido-enable-prefix nil
         ido-enable-flex-matching t
