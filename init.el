@@ -156,6 +156,9 @@
   (progn
     ;; Don't truncate lines
     (setq org-startup-truncated nil
+          ;; Enable syntax highlighting in source blocks
+          org-src-fontify-natively t
+          ;; Add more capture templates
           org-capture-templates
           '(("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
              "* TODO %?\n  %i\n  %a")
