@@ -37,6 +37,7 @@
 
 (use-package dash
   :config (dash-enable-font-lock))
+  :defer t
 
 ;; Fix path
 (when (memq window-system '(mac ns))
@@ -62,6 +63,7 @@
 ;; Awesome project navigation
 (use-package projectile
   :diminish projectile-mode
+  :defer 5
   :init
   (projectile-global-mode)
   (add-to-list 'projectile-globally-ignored-directories "node_modules"))
@@ -135,16 +137,19 @@
   :config (setq uniquify-buffer-name-style 'forward))
 
 (use-package wgrep
+  :defer t
   :config
   (progn
     (autoload 'wgrep-ag-setup "wgrep-ag")
     (add-hook 'ag-mode-hook 'wgrep-ag-setup)))
 
 (use-package flycheck
+  :defer t
   :config
   (setq-default flycheck-display-errors-delay 0.5))
 
 (use-package org
+  :defer 30
   :init
   (progn
     ;; Don't truncate lines
@@ -219,6 +224,7 @@
   'js2-mode      'setup-javascript)
 
 (use-package cc-mode
+  :defer t
   :init
   (add-hook 'c-mode-hook
             #'(lambda ()
@@ -230,6 +236,7 @@
                 (setq c-backspace-function 'backward-delete-char))))
 
 (use-package sgml-mode
+  :defer t
   :config
   (progn
     ;; Enable tagedit
@@ -240,6 +247,7 @@
     (add-hook 'mustache-mode (lambda () (tagedit-mode 1)))))
 
 (use-package emmet-mode
+  :defer t
   :config
   (progn
     ;; Enable Emmet in tag soup modes
@@ -250,10 +258,12 @@
   :mode "\\.hjs\\'")
 
 (use-package scss-mode
+  :defer t
   ;; Don't autocompile SCSS, I usually have task runners doing that
   :config (setq scss-compile-at-save nil))
 
 (use-package rust-mode
+  :defer t
   :config
   (progn
     (add-hook 'rust-mode-hook
@@ -303,6 +313,7 @@
 
 ;; Easier kill-ring viewing
 (use-package browse-kill-ring
+  :defer t
   ;; Highlight the current entry in browse-kill-ring
   :config (setq browse-kill-ring-highlight-current-entry t))
 
@@ -344,16 +355,19 @@
                   (magit-key-mode-toggle-option 'committing "--verbose")))))
 
 (use-package enh-ruby-mode
+  :mode "\\.rb\\'"
   ;; Don't deep indent arrays and hashes
   :config (setq enh-ruby-deep-ident-paren nil))
 
 ;; Better package management
 (use-package paradox
+  :defer 5
   ;; Always update in background
   :config (setq paradox-execute-asynchronously t))
 
 ;; Better interactive search
 (use-package swiper
+  :defer t
   :init (global-set-key (kbd "C-s") 'swiper))
 
 ;; Enable paredit for Emacs Lisp
@@ -376,6 +390,7 @@
      ("q" nil "quit"))))
 
 (use-package ivy
+  :defer t
   :config
   ;; Allow quitting ivy with ESC
   (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit))
