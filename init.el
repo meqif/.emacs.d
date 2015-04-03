@@ -343,7 +343,6 @@
   :config (setq undo-tree-visualizer-timestamps t))
 
 (use-package magit
-  :defer t
   :diminish magit-auto-revert-mode
   :bind ("C-x g" . magit-status)
   :config
