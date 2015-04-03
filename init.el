@@ -199,7 +199,7 @@
     (setq yas-verbosity 1)
 
     ;; Snippets everywhere
-    (yas-global-mode 1)
+    (yas-global-mode)
 
     (add-hook 'snippet-mode-hook
               (lambda ()
