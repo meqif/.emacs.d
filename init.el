@@ -1,3 +1,8 @@
+;; Mark start point for load time measurement
+(defconst emacs-start-time (current-time))
+(unless noninteractive
+  (message "Loading %s..." load-file-name))
+
 ;; Refuse to work with old Emacsen
 (when (version< emacs-version "24.4")
   (error "This emacs is too old!"))
@@ -379,3 +384,17 @@
 (use-package macrostep
   :defer t
   :config (define-key emacs-lisp-mode-map (kbd "C-c e") 'macrostep-expand))
+
+;; Post initialization -- calculate loading time
+;; Copied from jwiegley's configuration
+(when window-system
+  (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time))))
+    (message "Loading %s...done (%.3fs)" load-file-name elapsed))
+
+  (add-hook 'after-init-hook
+            `(lambda ()
+               (let ((elapsed (float-time
+                               (time-subtract (current-time) emacs-start-time))))
+                 (message "Loading %s...done (%.3fs) [after-init]"
+                          ,load-file-name elapsed)))
+            t))
