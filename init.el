@@ -275,15 +275,8 @@
               (lambda ()
                 ;; Enable on-the-fly syntax checking
                 (flycheck-mode 1)
-                ;; Fix paths where to look for libraries
-                (add-to-list 'flycheck-rust-library-path
-                             (concat (projectile-project-root) "target/debug"))
-                (add-to-list 'flycheck-rust-library-path
-                             (concat (projectile-project-root) "target/debug/deps"))
-                (add-to-list 'flycheck-rust-library-path
-                             (concat (projectile-project-root) "target/release"))
-                (add-to-list 'flycheck-rust-library-path
-                             (concat (projectile-project-root) "target/release/deps"))
+                ;; Do the required setup
+                (flycheck-rust-setup)
                 ;; Rust has different rules for too long lines
                 (setq-local fill-column 101)
                 (setq-local whitespace-line-column 100)
