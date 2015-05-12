@@ -20,9 +20,6 @@
 
 ;; Misc
 
-;; Kill current buffer without prompting
-(global-set-key (kbd "H-k") 'kill-this-buffer)
-
 ;; Comment or uncomment current line or region
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
 
