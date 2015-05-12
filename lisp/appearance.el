@@ -80,14 +80,14 @@ already in fullscreen"
       (concat " " (projectile-project-name))))
    face project-face))
 
-(defvar mein-vc-mode-line
+(defvar meqif-vc-mode-line
   '(" " (:propertize
          ;; Strip the backend name from the VC status information
          (:eval (let ((backend (symbol-name (vc-backend (buffer-file-name)))))
                   (substring vc-mode (+ (length backend) 2))))
          face branch-face))
   "Mode line format for VC Mode.")
-(put 'mein-vc-mode-line 'risky-local-variable t)
+(put 'meqif-vc-mode-line 'risky-local-variable t)
 
 (setq-default mode-line-format
               '("%e" mode-line-front-space
@@ -103,7 +103,7 @@ already in fullscreen"
                 ;; Project information
                 (projectile-mode projectile-mode-line)
                 ;; Version control information
-                (vc-mode mein-vc-mode-line)
+                (vc-mode meqif-vc-mode-line)
                 ;; Misc information
                 " "
                 mode-line-misc-info
