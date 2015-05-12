@@ -404,6 +404,9 @@
   :defer t
   :config (define-key emacs-lisp-mode-map (kbd "C-c e") 'macrostep-expand))
 
+;; Unbind s-&, as I hit it accidentally too often and it kills the buffer. :(
+(unbind-key (kbd "s-&"))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when window-system
