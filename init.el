@@ -278,7 +278,7 @@
                 ;; Do the required setup
                 (flycheck-rust-setup)
                 ;; Rust has different rules for too long lines
-                (setq-local fill-column 101)
+                (setq-local fill-column 100)
                 (setq-local whitespace-line-column 100)
                 ;; Reload whitespace mode to make the previous change effective
                 (whitespace-mode -1)
