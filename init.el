@@ -174,6 +174,18 @@
     ;; Enable wordwrap
     (add-hook 'org-mode-hook 'visual-line-mode)
 
+    ;; Org-latex configuration
+    (use-package ox-latex
+      :defer t
+      :config
+      ;; Use latexmk and xelatex to generate PDFs
+      (setq org-latex-pdf-process '("latexmk -pdflatex=xelatex -pdf -f %f"))
+      ;; Default packages
+      (add-to-list 'org-latex-packages-alist
+                   '("" "MinionPro" nil))
+      (add-to-list 'org-latex-packages-alist
+                   '("" "microtype" nil)))
+
     ;; Organizing stuff
     ;; http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
 
