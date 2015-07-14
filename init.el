@@ -433,7 +433,10 @@
                 (setq-local whitespace-line-column 100)
                 ;; Reload whitespace mode to make the previous change effective
                 (whitespace-mode -1)
-                (whitespace-mode 1)))
+                (whitespace-mode 1)
+                ;; Prettify some symbols
+                (--each '((">=" . ?≥) ("<=" . ?≤) ("!=" . ?≠))
+                  (push it prettify-symbols-alist))))
 
     ;; Add brackets to smartparens pair list
     (sp-local-pair 'rust-mode "<" ">")
