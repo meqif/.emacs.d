@@ -573,3 +573,6 @@
                  (message "Loading %s...done (%.3fs) [after-init]"
                           ,load-file-name elapsed)))
             t))
+
+;; Start server
+(server-start)
