@@ -103,7 +103,8 @@
   :bind ("C-c SPC" . ace-jump-mode)
   :config
   (progn
-    (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)))
+    (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+    (evil-leader/set-key "<SPC>" 'ace-jump-mode)))
 
 (use-package expand-region
   :defer t
