@@ -90,6 +90,11 @@
         ido-use-filename-at-point nil
         ido-max-prospects 10))
 
+(use-package compile
+  :config
+  ;; Scroll compile buffer automatically but stop on the first error
+  (setq compilation-scroll-output 'first-error))
+
 (use-package helm-imenu
   :bind ("s-r" . helm-imenu))
 
