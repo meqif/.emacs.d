@@ -521,6 +521,14 @@
   :config
   ;; Easy error navigation
   (global-set-key
+   (kbd "M-ç")
+   (defhydra hydra-flyspell (:color red)
+     "spellchecking"
+     ("r" flyspell-buffer "rerun on buffer")
+     ("n" flyspell-goto-next-error "next")
+     ("c" ispell-word "correct word")
+     ("q" nil "quit")))
+  (global-set-key
    (kbd "M-g")
    (defhydra hydra-error (:color red)
      "goto-error"
