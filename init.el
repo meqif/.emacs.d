@@ -447,11 +447,11 @@
   :config (setq undo-tree-visualizer-timestamps t))
 
 (use-package magit
-  :diminish magit-auto-revert-mode
   :bind ("C-x g" . magit-status)
   :init
   ;; Mark setup instructions as read
-  (setq magit-last-seen-setup-instructions "1.4.0")
+  (setq magit-last-seen-setup-instructions "1.4.0"
+        magit-revert-buffers t)
   :config
   (progn
     (setq magit-set-upstream-on-push t)
