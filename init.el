@@ -224,9 +224,119 @@
 
 ;; Language-specific setup files
 (load-config
-    'tex-mode      'setup-latex
-  'markdown-mode 'setup-markdown
+    ;; 'tex-mode      'setup-latex
+    'markdown-mode 'setup-markdown
   'js2-mode      'setup-javascript)
+
+(use-package tex-mode
+  :mode ("\\.tex\\'" . LaTeX-mode)
+  :config
+  (progn
+    (use-package flyspell)
+
+    ;; Default options
+    (setq TeX-auto-save t)
+    (setq TeX-parse-self t)
+    (setq-default TeX-master nil)
+
+    ;; Generate PDF by default
+    (setq TeX-PDF-mode t)
+
+    ;; Explicitly add XeLaTeX to the available commands
+    (eval-after-load "tex"
+      '(add-to-list 'TeX-command-list
+                    '("XeLaTeX" "xelatex -interaction=nonstopmode %s"
+                      TeX-run-command t t :help "Run xelatex") t))
+
+    ;; Set default viewer
+    ;; (setq TeX-view-program-list '(("Skim" "open -a Skim.app %(outpage) %o")))
+
+    ;; Use Skim as viewer, enable source <-> PDF sync
+    ;; make latexmk available via C-c C-c
+    ;; Note: SyncTeX is setup via ~/.latexmkrc (see below)
+    (add-hook 'LaTeX-mode-hook (lambda ()
+                                 (push
+                                  '("latexmk" "latexmk -synctex=1 -pdf %s" TeX-run-TeX nil t
+                                    :help "Run latexmk on file")
+                                  TeX-command-list)))
+    (add-hook 'LaTeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
+
+    ;; use Skim as default pdf viewer
+    ;; Skim's displayline is used for forward search (from .tex to .pdf)
+    ;; option -b highlights the current line; option -g opens Skim in the background
+    (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
+    (setq TeX-view-program-list
+          '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b %n %o %b")))
+
+
+    ;; Set default TeX engine
+    ;; (setq TeX-engine 'xetex)
+    (setq TeX-engine 'luatex) ; LuaTeX works great, even though it's slow
+
+    ;; Enable rainbow delimiters (makes it easier to catch stray curly brackets)
+    (add-hook 'LaTeX-mode-hook 'rainbow-delimiters-mode)
+
+    ;; Enable spellcheck for LaTeX
+    (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+
+    ;; Quick spellcheck shortcut
+    (add-hook 'LaTeX-mode-hook
+              (lambda()
+                (define-key LaTeX-mode-map (kbd "§") 'flyspell-buffer)
+                (define-key LaTeX-mode-map (kbd "C-c b") 'helm-bibtex)
+                (define-key LaTeX-mode-map (kbd "<M-up>") 'outline-move-subtree-up)
+                (define-key LaTeX-mode-map (kbd "<M-down>") 'outline-move-subtree-down)
+                (define-key LaTeX-mode-map (kbd "C-c t") #'(lambda () (interactive) (TeX-insert-macro "todo")))))
+
+    ;; Autosave before compiling
+    (setq TeX-save-query nil)
+
+    ;; Enable word wrapping
+    (setq-local word-wrap t)
+
+    ;; Enable RefTeX
+    (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+    (setq reftex-plug-into-AUCTeX t)
+
+    ;; Add biblatex style cite formats
+    (eval-after-load 'reftex-vars
+      '(progn
+         (setq reftex-cite-format
+               '((?\C-m . "\\cite[]{%l}")
+                 (?f . "\\footcite[][]{%l}")
+                 (?t . "\\textcite[]{%l}")
+                 (?p . "\\parencite[]{%l}")
+                 (?o . "\\citepr[]{%l}")
+                 (?n . "\\nocite{%l}")
+                 (?a . "\\autocite[]{%l}")))))
+
+    ;; Expand command regexp with biblatex stuff
+    ;; (setq flyspell-tex-command-regexp)
+
+    ;; Enable wordwrap
+    (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+
+    ;; Set XeLaTeX as the default command
+    (add-hook 'LaTeX-mode-hook
+              (lambda ()
+                (setq TeX-command-default "XeLaTeX")))
+
+    ;; Add `` and '' to evil-surrond
+    (add-hook 'LaTeX-mode-hook
+              (lambda ()
+                ;; 34 is the code for " (double quote)
+                (push '(34 . ("``" . "''")) evil-surround-pairs-alist)))
+
+    ;; Set up imenu properly
+    (setq imenu-generic-expression
+          '(("*Part*" "\\s-*\\\\part{\\(.+\\)}" 1)
+            ("*Chapter*" "\\s-*\\\\chapter{\\(.+\\)}" 1)
+            ("*Section*" "\\s-*\\\\section{\\(.+\\)}" 1)
+            ("*Subsection*" "\\s-*\\\\subsection{\\(.+\\)}" 1)
+            ("*Subsubsection*" "\\s-*\\\\subsubsection{\\(.+\\)}" 1)
+            ("*Paragraph*" "\\s-*\\\\paragraph{\\(.+\\)}" 1)
+            ("*Subparagraph*" "\\s-*\\\\subparagraph{\\(.+\\)}" 1)))
+    ))
 
 (use-package cc-mode
   :defer t
