@@ -469,7 +469,12 @@
 (use-package paradox
   :defer 5
   ;; Always update in background
-  :config (setq paradox-execute-asynchronously t))
+  :init (use-package spinner)
+  :config
+  (setq paradox-execute-asynchronously t
+        paradox-github-token t
+        paradox-automatically-star nil)
+  (add-hook 'paradox-menu-mode-hook (lambda () (linum-mode -1))))
 
 ;; Better interactive search
 (use-package swiper
