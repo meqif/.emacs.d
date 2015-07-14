@@ -175,14 +175,6 @@
     ;; Set default notes file
     (setq org-default-notes-file "~/organizer.org")
 
-    ;; Shortcut to open notes file
-    (global-set-key (kbd "C-c o")
-                    (lambda () (interactive) (find-file "~/org/tasks.org")))
-    (global-set-key (kbd "C-c d")
-                    (lambda () (interactive) (find-file "~/org/dissertation.org")))
-    (global-set-key (kbd "C-c b")
-                    (lambda () (interactive) (find-file "~/org/blog/post_ideas.org")))
-
     ;; Shortcut to capture notes
     (global-set-key (kbd "C-c c") 'org-capture)))
 
