@@ -243,8 +243,20 @@
     (require 'reftex)
 
     ;; Set default bibliography file
-    (setq helm-bibtex-bibliography "bibliography.bib")
-    (add-to-list 'reftex-default-bibliography "bibliography.bib")
+    (if (file-exists-p "bibliography.bib")
+        (setq helm-bibtex-bibliography (list "bibliography.bib"))
+      (setq helm-bibtex-bibliography
+            (list (expand-file-name "~/bibliography.bib"))))
+
+    (add-to-list
+     (make-local-variable 'reftex-default-bibliography)
+     "bibliography.bib")
+
+    ;; Change default action
+    (progn
+      (helm-delete-action-from-source "Insert BibTeX key" helm-source-bibtex)
+      (helm-add-action-to-source
+       "Insert BibTeX key" 'helm-bibtex-insert-key helm-source-bibtex 0))
 
     ;; Use LaTeX autocite even in org-mode.
     (add-to-list
