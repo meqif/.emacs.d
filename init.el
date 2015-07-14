@@ -536,7 +536,15 @@
      ("n" next-error "next")
      ("p" previous-error "prev")
      ("v" recenter-top-bottom "recenter")
-     ("q" nil "quit"))))
+     ("q" nil "quit")))
+  (global-set-key
+   (kbd "M-n")
+   (defhydra hydra-narrow (:color blue)
+     "narrow"
+     ("f" narrow-to-defun "to function")
+     ("p" narrow-to-page "to page")
+     ("r" narrow-to-region "to region")
+     ("w" widen "widen"))))
 
 (use-package ivy
   :defer t
