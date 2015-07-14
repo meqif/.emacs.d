@@ -173,6 +173,8 @@
              "* %?")))
     ;; Enable wordwrap
     (add-hook 'org-mode-hook 'visual-line-mode)
+    ;; Break lines automatically
+    (add-hook 'org-mode-hook 'auto-fill-mode)
 
     ;; Org-latex configuration
     (use-package ox-latex
