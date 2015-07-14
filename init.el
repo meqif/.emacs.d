@@ -90,6 +90,13 @@
         ido-use-filename-at-point nil
         ido-max-prospects 10))
 
+(use-package imenu
+  :config
+  ;; Allow imenu to jump between use-package declarations
+  (add-to-list 'imenu-generic-expression
+               '("Used Packages"
+                 "\\(^\\s-*(use-package +\\)\\(\\_<.+\\_>\\)" 2)))
+
 (use-package compile
   :config
   ;; Scroll compile buffer automatically but stop on the first error
