@@ -134,9 +134,19 @@
     (add-to-list 'company-backends 'company-tern)
 
     ;; Fix lowercase candidates
-    (use-package company-dabbrev-code
+    ;; (use-package company-dabbrev-code
+    ;;   :config
+    ;;   (add-to-list 'company-dabbrev-code-modes 'rust-mode)))
+    (setq company-dabbrev-downcase nil)
+
+    ;; Add racer to load-path
+    (add-to-list 'load-path "~/racer/editors/emacs")
+    (use-package racer
+      :init
+      (setq racer-rust-src-path "~/rust/src/")
+      (setq racer-cmd "~/racer/target/release/racer")
       :config
-      (add-to-list 'company-dabbrev-code-modes 'rust-mode))))
+      (add-hook 'rust-mode-hook 'racer-activate))))
 
 ;; Unique buffer names
 (use-package uniquify
