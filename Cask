@@ -1,7 +1,6 @@
 (source gnu)
 (source melpa)
 
-(depends-on "ace-jump-mode")
 (depends-on "adoc-mode")
 (depends-on "ag")
 (depends-on "aggressive-indent")
@@ -9,6 +8,7 @@
 (depends-on "auctex")
 (depends-on "auto-complete")
 (depends-on "base16-theme")
+(depends-on "avy")
 (depends-on "bind-key")
 (depends-on "browse-kill-ring")
 (depends-on "caml")

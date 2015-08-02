@@ -105,13 +105,9 @@
 (use-package helm-imenu
   :bind ("s-r" . helm-imenu))
 
-(use-package ace-jump-mode
-  :defer t
-  :bind ("C-c SPC" . ace-jump-mode)
-  :config
-  (progn
-    (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-    (evil-leader/set-key "<SPC>" 'ace-jump-mode)))
+(use-package avy
+  :bind ("C-c SPC" . avy-goto-word-1)
+  :config (evil-leader/set-key "<SPC>" 'avy-goto-word-1))
 
 (use-package expand-region
   :defer t
