@@ -12,6 +12,11 @@
   "r" 'helm-recentf
   "g" 'magit-status)
 
+(evil-leader/set-key-for-mode 'latex-mode
+  "s" 'flyspell-buffer
+  "t" #'(lambda () (interactive) (TeX-insert-macro "todo"))
+  "cc" 'TeX-command-master
+  "cv" 'TeX-view)
 
 
 ;; Evil surround is a must
