@@ -265,7 +265,6 @@
 
 ;; Language-specific setup files
 (load-config
-    ;; 'tex-mode      'setup-latex
     'markdown-mode 'setup-markdown
   'js2-mode      'setup-javascript)
 
