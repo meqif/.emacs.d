@@ -19,6 +19,13 @@
   "cv" 'TeX-view)
 
 
+;; Easy mark popping
+(defun meqif/pop-mark ()
+  (interactive)
+  (set-mark-command '(4)))
+(evil-leader/set-key
+  "\\" #'meqif/pop-mark)
+
 ;; Evil surround is a must
 (global-evil-surround-mode 1)
 
