@@ -87,14 +87,35 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;; Some more modes that should be in emacs mode
 (--each
-    '(flycheck-error-list-mode
-      term-mode
-      special-mode
-      messages-buffer-mode
+    '(compilation-mode
       finder-mode
-      compilation-mode
+      flycheck-error-list-mode
+      messages-buffer-mode
+      neotree-mode
       paradox-menu-mode
-      neotree-mode)
+      special-mode
+      term-mode
+      ;; Magit modes
+      git-rebase-mode
+      magit-auto-revert-mode
+      magit-blame-mode
+      magit-branch-manager-mode
+      magit-cherry-mode
+      magit-commit-mode
+      magit-diff-mode
+      magit-key-mode
+      magit-log-mode
+      magit-popup-mode
+      magit-pre-key-mode
+      magit-process-mode
+      magit-process-set-mode
+      magit-process-unset-mode
+      magit-reflog-mode
+      magit-status-mode
+      magit-topgit-mode
+      magit-wazzup-mode
+      magit-wip-mode
+      magit-wip-save-mode)
   (add-to-list 'evil-emacs-state-modes it))
 
 (provide 'setup-evil)
