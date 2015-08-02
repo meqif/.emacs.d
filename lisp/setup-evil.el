@@ -5,14 +5,14 @@
 ;; We need more evil leadership, your wickedness, Sir.
 (global-evil-leader-mode)
 
-;; Quick shortcut to projectile-find-file
-(evil-leader/set-key "f" 'projectile-find-file)
+(evil-leader/set-key
+  "f" 'projectile-find-file
+  "p" 'browse-kill-ring
+  "b" 'ibuffer
+  "r" 'helm-recentf
+  "g" 'magit-status)
 
-;; Quick shortcut to browse-kill-ring
-(evil-leader/set-key "p" 'browse-kill-ring)
 
-;; Quick shortcut to ibuffer
-(evil-leader/set-key "b" 'ibuffer)
 
 ;; Evil surround is a must
 (global-evil-surround-mode 1)
