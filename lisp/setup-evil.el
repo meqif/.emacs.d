@@ -18,6 +18,8 @@
   "cc" 'TeX-command-master
   "cv" 'TeX-view)
 
+(evil-leader/set-key-for-mode 'org-mode
+  "ce" #'org-export-dispatch)
 
 ;; Easy mark popping
 (defun meqif/pop-mark ()
