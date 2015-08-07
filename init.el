@@ -498,6 +498,8 @@
   :init
   ;; Mark setup instructions as read
   (setq magit-last-seen-setup-instructions "1.4.0"
+        ;; Silence nag on push
+        magit-push-always-verify nil
         magit-revert-buffers t)
   :config
   (progn
