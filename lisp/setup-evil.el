@@ -37,7 +37,8 @@
          (compile "cargo benchmark"))
    "benchmark all")
   ("C" (lambda () (interactive)
-         (compile "cargo clean"))))
+         (compile "cargo clean"))
+   "clean"))
 (evil-leader/set-key-for-mode 'rust-mode "c" #'hydra-cargo/body)
 (evil-leader/set-key-for-mode 'toml-mode "c" #'hydra-cargo/body)
 
