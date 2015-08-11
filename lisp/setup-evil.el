@@ -18,22 +18,26 @@
   "cc" 'TeX-command-master
   "cv" 'TeX-view)
 
-(progn
-  (require 'which-func)
-  (defhydra hydra-cargo (:color blue)
-    "cargo"
-    ("c" (lambda () (interactive)
-           (save-buffer (compile "cargo build")))
-     "build")
-    ("tt" (lambda () (interactive)
-            (save-buffer (compile "cargo test")))
-     "test all")
-    ("tf" (lambda () (interactive)
-            (save-buffer (compile (concat "cargo test " (which-function)))))
-     "test current function")
-    ("b" (lambda () (interactive)
-           (save-buffer (compile "cargo benchmark")))
-     "benchmark all")))
+(defhydra hydra-cargo (:color blue)
+  "cargo"
+  ("c" (lambda () (interactive)
+         (save-buffer)
+         (compile "cargo build"))
+   "build")
+  ("tt" (lambda () (interactive)
+          (save-buffer)
+          (compile "cargo test"))
+   "test all")
+  ("tf" (lambda () (interactive)
+          (save-buffer)
+          (compile (concat "cargo test " (meqif/which-function))))
+   "test current function")
+  ("b" (lambda () (interactive)
+         (save-buffer)
+         (compile "cargo benchmark"))
+   "benchmark all")
+  ("C" (lambda () (interactive)
+         (compile "cargo clean"))))
 (evil-leader/set-key-for-mode 'rust-mode "c" #'hydra-cargo/body)
 
 (evil-leader/set-key-for-mode 'org-mode
