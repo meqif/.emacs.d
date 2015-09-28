@@ -200,6 +200,8 @@
           org-replace-disputed-keys t
           ;; Enable syntax highlighting in source blocks
           org-src-fontify-natively t
+          ;; Don't export a table of content by default
+          org-export-with-toc nil
           ;; Add more capture templates
           org-capture-templates
           '(("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
