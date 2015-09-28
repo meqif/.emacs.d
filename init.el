@@ -301,6 +301,9 @@
     ;; Generate PDF by default
     (setq TeX-PDF-mode t)
 
+    ;; Open TeX error overview automatically after compiling
+    (setq TeX-error-overview-open-after-TeX-run t)
+
     ;; Explicitly add XeLaTeX to the available commands
     (eval-after-load "tex"
       '(add-to-list 'TeX-command-list
