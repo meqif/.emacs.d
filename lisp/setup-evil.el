@@ -5,11 +5,13 @@
 ;; We need more evil leadership, your wickedness, Sir.
 (global-evil-leader-mode)
 
+;; Global evil leader shortcuts
 (evil-leader/set-key
   "f" 'projectile-find-file
   "p" 'browse-kill-ring
   "b" 'ibuffer
   "r" 'helm-recentf
+  "l" 'avy-goto-line
   "g" 'magit-status)
 
 (evil-leader/set-key-for-mode 'latex-mode
