@@ -21,6 +21,10 @@
 ;; Set up load path
 (add-to-list 'load-path lisp-dir)
 
+;; Add packages installed by Homebrew to the load path
+(let ((default-directory (expand-file-name "~/homebrew/share/emacs/site-lisp/")))
+  (normal-top-level-add-subdirs-to-load-path))
+
 ;; Keep emacs Custom-settings in separate file
 (setq custom-file (expand-file-name "custom.el" lisp-dir))
 (load custom-file)
