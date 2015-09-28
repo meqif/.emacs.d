@@ -554,7 +554,11 @@
   (setq paradox-execute-asynchronously t
         paradox-github-token t
         paradox-automatically-star nil)
-  (add-hook 'paradox-menu-mode-hook (lambda () (linum-mode -1))))
+  (evil-add-hjkl-bindings paradox-menu-mode-map 'emacs
+    (kbd "J") #'paradox-next-describe
+    (kbd "K") #'paradox-previous-describe
+    (kbd "H") #'paradox-menu-quick-help
+    (kbd "L") #'(lambda (pkg) (interactive '(nil)) (paradox-menu-view-commit-list pkg))))
 
 ;; Better interactive search
 (use-package swiper
