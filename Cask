@@ -28,6 +28,7 @@
 (depends-on "evil")
 (depends-on "evil-leader")
 (depends-on "evil-surround")
+(depends-on "evil-textobj-anyblock")
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")
 (depends-on "f")
