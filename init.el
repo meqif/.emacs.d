@@ -347,6 +347,14 @@
                 (define-key LaTeX-mode-map (kbd "<M-down>") 'outline-move-subtree-down)
                 (define-key LaTeX-mode-map (kbd "C-c t") #'(lambda () (interactive) (TeX-insert-macro "todo")))))
 
+    (defhydra hydra-latex-fonts (:color blue)
+      "LaTeX font"
+      ("b" (TeX-font nil ?\C-b) "bold")
+      ("i" (TeX-font nil ?\C-i) "italic")
+      ("t" (TeX-font nil ?\C-t) "monospace")
+      ("e" (TeX-font nil ?\C-e) "emphasis"))
+    (evil-leader/set-key-for-mode 'latex-mode "f" #'hydra-latex-fonts/body)
+
     ;; Autosave before compiling
     (setq TeX-save-query nil)
 
