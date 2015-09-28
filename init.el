@@ -40,8 +40,8 @@
 (require 'use-package)
 
 (use-package dash
-  :config (dash-enable-font-lock))
   :defer t
+  :config (dash-enable-font-lock))
 
 ;; Fix path
 (use-package exec-path-from-shell
