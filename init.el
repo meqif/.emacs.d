@@ -430,6 +430,13 @@
   :defer t
   :config
   (progn
+    (use-package racer
+      :init
+      (setq racer-rust-src-path "~/rust/src/")
+      (setq racer-cmd (expand-file-name "~/racer/target/release/racer"))
+      :config
+      (add-hook 'rust-mode-hook #'racer-mode)
+      (add-hook 'rust-mode-hook #'eldoc-mode))
     (add-hook 'rust-mode-hook
               (lambda ()
                 ;; Enable on-the-fly syntax checking
