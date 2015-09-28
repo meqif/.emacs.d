@@ -14,13 +14,6 @@
 ;; Highlight ag's search results
 (setq ag-highlight-search t)
 
-(defun meqif/cycle-windows ()
-  "Cycle between windows in the same frame"
-  (interactive)
-  (other-window 1 t))
-(global-set-key (kbd "C-x C-\\") 'meqif/cycle-windows)
-(global-set-key (kbd "H-\\") 'meqif/cycle-windows)
-
 (defmacro version>= (a b)
   `(not (version< ,a ,b)))
 
