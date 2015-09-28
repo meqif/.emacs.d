@@ -502,8 +502,15 @@
 
 (use-package undo-tree
   :diminish undo-tree-mode
+  :config
   ;; Show timestamps
-  :config (setq undo-tree-visualizer-timestamps t))
+  (setq undo-tree-visualizer-timestamps t)
+  ;; Split undo-tree side-by-side, like decent people do.
+  (defadvice undo-tree-visualize (around undo-tree-split-side-by-side activate)
+    "Split undo-tree side-by-side"
+    (let ((split-height-threshold nil)
+          (split-width-threshold 0))
+      ad-do-it)))
 
 (use-package magit
   :bind ("C-x g" . magit-status)

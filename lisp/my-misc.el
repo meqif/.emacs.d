@@ -14,13 +14,6 @@
 ;; Highlight ag's search results
 (setq ag-highlight-search t)
 
-;; Split undo-tree side-by-side, like decent people do.
-(defadvice undo-tree-visualize (around undo-tree-split-side-by-side activate)
-  "Split undo-tree side-by-side"
-  (let ((split-height-threshold nil)
-        (split-width-threshold 0))
-  ad-do-it))
-
 (defun meqif/cycle-windows ()
   "Cycle between windows in the same frame"
   (interactive)
