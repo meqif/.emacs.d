@@ -1,11 +1,11 @@
 ;; Appearance
 
-; I like line numbers, thankyouverymuch.
-(global-linum-mode 1)
+;; I like line numbers, thankyouverymuch.
+(add-hook 'prog-mode-hook #'linum-mode)
 
 ;; Clean previous themes definitions when loading a theme
 (defadvice load-theme
-  (before theme-dont-propagate activate)
+    (before theme-dont-propagate activate)
   (mapc #'disable-theme custom-enabled-themes))
 
 ;; Custom tweaks to solarized-theme
