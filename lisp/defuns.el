@@ -102,4 +102,12 @@ beginning of the line."
       (goto-char pos1)
       (insert TeX-open-quote))))
 
+(defun meqif/which-function ()
+  "Return current function name based on point."
+  (require 'which-func)
+  ;; Clean the imenu cache
+  ;; Source: http://stackoverflow.com/a/13447080/850756
+  (setq imenu--index-alist nil)
+  (which-function))
+
 (provide 'defuns)
