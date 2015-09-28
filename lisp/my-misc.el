@@ -14,12 +14,6 @@
 ;; Highlight ag's search results
 (setq ag-highlight-search t)
 
-;; Make imenu rescan automatically
-(setq imenu-auto-rescan t)
-
-;; Make imenu work on larger files
-(setq imenu-auto-rescan-maxout 120000)
-
 ;; Split undo-tree side-by-side, like decent people do.
 (defadvice undo-tree-visualize (around undo-tree-split-side-by-side activate)
   "Split undo-tree side-by-side"
