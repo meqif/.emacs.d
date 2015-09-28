@@ -128,8 +128,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       messages-buffer-mode
       neotree-mode
       paradox-menu-mode
+      paradox-commit-list-mode
       special-mode
       term-mode
+      TeX-error-overview-mode
       ;; Magit modes
       git-rebase-mode
       magit-auto-revert-mode
