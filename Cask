@@ -61,7 +61,6 @@
 (depends-on "multiple-cursors")
 (depends-on "mustache-mode")
 (depends-on "names")
-(depends-on "nyan-mode")
 (depends-on "package-build")
 (depends-on "pallet")
 (depends-on "paradox")

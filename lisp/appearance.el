@@ -56,13 +56,6 @@ already in fullscreen"
 ;; Make show-paren highlight the entire expression
 (setq show-paren-style 'expression)
 
-;; Shorten nyan cat bar length
-(eval-after-load "nyan-mode" (setq-default nyan-bar-length 16))
-(autoload 'nyan-create "nyan-mode") ; Nyan doesn't how to autoload :(
-
-;; Enable nyan cat :3
-(nyan-mode)
-
 ;; Customize mode-line project face
 (copy-face 'font-lock-constant-face 'project-face)
 (set-face-attribute 'project-face nil :foreground "#19D0FF")
@@ -111,8 +104,7 @@ already in fullscreen"
                 " " mode-line-modes mode-line-end-spaces
                 )
               mode-line-position
-              '((:eval (when nyan-mode (nyan-create)))
-                " "
+              '(" 🐱 "
                 (line-number-mode
                  ("%l" (column-number-mode ":%c")))))
 
