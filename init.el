@@ -54,7 +54,7 @@
 (require 'keybindings)
 
 ;; Appearance
-(require 'appearance)
+(use-package appearance)
 
 ;; Unclutter modeline
 (use-package diminish)
@@ -81,7 +81,7 @@
     (use-package smartparens-config)))
 
 ;; Setup extensions
-(require 'setup-evil)
+(use-package setup-evil)
 
 ;; Port of vim-textobj-anyblock -- easy block selection
 (use-package evil-textobj-anyblock
