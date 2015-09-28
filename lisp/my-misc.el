@@ -21,10 +21,6 @@
 (global-set-key (kbd "C-x C-\\") 'meqif/cycle-windows)
 (global-set-key (kbd "H-\\") 'meqif/cycle-windows)
 
-;; Stop org-mode from replacing my window-moving keys
-;; Has to be defined before loading org-mode
-(setq org-replace-disputed-keys t)
-
 (defmacro version>= (a b)
   `(not (version< ,a ,b)))
 

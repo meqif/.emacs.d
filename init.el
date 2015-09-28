@@ -187,6 +187,9 @@
   (progn
     ;; Don't truncate lines
     (setq org-startup-truncated nil
+          ;; Stop org-mode from replacing my window-moving keys
+          ;; Has to be defined before loading org-mode
+          org-replace-disputed-keys t
           ;; Enable syntax highlighting in source blocks
           org-src-fontify-natively t
           ;; Add more capture templates
