@@ -118,6 +118,7 @@
   :bind ("s-r" . helm-imenu))
 
 (use-package avy
+  :demand
   :bind ("C-c SPC" . avy-goto-word-1)
   :config (evil-leader/set-key "<SPC>" 'avy-goto-word-1))
 
