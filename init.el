@@ -156,7 +156,11 @@
     ;;   (add-to-list 'company-dabbrev-code-modes 'rust-mode)))
     (setq company-dabbrev-downcase nil)
 
- ))
+    ;; Traverse candidates with TAB and BACKTAB
+    (define-key company-active-map (kbd "TAB") 'company-select-next)
+    (define-key company-active-map [tab] 'company-select-next)
+    (define-key company-active-map (kbd "BACKTAB") 'company-select-previous)
+    (define-key company-active-map [backtab] 'company-select-previous)))
 
 ;; Unique buffer names
 (use-package uniquify
