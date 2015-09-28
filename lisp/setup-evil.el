@@ -153,6 +153,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       magit-wip-save-mode)
   (add-to-list 'evil-emacs-state-modes it))
 
+;; Better navigation for modes
+(evil-add-hjkl-bindings occur-mode-map 'emacs)
+
 ;; Undo like Vim: everything done during an insert session will be undone in one
 ;; step.
 (setq evil-want-fine-undo 'no)
