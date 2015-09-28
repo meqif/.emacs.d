@@ -59,6 +59,7 @@ already in fullscreen"
 ;; Customize mode-line project face
 (copy-face 'font-lock-constant-face 'project-face)
 (set-face-attribute 'project-face nil :foreground "#19D0FF")
+(set-face-attribute 'project-face nil :foreground "#086199")
 
 ;; Customize mode-line project branch face
 (copy-face 'project-face 'branch-face)
@@ -69,7 +70,7 @@ already in fullscreen"
  '(:propertize
    (:eval
     (if (string= (projectile-project-name) (getenv "USER"))
-        '(" ¬_¬")
+        '(" ")
       (concat " " (projectile-project-name))))
    face project-face))
 
