@@ -22,8 +22,13 @@
  solarized-distinct-fringe-background t)
 
 ;; Load theme
-(require 'solarized)
-(load-theme 'solarized-light t)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(progn
+  (load-theme 'eink t)
+  (set-face-attribute 'font-lock-keyword-face nil :foreground "#ab4642")
+  (set-face-attribute 'highlight nil :background "#fff1aa")
+  ;;(set-face-attribute 'whitespace-line nil :background 'unspecified :foreground "magenta")
+  (set-face-attribute 'font-lock-doc-face nil :foreground "#808080"))
 
 ;; mac friendly font
 (when window-system
