@@ -33,7 +33,7 @@
 (require 'sane-defaults)
 
 ;; Packages
-(require 'cask "~/homebrew/share/emacs/site-lisp/cask.el")
+(require 'cask)
 (cask-initialize)
 (require 'pallet)
 (pallet-mode t)
