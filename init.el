@@ -154,16 +154,17 @@
   (progn
     ;; Enable company mode for every programming major mode
     (add-hook 'prog-mode-hook 'company-mode)
+
     ;; Offer completions quickly
-    (set 'company-idle-delay 0.1)
+    (setq company-idle-delay 0.1)
+
+    ;; Wrap around candidate list
+    (setq company-selection-wrap-around t)
 
     ;; Add tern.js backend
     (add-to-list 'company-backends 'company-tern)
 
     ;; Fix lowercase candidates
-    ;; (use-package company-dabbrev-code
-    ;;   :config
-    ;;   (add-to-list 'company-dabbrev-code-modes 'rust-mode)))
     (setq company-dabbrev-downcase nil)
 
     ;; Traverse candidates with TAB and BACKTAB
