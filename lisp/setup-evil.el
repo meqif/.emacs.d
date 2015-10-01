@@ -157,6 +157,17 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;; Better navigation for modes
 (evil-add-hjkl-bindings occur-mode-map 'emacs)
+(eval-after-load 'ibuffer
+  '(progn
+     ;; Remove ibuffer from evil emacs state modes
+     (delete 'ibuffer-mode evil-emacs-state-modes)
+     ;; Use the standard ibuffer bindings as a base
+     (set-keymap-parent
+      (evil-get-auxiliary-keymap ibuffer-mode-map 'normal t)
+      (assq-delete-all 'menu-bar (copy-keymap ibuffer-mode-map)))
+     (evil-define-key 'normal ibuffer-mode-map "j" 'ibuffer-forward-line)
+     (evil-define-key 'normal ibuffer-mode-map "k" 'ibuffer-backward-line)
+     (evil-define-key 'normal ibuffer-mode-map "J" 'ibuffer-jump-to-buffer)))
 
 ;; Undo like Vim: everything done during an insert session will be undone in one
 ;; step.
