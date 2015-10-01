@@ -30,13 +30,10 @@
   ;;(set-face-attribute 'whitespace-line nil :background 'unspecified :foreground "magenta")
   (set-face-attribute 'font-lock-doc-face nil :foreground "#808080"))
 
-;; mac friendly font
+;; Mac friendly font
 (when window-system
-  (setq magnars/default-font "-apple-Monaco-medium-normal-normal-*-16-*-*-*-m-0-iso10646-1"
-        meqif/old-font "-apple-Source Code Pro-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1"
-        meqif/default-font "-apple-Fira Mono-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1"
-        meqif/fullscreen-font "-apple-Fira Mono-medium-normal-normal-*-16-*-*-*-m-0-iso10646-1"
-        magnars/presentation-font "-apple-Monaco-medium-normal-normal-*-28-*-*-*-m-0-iso10646-1")
+  (setq meqif/default-font "-apple-Fira Mono-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1"
+        meqif/fullscreen-font "-apple-Fira Mono-medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")
   (set-face-attribute 'default nil :font meqif/default-font)
   (set-frame-size (selected-frame) 120 38))
 
