@@ -8,19 +8,6 @@
     (before theme-dont-propagate activate)
   (mapc #'disable-theme custom-enabled-themes))
 
-;; Custom tweaks to solarized-theme
-(setq
- ;; Make the mode-line high contrast
- solarized-high-contrast-mode-line t
- ;; Fix underscored mode-line
- x-underline-at-descent-line t
- ;; Don't use as much bold
- solarized-use-less-bold t
- ;; Disable variable pitch fonts in Solarized theme
- solarized-use-variable-pitch nil
- ;; Fix the fringe and linum
- solarized-distinct-fringe-background t)
-
 ;; Load theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (progn
