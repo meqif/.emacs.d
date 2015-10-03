@@ -17,6 +17,12 @@
 ;; Follow highlighted occur results in original buffer
 (add-hook 'occur-mode-hook #'next-error-follow-minor-mode)
 
+;; Adjust the font settings of frame so Emacs can display emoji properly.
+(defun darwin-set-emoji-font (frame)
+  (when (eq system-type 'darwin)
+    (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)))
+(darwin-set-emoji-font nil)
+
 (defmacro version>= (a b)
   `(not (version< ,a ,b)))
 
