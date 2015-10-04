@@ -1,68 +1,68 @@
-(require 'evil)
+(use-package evil)
 (require 'my-misc)
 (require 'dash)
 
 ;; We need more evil leadership, your wickedness, Sir.
-(global-evil-leader-mode)
+(use-package evil-leader
+  :config
+  (global-evil-leader-mode)
 
-;; Global evil leader shortcuts
-(evil-leader/set-key
-  "f" 'projectile-find-file
-  "p" 'browse-kill-ring
-  "b" 'ibuffer
-  "r" 'helm-recentf
-  "l" 'avy-goto-line
-  "g" 'magit-status)
+  ;; Global evil leader shortcuts
+  (evil-leader/set-key
+    "f" 'projectile-find-file
+    "p" 'browse-kill-ring
+    "b" 'ibuffer
+    "r" 'helm-recentf
+    "l" 'avy-goto-line
+    "g" 'magit-status
+    "\\" 'meqif/pop-mark)
 
-(evil-leader/set-key-for-mode 'latex-mode
-  "s" 'flyspell-buffer
-  "t" #'(lambda () (interactive) (TeX-insert-macro "todo"))
-  "cc" 'TeX-command-master
-  "cv" 'TeX-view)
+  ;; LaTeX leader shortcuts
+  (evil-leader/set-key-for-mode 'latex-mode
+    "s" 'flyspell-buffer
+    "t" #'(lambda () (interactive) (TeX-insert-macro "todo"))
+    "cc" 'TeX-command-master
+    "cv" 'TeX-view)
 
-;; Hydra for rust's cargo
-(defhydra hydra-cargo (:color blue :columns 4)
-  "cargo"
-  ("c" (lambda () (interactive)
-         (save-buffer)
-         (compile "rustc --version && cargo build"))
-   "build")
-  ("tt" (lambda () (interactive)
-          (save-buffer)
-          (compile "rustc --version && cargo test"))
-   "test all")
-  ("tf" (lambda () (interactive)
-          (save-buffer)
-          (compile (concat "rustc --version && cargo test " (meqif/which-function))))
-   "test current function")
-  ("b" (lambda () (interactive)
-         (save-buffer)
-         (compile "rustc --version && cargo benchmark"))
-   "benchmark all")
-  ("C" (lambda () (interactive)
-         (compile "cargo clean"))
-   "clean")
-  ("d" (lambda () (interactive)
-         (save-buffer) (compile "rustc --version && cargo doc"))
-   "build documentation")
-  ("r" (lambda () (interactive)
-         (save-buffer) (compile "rustc --version && cargo run"))
-   "run"))
-(evil-leader/set-key-for-mode 'rust-mode "c" #'hydra-cargo/body)
-(evil-leader/set-key-for-mode 'toml-mode "c" #'hydra-cargo/body)
+  ;; Hydra for rust's cargo
+  (defhydra hydra-cargo (:color blue :columns 4)
+    "cargo"
+    ("c" (lambda () (interactive)
+           (save-buffer)
+           (compile "rustc --version && cargo build"))
+     "build")
+    ("tt" (lambda () (interactive)
+            (save-buffer)
+            (compile "rustc --version && cargo test"))
+     "test all")
+    ("tf" (lambda () (interactive)
+            (save-buffer)
+            (compile (concat "rustc --version && cargo test " (meqif/which-function))))
+     "test current function")
+    ("b" (lambda () (interactive)
+           (save-buffer)
+           (compile "rustc --version && cargo benchmark"))
+     "benchmark all")
+    ("C" (lambda () (interactive)
+           (compile "cargo clean"))
+     "clean")
+    ("d" (lambda () (interactive)
+           (save-buffer) (compile "rustc --version && cargo doc"))
+     "build documentation")
+    ("r" (lambda () (interactive)
+           (save-buffer) (compile "rustc --version && cargo run"))
+     "run"))
+  (evil-leader/set-key-for-mode 'rust-mode "c" #'hydra-cargo/body)
+  (evil-leader/set-key-for-mode 'toml-mode "c" #'hydra-cargo/body)
 
-(evil-leader/set-key-for-mode 'org-mode
-  "ce" #'org-export-dispatch)
-
-;; Easy mark popping
-(defun meqif/pop-mark ()
-  (interactive)
-  (set-mark-command '(4)))
-(evil-leader/set-key
-  "\\" #'meqif/pop-mark)
+  ;; Org-mode leader shortcuts
+  (evil-leader/set-key-for-mode 'org-mode
+    "ce" #'org-export-dispatch))
 
 ;; Evil surround is a must
-(global-evil-surround-mode 1)
+(use-package evil-surround
+  :config
+  (global-evil-surround-mode 1))
 
 ;; Enable evil mode
 (evil-mode 1)

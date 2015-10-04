@@ -110,4 +110,9 @@ beginning of the line."
   (setq imenu--index-alist nil)
   (which-function))
 
+;; Easy mark popping
+(defun meqif/pop-mark ()
+  (interactive)
+  (set-mark-command '(4)))
+
 (provide 'defuns)
