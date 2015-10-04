@@ -82,14 +82,16 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
     (abort-recursive-edit)))
 
-;; Make Esc quit
-(define-key evil-normal-state-map [escape] 'keyboard-quit)
-(define-key evil-visual-state-map [escape] 'keyboard-quit)
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+;; Make Esc quit everywhere
+(--each (list evil-normal-state-map evil-visual-state-map)
+  (define-key it [escape] 'keyboard-quit))
+(--each
+    (list minibuffer-local-map
+          minibuffer-local-ns-map
+          minibuffer-local-completion-map
+          minibuffer-local-must-match-map
+          minibuffer-local-isearch-map)
+  (define-key it [escape] 'minibuffer-keyboard-quit))
 
 ;; Make ':bd' kill the buffer but not close the window.
 ;;
