@@ -697,6 +697,9 @@
   ;; Show human-friendly file sizes and sort numbers properly
   (setq-default dired-listing-switches "-alhv"))
 
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer))
+
 ;; Unbind s-&, as I hit it accidentally too often and it kills the buffer. 😞
 (unbind-key (kbd "s-&"))
 

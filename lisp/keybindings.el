@@ -30,8 +30,6 @@
 (eval-after-load "evil"
   '(define-key evil-normal-state-map "0" 'meqif/move-to-beginning-of-indentation))
 
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
 ;; Quickly jump to scratch buffer
 (global-set-key
  (kbd "s-t")
