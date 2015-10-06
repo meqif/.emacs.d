@@ -294,9 +294,33 @@
      '(org-mode . (lambda (keys) (format "\\autocite{%s}" (s-join ", " keys)))))))
 
 ;; Language-specific setup files
-(load-config
-    'markdown-mode 'setup-markdown
-  'js2-mode      'setup-javascript)
+(load-config 'markdown-mode 'setup-markdown)
+
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :config
+  ;; Easier refactoring
+  (use-package js2-refactor)
+
+  (setq-default js2-global-externs
+                '("module" "export" "require" "describe" "it" "before" "after"))
+
+  ;; Let flycheck handle parse errors
+  (setq-default js2-mode-show-parse-errors nil)
+  (setq-default js2-strict-missing-semi-warning nil)
+  (setq-default js2-strict-trailing-comma-warning t) ;; jshint does not warn about this now for some reason
+
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              ;; Enable flycheck
+              (flycheck-mode 1)
+              ;; Use symbol for anonymous functions
+              (push '("function" . ?ƒ) prettify-symbols-alist)
+              ;; Enable ternjs (requires tern to be installed through npm)
+              (tern-mode t))))
+
+(use-package json-mode
+  :mode "\\.json\\'")
 
 (use-package tex-mode
   :mode ("\\.tex\\'" . LaTeX-mode)
