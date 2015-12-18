@@ -37,4 +37,7 @@
      (interactive)
      (switch-to-buffer (get-buffer-create "*scratch*"))))
 
+;; ivy replacement for helm-imenu
+(global-set-key (kbd "s-r") #'ivy-imenu-goto)
+
 (provide 'keybindings)

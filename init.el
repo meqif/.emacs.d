@@ -122,8 +122,6 @@
   ;; Scroll compile buffer automatically but stop on the first error
   (setq compilation-scroll-output 'first-error))
 
-(use-package helm-imenu
-  :bind ("s-r" . helm-imenu))
 
 (use-package avy
   :demand
