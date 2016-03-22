@@ -44,7 +44,7 @@
    (save-buffers-kill-emacs)))
 
 ;; Packages
-(require 'cask)
+(require 'cask (expand-file-name "~/homebrew/share/emacs/site-lisp/cask/cask.el"))
 (cask-initialize)
 
 (unless (package-installed-p 'pallet)
