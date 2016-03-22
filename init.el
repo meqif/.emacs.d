@@ -74,6 +74,10 @@
   ;; Allow quitting ivy with ESC
   (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit))
 
+;; Use the fish shell in OSX
+(when (eq system-type 'darwin)
+  (setenv "SHELL" (expand-file-name "~/homebrew/bin/fish")))
+
 ;; Fix path
 (use-package exec-path-from-shell
   :config (exec-path-from-shell-initialize))
