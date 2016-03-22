@@ -109,10 +109,10 @@
   (progn
     (smartparens-global-mode t)
     ;; Load default smartparens configuration
-    (use-package smartparens-config)))
+    (require 'smartparens-config)))
 
 ;; Setup extensions
-(use-package setup-evil)
+(use-package setup-evil :ensure nil)
 
 ;; Port of vim-textobj-anyblock -- easy block selection
 (use-package evil-textobj-anyblock
@@ -152,7 +152,6 @@
   :config
   ;; Scroll compile buffer automatically but stop on the first error
   (setq compilation-scroll-output 'first-error))
-
 
 (use-package avy
   :demand
