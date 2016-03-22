@@ -47,6 +47,10 @@
 (pallet-mode t)
 (require 'use-package)
 
+;; Use https for package archives
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
+
 (use-package dash
   :defer t
   :config (dash-enable-font-lock))
