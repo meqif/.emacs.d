@@ -706,6 +706,7 @@
     "q" 'macrostep-collapse-all))
 
 (use-package dired
+  :defer t
   :config
   ;; Show human-friendly file sizes and sort numbers properly
   (setq-default dired-listing-switches "-alhv"))
