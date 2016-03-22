@@ -550,7 +550,11 @@
                 (whitespace-mode -1)
                 (whitespace-mode 1)
                 ;; Prettify some symbols
-                (--each '((">=" . ?≥) ("<=" . ?≤) ("!=" . ?≠))
+                (--each '((">=" . (?· (Br . Bl) ?≥))
+                          ("<=" . (?· (Br . Bl) ?≤))
+                          ("!=" . (?· (Br . Bl) ?≠))
+                          ("=>" . (?· (Br . Bl) ?➡))
+                          )
                   (push it prettify-symbols-alist))))
 
     ;; Add brackets to smartparens pair list
