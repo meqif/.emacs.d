@@ -214,7 +214,9 @@
 (use-package flycheck
   :defer t
   :config
-  (setq-default flycheck-display-errors-delay 0.5))
+  (setq-default flycheck-display-errors-delay 0.5)
+  (define-key flycheck-error-list-mode-map (kbd "j") 'next-line)
+  (define-key flycheck-error-list-mode-map (kbd "k") 'previous-line))
 
 (use-package org
   :defer 30
