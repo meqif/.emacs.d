@@ -55,6 +55,14 @@
   :defer t
   :config (dash-enable-font-lock))
 
+;; ivy
+(use-package ivy
+  :ensure swiper
+  :defer t
+  :config
+  ;; Allow quitting ivy with ESC
+  (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit))
+
 ;; Fix path
 (use-package exec-path-from-shell
   :config (exec-path-from-shell-initialize))
@@ -687,11 +695,6 @@
      ("r" narrow-to-region "to region")
      ("w" widen "widen"))))
 
-(use-package ivy
-  :defer t
-  :config
-  ;; Allow quitting ivy with ESC
-  (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit))
 
 ;; Macro expansion for ease of debugging
 (use-package macrostep
