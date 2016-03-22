@@ -582,10 +582,6 @@
     ;; Flyspell messages slow down the spellchecking process
     (setq flyspell-issue-message-flag nil)))
 
-(use-package js2-mode
-  :diminish (js2-mode "JS2")
-  :mode ("\\.js$" "\\.json$"))
-
 ;; Easier kill-ring viewing
 (use-package browse-kill-ring
   :defer t
