@@ -46,8 +46,16 @@
 ;; Packages
 (require 'cask)
 (cask-initialize)
+
+(unless (package-installed-p 'pallet)
+  (package-refresh-contents)
+  (package-install pallet))
 (require 'pallet)
 (pallet-mode t)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install use-package))
 (require 'use-package)
 
 ;; Use https for package archives
