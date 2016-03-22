@@ -86,7 +86,11 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
           minibuffer-local-ns-map
           minibuffer-local-completion-map
           minibuffer-local-must-match-map
-          minibuffer-local-isearch-map)
+          minibuffer-local-must-match-filename-map
+          minibuffer-local-isearch-map
+          minibuffer-local-filename-completion-map
+          minibuffer-local-filename-must-match-map
+          minibuffer-local-shell-command-map)
   (define-key it [escape] 'minibuffer-keyboard-quit))
 
 ;; Make ':bd' kill the buffer but not close the window.
