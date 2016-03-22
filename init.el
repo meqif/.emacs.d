@@ -1,4 +1,7 @@
 ;; Mark start point for load time measurement
+
+;; (package-initialize)
+
 (defconst emacs-start-time (current-time))
 (unless noninteractive
   (message "Loading %s..." load-file-name))
