@@ -197,9 +197,6 @@
     ;; Wrap around candidate list
     (setq company-selection-wrap-around t)
 
-    ;; Add tern.js backend
-    (add-to-list 'company-backends 'company-tern)
-
     ;; Fix lowercase candidates
     (setq company-dabbrev-downcase nil)
 
@@ -347,7 +344,9 @@
               ;; Use symbol for anonymous functions
               (push '("function" . ?ƒ) prettify-symbols-alist)
               ;; Enable ternjs (requires tern to be installed through npm)
-              (tern-mode t))))
+              (tern-mode t)
+              ;; Add tern.js backend
+              (add-to-list 'company-backends 'company-tern))))
 
 (use-package json-mode
   :mode "\\.json\\'")
