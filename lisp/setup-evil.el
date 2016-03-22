@@ -67,10 +67,6 @@
 ;; Enable evil mode
 (evil-mode 1)
 
-;; Map escape to cancel (like C-g)...
-;; (define-key isearch-mode-map [escape] 'isearch-abort)   ;; isearch
-;; (global-set-key [escape] 'keyboard-escape-quit)         ;; everywhere else
-
 ;; esc quits
 (defun minibuffer-keyboard-quit ()
   "Abort recursive edit.
