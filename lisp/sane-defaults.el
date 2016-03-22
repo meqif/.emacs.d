@@ -50,4 +50,8 @@
 ;; Default directory
 (setq default-directory "~/")
 
+
+;; Disable audible bell
+(setq visible-bell t)
+
 (provide 'sane-defaults)
