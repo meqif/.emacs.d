@@ -105,6 +105,25 @@
 ;; Appearance
 (use-package appearance)
 
+;; (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
+(set-fontset-font t 'unicode "Symbola" nil 'prepend)
+(when (eq window-system 'mac)
+  (set-fontset-font t 'symbol "Symbola" nil 'prepend))
+;; 😎😎
+;; (defun --set-emoji-font (frame)
+;;   "Adjust the font settings of FRAME so Emacs can display emoji properly."
+;;   (if (eq system-type 'darwin)
+;;       ;; For NS/Cocoa
+;;       (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
+;;     ;; For Linux
+;;     (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend)))
+
+;; ;; For when Emacs is started in GUI mode:
+;; (--set-emoji-font nil)
+;; ;; Hook for when a frame is created with emacsclient
+;; ;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
+;; (add-hook 'after-make-frame-functions '--set-emoji-font)
+
 ;; Unclutter modeline
 (use-package diminish)
 
