@@ -141,13 +141,19 @@
   (projectile-global-mode)
   ;; Use ivy for completion
   (setq projectile-completion-system 'ivy)
-  (add-to-list 'projectile-globally-ignored-directories "node_modules"))
+  (--each '("node_modules" "vendor" ".bundle")
+    (add-to-list 'projectile-globally-ignored-directories it))
+  )
 
 (use-package smartparens
   :diminish smartparens-mode
   :init
   (progn
     (smartparens-global-mode t)
+    ;; Show matching parentheses
+    (show-smartparens-global-mode t)
+    ;; Remove matching parentheses delay
+    (setq sp-show-pair-delay 0)
     ;; Load default smartparens configuration
     (require 'smartparens-config)))
 
