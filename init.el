@@ -139,6 +139,8 @@
   :defer 5
   :init
   (projectile-global-mode)
+  ;; Use ivy for completion
+  (setq projectile-completion-system 'ivy)
   (add-to-list 'projectile-globally-ignored-directories "node_modules"))
 
 (use-package smartparens
