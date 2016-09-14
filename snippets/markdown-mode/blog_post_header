@@ -1,0 +1,15 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: header
+# key: header
+# binding: direct-keybinding
+# --
+---
+layout: post
+title: "$1"
+description: $2
+tags:
+- $3
+
+---
+
+$0

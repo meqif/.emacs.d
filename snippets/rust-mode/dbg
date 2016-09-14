@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: debug!(description, object)
+# key: dbg
+# binding: direct-keybinding
+# --
+debug!("${1:object}: {:?}", ${1:$(yas/substr yas-text "[^ ]*")});

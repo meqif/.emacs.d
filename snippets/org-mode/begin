@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: #+BEGIN_XXX
+# key: beg
+# binding: direct-keybinding
+# --
+#+BEGIN_${1:src$(upcase yas-text)} $2
+$0
+#+END_$1

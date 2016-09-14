@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: require 'spec_helper'
+# --
+require 'spec_helper'
+
+$0

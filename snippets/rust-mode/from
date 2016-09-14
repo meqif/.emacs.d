@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: from
+# key: from
+# --
+impl From<${1:SourceType}> for ${2:TargetType} {
+    fn from(${3:value}: $1) -> $2 {
+        $0
+    }
+}

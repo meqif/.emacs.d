@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: thread::spawn(|| { ... })
+# key: spawn
+# --
+thread::spawn(${1:move }|${2:argument}| {
+    $0
+})

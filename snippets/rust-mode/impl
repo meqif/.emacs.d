@@ -1,9 +1,8 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: function
-# key: fn
+# name: impl Trait for Type { ... }
+# key: impl
 # binding: direct-keybinding
-# expand-env: ((yas-indent-line 'fixed))
 # --
-fn $1($2) -> $3 {
+impl ${2:${1:Trait} for }${3:Type} {
     $0
 }

@@ -1,6 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: match
+# name: title
+# key: title
 # --
-match ${1:expression} {
-    $2 => $3,
-}$0
+#+TITLE: $0
