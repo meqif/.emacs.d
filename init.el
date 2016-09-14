@@ -682,6 +682,13 @@
           (split-width-threshold 0))
       ad-do-it)))
 
+;; Enable diff indication on the fringe
+(use-package diff-hl
+  :commands diff-hl-magit-post-refresh
+  :init
+  (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
+  (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
+
 (use-package magit
   :bind ("C-x g" . magit-status)
   :init
