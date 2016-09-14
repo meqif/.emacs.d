@@ -661,14 +661,6 @@
 ;; Misc
 (require 'my-misc)
 
-(use-package aggressive-indent
-  :config
-  (progn
-    ;; Enable agressive indent mode globally
-    (global-aggressive-indent-mode)
-    ;; Aggressive indentation doesn't work very well in rust
-    (add-to-list 'aggressive-indent-excluded-modes 'rust-mode)))
-
 ;; Highlight excessively long lines
 (use-package whitespace
   :diminish whitespace-mode
