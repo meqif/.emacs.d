@@ -704,6 +704,7 @@
         magit-push-always-verify nil
         magit-revert-buffers t)
   :config
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   (progn
     (setq magit-set-upstream-on-push t)
     ;; Verbose commits (show changes to be commited) by default
