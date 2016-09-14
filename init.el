@@ -35,6 +35,15 @@
 ;; Bring some sanity in
 (require 'sane-defaults)
 
+;; Make the minibuffer prompt intangible to stop it from being selectable or
+;; navigable with the movement keys
+;; Source: https://lists.gnu.org/archive/html/emacs-devel/2016-04/msg00857.html
+(unless (version< emacs-version "25.0")
+  (let ((default (eval (car (get 'minibuffer-prompt-properties 'standard-value))))
+      (dont-touch-prompt-prop '(cursor-intangible t)))
+  (setq minibuffer-prompt-properties (append default dont-touch-prompt-prop))
+  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)))
+
 ;; Always ask before exiting Emacs
 (global-set-key
  (kbd "s-q")
