@@ -198,7 +198,10 @@
     (add-hook 'prog-mode-hook 'company-mode)
 
     ;; Offer completions quickly
-    (setq company-idle-delay 0.1)
+    ;; (setq company-idle-delay 0.1)
+
+    ;; Start completing after two chars
+    (setq company-minimum-prefix-length 2)
 
     ;; Wrap around candidate list
     (setq company-selection-wrap-around t)
