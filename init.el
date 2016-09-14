@@ -130,7 +130,8 @@
 ;; Smarter M-x
 (use-package smex
   :init (smex-initialize)
-  :bind ("M-x" . smex))
+  :bind ("M-x" . smex)
+  :config (setq smex-completion-method 'ivy))
 
 ;; Awesome project navigation
 (use-package projectile
