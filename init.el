@@ -264,7 +264,29 @@
   :config
   (setq-default flycheck-display-errors-delay 0.5)
   (define-key flycheck-error-list-mode-map (kbd "j") 'next-line)
-  (define-key flycheck-error-list-mode-map (kbd "k") 'previous-line))
+  (define-key flycheck-error-list-mode-map (kbd "k") 'previous-line)
+
+  (flycheck-define-checker rust-clippy
+    "A lint checker based on rust-clippy."
+
+    :command ("rustup" "run" "nightly" "cargo" "clippy")
+    :error-patterns
+    ((error line-start (file-name) ":" line ":" column ": "
+            (one-or-more digit) ":" (one-or-more digit) " error: "
+            (or
+             ;; Multiline errors
+             (and (message (minimal-match (one-or-more anything)))
+                  " [" (id "E" (one-or-more digit)) "]")
+             (message))
+            line-end)
+     (warning line-start (file-name) ":" line ":" column ": "
+              (one-or-more digit) ":" (one-or-more digit) " warning: "
+              (message) line-end)
+     (info line-start (file-name) ":" line ":" column ": "
+           (one-or-more digit) ":" (one-or-more digit) " " (or "note" "help") ": "
+           (message) line-end))
+    :modes rust-mode)
+  )
 
 (use-package flycheck-status-emoji
   :config (add-hook 'flycheck-mode-hook #'flycheck-status-emoji-mode))
