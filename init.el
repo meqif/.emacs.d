@@ -65,6 +65,7 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+(setq use-package-enable-imenu-support t)
 (require 'use-package)
 
 ;; Use https for package archives
@@ -151,15 +152,7 @@
     (setq imenu-auto-rescan t)
 
     ;; Make imenu work on larger files
-    (setq imenu-auto-rescan-maxout 120000)
-
-    ;; Easily move between use-package blocks
-    ;; https://gist.github.com/jordonbiondo/6385874a70420b05de18
-    (defun meqif/imenu-use-package ()
-      (add-to-list 'imenu-generic-expression
-                   '("Used Packages"
-                     "\\(^\\s-*(use-package +\\)\\(\\_<.+\\_>\\)" 2)))
-    (add-hook 'emacs-lisp-mode-hook #'meqif/imenu-use-package)))
+    (setq imenu-auto-rescan-maxout 120000)))
 
 (use-package compile
   :config
