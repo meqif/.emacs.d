@@ -383,7 +383,11 @@
      '(org-mode . (lambda (keys) (format "\\autocite{%s}" (s-join ", " keys)))))))
 
 ;; Language-specific setup files
-(load-config 'markdown-mode 'setup-markdown)
+(use-package gfm-mode
+  :mode "\\.md\\'"
+  :ensure markdown-mode
+  :config
+  (add-hook 'gfm-mode-hook #'visual-line-mode))
 
 (use-package js2-mode
   :mode "\\.js\\'"
