@@ -304,6 +304,8 @@
           org-src-fontify-natively t
           ;; Don't export a table of content by default
           org-export-with-toc nil
+          ;; Place footnotes at the end of the current outline node
+          org-footnote-section nil
           ;; Change the collapsed-tree ellipsis to something more compact
           org-ellipsis "⤵")
     ;; Enable wordwrap
