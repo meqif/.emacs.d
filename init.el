@@ -304,14 +304,7 @@
           org-src-fontify-natively t
           ;; Don't export a table of content by default
           org-export-with-toc nil
-          ;; Add more capture templates
-          org-capture-templates
-          '(("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
-             "* TODO %?\n  %i\n  %a")
-            ("j" "Dissertation" entry (file+datetree "~/org/dissertation.org")
-             "* %?\nEntered on %U\n  %i\n  %a")
-            ("b" "Blog post idea" entry (file+headline "~/org/blog/post_ideas.org" "Ideas")
-             "* %?")))
+          )
     ;; Enable wordwrap
     (add-hook 'org-mode-hook 'visual-line-mode)
     ;; Break lines automatically
