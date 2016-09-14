@@ -707,6 +707,9 @@
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   (progn
     (setq magit-set-upstream-on-push t)
+    ;; Fix gravatars in commit log in OSX
+    (when (eq system-type 'darwin)
+      (setq magit-revision-use-gravatar-kludge t))
     ;; Verbose commits (show changes to be commited) by default
     (advice-add #'magit-key-mode-popup-committing :after
                 (lambda ()
