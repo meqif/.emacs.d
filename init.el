@@ -93,6 +93,7 @@
 
 ;; Fix path
 (use-package exec-path-from-shell
+  :defer 1
   :config (exec-path-from-shell-initialize))
 
 ;; Functions
