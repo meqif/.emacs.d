@@ -304,7 +304,8 @@
           org-src-fontify-natively t
           ;; Don't export a table of content by default
           org-export-with-toc nil
-          )
+          ;; Change the collapsed-tree ellipsis to something more compact
+          org-ellipsis "⤵")
     ;; Enable wordwrap
     (add-hook 'org-mode-hook 'visual-line-mode)
     ;; Break lines automatically
