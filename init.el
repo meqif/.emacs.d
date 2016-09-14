@@ -234,6 +234,9 @@
   (define-key flycheck-error-list-mode-map (kbd "j") 'next-line)
   (define-key flycheck-error-list-mode-map (kbd "k") 'previous-line))
 
+(use-package flycheck-status-emoji
+  :config (add-hook 'flycheck-mode-hook #'flycheck-status-emoji-mode))
+
 (use-package org
   :defer 30
   :init
