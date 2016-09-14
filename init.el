@@ -715,10 +715,71 @@
                 (lambda ()
                   (magit-key-mode-toggle-option 'committing "--verbose")))))
 
-(use-package enh-ruby-mode
-  :mode "\\.rb\\'"
+(use-package subword
+  :defer t
+  :diminish "sub")
+
+;; Ruby mode
+(use-package ruby-mode
+  :mode ("\\.rb\\'"
+         "\\.rake\\'"
+         "Rakefile\\'"
+         "\\.gemspec\\'"
+         "\\.ru\\'"
+         "Gemfile\\'"
+         "Guardfile\\'"
+         "Capfile\\'"
+         "Vagrantfile\\'")
   ;; Don't deep indent arrays and hashes
-  :config (setq enh-ruby-deep-ident-paren nil))
+  :config
+  (setq ruby-deep-ident-paren nil
+        ruby-insert-encoding-magic-comment nil)
+  (add-hook 'ruby-mode-hook #'subword-mode)
+  (add-hook 'ruby-mode-hook #'flycheck-mode)
+  (add-hook 'ruby-mode-hook
+            (lambda () (setq-local tab-width 2)
+              (setq-local evil-shift-width 2)))
+
+  (use-package rspec
+    :defer
+    :init
+    (setq rspec-command-options "--format progress")
+    (defhydra hydra-rspec (:color blue)
+      "rspec"
+      ("a" rspec-verify-all "run all specs")
+      ("s" rspec-verify-single "run specs for this context")
+      ("v" rspec-verify "run specs for this buffer")
+      ("t" rspec-toggle-spec-and-target-find-example
+       "toggle between spec and class")))
+
+  (evil-leader/set-key-for-mode 'ruby-mode "c" #'hydra-rspec/body)
+
+  ;; Run specs on save
+  (firestarter-mode)
+  (defun rspec-verify-firestarter ()
+    (interactive)
+    (when (s-matches-p "\.rb$" (buffer-name))
+      (rspec-verify)))
+  (defun rspec-firestarter ()
+    (setq firestarter #'rspec-verify-firestarter))
+  (add-hook 'ruby-mode-hook #'rspec-firestarter)
+
+  ;; Automatically expand # to #{} inside double-quoted strings
+  (use-package ruby-tools
+    :diminish ruby-tools-mode))
+
+(use-package inf-ruby
+  :defer
+  :config
+  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
+
+;; Better completion and documentation access for Ruby
+(use-package robe
+  :defer
+  :init (add-hook 'enh-ruby-mode-hook 'robe-mode)
+  :config
+  ;; Add robe to company mode backends
+  (push 'company-robe company-backends))
 
 ;; Better package management
 (use-package paradox
