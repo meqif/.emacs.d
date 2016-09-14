@@ -689,6 +689,12 @@
   (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
   (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
 
+(use-package ag
+  :defer
+  :config
+  ;; Highlight ag's search results
+  (setq ag-highlight-search t))
+
 (use-package magit
   :bind ("C-x g" . magit-status)
   :init
