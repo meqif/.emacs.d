@@ -24,13 +24,17 @@
 ;; Set up load path
 (add-to-list 'load-path lisp-dir)
 
+(defun find-brew-prefix ()
+  "Find Homebrew prefix"
+  (substring (shell-command-to-string "brew --prefix") 0 -1))
+
+(defun add-subdirs-to-load-path (path)
+  "Recursively add all subdirectories of the given path to load-path."
+  (let ((default-directory path))
+    (normal-top-level-add-subdirs-to-load-path)))
+
 ;; Add packages installed by Homebrew to the load path
-(setq brew-prefix
-      (let ((local "/usr/local/")
-            (home (expand-file-name "~/homebrew/")))
-        (if (file-exists-p home) home local)))
-(let ((default-directory (concat brew-prefix "share/emacs/site-lisp/")))
-  (normal-top-level-add-subdirs-to-load-path))
+(add-subdirs-to-load-path (concat (find-brew-prefix) "/share/emacs/site-lisp/"))
 
 ;; Keep emacs Custom-settings in separate file
 (setq custom-file (expand-file-name "custom.el" lisp-dir))
@@ -57,7 +61,7 @@
    (save-buffers-kill-emacs)))
 
 ;; Packages
-(require 'cask (expand-file-name "~/homebrew/share/emacs/site-lisp/cask/cask.el"))
+(require 'cask)
 (cask-initialize)
 
 (unless (package-installed-p 'pallet)
