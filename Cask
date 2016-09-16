@@ -83,7 +83,7 @@
 (depends-on "simple-httpd")
 (depends-on "skewer-mode")
 (depends-on "smartparens")
-(depends-on "smex")
+(depends-on "smex" :git "https://github.com/abo-abo/smex.git" :files ("*" (:exclude ".git")))
 (depends-on "solarized-theme")
 (depends-on "spaceline")
 (depends-on "spinner")
