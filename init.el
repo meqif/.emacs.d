@@ -654,6 +654,7 @@
                           ("<=" . (?· (Br . Bl) ?≤))
                           ("!=" . (?· (Br . Bl) ?≠))
                           ("=>" . (?· (Br . Bl) ?➡))
+                          ("->" . (?· (Br . Bl) ?→))
                           )
                   (push it prettify-symbols-alist))))
 
