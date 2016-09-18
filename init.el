@@ -638,6 +638,9 @@
                           )
                   (push it prettify-symbols-alist))))
 
+    ;; Register rust-mode in company dabbrev code modes
+    (add-to-list 'company-dabbrev-code-modes 'rust-mode)
+
     ;; Add brackets to smartparens pair list
     (sp-local-pair 'rust-mode "<" ">")
 
