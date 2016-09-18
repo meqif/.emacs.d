@@ -173,6 +173,16 @@ already in fullscreen"
   (toggle-frame-fullscreen))
 (defalias 'toggle-fullscreen 'gogo-fullscreen)
 
+(defun toggle-company-ispell ()
+  (interactive)
+  (cond
+   ((memq 'company-ispell company-backends)
+    (setq company-backends (delete 'company-ispell company-backends))
+    (message "company-ispell disabled"))
+   (t
+    (add-to-list 'company-backends 'company-ispell)
+    (message "company-ispell enabled!"))))
+
 (defun projectile-or-counsel-find-file ()
   "Find file inside project if inside one, with fallback"
   (interactive)
