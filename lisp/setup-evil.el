@@ -127,7 +127,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     '(compilation-mode
       finder-mode
       flycheck-error-list-mode
-      messages-buffer-mode
       neotree-mode
       paradox-menu-mode
       paradox-commit-list-mode
