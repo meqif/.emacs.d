@@ -594,12 +594,10 @@
     (add-hook 'mustache-mode (lambda () (tagedit-mode 1)))))
 
 (use-package emmet-mode
-  :defer t
-  :config
-  (progn
-    ;; Enable Emmet in tag soup modes
-    (add-hook 'sgml-mode-hook 'emmet-mode)
-    (add-hook 'mustache-mode-hook 'emmet-mode)))
+  :defer
+  :init
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'mustache-mode-hook 'emmet-mode))
 
 (use-package mustache-mode
   :mode "\\.hjs\\'")
