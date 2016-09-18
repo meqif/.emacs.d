@@ -216,8 +216,6 @@
 
 (use-package multiple-cursors
   :defer t
-  :bind (("C->" . mc/mark-next-like-this)
-         ("C-<" . mc/mark-previous-like-this))
   :config
   (defhydra hydra-multiple-cursors (:color red)
     "multiple cursors"
