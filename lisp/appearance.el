@@ -56,13 +56,6 @@ already in fullscreen"
 ;; Highlight current line
 (global-hl-line-mode 1)
 
-;; Highlight matching parentheses when the point is on them.
-(show-paren-mode 1)
-(setq show-paren-delay 0)
-
-;; Make show-paren highlight the entire expression
-(setq show-paren-style 'expression)
-
 ;; Customize mode-line project face
 (copy-face 'font-lock-constant-face 'project-face)
 (set-face-attribute 'project-face nil :foreground "#19D0FF")
