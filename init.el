@@ -961,8 +961,15 @@
      ("f" narrow-to-defun "to function")
      ("p" narrow-to-page "to page")
      ("r" narrow-to-region "to region")
-     ("w" widen "widen"))))
+     ("w" widen "widen")))
 
+  (defhydra hydra-zoom ()
+    "zoom"
+    ("i" text-scale-increase "in")
+    ("o" text-scale-decrease "out")
+    ("0" (text-scale-adjust 0) "reset")
+    ("q" nil "quit" :color blue))
+  (evil-leader/set-key "z" #'hydra-zoom/body))
 
 ;; Macro expansion for ease of debugging
 (use-package macrostep
