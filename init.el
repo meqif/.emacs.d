@@ -348,6 +348,7 @@
     (global-set-key (kbd "C-c c") 'org-capture)))
 
 (use-package yasnippet
+  :diminish yas-minor-mode
   :config
   (progn
     ;; Use only own snippets, do not use bundled ones
