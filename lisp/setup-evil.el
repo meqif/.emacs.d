@@ -54,6 +54,7 @@
      "run"))
   (evil-leader/set-key-for-mode 'rust-mode "c" #'hydra-cargo/body)
   (evil-leader/set-key-for-mode 'toml-mode "c" #'hydra-cargo/body)
+  (evil-leader/set-key-for-mode 'rust-mode "." #'racer-find-definition)
 
   ;; Org-mode leader shortcuts
   (evil-leader/set-key-for-mode 'org-mode
