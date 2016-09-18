@@ -889,6 +889,10 @@
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer))
 
+(use-package smooth-scrolling
+  :config
+  (setq smooth-scroll-margin 5))
+
 ;; Unbind s-&, as I hit it accidentally too often and it kills the buffer. 😞
 (unbind-key (kbd "s-&"))
 
