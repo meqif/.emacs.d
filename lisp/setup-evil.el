@@ -131,6 +131,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       neotree-mode
       paradox-menu-mode
       paradox-commit-list-mode
+      profiler-report-mode
+      racer-help-mode
       special-mode
       term-mode
       TeX-error-overview-mode
