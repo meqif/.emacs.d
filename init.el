@@ -112,7 +112,8 @@
 (require 'keybindings)
 
 ;; Appearance
-(use-package appearance)
+(use-package appearance
+  :ensure nil)
 
 ;; (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
 (set-fontset-font t 'unicode "Symbola" nil 'prepend)
@@ -258,6 +259,7 @@
 
 ;; Unique buffer names
 (use-package uniquify
+  :ensure nil
   ;; Make uniquify rename buffers like in path name notation
   :config (setq uniquify-buffer-name-style 'forward))
 
@@ -863,6 +865,7 @@
     "q" 'macrostep-collapse-all))
 
 (use-package dired
+  :ensure nil
   :defer t
   :config
   ;; Show human-friendly file sizes and sort numbers properly
