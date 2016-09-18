@@ -177,6 +177,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;; Undo like Vim: everything done during an insert session will be undone in one
 ;; step.
-(setq evil-want-fine-undo 'no)
+;; (setq evil-want-fine-undo 'no)
 
 (provide 'setup-evil)
