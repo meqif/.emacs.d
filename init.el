@@ -451,8 +451,6 @@
   :mode ("\\.tex\\'" . LaTeX-mode)
   :config
   (progn
-    (use-package flyspell)
-
     ;; Default options
     (setq TeX-auto-save t)
     (setq TeX-parse-self t)
@@ -500,15 +498,6 @@
 
     ;; Enable spellcheck for LaTeX
     (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-
-    ;; Quick spellcheck shortcut
-    (add-hook 'LaTeX-mode-hook
-              (lambda()
-                (define-key LaTeX-mode-map (kbd "§") 'flyspell-buffer)
-                (define-key LaTeX-mode-map (kbd "C-c b") 'helm-bibtex)
-                (define-key LaTeX-mode-map (kbd "<M-up>") 'outline-move-subtree-up)
-                (define-key LaTeX-mode-map (kbd "<M-down>") 'outline-move-subtree-down)
-                (define-key LaTeX-mode-map (kbd "C-c t") #'(lambda () (interactive) (TeX-insert-macro "todo")))))
 
     (defhydra hydra-latex-fonts (:color blue)
       "LaTeX font"
