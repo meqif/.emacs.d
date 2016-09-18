@@ -85,16 +85,20 @@
   :defer t
   :config (dash-enable-font-lock))
 
-;; ivy
 (use-package ivy
   :defer t
-  :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-h f" . counsel-describe-function)
-         ("C-h v" . counsel-describe-variable))
   :config
   ;; Allow quitting ivy with ESC
   (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit))
+
+;; Replace default functions with much better alternatives
+(use-package counsel
+  :defer t
+  :bind (("s-r" . counsel-imenu)
+         ("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("C-h f" . counsel-describe-function)
+         ("C-h v" . counsel-describe-variable)))
 
 ;; Use the fish shell in OSX
 (when (eq system-type 'darwin)
@@ -806,7 +810,6 @@
     (kbd "K") #'paradox-previous-describe
     (kbd "H") #'paradox-menu-quick-help
     (kbd "L") #'(lambda (pkg) (interactive '(nil)) (paradox-menu-view-commit-list pkg))))
-
 
 ;; Enable paredit for Emacs Lisp
 (use-package paredit
