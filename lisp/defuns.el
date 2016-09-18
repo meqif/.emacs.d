@@ -140,4 +140,13 @@ beginning of the line."
               (ivy-imenu-get-candidates-from (delete (assoc "*Rescan*" items) items))
               :action (lambda (k) (goto-char k)))))
 
+(defun gogo-fullscreen ()
+  "Change to fullscreen mode.
+
+Make frame fullscreen and change the default font unless it's
+already in fullscreen"
+  (interactive)
+  (toggle-frame-fullscreen))
+(defalias 'toggle-fullscreen 'gogo-fullscreen)
+
 (provide 'defuns)
