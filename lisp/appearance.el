@@ -83,31 +83,17 @@ already in fullscreen"
   "Mode line format for VC Mode.")
 (put 'meqif-vc-mode-line 'risky-local-variable t)
 
-(setq-default mode-line-format
-              '("%e" mode-line-front-space
-                ;; Standard info about the current buffer
-                mode-line-mule-info
-                mode-line-client
-                mode-line-modified
-                mode-line-remote
-                mode-line-frame-identification
-                mode-line-buffer-identification " " mode-line-position
-                ;; Show evil-mode state
-                evil-mode-line-tag
-                ;; Project information
-                (projectile-mode projectile-mode-line)
-                ;; Version control information
-                (vc-mode meqif-vc-mode-line)
-                ;; Misc information
-                " "
-                mode-line-misc-info
-                ;; Finally, the modes
-                " " mode-line-modes mode-line-end-spaces
-                )
-              mode-line-position
-              '(" 🐱 "
-                (line-number-mode
-                 ("%l" (column-number-mode ":%c")))))
+(use-package spaceline-config
+  :ensure spaceline
+  :config
+  (setq ns-use-srgb-colorspace nil)
+  (spaceline-spacemacs-theme)
+  (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state
+        spaceline-minor-modes-separator " · "
+        powerline-default-separator 'slant)
+  (spaceline-toggle-buffer-position-off)
+  (spaceline-toggle-hud-off)
+  (set-face-attribute 'powerline-active1 nil :foreground "gray99"))
 
 ;; Tweak display-time mode-line format
 (setq display-time-24hr-format t)
