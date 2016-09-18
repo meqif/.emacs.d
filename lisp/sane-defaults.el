@@ -50,7 +50,7 @@
 ;; Default directory
 (setq default-directory "~/")
 
-;; Disable audible bell
-(setq visible-bell t)
+;; Disable the bell and the flashing
+(setq ring-bell-function 'ignore)
 
 (provide 'sane-defaults)
