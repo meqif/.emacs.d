@@ -953,6 +953,12 @@
                            TeX-mode))
       (indent-region (region-beginning) (region-end) nil)))
 
+(use-package faun-mode
+  :ensure nil
+  :after 'org
+  :load-path "lisp/"
+  :diminish (faun-mode . "👹"))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when window-system
