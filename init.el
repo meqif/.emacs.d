@@ -392,6 +392,8 @@
                 ;; This fixes the problem with an extra newline when expanding snippets
                 (set (make-local-variable 'require-final-newline) nil)))))
 
+(use-package auto-yasnippet)
+
 (defun configure-helm-bibtex ()
   (progn
     (require 'reftex)
