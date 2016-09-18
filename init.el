@@ -941,6 +941,18 @@
 (unbind-key (kbd "s-&"))
 (unbind-key (kbd "s-k"))
 
+;; Indent after pasting
+(defadvice yank (after indent-region activate)
+  (if (member major-mode '(emacs-lisp-mode
+                           c-mode
+                           js2-mode
+                           python-mode
+                           ruby-mode
+                           rust-mode
+                           LaTeX-mode
+                           TeX-mode))
+      (indent-region (region-beginning) (region-end) nil)))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when window-system
