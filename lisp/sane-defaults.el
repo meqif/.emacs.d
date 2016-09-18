@@ -53,4 +53,7 @@
 ;; Disable the bell and the flashing
 (setq ring-bell-function 'ignore)
 
+;; Enable narrow-to-region
+(put 'narrow-to-region 'disabled nil)
+
 (provide 'sane-defaults)
