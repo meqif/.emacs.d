@@ -807,17 +807,6 @@
     (kbd "H") #'paradox-menu-quick-help
     (kbd "L") #'(lambda (pkg) (interactive '(nil)) (paradox-menu-view-commit-list pkg))))
 
-;; Better interactive search
-(use-package swiper
-  :defer t
-  ;; :init (global-set-key (kbd "C-s") 'swiper))
-  :config
-  ;; Run swiper after opening ibuffer
-  (defadvice ibuffer (after ibuffer-start-ace activate)
-    (if (eq major-mode 'ibuffer-mode) (swiper)))
-  ;; Jump to selected buffer in ibuffer after selecting it with swiper
-  (defadvice swiper (after swiper-ibuffer-done activate)
-    (if (eq major-mode 'ibuffer-mode) (ibuffer-visit-buffer))))
 
 ;; Enable paredit for Emacs Lisp
 (use-package paredit
