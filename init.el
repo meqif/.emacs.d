@@ -1076,6 +1076,11 @@
   :load-path "lisp/"
   :diminish (faun-mode . "👹"))
 
+;; Wrap lines in visual-line-mode at the fill column
+(use-package visual-fill-column
+  :init
+  (add-hook 'visual-line-mode-hook 'visual-fill-column-mode))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when window-system
