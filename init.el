@@ -73,7 +73,8 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
-(setq use-package-enable-imenu-support t)
+(setq use-package-enable-imenu-support t
+      use-package-always-ensure t)
 (require 'use-package)
 
 ;; Use https for package archives
