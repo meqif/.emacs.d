@@ -444,6 +444,9 @@
 (use-package json-mode
   :mode "\\.json\\'")
 
+(use-package dockerfile-mode
+  :mode "Dockerfile\\'")
+
 (use-package tex-mode
   :mode ("\\.tex\\'" . LaTeX-mode)
   :config
