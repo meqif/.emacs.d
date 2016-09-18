@@ -891,5 +891,8 @@
                           ,load-file-name elapsed)))
             t))
 
-;; Start server
-(server-start)
+(use-package server
+  :diminish server-buffer-clients
+  ;; Start server if it isn't already running
+  :config
+  (unless (server-running-p) (server-start)))
