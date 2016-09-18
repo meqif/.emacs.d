@@ -731,17 +731,46 @@
   )
 
 (use-package flyspell
+  :defer
   :init
-  (progn
-    ;; Use Aspell for spellcheck
-    (setq ispell-program-name "~/homebrew/bin/aspell")
-    (setq ispell-list-command "--list")
+  ;; Use Aspell for spellcheck
+  (setq ispell-program-name "~/homebrew/bin/aspell")
+  (setq ispell-list-command "--list")
 
-    ;; Default language is Portuguese.
-    (setq ispell-dictionary "pt_PT")
+  ;; Default language is Portuguese.
+  (setq ispell-dictionary "pt_PT")
 
-    ;; Flyspell messages slow down the spellchecking process
-    (setq flyspell-issue-message-flag nil)))
+  ;; Flyspell messages slow down the spellchecking process
+  (setq flyspell-issue-message-flag nil)
+
+  ;; Don't spell check embedded snippets in org-mode
+  ;; Source: http://emacs.stackexchange.com/a/9347
+  (defadvice org-mode-flyspell-verify
+      (after org-mode-flyspell-verify-hack activate)
+    (let ((rlt ad-return-value)
+          (begin-regexp "^[ \t]*#\\+BEGIN_\\(SRC\\|HTML\\|LATEX\\)")
+          (end-regexp "^[ \t]*#\\+END_\\(SRC\\|HTML\\|LATEX\\)")
+          old-flag
+          b e)
+      (when ad-return-value
+        (save-excursion
+          (setq old-flag case-fold-search)
+          (setq case-fold-search t)
+          (setq b (re-search-backward begin-regexp nil t))
+          (if b (setq e (re-search-forward end-regexp nil t)))
+          (setq case-fold-search old-flag))
+        (if (and b e (< (point) e)) (setq rlt nil)))
+      (setq ad-return-value rlt)))
+
+  :config
+  (use-package flyspell-correct-ivy
+    :defer t
+    :config
+    ;; set ivy as correcting interface
+    (setq flyspell-correct-interface 'flyspell-correct-ivy)
+    ;; bind flyspell-correct-word-generic
+    (define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-word-generic)))
+
 
 ;; Easier kill-ring viewing
 (use-package browse-kill-ring
@@ -907,6 +936,14 @@
      ("r" flyspell-buffer "rerun on buffer")
      ("n" flyspell-goto-next-error "next")
      ("c" ispell-word "correct word")
+     ("en" #'(lambda ()
+               (interactive)
+               (setq-local ispell-local-dictionary "en_GB"))
+      "change language to en_GB")
+     ("pt" #'(lambda ()
+               (interactive)
+               (setq-local ispell-local-dictionary "pt_PT"))
+      "change language to pt_PT")
      ("q" nil "quit")))
   (global-set-key
    (kbd "M-g")
