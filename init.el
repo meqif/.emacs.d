@@ -685,7 +685,50 @@
           ("C-c C-r" . "cargo run"))
       (-let* (((keycombo . command) it))
         (define-key rust-mode-map (kbd keycombo)
-          `(lambda () (interactive) (save-buffer) (compile ,command)))))))
+          `(lambda () (interactive) (save-buffer) (compile ,command))))))
+
+  ;; Compile a single file
+  (defun meqif/compile-single-rust-file ()
+    (interactive)
+    (when (and (f-exists? (buffer-name))
+               (f-file? (buffer-name)))
+      (compile (concat "rustc " (buffer-name) " -o " (f-no-ext (buffer-name))))))
+
+  ;; Useful rustup bindings
+  (progn
+    (require 'ivy)
+    (defvar rustup-binary "rustup")
+
+    (defun rustup--set-default-toolchain (version)
+      (let ((short-version (car (split-string version))))
+        (shell-command (concat rustup-binary " default " short-version))))
+
+    (defun rustup--list-toolchains ()
+      (split-string (shell-command-to-string
+                     (concat rustup-binary " toolchain list"))))
+
+    (defun rustup--full-toolchains ()
+      (let ((toolchains (rustup--list-toolchains)))
+        (--zip-with
+         (concat it " (" other ")")
+         toolchains
+         (--map
+          (cadr
+           (split-string
+            (shell-command-to-string
+             (concat rustup-binary " run " it " rustc --version"))))
+          (rustup--list-toolchains)))))
+
+    (defun rustup-change-toolchain ()
+      (interactive)
+      (let ((ivy-count-format ""))
+        (ivy-read "Rust version: " (rustup--full-toolchains)
+                  :action #'rustup--set-default-toolchain)))
+
+    (defun rustup--run-cargo-clippy ()
+      (compile (concat rustup-binary " run nightly cargo clippy")))
+    )
+  )
 
 (use-package flyspell
   :init
