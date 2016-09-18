@@ -7,9 +7,6 @@
 ;; Enable rainbow delimiters in all programming modes
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
-;; Highlight ag's search results
-(setq ag-highlight-search t)
-
 ;; Follow highlighted occur results in original buffer
 (add-hook 'occur-mode-hook #'next-error-follow-minor-mode)
 
