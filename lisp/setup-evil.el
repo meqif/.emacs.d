@@ -9,10 +9,10 @@
 
   ;; Global evil leader shortcuts
   (evil-leader/set-key
-    "f" 'projectile-find-file
-    "p" 'browse-kill-ring
+    "f" 'projectile-or-counsel-find-file
+    "p" 'counsel-yank-pop
     "b" 'ibuffer
-    "r" 'helm-recentf
+    "r" 'counsel-recentf
     "l" 'avy-goto-line
     "g" 'magit-status
     "\\" 'meqif/pop-mark)
