@@ -363,6 +363,12 @@
     ;; Snippets everywhere
     (yas-global-mode)
 
+    ;; ... but not on compilation-mode buffers
+    (defun meqif/compilation-buffer-p ()
+      ;; Return t if the current buffer is a compilation-mode buffer
+      (compilation-buffer-p (current-buffer)))
+    (add-to-list 'yas-dont-activate-functions #'meqif/compilation-buffer-p)
+
     (add-hook 'snippet-mode-hook
               (lambda ()
                 ;; Temporarily disable required newline at the end of file
