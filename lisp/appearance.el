@@ -7,12 +7,33 @@
 
 ;; Load theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(progn
-  (load-theme 'eink t)
-  (set-face-attribute 'font-lock-keyword-face nil :foreground "#ab4642")
-  (set-face-attribute 'highlight nil :background "#fff1aa")
-  ;;(set-face-attribute 'whitespace-line nil :background 'unspecified :foreground "magenta")
-  (set-face-attribute 'font-lock-doc-face nil :foreground "#808080"))
+
+;; (progn
+;;   ;; Custom tweaks to solarized-theme
+;;   (setq
+;;    ;; Make the mode-line high contrast
+;;    solarized-high-contrast-mode-line t
+;;    ;; Fix underscored mode-line
+;;    x-underline-at-descent-line t
+;;    ;; Don't use as much bold
+;;    solarized-use-less-bold t
+;;    ;; Disable variable pitch fonts in Solarized theme
+;;    solarized-use-variable-pitch nil
+;;    ;; Fix the fringe and linum
+;;    solarized-distinct-fringe-background t)
+;;   (load-theme 'solarized-light t)
+;;   (set-face-attribute 'mode-line nil :box nil :overline nil :underline nil)
+;;   (set-face-attribute 'mode-line-inactive nil :box nil :overline nil :underline nil))
+
+;; (progn
+;;   (load-theme 'eink t)
+;;   (set-face-attribute 'font-lock-keyword-face nil :foreground "#ab4642")
+;;   (set-face-attribute 'highlight nil :background "#fff1aa")
+;;   ;;(set-face-attribute 'whitespace-line nil :background 'unspecified :foreground "magenta")
+;;   (set-face-attribute 'font-lock-doc-face nil :foreground "#808080"))
+;; (load-theme 'duotone-denim t)
+;; (load-theme 'gruvbox t)
+(load-theme 'cleanroom t)
 
 ;; Mac friendly font
 (when window-system
