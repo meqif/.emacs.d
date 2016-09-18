@@ -633,7 +633,8 @@
       (setq racer-rust-src-path "~/rust/src/")
       :config
       (add-hook 'rust-mode-hook #'racer-mode)
-      (add-hook 'rust-mode-hook #'eldoc-mode))
+      (add-hook 'rust-mode-hook #'eldoc-mode)
+      (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common))
     (add-hook 'rust-mode-hook
               (lambda ()
                 ;; Enable on-the-fly syntax checking
