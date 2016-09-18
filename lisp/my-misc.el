@@ -7,8 +7,14 @@
 ;; Enable rainbow delimiters in all programming modes
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
-;; Follow highlighted occur results in original buffer
-(add-hook 'occur-mode-hook #'next-error-follow-minor-mode)
+;; Tweaks for modes that show search results
+(--each
+    '(occur-mode-hook ag-mode-hook)
+  (progn
+    ;; Follow highlighted results in original buffer
+    (add-hook it #'next-error-follow-minor-mode)
+    ;; Use visual line mode
+    (add-hook it #'visual-line-mode)))
 
 ;; Adjust the font settings of frame so Emacs can display emoji properly.
 (defun darwin-set-emoji-font (frame)
