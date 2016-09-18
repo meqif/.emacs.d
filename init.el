@@ -933,6 +933,10 @@
   ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
   (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match))
 
+;; Better % jumping
+(use-package evil-matchit
+  :init (global-evil-matchit-mode))
+
 ;; Unbind s-&, as I hit it accidentally too often and it kills the buffer. 😞
 (unbind-key (kbd "s-&"))
 
