@@ -6,6 +6,18 @@
 ; Let right alt work as usual
 (setq ns-right-option-modifier 'none)
 
+;; For emacs-mac
+(when (eq window-system 'mac)
+  (progn
+    (setq mac-option-modifier 'meta)
+    (setq mac-command-modifier 'super)
+    (global-set-key (kbd "s-s") 'save-buffer)
+    (global-set-key (kbd "s-v") 'yank)
+    (global-set-key (kbd "s-c") 'kill-ring-save)
+    (global-set-key (kbd "s-l") 'goto-line)
+    (global-set-key (kbd "s-z") 'undo)
+    (global-set-key (kbd "s-a") 'mark-whole-buffer)))
+
 ;; Portuguese mac-keyboard alt-keys)
 (define-key key-translation-map (kbd "H-8") (kbd "["))
 (define-key key-translation-map (kbd "H-(") (kbd "{"))
