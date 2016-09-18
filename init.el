@@ -375,9 +375,7 @@
                 ;; This fixes the problem with an extra newline when expanding snippets
                 (set (make-local-variable 'require-final-newline) nil)))))
 
-(use-package helm-bibtex
-  :defer t
-  :config
+(defun configure-helm-bibtex ()
   (progn
     (require 'reftex)
 
@@ -390,17 +388,25 @@
     (add-to-list
      (make-local-variable 'reftex-default-bibliography)
      "bibliography.bib")
+    ))
 
-    ;; Change default action
-    (progn
-      (helm-delete-action-from-source "Insert BibTeX key" helm-source-bibtex)
-      (helm-add-action-to-source
-       "Insert BibTeX key" 'helm-bibtex-insert-key helm-source-bibtex 0))
+(use-package helm-bibtex
+  :defer t
+  :config
+  (unless (boundp 'helm-bibtex-bibliography) (configure-helm-bibtex))
+  ;; Change default action
+  (progn
+    (helm-delete-action-from-source "Insert BibTeX key" helm-source-bibtex)
+    (helm-add-action-to-source
+     "Insert BibTeX key" 'helm-bibtex-insert-key helm-source-bibtex 0))
+  ;; Use LaTeX autocite even in org-mode.
+  (add-to-list
+   'helm-bibtex-format-citation-functions
+   '(org-mode . (lambda (keys) (format "\\autocite{%s}" (s-join ", " keys))))))
 
-    ;; Use LaTeX autocite even in org-mode.
-    (add-to-list
-     'helm-bibtex-format-citation-functions
-     '(org-mode . (lambda (keys) (format "\\autocite{%s}" (s-join ", " keys)))))))
+(use-package ivy-bibtex
+  :defer t
+  :config (unless (boundp 'helm-bibtex-bibliography) (configure-helm-bibtex)))
 
 ;; Language-specific setup files
 (use-package gfm-mode
