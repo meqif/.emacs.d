@@ -343,18 +343,6 @@
     ;; Break lines automatically
     (add-hook 'org-mode-hook 'auto-fill-mode)
 
-    ;; Org-latex configuration
-    (use-package ox-latex
-      :defer t
-      :config
-      ;; Use latexmk and xelatex to generate PDFs
-      (setq org-latex-pdf-process '("latexmk -pdflatex=xelatex -pdf -f %f"))
-      ;; Default packages
-      (add-to-list 'org-latex-packages-alist
-                   '("" "MinionPro" nil))
-      (add-to-list 'org-latex-packages-alist
-                   '("" "microtype" nil)))
-
     ;; Organizing stuff
     ;; http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
 
@@ -362,7 +350,33 @@
     (setq org-default-notes-file "~/organizer.org")
 
     ;; Shortcut to capture notes
-    (global-set-key (kbd "C-c c") 'org-capture)))
+    (global-set-key (kbd "C-c c") 'org-capture)
+
+    ;; Hydra
+    (defhydra hydra-org-mode-narrow (:color blue)
+      "Narrow buffer to"
+      ("s" org-narrow-to-subtree "Subtree")
+      ("b" org-narrow-to-block "Block")
+      ("w" widen "Widen"))
+    (evil-leader/set-key-for-mode 'org-mode "n" #'hydra-org-mode-narrow/body))
+  :config
+  ;; Org-latex configuration
+  (use-package ox-latex
+    :defer t
+    :config
+    ;; Use latexmk and xelatex to generate PDFs
+    (setq org-latex-pdf-process '("latexmk -pdflatex=xelatex -pdf -f %f"))
+    ;; Default packages
+    (add-to-list 'org-latex-packages-alist
+                 '("" "MinionPro" nil))
+    (add-to-list 'org-latex-packages-alist
+                 '("" "microtype" nil)))
+
+  ;; Add Github-Flavored Markdown exporter
+  (use-package ox-gfm :defer t)
+
+  ;; Allow editing html blocks
+  (use-package ox-html))
 
 (use-package yasnippet
   :diminish yas-minor-mode
