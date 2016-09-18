@@ -305,7 +305,7 @@
   :config (add-hook 'flycheck-mode-hook #'flycheck-status-emoji-mode))
 
 (use-package org
-  :defer 30
+  :defer
   :init
   (progn
     ;; Don't truncate lines
