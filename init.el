@@ -543,8 +543,7 @@
     ;; Add `` and '' to evil-surrond
     (add-hook 'LaTeX-mode-hook
               (lambda ()
-                ;; 34 is the code for " (double quote)
-                (push '(34 . ("``" . "''")) evil-surround-pairs-alist)))
+                (push '(?\" . ("``" . "''")) evil-surround-pairs-alist)))
 
     ;; Override <TAB> to jump out of a pair of curly braces if the character
     ;; following the point is a closing curly brace.
