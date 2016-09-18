@@ -994,6 +994,22 @@
   :config
   (setq smooth-scroll-margin 5))
 
+(defun meqif/jump-to-definition ()
+  (interactive)
+  (funcall (case major-mode
+              ('rust-mode 'racer-find-definition)
+              (t 'dumb-jump-go))))
+
+(use-package dumb-jump
+  :defer t
+  :commands (dumb-jump-go dumb-jump-back)
+  :init
+  ;; (define-key evil-normal-state-map (kbd "C-]") 'dumb-jump-go)
+  (define-key evil-normal-state-map (kbd "C-]") 'meqif/jump-to-definition)
+  (define-key evil-normal-state-map (kbd "C-t") 'dumb-jump-back)
+  :config
+  (setq dumb-jump-selector 'ivy))
+
 (use-package iedit
   :defer
   :init (setq iedit-toggle-key-default nil))
