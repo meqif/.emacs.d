@@ -1,8 +1,5 @@
 ;; Appearance
 
-;; I like line numbers, thankyouverymuch.
-(add-hook 'prog-mode-hook #'linum-mode)
-
 ;; Clean previous themes definitions when loading a theme
 (defadvice load-theme
     (before theme-dont-propagate activate)
