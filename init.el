@@ -939,6 +939,7 @@
 
 ;; Unbind s-&, as I hit it accidentally too often and it kills the buffer. 😞
 (unbind-key (kbd "s-&"))
+(unbind-key (kbd "s-k"))
 
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
