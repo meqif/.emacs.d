@@ -173,4 +173,11 @@ already in fullscreen"
   (toggle-frame-fullscreen))
 (defalias 'toggle-fullscreen 'gogo-fullscreen)
 
+(defun projectile-or-counsel-find-file ()
+  "Find file inside project if inside one, with fallback"
+  (interactive)
+  (if (projectile-project-p)
+      (projectile-find-file)
+    (counsel-find-file)))
+
 (provide 'defuns)
