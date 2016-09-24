@@ -85,6 +85,8 @@
 (depends-on "redshank")
 (depends-on "robe")
 (depends-on "rspec-mode")
+(depends-on "rubocop")
+(depends-on "ruby-tools")
 (depends-on "rust-mode")
 (depends-on "s")
 (depends-on "scss-mode")
