@@ -874,11 +874,13 @@
     (setq firestarter #'rspec-verify-firestarter))
   (add-hook 'ruby-mode-hook #'rspec-firestarter)
 
+  ;; Handy functions to run rubocop from Emacs
+  (use-package rubocop)
+
   ;; Automatically expand # to #{} inside double-quoted strings
   (use-package ruby-tools
     :diminish (ruby-tools-mode . "🛠")))
 
-(use-package rubocop)
 (use-package inf-ruby
   :defer
   :config
