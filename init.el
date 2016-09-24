@@ -890,7 +890,7 @@
 
   ;; Automatically expand # to #{} inside double-quoted strings
   (use-package ruby-tools
-    :diminish ruby-tools-mode))
+    :diminish (ruby-tools-mode . "🛠")))
 
 (use-package inf-ruby
   :defer
