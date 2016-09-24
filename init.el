@@ -864,6 +864,7 @@
               (setq-local evil-shift-width 2)))
 
   (use-package rspec
+    :ensure rspec-mode
     :defer
     :init
     (setq rspec-command-options "--format progress")
