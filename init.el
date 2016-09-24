@@ -892,6 +892,7 @@
   (use-package ruby-tools
     :diminish (ruby-tools-mode . "🛠")))
 
+(use-package rubocop)
 (use-package inf-ruby
   :defer
   :config
