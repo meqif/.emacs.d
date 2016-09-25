@@ -824,7 +824,7 @@
 
 (use-package subword
   :defer t
-  :diminish "sub")
+  :diminish "_")
 
 ;; Ruby mode
 (use-package ruby-mode
