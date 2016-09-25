@@ -644,7 +644,6 @@
                 (flycheck-rust-setup)
                 ;; Rust has different rules for too long lines
                 (setq-local fill-column 100)
-                (setq-local whitespace-line-column 100)
                 ;; Reload whitespace mode to make the previous change effective
                 (whitespace-mode -1)
                 (whitespace-mode 1)
@@ -775,8 +774,7 @@
   :diminish whitespace-mode
   :config
   (progn
-    (setq whitespace-line-column 80
-          whitespace-style '(face lines-tail))
+    (setq whitespace-style '(face lines-tail))
     (add-hook 'prog-mode-hook 'whitespace-mode)))
 
 (use-package undo-tree
