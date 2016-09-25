@@ -847,8 +847,10 @@
   (add-hook 'ruby-mode-hook #'subword-mode)
   (add-hook 'ruby-mode-hook #'flycheck-mode)
   (add-hook 'ruby-mode-hook
-            (lambda () (setq-local tab-width 2)
-              (setq-local evil-shift-width 2)))
+            #'(lambda ()
+                (setq mode-name "💎")
+                (setq-local tab-width 2)
+                (setq-local evil-shift-width 2)))
 
   (use-package rspec
     :ensure rspec-mode
