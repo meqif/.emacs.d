@@ -2,6 +2,9 @@
 (require 'my-misc)
 (require 'dash)
 
+;; Improve symbol search to consider snake case symbols
+(setq-default evil-symbol-word-search 'symbol)
+
 ;; We need more evil leadership, your wickedness, Sir.
 (use-package evil-leader
   :config
