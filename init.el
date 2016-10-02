@@ -350,6 +350,7 @@
   :config
   ;; Org-latex configuration
   (use-package ox-latex
+    :ensure org
     :defer t
     :config
     ;; Use latexmk and xelatex to generate PDFs
@@ -364,7 +365,7 @@
   (use-package ox-gfm :defer t)
 
   ;; Allow editing html blocks
-  (use-package ox-html))
+  (use-package ox-html :ensure org))
 
 (use-package yasnippet
   :diminish yas-minor-mode
