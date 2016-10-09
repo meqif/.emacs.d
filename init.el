@@ -777,9 +777,9 @@
 (use-package whitespace
   :diminish whitespace-mode
   :config
-  (progn
-    (setq whitespace-style '(face lines-tail))
-    (add-hook 'prog-mode-hook 'whitespace-mode)))
+  (setq whitespace-style '(face lines-tail))
+  (setq-default whitespace-line-column nil)
+  (add-hook 'prog-mode-hook 'whitespace-mode))
 
 (use-package undo-tree
   :diminish undo-tree-mode
