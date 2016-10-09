@@ -814,6 +814,8 @@
         ;; Silence nag on push
         magit-push-always-verify nil
         magit-revert-buffers t)
+  ;; Make fine-grained changes more obvious
+  (setq magit-diff-refine-hunk 'all)
   :config
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   (progn
@@ -825,6 +827,14 @@
     (advice-add #'magit-key-mode-popup-committing :after
                 (lambda ()
                   (magit-key-mode-toggle-option 'committing "--verbose")))))
+
+(use-package diff-mode
+  :ensure nil
+  :config
+  ;; Make fine grained changes more obvious
+  (set-face-attribute 'diff-refine-change nil :bold t :background 'unspecified)
+  (set-face-attribute 'diff-refine-added nil :bold t :background 'unspecified)
+  (set-face-attribute 'diff-refine-removed nil :bold t :background 'unspecified))
 
 (use-package subword
   :defer t
