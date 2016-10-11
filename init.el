@@ -119,6 +119,14 @@
 (use-package appearance
   :ensure nil)
 
+(use-package prog-mode
+  :ensure nil
+  :config
+  ;; Enable prettify symbols mode globally
+  (global-prettify-symbols-mode +1)
+  ;; Unprettify when the cursor is either on the symbol or on its right edge
+  (setq prettify-symbols-unprettify-at-point 'right-edge))
+
 ;; Fix emoji display
 (set-fontset-font t 'unicode "Symbola" nil 'prepend)
 (when (eq window-system 'mac)

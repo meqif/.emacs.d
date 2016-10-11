@@ -90,9 +90,6 @@
 (setq display-time-24hr-format t)
 (setq display-time-default-load-average nil)
 
-;; Enable prettify symbols mode
-(global-prettify-symbols-mode +1)
-
 (defun font-lock-comment-annotations ()
   "Highlight a bunch of well known comment annotations."
   (font-lock-add-keywords
