@@ -1092,6 +1092,23 @@
   :init
   (add-hook 'visual-line-mode-hook 'visual-fill-column-mode))
 
+(use-package clojure-mode
+  :defer t
+  :init
+  (add-hook 'clojure-mode-hook 'cider-mode)
+  (add-hook 'clojure-mode-hook 'cider-jack-in))
+(use-package cider
+  :after 'clojure-mode
+  :init
+  (setq cider-repl-display-help-banner nil)
+  :config
+  (evil-define-key 'normal cider-repl-mode-map (kbd "j") 'cider-repl-previous-input)
+  (evil-define-key 'normal cider-repl-mode-map (kbd "k") 'cider-repl-next-input)
+  (--each '('normal 'insert)
+    (progn
+      (evil-define-key it cider-repl-mode-map (kbd "<up>") 'cider-repl-previous-input)
+      (evil-define-key it cider-repl-mode-map (kbd "<down>") 'cider-repl-next-input))))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when window-system

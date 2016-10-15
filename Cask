@@ -13,6 +13,8 @@
 (depends-on "browse-kill-ring")
 (depends-on "caml")
 (depends-on "cask")
+(depends-on "cider")
+(depends-on "clojure-mode")
 (depends-on "color-theme")
 (depends-on "company")
 (depends-on "company-tern")

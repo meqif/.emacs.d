@@ -131,7 +131,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;; Some more modes that should be in emacs mode
 (--each
-    '(compilation-mode
+    '(cider-stacktrace-mode
+      compilation-mode
       finder-mode
       flycheck-error-list-mode
       neotree-mode
