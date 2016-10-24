@@ -5,6 +5,22 @@
     (before theme-dont-propagate activate)
   (mapc #'disable-theme custom-enabled-themes))
 
+(use-package spaceline-config
+  :ensure spaceline
+  :config
+  (setq ns-use-srgb-colorspace nil)
+  (spaceline-spacemacs-theme)
+  (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state
+        spaceline-minor-modes-separator " · "
+        powerline-default-separator 'slant)
+  (spaceline-toggle-buffer-position-off)
+  (spaceline-toggle-hud-off)
+  (set-face-attribute 'powerline-active1 nil :foreground "gray99")
+
+  ;; Automatically recompile separators
+  (advice-add 'load-theme :after
+              #'(lambda (&rest ignored-arguments) (spaceline-compile))))
+
 ;; Load theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
@@ -73,18 +89,6 @@
          face branch-face))
   "Mode line format for VC Mode.")
 (put 'meqif-vc-mode-line 'risky-local-variable t)
-
-(use-package spaceline-config
-  :ensure spaceline
-  :config
-  (setq ns-use-srgb-colorspace nil)
-  (spaceline-spacemacs-theme)
-  (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state
-        spaceline-minor-modes-separator " · "
-        powerline-default-separator 'slant)
-  (spaceline-toggle-buffer-position-off)
-  (spaceline-toggle-hud-off)
-  (set-face-attribute 'powerline-active1 nil :foreground "gray99"))
 
 ;; Tweak display-time mode-line format
 (setq display-time-24hr-format t)
