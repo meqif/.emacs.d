@@ -74,6 +74,8 @@
 (depends-on "multiple-cursors")
 (depends-on "mustache-mode")
 (depends-on "names")
+(depends-on "oceanic-theme")
+(depends-on "ox-gfm")
 (depends-on "package-build")
 (depends-on "pallet")
 (depends-on "paradox")
