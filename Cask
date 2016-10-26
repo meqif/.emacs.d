@@ -12,6 +12,7 @@
 (depends-on "bind-key")
 (depends-on "browse-kill-ring")
 (depends-on "caml")
+(depends-on "bundler")
 (depends-on "cask")
 (depends-on "cider")
 (depends-on "clojure-mode")
