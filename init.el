@@ -871,21 +871,6 @@
                 (setq-local tab-width 2)
                 (setq-local evil-shift-width 2)))
 
-  (use-package rspec
-    :ensure rspec-mode
-    :defer
-    :init
-    (setq rspec-command-options "--format progress")
-    (defhydra hydra-rspec (:color blue)
-      "rspec"
-      ("a" rspec-verify-all "run all specs")
-      ("s" rspec-verify-single "run specs for this context")
-      ("v" rspec-verify "run specs for this buffer")
-      ("t" rspec-toggle-spec-and-target-find-example
-       "toggle between spec and class")))
-
-  (evil-leader/set-key-for-mode 'ruby-mode "c" #'hydra-rspec/body)
-
   ;; Run specs on save
   (firestarter-mode)
   (defun rspec-verify-firestarter ()
@@ -895,13 +880,33 @@
   (defun rspec-firestarter ()
     (setq firestarter #'rspec-verify-firestarter))
   (add-hook 'ruby-mode-hook #'rspec-firestarter)
+  )
 
-  ;; Handy functions to run rubocop from Emacs
-  (use-package rubocop)
 
-  ;; Automatically expand # to #{} inside double-quoted strings
-  (use-package ruby-tools
-    :diminish (ruby-tools-mode . "🛠")))
+(use-package rspec
+  :ensure rspec-mode
+  :defer
+  :after (ruby-mode enh-ruby-mode)
+  :init
+  (setq rspec-command-options "--format progress")
+  (defhydra hydra-rspec (:color blue)
+    "rspec"
+    ("a" rspec-verify-all "run all specs")
+    ("s" rspec-verify-single "run specs for this context")
+    ("v" rspec-verify "run specs for this buffer")
+    ("t" rspec-toggle-spec-and-target-find-example
+     "toggle between spec and class"))
+  (evil-leader/set-key-for-mode 'ruby-mode "c" #'hydra-rspec/body)
+  (evil-leader/set-key-for-mode 'enh-ruby-mode "c" #'hydra-rspec/body))
+
+;; Handy functions to run rubocop from Emacs
+(use-package rubocop
+  :after (ruby-mode enh-ruby-mode))
+
+;; Automatically expand # to #{} inside double-quoted strings
+(use-package ruby-tools
+  :after (ruby-mode enh-ruby-mode)
+  :diminish (ruby-tools-mode . "🛠"))
 
 (use-package inf-ruby
   :defer
