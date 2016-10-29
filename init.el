@@ -872,7 +872,7 @@
                 (setq-local evil-shift-width 2)))
 
   ;; Run specs on save
-  (firestarter-mode)
+  ;; (firestarter-mode)
   (defun rspec-verify-firestarter ()
     (interactive)
     (when (s-matches-p "\.rb$" (buffer-name))
