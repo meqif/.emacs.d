@@ -926,7 +926,6 @@
 ;; Better completion and documentation access for Ruby
 (use-package robe
   :defer
-  :init (add-hook 'enh-ruby-mode-hook 'robe-mode)
   :config
   ;; Add robe to company mode backends
   (push 'company-robe company-backends))
