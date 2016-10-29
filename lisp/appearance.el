@@ -8,7 +8,6 @@
 (use-package spaceline-config
   :ensure spaceline
   :config
-  (setq ns-use-srgb-colorspace nil)
   (spaceline-spacemacs-theme)
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state
         spaceline-minor-modes-separator " · "
@@ -49,7 +48,8 @@
 ;;   (set-face-attribute 'font-lock-doc-face nil :foreground "#808080"))
 ;; (load-theme 'duotone-denim t)
 ;; (load-theme 'gruvbox t)
-(load-theme 'cleanroom t)
+;; (load-theme 'cleanroom t)
+(load-theme 'oceanic t)
 
 ;; Mac friendly font
 (when window-system
