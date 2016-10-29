@@ -882,6 +882,16 @@
   (add-hook 'ruby-mode-hook #'rspec-firestarter)
   )
 
+(use-package enh-ruby-mode
+  :defer
+  :config
+  (add-hook 'enh-ruby-mode-hook
+            #'(lambda ()
+                (setq mode-name "💎🕷")
+                (setq-local tab-width 2)
+                (setq-local evil-shift-width 2)
+                (subword-mode)
+                (flycheck-mode))))
 
 (use-package rspec
   :ensure rspec-mode
