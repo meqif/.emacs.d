@@ -225,7 +225,9 @@
   (evil-leader/set-key "<SPC>" 'avy-goto-word-1))
 
 (use-package expand-region
-  :defer t)
+  :defer t
+  :config
+  (evil-leader/set-key "e" #'er/expand-region))
 
 (use-package multiple-cursors
   :defer t
