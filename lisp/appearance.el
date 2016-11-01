@@ -50,6 +50,7 @@
 ;; (load-theme 'gruvbox t)
 ;; (load-theme 'cleanroom t)
 (load-theme 'oceanic t)
+(set-face-attribute 'region nil :background "#4F5B66")
 
 ;; Mac friendly font
 (when window-system
