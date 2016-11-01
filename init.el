@@ -27,6 +27,7 @@
 (defun find-brew-prefix ()
   "Find Homebrew prefix"
   (substring (shell-command-to-string "brew --prefix") 0 -1))
+(defvar brew-prefix (find-brew-prefix))
 
 (defun add-subdirs-to-load-path (path)
   "Recursively add all subdirectories of the given path to load-path."
@@ -34,7 +35,7 @@
     (normal-top-level-add-subdirs-to-load-path)))
 
 ;; Add packages installed by Homebrew to the load path
-(add-subdirs-to-load-path (concat (find-brew-prefix) "/share/emacs/site-lisp/"))
+(add-subdirs-to-load-path (concat brew-prefix "/share/emacs/site-lisp/"))
 
 ;; Keep emacs Custom-settings in separate file
 (setq custom-file (expand-file-name "custom.el" lisp-dir))
@@ -102,7 +103,7 @@
 
 ;; Use the fish shell in OSX
 (when (eq system-type 'darwin)
-  (setenv "SHELL" (expand-file-name "~/homebrew/bin/fish")))
+  (setenv "SHELL" (concat brew-prefix "/bin/fish")))
 
 ;; Fix path
 (use-package exec-path-from-shell
@@ -732,7 +733,7 @@
   :defer
   :init
   ;; Use Aspell for spellcheck
-  (setq ispell-program-name "~/homebrew/bin/aspell")
+  (setq ispell-program-name (concat brew-prefix "/bin/aspell"))
   (setq ispell-list-command "--list")
 
   ;; Default language is Portuguese.
