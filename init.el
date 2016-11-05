@@ -1126,6 +1126,12 @@
       (evil-define-key it cider-repl-mode-map (kbd "<up>") 'cider-repl-previous-input)
       (evil-define-key it cider-repl-mode-map (kbd "<down>") 'cider-repl-next-input))))
 
+;; Diffs like vimdiff
+(use-package vdiff
+  :defer
+  :config
+  (setq ediff-split-window-function 'split-window-horizontally))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when window-system

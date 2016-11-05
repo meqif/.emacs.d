@@ -111,6 +111,7 @@
 (depends-on "tree-mode")
 (depends-on "undo-tree")
 (depends-on "use-package")
+(depends-on "vdiff")
 (depends-on "visual-fill-column")
 (depends-on "wgrep")
 (depends-on "wgrep-ag")
