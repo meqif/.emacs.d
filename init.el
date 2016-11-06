@@ -646,7 +646,10 @@
   (progn
     (use-package racer
       :init
-      (setq racer-rust-src-path "~/rust/src/")
+      (setq racer-rust-src-path
+            (concat
+             (s-trim-right (shell-command-to-string "rustc --print sysroot"))
+             "/lib/rustlib/src/rust/src/"))
       :config
       (add-hook 'rust-mode-hook #'racer-mode)
       (add-hook 'rust-mode-hook #'eldoc-mode)
