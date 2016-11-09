@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: debug inspect
+# key: dbg
+# --
+puts "DEBUG: ${1:varname}=#{$1.inspect}"
