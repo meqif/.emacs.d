@@ -11,8 +11,6 @@
 (--each
     '(occur-mode-hook ag-mode-hook)
   (progn
-    ;; Follow highlighted results in original buffer
-    (add-hook it #'next-error-follow-minor-mode)
     ;; Use visual line mode
     (add-hook it #'visual-line-mode)))
 
