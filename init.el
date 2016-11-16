@@ -838,7 +838,9 @@
     (setq magit-revision-use-gravatar-kludge t))
 
   ;; Verbose commits (show changes to be commited) by default
-  (setq magit-commit-arguments '("--verbose")))
+  (setq magit-commit-arguments '("--verbose")
+        ;; No fast-forward by default for merge mode
+        magit-merge-arguments '("--no-ff")))
 
 (use-package diff-mode
   :ensure nil
