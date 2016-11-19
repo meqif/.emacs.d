@@ -82,6 +82,16 @@
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 
+(let ((trustfile (expand-file-name "~/.emacs.d/cacert.pem")))
+  (unless (file-exists-p trustfile)
+    (error (concat "No certificate bundle file found! "
+                   "Please download it with "
+                   (format "`curl https://curl.haxx.se/ca/cacert.pem -o %s`" trustfile))))
+  (setq tls-checktrust 'always
+        tls-program (list (format "gnutls-cli --x509cafile %s -p %%p %%h" trustfile))
+        gnutls-verify-error t
+        gnutls-trustfiles (list trustfile)))
+
 (use-package dash
   :defer t
   :config (dash-enable-font-lock))
