@@ -5,3 +5,4 @@ ac-comphist.dat
 auto-save-list
 *.elc
 .yas-compiled-snippets.el
+/cacert.pem
