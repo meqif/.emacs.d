@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: prygems
+# key: prygems
+# --
+${1:s.add_development_dependency} 'pry'
+$1 'pry-byebug'
+$1 'pry-doc'
+$1 'pry-docmore'
+$1 'pry-rescue'
+$1 'pry-stack_explorer'
