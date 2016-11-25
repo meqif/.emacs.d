@@ -221,7 +221,7 @@
 
 (use-package avy
   :demand
-  :bind ("C-c SPC" . avy-goto-word-1)
+  :bind ("C-c SPC" . avy-goto-char-timer)
   :init
   (defun avy-goto-ibuffer ()
     "Select and visit buffer"
@@ -240,7 +240,7 @@
       (ibuffer-visit-buffer)))
   ;; (add-hook 'ibuffer-hook #'avy-goto-ibuffer)
   :config
-  (evil-leader/set-key "<SPC>" 'avy-goto-word-1))
+  (evil-leader/set-key "<SPC>" 'avy-goto-char-timer))
 
 (use-package expand-region
   :defer t
