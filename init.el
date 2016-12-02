@@ -857,7 +857,10 @@
   ;; Verbose commits (show changes to be commited) by default
   (setq magit-commit-arguments '("--verbose")
         ;; No fast-forward by default for merge mode
-        magit-merge-arguments '("--no-ff")))
+        magit-merge-arguments '("--no-ff"))
+
+  ;; Make <SPC> insert dashes instead. Useful when creating new branches
+  (define-key magit-minibuffer-local-ns-map "\s" "-"))
 
 (use-package diff-mode
   :ensure nil
