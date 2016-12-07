@@ -849,6 +849,10 @@
   (setq magit-diff-refine-hunk 'all)
   :config
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+
+  ;; Check excessively long summary lines in commit messages
+  (add-to-list 'git-commit-style-convention-checks 'overlong-summary-line)
+
   (setq magit-set-upstream-on-push t)
   ;; Fix gravatars in commit log in OSX
   (when (eq system-type 'darwin)
