@@ -80,7 +80,8 @@
 
 ;; Use https for package archives
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")))
 
 (let ((trustfile (expand-file-name "~/.emacs.d/cacert.pem")))
   (unless (file-exists-p trustfile)
@@ -838,6 +839,7 @@
   (setq ag-highlight-search t))
 
 (use-package magit
+  :pin melpa-stable
   :bind ("C-x g" . magit-status)
   :init
   ;; Mark setup instructions as read

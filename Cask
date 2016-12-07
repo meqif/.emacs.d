@@ -1,5 +1,6 @@
 (source gnu)
 (source melpa)
+(source melpa-stable)
 
 (depends-on "adoc-mode")
 (depends-on "ag")
@@ -68,7 +69,7 @@
 (depends-on "let-alist")
 (depends-on "list-utils")
 (depends-on "macrostep")
-(depends-on "magit")
+(depends-on "magit" :archive melpa-stable)
 (depends-on "markdown-mode")
 (depends-on "markup-faces")
 (depends-on "monokai-theme")
