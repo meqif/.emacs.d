@@ -9,9 +9,10 @@
 ;; For emacs-mac
 (when (eq window-system 'mac)
   (progn
-    (setq mac-option-modifier 'meta)
-    (setq mac-command-modifier 'super)
-    (setq mac-right-option-modifier 'none)
+    (setq mac-pass-command-to-system nil
+          mac-option-modifier 'meta
+          mac-command-modifier 'super
+          mac-right-option-modifier 'none)
     (global-set-key (kbd "s-s") 'save-buffer)
     (global-set-key (kbd "s-v") 'yank)
     (global-set-key (kbd "s-c") 'kill-ring-save)
