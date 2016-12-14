@@ -2,6 +2,7 @@
 (source melpa)
 (source melpa-stable)
 
+(depends-on "ace-window")
 (depends-on "adoc-mode")
 (depends-on "ag")
 (depends-on "aggressive-indent")

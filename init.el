@@ -243,6 +243,12 @@
   :config
   (evil-leader/set-key "<SPC>" 'avy-goto-char-timer))
 
+(use-package ace-window
+  :init
+  (evil-leader/set-key "w" #'ace-window)
+  :config
+  (set-face-attribute 'aw-leading-char-face nil :height 10.0))
+
 (use-package expand-region
   :defer t
   :config
