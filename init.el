@@ -470,6 +470,7 @@
   :mode "\\.md\\'"
   :ensure markdown-mode
   :config
+  (setq markdown-command "marked --gfm")
   (add-hook 'gfm-mode-hook #'visual-line-mode))
 
 (use-package js2-mode
