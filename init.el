@@ -466,9 +466,8 @@
   :config (unless (boundp 'helm-bibtex-bibliography) (configure-helm-bibtex)))
 
 ;; Language-specific setup files
-(use-package gfm-mode
-  :mode "\\.md\\'"
-  :ensure markdown-mode
+(use-package markdown-mode
+  :mode ("\\.md\\'" . gfm-mode)
   :config
   (setq markdown-command "marked --gfm")
   (add-hook 'gfm-mode-hook #'visual-line-mode))
