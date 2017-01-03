@@ -402,6 +402,11 @@
   ;; Allow editing html blocks
   (use-package ox-html :ensure org))
 
+;; Use org-mode tables in any mode
+(use-package org-table
+  :ensure nil
+  :commands orgtbl-mode)
+
 (use-package yasnippet
   :diminish yas-minor-mode
   :config
