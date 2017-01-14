@@ -297,7 +297,15 @@
     (define-key company-active-map (kbd "TAB") 'company-select-next)
     (define-key company-active-map [tab] 'company-select-next)
     (define-key company-active-map (kbd "BACKTAB") 'company-select-previous)
-    (define-key company-active-map [backtab] 'company-select-previous)))
+    (define-key company-active-map [backtab] 'company-select-previous))
+
+  ;; Make ESC abort the completion popup
+  (--each
+      (list company-active-map
+            company-filter-map
+            company-mode-map
+            company-search-map)
+    (define-key it [escape] 'company-abort)))
 
 ;; Unique buffer names
 (use-package uniquify
