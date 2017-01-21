@@ -1164,6 +1164,7 @@
 (use-package origami
   :defer
   :init
+  (add-hook 'prog-mode-hook 'origami-mode)
   (define-key evil-normal-state-map (kbd "<tab>") 'origami-toggle-node))
 
 ;; Post initialization -- calculate loading time
