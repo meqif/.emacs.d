@@ -77,6 +77,7 @@
 (depends-on "mustache-mode")
 (depends-on "names")
 (depends-on "oceanic-theme")
+(depends-on "origami")
 (depends-on "ox-gfm")
 (depends-on "package-build")
 (depends-on "pallet")

@@ -1160,6 +1160,12 @@
   :config
   (setq ediff-split-window-function 'split-window-horizontally))
 
+;; Code folding
+(use-package origami
+  :defer
+  :init
+  (define-key evil-normal-state-map (kbd "<tab>") 'origami-toggle-node))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when window-system
