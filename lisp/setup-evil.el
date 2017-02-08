@@ -186,4 +186,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; step.
 ;; (setq evil-want-fine-undo 'no)
 
+;; Let emacs bindings for M-. and M-, take over
+(define-key evil-normal-state-map (kbd "M-.") nil)
+(define-key evil-normal-state-map (kbd "M-,") nil)
+
 (provide 'setup-evil)
