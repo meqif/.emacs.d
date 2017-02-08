@@ -53,6 +53,16 @@
 ;; (set-face-attribute 'region nil :background "#4F5B66")
 (load-theme 'quiet-light t)
 
+;; Quiet Light mode-line tweaks
+(set-face-attribute 'mode-line nil :foreground "white")
+(set-face-attribute 'mode-line-inactive nil :background "SkyBlue1" :box nil)
+(set-face-attribute 'powerline-inactive1 nil :background "SkyBlue1")
+(set-face-attribute 'powerline-inactive2 nil :background "SkyBlue1")
+(set-face-attribute 'mode-line nil :background "#0075c9" :box nil)
+(set-face-attribute 'powerline-active1 nil :background "#0075c9")
+(set-face-attribute 'powerline-active2 nil :background "#0075c9")
+(spaceline-install)
+
 ;; Mac friendly font
 (when window-system
   (setq meqif/default-font "-apple-Fira Mono-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1"
