@@ -865,7 +865,17 @@
         magit-completing-read-function 'ivy-completing-read)
 
   ;; Make <SPC> insert dashes instead. Useful when creating new branches
-  (define-key magit-minibuffer-local-ns-map "\s" "-"))
+  (define-key magit-minibuffer-local-ns-map "\s" "-")
+
+  (defun append-jira-ticket-identifier ()
+    (let ((jira-ticket-identifier (-first-item (s-match "^[A-Z]+-[0-9]+" (magit-get-current-branch)))))
+      (when jira-ticket-identifier
+        (goto-char (point-min))
+        (insert "\n\n")
+        (insert jira-ticket-identifier)
+        (goto-char (point-min)))))
+
+  (add-hook 'git-commit-setup-hook 'append-jira-ticket-identifier))
 
 (use-package diff-mode
   :ensure nil
