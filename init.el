@@ -868,8 +868,15 @@
   ;; Make <SPC> insert dashes instead. Useful when creating new branches
   (define-key magit-minibuffer-local-ns-map "\s" "-")
 
+  (defun guess-jira-ticket-identifier ()
+    "Attempt to extract JIRA identifier from git branch name.
+
+It only really works if the branch follows the PROJECT-TICKETNUMBER-description
+naming scheme."
+    (-first-item (s-match "^[A-Z]+-[0-9]+" (magit-get-current-branch))))
+
   (defun append-jira-ticket-identifier ()
-    (let ((jira-ticket-identifier (-first-item (s-match "^[A-Z]+-[0-9]+" (magit-get-current-branch)))))
+    (let ((jira-ticket-identifier (guess-jira-ticket-identifier)))
       (when jira-ticket-identifier
         (goto-char (point-min))
         (insert "\n\n")
