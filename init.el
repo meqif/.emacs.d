@@ -873,15 +873,15 @@
 
 It only really works if the branch follows the PROJECT-TICKETNUMBER-description
 naming scheme."
-    (-first-item (s-match "^[A-Z]+-[0-9]+" (magit-get-current-branch))))
+    (when-let ((current-branch (magit-get-current-branch)))
+      (-first-item (s-match "^[A-Z]+-[0-9]+" current-branch))))
 
   (defun append-jira-ticket-identifier ()
-    (let ((jira-ticket-identifier (guess-jira-ticket-identifier)))
-      (when jira-ticket-identifier
+    (when-let ((jira-ticket-identifier (guess-jira-ticket-identifier)))
         (goto-char (point-min))
         (insert "\n\n")
         (insert jira-ticket-identifier)
-        (goto-char (point-min)))))
+        (goto-char (point-min))))
 
   (add-hook 'git-commit-setup-hook 'append-jira-ticket-identifier))
 
