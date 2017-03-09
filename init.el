@@ -1124,6 +1124,7 @@ naming scheme."
 
 ;; Wrap lines in visual-line-mode at the fill column
 (use-package visual-fill-column
+  :disabled
   :init
   (add-hook 'visual-line-mode-hook 'visual-fill-column-mode))
 
