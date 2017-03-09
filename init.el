@@ -1157,6 +1157,12 @@ naming scheme."
   (add-hook 'prog-mode-hook 'origami-mode)
   (define-key evil-normal-state-map (kbd "<tab>") 'origami-toggle-node))
 
+(use-package ess
+  :pin melpa-stable
+  :config
+  (add-hook 'ess-mode-hook 'company-mode)
+  (add-hook 'inferior-ess-mode-hook 'company-mode))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when window-system

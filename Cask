@@ -32,6 +32,7 @@
 (depends-on "emmet-mode")
 (depends-on "enh-ruby-mode")
 (depends-on "epl")
+(depends-on "ess" :archive melpa-stable)
 (depends-on "evil")
 (depends-on "evil-leader")
 (depends-on "evil-matchit")
