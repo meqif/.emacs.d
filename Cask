@@ -28,6 +28,7 @@
 (depends-on "diminish")
 (depends-on "dockerfile-mode")
 (depends-on "dumb-jump")
+(depends-on "easy-escape")
 (depends-on "ebib")
 (depends-on "emmet-mode")
 (depends-on "enh-ruby-mode")

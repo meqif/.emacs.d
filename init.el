@@ -1164,6 +1164,12 @@ naming scheme."
   (add-hook 'ess-mode-hook 'company-mode)
   (add-hook 'inferior-ess-mode-hook 'company-mode))
 
+;; Improve readability of ELisp regular expressions
+(use-package easy-escape
+  :init
+  (add-hook 'lisp-mode-hook 'easy-escape-minor-mode)
+  (add-hook 'emacs-lisp-mode-hook 'easy-escape-minor-mode))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when window-system
