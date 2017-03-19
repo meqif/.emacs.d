@@ -893,6 +893,9 @@ naming scheme."
   (set-face-attribute 'diff-refine-added nil :bold t :background 'unspecified)
   (set-face-attribute 'diff-refine-removed nil :bold t :background 'unspecified))
 
+(use-package evil-magit
+  :after magit)
+
 (use-package subword
   :defer t
   :diminish "_")
