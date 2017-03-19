@@ -1154,13 +1154,6 @@ naming scheme."
   :config
   (setq ediff-split-window-function 'split-window-horizontally))
 
-;; Code folding
-(use-package origami
-  :defer
-  :init
-  (add-hook 'prog-mode-hook 'origami-mode)
-  (define-key evil-normal-state-map (kbd "<tab>") 'origami-toggle-node))
-
 (use-package ess
   :pin melpa-stable
   :config
