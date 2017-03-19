@@ -1155,6 +1155,7 @@ naming scheme."
   (setq ediff-split-window-function 'split-window-horizontally))
 
 (use-package ess
+  :defer t
   :pin melpa-stable
   :config
   (add-hook 'ess-mode-hook 'company-mode)
