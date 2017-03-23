@@ -36,6 +36,7 @@
 (depends-on "ess" :archive melpa-stable)
 (depends-on "evil")
 (depends-on "evil-leader")
+(depends-on "evil-lion")
 (depends-on "evil-magit")
 (depends-on "evil-matchit")
 (depends-on "evil-multiedit")

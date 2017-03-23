@@ -1103,6 +1103,11 @@ naming scheme."
 (use-package evil-matchit
   :init (global-evil-matchit-mode))
 
+;; Convenient bindings for align functions
+(use-package evil-lion
+  :config
+  (evil-lion-mode))
+
 ;; Unbind s-&, as I hit it accidentally too often and it kills the buffer. 😞
 (unbind-key (kbd "s-&"))
 (unbind-key (kbd "s-k"))
