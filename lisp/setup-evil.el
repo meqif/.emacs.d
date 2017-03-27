@@ -142,28 +142,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       racer-help-mode
       special-mode
       term-mode
-      TeX-error-overview-mode
-      ;; Magit modes
-      git-rebase-mode
-      magit-auto-revert-mode
-      magit-blame-mode
-      magit-branch-manager-mode
-      magit-cherry-mode
-      magit-commit-mode
-      magit-diff-mode
-      magit-key-mode
-      magit-log-mode
-      magit-popup-mode
-      magit-pre-key-mode
-      magit-process-mode
-      magit-process-set-mode
-      magit-process-unset-mode
-      magit-reflog-mode
-      magit-status-mode
-      magit-topgit-mode
-      magit-wazzup-mode
-      magit-wip-mode
-      magit-wip-save-mode)
+      TeX-error-overview-mode)
   (add-to-list 'evil-emacs-state-modes it))
 
 ;; Better navigation for modes

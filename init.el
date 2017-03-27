@@ -883,7 +883,9 @@ naming scheme."
         (insert jira-ticket-identifier)
         (goto-char (point-min))))
 
-  (add-hook 'git-commit-setup-hook 'append-jira-ticket-identifier))
+  (add-hook 'git-commit-setup-hook 'append-jira-ticket-identifier)
+  :config
+  (use-package evil-magit))
 
 (use-package diff-mode
   :ensure nil
@@ -892,9 +894,6 @@ naming scheme."
   (set-face-attribute 'diff-refine-change nil :bold t :background 'unspecified)
   (set-face-attribute 'diff-refine-added nil :bold t :background 'unspecified)
   (set-face-attribute 'diff-refine-removed nil :bold t :background 'unspecified))
-
-(use-package evil-magit
-  :after magit)
 
 (use-package subword
   :defer t
