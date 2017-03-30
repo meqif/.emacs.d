@@ -69,6 +69,7 @@
 (depends-on "js2-mode")
 (depends-on "js2-refactor")
 (depends-on "json-mode")
+(depends-on "kotlin-mode" :git "https://github.com/kiddouk/kotlin-mode.git")
 (depends-on "less-css-mode")
 (depends-on "let-alist")
 (depends-on "list-utils")
