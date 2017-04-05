@@ -998,8 +998,19 @@ naming scheme."
 
 ;; Enable paredit for Emacs Lisp
 (use-package paredit
+  :disabled
   :init
-  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
+  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+  (add-hook 'clojure-mode-hook #'enable-paredit-mode))
+
+(use-package lispy
+  :init
+  (add-hook 'emacs-lisp-mode-hook #'lispy-mode)
+  (add-hook 'clojure-mode-hook #'lispy-mode))
+
+(use-package lispyville
+  :init
+  (add-hook 'lispy-mode-hook #'lispyville-mode))
 
 ;; Group reusable keyboard bindings behind a common prefix
 (use-package hydra
