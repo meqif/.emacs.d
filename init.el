@@ -1149,8 +1149,8 @@ naming scheme."
 (use-package clojure-mode
   :defer t
   :init
-  (add-hook 'clojure-mode-hook 'cider-mode)
-  (add-hook 'clojure-mode-hook 'cider-jack-in))
+  (add-hook 'clojure-mode-hook 'cider-mode))
+
 (use-package cider
   :after 'clojure-mode
   :init
