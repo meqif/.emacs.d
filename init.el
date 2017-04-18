@@ -399,7 +399,7 @@
   :config
   (progn
     ;; Use only own snippets, do not use bundled ones
-    (setq yas-snippet-dirs (expand-file-name "~/.emacs.d/snippets"))
+    (setq yas-snippet-dirs (list (expand-file-name "~/.emacs.d/snippets")))
 
     ;; Don't mess with the indentation
     (setq yas-indent-line 'fixed)
