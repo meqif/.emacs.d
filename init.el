@@ -891,8 +891,8 @@ naming scheme."
   :ensure nil
   :config
   ;; Make fine grained changes more obvious
-  (set-face-attribute 'diff-refine-change nil :bold t :background 'unspecified)
   (set-face-attribute 'diff-refine-added nil :bold t :background 'unspecified)
+  (set-face-attribute 'diff-refine-changed nil :bold t :background 'unspecified)
   (set-face-attribute 'diff-refine-removed nil :bold t :background 'unspecified))
 
 (use-package subword
