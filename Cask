@@ -81,6 +81,7 @@
 (depends-on "multiple-cursors")
 (depends-on "mustache-mode")
 (depends-on "names")
+(depends-on "nord-theme")
 (depends-on "oceanic-theme")
 (depends-on "ox-gfm")
 (depends-on "package-build")

@@ -14,7 +14,6 @@
         powerline-default-separator 'slant)
   (spaceline-toggle-buffer-position-off)
   (spaceline-toggle-hud-off)
-  (set-face-attribute 'powerline-active1 nil :foreground "gray99")
 
   ;; Automatically recompile separators
   (advice-add 'load-theme :after
@@ -22,45 +21,7 @@
 
 ;; Load theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-
-;; (progn
-;;   ;; Custom tweaks to solarized-theme
-;;   (setq
-;;    ;; Make the mode-line high contrast
-;;    solarized-high-contrast-mode-line t
-;;    ;; Fix underscored mode-line
-;;    x-underline-at-descent-line t
-;;    ;; Don't use as much bold
-;;    solarized-use-less-bold t
-;;    ;; Disable variable pitch fonts in Solarized theme
-;;    solarized-use-variable-pitch nil
-;;    ;; Fix the fringe and linum
-;;    solarized-distinct-fringe-background t)
-;;   (load-theme 'solarized-light t)
-;;   (set-face-attribute 'mode-line nil :box nil :overline nil :underline nil)
-;;   (set-face-attribute 'mode-line-inactive nil :box nil :overline nil :underline nil))
-
-;; (progn
-;;   (load-theme 'eink t)
-;;   (set-face-attribute 'font-lock-keyword-face nil :foreground "#ab4642")
-;;   (set-face-attribute 'highlight nil :background "#fff1aa")
-;;   ;;(set-face-attribute 'whitespace-line nil :background 'unspecified :foreground "magenta")
-;;   (set-face-attribute 'font-lock-doc-face nil :foreground "#808080"))
-;; (load-theme 'duotone-denim t)
-;; (load-theme 'gruvbox t)
-;; (load-theme 'cleanroom t)
-;; (load-theme 'oceanic t)
-;; (set-face-attribute 'region nil :background "#4F5B66")
-(load-theme 'quiet-light t)
-
-;; Quiet Light mode-line tweaks
-(set-face-attribute 'mode-line nil :foreground "white")
-(set-face-attribute 'mode-line-inactive nil :background "SkyBlue1" :box nil)
-(set-face-attribute 'powerline-inactive1 nil :background "SkyBlue1")
-(set-face-attribute 'powerline-inactive2 nil :background "SkyBlue1")
-(set-face-attribute 'mode-line nil :background "#0075c9" :box nil)
-(set-face-attribute 'powerline-active1 nil :background "#0075c9")
-(set-face-attribute 'powerline-active2 nil :background "#0075c9")
+(load-theme 'nord t)
 (spaceline-install)
 
 ;; Mac friendly font
