@@ -63,7 +63,6 @@
  '(powerline-color1 "#1E1E1E")
  '(powerline-color2 "#111111")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#657b83" 0.2))
- '(smooth-scrolling-mode t)
  '(term-default-bg-color "#fdf6e3")
  '(term-default-fg-color "#657b83")
  '(vc-annotate-background nil)

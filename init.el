@@ -44,6 +44,11 @@
 ;; Bring some sanity in
 (require 'sane-defaults)
 
+;; Keyboard smooth scrolling: Prevent the awkward "snap to re-center" when
+;; the text cursor moves off-screen. Instead, only scroll the minimum amount
+;; necessary to show the new line. (A number of 101+ disables re-centering.)
+(setq scroll-conservatively 101)
+
 ;; Make the minibuffer prompt intangible to stop it from being selectable or
 ;; navigable with the movement keys
 ;; Source: https://lists.gnu.org/archive/html/emacs-devel/2016-04/msg00857.html
@@ -1076,10 +1081,6 @@ naming scheme."
 
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer))
-
-(use-package smooth-scrolling
-  :config
-  (setq smooth-scroll-margin 5))
 
 (defun meqif/jump-to-definition ()
   (interactive)

@@ -107,7 +107,6 @@
 (depends-on "skewer-mode")
 (depends-on "smartparens")
 (depends-on "smex" :git "https://github.com/abo-abo/smex.git" :files ("*" (:exclude ".git")))
-(depends-on "smooth-scrolling")
 (depends-on "solarized-theme")
 (depends-on "spaceline")
 (depends-on "spinner")
