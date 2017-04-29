@@ -22,6 +22,11 @@
 ;; Load theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'nord t)
+(eval-after-load 'diff-hl
+  (lambda ()
+    (set-face-attribute 'diff-hl-change nil :background "#ecca87")
+    (set-face-attribute 'diff-hl-delete nil :background "#c05f68")
+    (set-face-attribute 'diff-hl-insert nil :background "#a2be8b")))
 (spaceline-install)
 
 ;; Mac friendly font
