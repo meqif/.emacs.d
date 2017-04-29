@@ -771,14 +771,13 @@
 
   ;; Don't spell check embedded snippets in org-mode
   ;; Source: http://emacs.stackexchange.com/a/9347
-  (defadvice org-mode-flyspell-verify
-      (after org-mode-flyspell-verify-hack activate)
-    (let ((rlt ad-return-value)
+  (defun org-mode-flyspell-verify-ignore-blocks (return-value)
+      (let ((rlt return-value)
           (begin-regexp "^[ \t]*#\\+BEGIN_\\(SRC\\|HTML\\|LATEX\\)")
           (end-regexp "^[ \t]*#\\+END_\\(SRC\\|HTML\\|LATEX\\)")
           old-flag
           b e)
-      (when ad-return-value
+      (when return-value
         (save-excursion
           (setq old-flag case-fold-search)
           (setq case-fold-search t)
@@ -786,7 +785,8 @@
           (if b (setq e (re-search-forward end-regexp nil t)))
           (setq case-fold-search old-flag))
         (if (and b e (< (point) e)) (setq rlt nil)))
-      (setq ad-return-value rlt)))
+      return-value))
+  (advice-add 'org-mode-flyspell-verify :filter-return 'org-mode-flyspell-verify-ignore-blocks)
 
   :config
   (use-package flyspell-correct-ivy
@@ -825,11 +825,12 @@
   ;; Show timestamps
   (setq undo-tree-visualizer-timestamps t)
   ;; Split undo-tree side-by-side, like decent people do.
-  (defadvice undo-tree-visualize (around undo-tree-split-side-by-side activate)
+  (defun undo-tree-split-side-by-side (original-function &rest args)
     "Split undo-tree side-by-side"
     (let ((split-height-threshold nil)
           (split-width-threshold 0))
-      ad-do-it)))
+      (apply original-function args)))
+  (advice-add 'undo-tree-visualize :around #'undo-tree-split-side-by-side))
 
 ;; Enable diff indication on the fringe
 (use-package diff-hl
@@ -1125,18 +1126,6 @@ naming scheme."
 ;; Unbind s-&, as I hit it accidentally too often and it kills the buffer. 😞
 (unbind-key (kbd "s-&"))
 (unbind-key (kbd "s-k"))
-
-;; Indent after pasting
-(defadvice yank (after indent-region activate)
-  (if (member major-mode '(emacs-lisp-mode
-                           c-mode
-                           js2-mode
-                           python-mode
-                           ruby-mode
-                           rust-mode
-                           LaTeX-mode
-                           TeX-mode))
-      (indent-region (region-beginning) (region-end) nil)))
 
 (use-package faun-mode
   :ensure nil

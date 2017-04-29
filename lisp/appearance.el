@@ -1,9 +1,9 @@
 ;; Appearance
 
 ;; Clean previous themes definitions when loading a theme
-(defadvice load-theme
-    (before theme-dont-propagate activate)
+(defun clear-old-theme (&rest args)
   (mapc #'disable-theme custom-enabled-themes))
+(advice-add 'load-theme :before #'clear-old-theme)
 
 (use-package spaceline-config
   :ensure spaceline
