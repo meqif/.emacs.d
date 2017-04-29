@@ -216,7 +216,10 @@
     (setq imenu-auto-rescan t)
 
     ;; Make imenu work on larger files
-    (setq imenu-auto-rescan-maxout 120000)))
+    (setq imenu-auto-rescan-maxout 120000)
+
+    ;; Recenter buffer after jumping
+    (add-hook 'imenu-after-jump-hook 'recenter)))
 
 ;; compilation-mode
 (use-package compile
