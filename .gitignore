@@ -6,3 +6,10 @@ auto-save-list
 *.elc
 .yas-compiled-snippets.el
 /cacert.pem
+ido.last
+projectile-bookmarks.eld
+themes
+packages
+tramp
+url
+network-security.data
