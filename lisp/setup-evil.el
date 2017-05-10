@@ -14,7 +14,7 @@
   (evil-leader/set-key
     "f" 'projectile-or-counsel-find-file
     "p" 'counsel-yank-pop
-    "b" 'ibuffer
+    "b" 'ivy-switch-buffer
     "r" 'counsel-recentf
     "l" 'avy-goto-line
     "g" 'magit-status
