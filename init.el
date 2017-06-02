@@ -115,7 +115,9 @@
          ("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-h f" . counsel-describe-function)
-         ("C-h v" . counsel-describe-variable)))
+         ("C-h v" . counsel-describe-variable))
+  :config
+  (define-key counsel-find-file-map (kbd "TAB") 'ivy-alt-done))
 
 ;; Use the fish shell in OSX
 (when (eq system-type 'darwin)
