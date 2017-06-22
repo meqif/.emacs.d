@@ -167,6 +167,10 @@
   :init (smex-initialize)
   :config (setq smex-completion-method 'ivy))
 
+(use-package eldoc
+  :defer t
+  :diminish "📖")
+
 ;; Awesome project navigation
 (use-package projectile
   :diminish projectile-mode
