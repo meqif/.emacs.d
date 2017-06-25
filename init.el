@@ -302,6 +302,8 @@
   (define-key prog-mode-map (kbd "TAB") #'company-indent-or-complete-common)
 
   (setq
+   ;; Offer completions quickly
+   company-idle-delay 0.1
    ;; Align tooltips
    company-tooltip-align-annotations t
    ;; Start completing after two chars
