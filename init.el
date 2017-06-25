@@ -286,7 +286,11 @@
 (use-package recentf
   :init
   (recentf-mode t)
-  (setq recentf-max-saved-items 100)) ;; just 20 is too recent
+  ;; Increase recent entries list from default (20)
+  (setq recentf-max-saved-items 100)
+  :config
+  ;; Exclude installed packages
+  (push (f-join user-emacs-directory ".cask") recentf-exclude))
 
 ;; Misery loves this
 (use-package company
