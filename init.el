@@ -682,51 +682,42 @@
 (use-package rust-mode
   :defer t
   :config
-  (progn
-    (use-package racer
-      :init
-      (setq racer-rust-src-path
-            (concat
-             (s-trim-right (shell-command-to-string "rustc --print sysroot"))
-             "/lib/rustlib/src/rust/src/"))
-      :config
-      (add-hook 'rust-mode-hook #'racer-mode)
-      (add-hook 'rust-mode-hook #'eldoc-mode)
-      (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common))
-    (add-hook 'rust-mode-hook
-              (lambda ()
-                ;; Enable on-the-fly syntax checking
-                (flycheck-mode 1)
-                ;; Do the required setup
-                (flycheck-rust-setup)
-                ;; Rust has different rules for too long lines
-                (setq-local fill-column 100)
-                ;; Reload whitespace mode to make the previous change effective
-                (whitespace-mode -1)
-                (whitespace-mode 1)
-                ;; Prettify some symbols
-                (--each '((">=" . (?· (Br . Bl) ?≥))
-                          ("<=" . (?· (Br . Bl) ?≤))
-                          ("!=" . (?· (Br . Bl) ?≠))
-                          ("=>" . (?· (Br . Bl) ?➡))
-                          ("->" . (?· (Br . Bl) ?→))
-                          )
-                  (push it prettify-symbols-alist))))
+  (require 'lsp-rust)
+  (add-hook 'rust-mode-hook #'lsp-mode)
+  ;; Add brackets to smartparens pair list
+  (sp-local-pair 'rust-mode "<" ">")
 
-    ;; Register rust-mode in company dabbrev code modes
-    (add-to-list 'company-dabbrev-code-modes 'rust-mode)
+  (add-hook 'rust-mode-hook
+            (lambda ()
+              ;; Enable on-the-fly syntax checking
+              (flycheck-mode 1)
+              ;; Do the required setup
+              (flycheck-rust-setup)
+              ;; Rust has different rules for too long lines
+              (setq-local fill-column 100)
+              ;; Reload whitespace mode to make the previous change effective
+              (whitespace-mode -1)
+              (whitespace-mode 1)
+              ;; Prettify some symbols
+              (--each '((">=" . (?· (Br . Bl) ?≥))
+                        ("<=" . (?· (Br . Bl) ?≤))
+                        ("!=" . (?· (Br . Bl) ?≠))
+                        ("=>" . (?· (Br . Bl) ?➡))
+                        ("->" . (?· (Br . Bl) ?→))
+                        )
+                (push it prettify-symbols-alist))))
 
-    ;; Add brackets to smartparens pair list
-    (sp-local-pair 'rust-mode "<" ">")
+  ;;   ;; Register rust-mode in company dabbrev code modes
+  ;;   (add-to-list 'company-dabbrev-code-modes 'rust-mode)
 
-    ;; Handy keybindings
-    (--each
-        '(("C-c C-c" . "cargo build")
-          ("C-c C-t" . "cargo test")
-          ("C-c C-r" . "cargo run"))
-      (-let* (((keycombo . command) it))
-        (define-key rust-mode-map (kbd keycombo)
-          `(lambda () (interactive) (save-buffer) (compile ,command))))))
+  ;; Handy keybindings
+  (--each
+      '(("C-c C-c" . "cargo build")
+        ("C-c C-t" . "cargo test")
+        ("C-c C-r" . "cargo run"))
+    (-let* (((keycombo . command) it))
+      (define-key rust-mode-map (kbd keycombo)
+        `(lambda () (interactive) (save-buffer) (compile ,command)))))
 
   ;; Compile a single file
   (defun meqif/compile-single-rust-file ()
