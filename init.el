@@ -125,7 +125,6 @@
 
 ;; Fix path
 (use-package exec-path-from-shell
-  :defer 1
   :init (setq exec-path-from-shell-arguments '("-l"))
   :config (exec-path-from-shell-initialize))
 
