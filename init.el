@@ -296,32 +296,26 @@
 (use-package company
   :diminish company-mode
   :config
-  (progn
-    ;; Enable company mode for every programming major mode
-    (add-hook 'prog-mode-hook 'company-mode)
+  ;; Enable company mode for every programming major mode
+  (add-hook 'prog-mode-hook 'company-mode)
 
-    (define-key prog-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+  (define-key prog-mode-map (kbd "TAB") #'company-indent-or-complete-common)
 
-    ;; Offer completions quickly
-    ;; (setq company-idle-delay 0.1)
+  (setq
+   ;; Align tooltips
+   company-tooltip-align-annotations t
+   ;; Start completing after two chars
+   company-minimum-prefix-length 2
+   ;; Wrap around candidate list
+   company-selection-wrap-around t
+   ;; Fix lowercase candidates
+   company-dabbrev-downcase nil)
 
-    ;; Align tooltips
-    (setq company-tooltip-align-annotations t)
-
-    ;; Start completing after two chars
-    (setq company-minimum-prefix-length 2)
-
-    ;; Wrap around candidate list
-    (setq company-selection-wrap-around t)
-
-    ;; Fix lowercase candidates
-    (setq company-dabbrev-downcase nil)
-
-    ;; Traverse candidates with TAB and BACKTAB
-    (define-key company-active-map (kbd "TAB") 'company-select-next)
-    (define-key company-active-map [tab] 'company-select-next)
-    (define-key company-active-map (kbd "BACKTAB") 'company-select-previous)
-    (define-key company-active-map [backtab] 'company-select-previous))
+  ;; Traverse candidates with TAB and BACKTAB
+  (define-key company-active-map (kbd "TAB") 'company-select-next)
+  (define-key company-active-map [tab] 'company-select-next)
+  (define-key company-active-map (kbd "BACKTAB") 'company-select-previous)
+  (define-key company-active-map [backtab] 'company-select-previous)
 
   ;; Make ESC abort the completion popup
   (--each
