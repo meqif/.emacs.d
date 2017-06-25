@@ -300,8 +300,13 @@
     ;; Enable company mode for every programming major mode
     (add-hook 'prog-mode-hook 'company-mode)
 
+    (define-key prog-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+
     ;; Offer completions quickly
     ;; (setq company-idle-delay 0.1)
+
+    ;; Align tooltips
+    (setq company-tooltip-align-annotations t)
 
     ;; Start completing after two chars
     (setq company-minimum-prefix-length 2)
