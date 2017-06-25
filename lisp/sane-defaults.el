@@ -44,9 +44,6 @@
 (savehist-mode 1)
 (setq history-length 1000)
 
-;; Don't be so stingy on the memory, we have lots now. It's the distant future.
-(setq gc-cons-threshold 20 * 1024 * 1024)
-
 ;; Default directory
 (setq default-directory "~/")
 

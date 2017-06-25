@@ -15,6 +15,10 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
+;; Reduce how often garbage collection runs (which negatively impacts
+;; performance)
+(setq gc-cons-threshold 50000000)
+
 ;; Disable splash screen
 (setq inhibit-startup-message t)
 
