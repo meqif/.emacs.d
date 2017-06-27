@@ -509,7 +509,9 @@
               (push '("function" . ?ƒ) prettify-symbols-alist))))
 
 (use-package json-mode
-  :mode "\\.json\\'")
+  :mode "\\.json\\'"
+  :config
+  (add-hook 'json-mode-hook (lambda (setq js-indent-level 2))))
 
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")
