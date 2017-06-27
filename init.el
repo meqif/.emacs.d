@@ -506,11 +506,7 @@
               ;; Enable flycheck
               (flycheck-mode 1)
               ;; Use symbol for anonymous functions
-              (push '("function" . ?ƒ) prettify-symbols-alist)
-              ;; Enable ternjs (requires tern to be installed through npm)
-              (tern-mode t)
-              ;; Add tern.js backend
-              (add-to-list 'company-backends 'company-tern))))
+              (push '("function" . ?ƒ) prettify-symbols-alist))))
 
 (use-package json-mode
   :mode "\\.json\\'")
