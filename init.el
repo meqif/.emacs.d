@@ -19,6 +19,9 @@
 ;; performance)
 (setq gc-cons-threshold 50000000)
 
+;; Run garbage collection when the frame is unfocused
+(add-hook 'focus-out-hook 'garbage-collect)
+
 ;; Disable splash screen
 (setq inhibit-startup-message t)
 
