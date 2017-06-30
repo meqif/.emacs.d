@@ -1008,13 +1008,6 @@ naming scheme."
     (kbd "H") #'paradox-menu-quick-help
     (kbd "L") #'(lambda (pkg) (interactive '(nil)) (paradox-menu-view-commit-list pkg))))
 
-;; Enable paredit for Emacs Lisp
-(use-package paredit
-  :disabled
-  :init
-  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
-  (add-hook 'clojure-mode-hook #'enable-paredit-mode))
-
 (use-package lispy
   :init
   (add-hook 'emacs-lisp-mode-hook #'lispy-mode)
