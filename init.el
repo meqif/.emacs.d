@@ -739,6 +739,22 @@
                         )
                 (push it prettify-symbols-alist))))
 
+  (use-package cargo
+    :config
+    ;; Hydra for rust's cargo
+    (defhydra hydra-cargo (:color blue :columns 4)
+      "cargo"
+      ("c" cargo-process-build "build")
+      ("tt" cargo-process-test "test all")
+      ("tf" cargo-process-current-test "test current function")
+      ("b" cargo-process-bench "benchmark all")
+      ("C" cargo-process-clean "clean")
+      ("dd" cargo-process-doc "build documentation")
+      ("do" cargo-process-doc-open "build and open documentation")
+      ("r" cargo-process-run "run")
+      ("y" cargo-process-clippy "clippy"))
+    (general-define-key :keymaps 'rust-mode-map :states 'normal "c" #'hydra-cargo/body))
+
   ;;   ;; Register rust-mode in company dabbrev code modes
   ;;   (add-to-list 'company-dabbrev-code-modes 'rust-mode)
 
