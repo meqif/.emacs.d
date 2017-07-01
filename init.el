@@ -241,6 +241,36 @@
   ;; Scroll compile buffer automatically but stop on the first error
   (setq compilation-scroll-output 'first-error))
 
+(use-package general
+  :config
+  (setq general-default-keymaps 'evil-normal-state-map)
+  (setq general-default-prefix "\\")
+
+  ;; Global evil leader shortcuts
+  (general-define-key
+   "f" 'projectile-or-counsel-find-file
+   "p" 'counsel-yank-pop
+   "b" 'ivy-switch-buffer
+   "r" 'counsel-recentf
+   "l" 'avy-goto-line
+   "g" 'magit-status
+   "s" 'counsel-grep-or-swiper
+   "S" #'(lambda ()
+           (interactive)
+           (let ((current-prefix-arg '(4)))
+             (call-interactively 'counsel-rg)))
+   "\\" 'meqif/pop-mark)
+
+  ;; LaTeX leader shortcuts
+  (general-define-key :keymaps 'latex-mode-map :states 'normal
+                      "s" 'flyspell-buffer
+                      "t" #'(lambda () (interactive) (TeX-insert-macro "todo"))
+                      "cc" 'TeX-command-master
+                      "cv" 'TeX-view)
+
+  ;; Org-mode leader shortcuts
+  (general-define-key :keymaps 'org-mode-map :states 'normal "ce" #'org-export-dispatch))
+
 (use-package avy
   :demand
   :bind ("C-c SPC" . avy-goto-char-timer)
@@ -262,18 +292,18 @@
       (ibuffer-visit-buffer)))
   ;; (add-hook 'ibuffer-hook #'avy-goto-ibuffer)
   :config
-  (evil-leader/set-key "<SPC>" 'avy-goto-char-timer))
+  (general-define-key "<SPC>" 'avy-goto-char-timer))
 
 (use-package ace-window
   :init
-  (evil-leader/set-key "w" #'ace-window)
+  (general-define-key "w" #'ace-window)
   :config
   (set-face-attribute 'aw-leading-char-face nil :height 10.0))
 
 (use-package expand-region
   :defer t
   :config
-  (evil-leader/set-key "e" #'er/expand-region))
+  (general-define-key "e" #'er/expand-region))
 
 (use-package multiple-cursors
   :defer t
@@ -286,7 +316,7 @@
     ("d" mc/mark-all-dwim "mark all dwim")
     ("m" mc/mark-more-like-this-extended "mark more extended")
     ("el" mc/edit-lines "edit lines"))
-  (evil-leader/set-key "m" #'hydra-multiple-cursors/body))
+  (general-define-key "m" #'hydra-multiple-cursors/body))
 
 ;; Save a list of recent files visited
 (use-package recentf
@@ -393,7 +423,7 @@
       ("s" org-narrow-to-subtree "Subtree")
       ("b" org-narrow-to-block "Block")
       ("w" widen "Widen"))
-    (evil-leader/set-key-for-mode 'org-mode "n" #'hydra-org-mode-narrow/body))
+    (general-define-key :keymaps 'org-mode-map :states 'normal "n" #'hydra-org-mode-narrow/body))
   :config
   ;; Org-latex configuration
   (use-package ox-latex
@@ -577,7 +607,7 @@
       ("i" (TeX-font nil ?\C-i) "italic")
       ("t" (TeX-font nil ?\C-t) "monospace")
       ("e" (TeX-font nil ?\C-e) "emphasis"))
-    (evil-leader/set-key-for-mode 'latex-mode "f" #'hydra-latex-fonts/body)
+    (general-define-key :keymaps 'latex-mode-map :states 'normal "f" #'hydra-latex-fonts/body)
 
     ;; Autosave before compiling
     (setq TeX-save-query nil)
@@ -972,8 +1002,7 @@ naming scheme."
     ("v" rspec-verify "run specs for this buffer")
     ("t" rspec-toggle-spec-and-target-find-example
      "toggle between spec and class"))
-  (evil-leader/set-key-for-mode 'ruby-mode "c" #'hydra-rspec/body)
-  (evil-leader/set-key-for-mode 'enh-ruby-mode "c" #'hydra-rspec/body))
+  (general-define-key :keymaps '(ruby-mode-map enh-ruby-mode-map) :states 'normal "c" #'hydra-rspec/body))
 
 ;; Handy functions to run rubocop from Emacs
 (use-package rubocop
@@ -1064,7 +1093,7 @@ naming scheme."
     ("o" text-scale-decrease "out")
     ("0" (text-scale-adjust 0) "reset")
     ("q" nil "quit" :color blue))
-  (evil-leader/set-key "z" #'hydra-zoom/body))
+  (general-define-key "z" #'hydra-zoom/body))
 
 ;; Macro expansion for ease of debugging
 (use-package macrostep
