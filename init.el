@@ -246,6 +246,8 @@
   (setq general-default-keymaps 'evil-normal-state-map)
   (setq general-default-prefix "\\")
 
+  (general-define-key :prefix nil :keymaps 'global "<s-return>" #'promote-demote-window-dwim)
+
   ;; Global evil leader shortcuts
   (general-define-key
    "f" 'projectile-or-counsel-find-file

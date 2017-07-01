@@ -190,4 +190,14 @@ already in fullscreen"
       (projectile-find-file)
     (counsel-find-file)))
 
+(defun promote-demote-window-dwim ()
+  "Promote current window to top-left window, or swap top-left window with previously used window"
+  (interactive)
+  (let ((first-window (car (aw-window-list))))
+    ;; If the currently selected window is the first window, then switch to the
+    ;; previously used window
+    (if (equal (selected-window) first-window)
+        (aw-flip-window))
+    (aw-swap-window first-window)))
+
 (provide 'defuns)
