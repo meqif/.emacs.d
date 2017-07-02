@@ -66,12 +66,7 @@
   (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)))
 
 ;; Always ask before exiting Emacs
-(global-set-key
- (kbd "s-q")
- (lambda ()
-   (interactive)
-   (set (make-local-variable 'confirm-kill-emacs) 'yes-or-no-p)
-   (save-buffers-kill-emacs)))
+(setq confirm-kill-emacs 'yes-or-no-p)
 
 ;; Packages
 (require 'cask)
