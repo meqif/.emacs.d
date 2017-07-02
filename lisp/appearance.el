@@ -21,7 +21,7 @@
 
 ;; Load theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'nord t)
+(load-theme 'gruvbox-dark-hard t)
 (spaceline-install)
 
 ;; Mac friendly font
