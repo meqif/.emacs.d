@@ -472,7 +472,7 @@
               (lambda ()
                 ;; Temporarily disable required newline at the end of file
                 ;; This fixes the problem with an extra newline when expanding snippets
-                (set (make-local-variable 'require-final-newline) nil)))))
+                (setq-local 'require-final-newline nil)))))
 
 (use-package auto-yasnippet)
 
