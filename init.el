@@ -943,7 +943,9 @@ naming scheme."
 
   (add-hook 'git-commit-setup-hook 'append-jira-ticket-identifier)
   :config
-  (use-package evil-magit))
+  (use-package evil-magit
+    :config
+    (evil-define-key evil-magit-state magit-mode-map "\\" nil)))
 
 (use-package diff-mode
   :ensure nil
