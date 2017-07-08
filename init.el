@@ -199,12 +199,6 @@
 ;; Setup extensions
 (use-package setup-evil :ensure nil)
 
-;; Port of vim-textobj-anyblock -- easy block selection
-(use-package evil-textobj-anyblock
-  :config
-  (define-key evil-inner-text-objects-map "b" 'evil-textobj-anyblock-inner-block)
-  (define-key evil-outer-text-objects-map "b" 'evil-textobj-anyblock-a-block))
-
 ;; Enable IDO mode
 (use-package ido
   :demand t
