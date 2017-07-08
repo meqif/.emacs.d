@@ -25,6 +25,10 @@
 ;; Disable splash screen
 (setq inhibit-startup-message t)
 
+;; Disable startup message in minibuffer
+(defun display-startup-echo-area-message ()
+  (message ""))
+
 ;; Set path to dependencies
 (setq lisp-dir (expand-file-name "lisp" user-emacs-directory))
 
