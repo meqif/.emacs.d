@@ -378,6 +378,7 @@
   (define-key flycheck-error-list-mode-map (kbd "k") 'previous-line))
 
 (use-package flycheck-status-emoji
+  :after flycheck
   :config (add-hook 'flycheck-mode-hook #'flycheck-status-emoji-mode))
 
 (use-package org
