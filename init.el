@@ -1053,11 +1053,13 @@ naming scheme."
     (kbd "L") #'(lambda (pkg) (interactive '(nil)) (paradox-menu-view-commit-list pkg))))
 
 (use-package lispy
+  :defer t
   :init
   (add-hook 'emacs-lisp-mode-hook #'lispy-mode)
   (add-hook 'clojure-mode-hook #'lispy-mode))
 
 (use-package lispyville
+  :defer t
   :init
   (add-hook 'lispy-mode-hook #'lispyville-mode))
 
