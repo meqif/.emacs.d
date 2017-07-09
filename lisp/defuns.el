@@ -129,14 +129,14 @@ already in fullscreen"
     (message "company-ispell enabled!"))))
 
 (defun projectile-or-counsel-find-file ()
-  "Find file inside project if inside one, with fallback"
+  "Find file inside project if inside one, with fallback."
   (interactive)
   (if (projectile-project-p)
       (projectile-find-file)
     (counsel-find-file)))
 
 (defun promote-demote-window-dwim ()
-  "Promote current window to top-left window, or swap top-left window with previously used window"
+  "Promote current window to top-left window, or swap top-left window with previously used window."
   (interactive)
   (let ((first-window (car (aw-window-list))))
     ;; If the currently selected window is the first window, then switch to the

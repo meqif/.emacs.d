@@ -36,7 +36,7 @@
 (add-to-list 'load-path lisp-dir)
 
 (defun find-brew-prefix ()
-  "Find Homebrew prefix"
+  "Find Homebrew prefix."
   (substring (shell-command-to-string "brew --prefix") 0 -1))
 (defvar brew-prefix (find-brew-prefix))
 
