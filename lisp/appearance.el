@@ -36,33 +36,6 @@
 ;; Highlight current line
 (global-hl-line-mode 1)
 
-;; Customize mode-line project face
-(copy-face 'font-lock-constant-face 'project-face)
-(set-face-attribute 'project-face nil :foreground "#19D0FF")
-(set-face-attribute 'project-face nil :foreground "#086199")
-
-;; Customize mode-line project branch face
-(copy-face 'project-face 'branch-face)
-(set-face-attribute 'branch-face nil :bold nil)
-
-;; Customize Projectile mode line
-(setq projectile-mode-line
- '(:propertize
-   (:eval
-    (if (string= (projectile-project-name) (getenv "USER"))
-        '(" ")
-      (concat " " (projectile-project-name))))
-   face project-face))
-
-(defvar meqif-vc-mode-line
-  '(" " (:propertize
-         ;; Strip the backend name from the VC status information
-         (:eval (let ((backend (symbol-name (vc-backend (buffer-file-name)))))
-                  (substring vc-mode (+ (length backend) 2))))
-         face branch-face))
-  "Mode line format for VC Mode.")
-(put 'meqif-vc-mode-line 'risky-local-variable t)
-
 ;; Tweak display-time mode-line format
 (setq display-time-24hr-format t)
 (setq display-time-default-load-average nil)
