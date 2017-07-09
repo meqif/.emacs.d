@@ -29,9 +29,7 @@
   (setq meqif/default-font "-apple-Fira Mono-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1"
         meqif/fullscreen-font "-apple-Fira Mono-medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")
   (set-face-attribute 'default nil :font meqif/default-font)
-  (let ((width 128)
-        (height 38))
-    (set-frame-size (selected-frame) width height)))
+  (add-to-list 'default-frame-alist '(fullscreen . maximized)))
 
 ;; Highlight current line
 (global-hl-line-mode 1)
