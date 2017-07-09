@@ -1219,7 +1219,7 @@ naming scheme."
 
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
-(when window-system
+(when (display-graphic-p)
   (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time))))
     (message "Loading %s...done (%.3fs)" load-file-name elapsed))
 
