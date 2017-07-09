@@ -36,10 +36,6 @@
 ;; Highlight current line
 (global-hl-line-mode 1)
 
-;; Tweak display-time mode-line format
-(setq display-time-24hr-format t)
-(setq display-time-default-load-average nil)
-
 (defun font-lock-comment-annotations ()
   "Highlight a bunch of well known comment annotations."
   (font-lock-add-keywords

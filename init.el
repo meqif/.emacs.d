@@ -144,6 +144,13 @@
 (use-package appearance
   :ensure nil)
 
+;; Display clock in modeline
+(use-package time
+  :defer t
+  :config
+  (setq display-time-24hr-format t
+        display-time-default-load-average nil))
+
 (use-package prog-mode
   :ensure nil
   :config
