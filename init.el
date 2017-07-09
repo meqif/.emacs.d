@@ -30,7 +30,7 @@
   (message ""))
 
 ;; Set path to dependencies
-(setq lisp-dir (expand-file-name "lisp" user-emacs-directory))
+(defvar lisp-dir (expand-file-name "lisp" user-emacs-directory))
 
 ;; Set up load path
 (add-to-list 'load-path lisp-dir)
