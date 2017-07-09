@@ -14,12 +14,6 @@
     ;; Use visual line mode
     (add-hook it #'visual-line-mode)))
 
-;; Adjust the font settings of frame so Emacs can display emoji properly.
-(defun darwin-set-emoji-font (frame)
-  (when (eq system-type 'darwin)
-    (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)))
-(darwin-set-emoji-font nil)
-
 (defmacro version>= (a b)
   `(not (version< ,a ,b)))
 
