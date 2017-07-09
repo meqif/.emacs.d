@@ -819,7 +819,7 @@
   ;; Don't spell check embedded snippets in org-mode
   ;; Source: http://emacs.stackexchange.com/a/9347
   (defun org-mode-flyspell-verify-ignore-blocks (return-value)
-      (let ((rlt return-value)
+    (let ((rlt return-value)
           (begin-regexp "^[ \t]*#\\+BEGIN_\\(SRC\\|HTML\\|LATEX\\)")
           (end-regexp "^[ \t]*#\\+END_\\(SRC\\|HTML\\|LATEX\\)")
           old-flag
@@ -934,10 +934,10 @@ naming scheme."
 
   (defun append-jira-ticket-identifier ()
     (when-let ((jira-ticket-identifier (guess-jira-ticket-identifier)))
-        (goto-char (point-min))
-        (insert "\n\n")
-        (insert jira-ticket-identifier)
-        (goto-char (point-min))))
+      (goto-char (point-min))
+      (insert "\n\n")
+      (insert jira-ticket-identifier)
+      (goto-char (point-min))))
 
   (add-hook 'git-commit-setup-hook 'append-jira-ticket-identifier)
   :config
@@ -1130,8 +1130,8 @@ naming scheme."
 (defun meqif/jump-to-definition ()
   (interactive)
   (funcall (case major-mode
-              ('rust-mode 'racer-find-definition)
-              (t 'dumb-jump-go))))
+             ('rust-mode 'racer-find-definition)
+             (t 'dumb-jump-go))))
 
 (use-package dumb-jump
   :defer t
