@@ -1113,11 +1113,10 @@ naming scheme."
 ;; Macro expansion for ease of debugging
 (use-package macrostep
   :defer t
+  :bind (:map emacs-lisp-mode-map ("C-c e" . macrostep-expand))
   :config
-  (define-key emacs-lisp-mode-map (kbd "C-c e") 'macrostep-expand)
   ;; Make macrostep play well with evil
-  (evil-define-key 'normal macrostep-keymap
-    "q" 'macrostep-collapse-all))
+  (evil-define-key 'normal macrostep-keymap "q" 'macrostep-collapse-all))
 
 (use-package dired
   :ensure nil
