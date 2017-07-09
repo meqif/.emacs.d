@@ -304,7 +304,7 @@
 
 (use-package expand-region
   :defer t
-  :config
+  :init
   (general-define-key "e" #'er/expand-region))
 
 ;; Save a list of recent files visited
