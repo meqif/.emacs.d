@@ -8,7 +8,7 @@
 
 ;; Refuse to work with old Emacsen
 (when (version< emacs-version "24.4")
-  (error "This emacs is too old!"))
+  (error "This Emacs is too old!"))
 
 ;; Disable mouse interface
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
