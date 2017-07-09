@@ -307,19 +307,6 @@
   :config
   (general-define-key "e" #'er/expand-region))
 
-(use-package multiple-cursors
-  :defer t
-  :config
-  (defhydra hydra-multiple-cursors (:color red)
-    "multiple cursors"
-    (";" mc/mark-previous-like-this "mark previous like this")
-    (":" mc/mark-next-like-this "mark next like this")
-    ("a" mc/mark-all-like-this "mark all like this")
-    ("d" mc/mark-all-dwim "mark all dwim")
-    ("m" mc/mark-more-like-this-extended "mark more extended")
-    ("el" mc/edit-lines "edit lines"))
-  (general-define-key "m" #'hydra-multiple-cursors/body))
-
 ;; Save a list of recent files visited
 (use-package recentf
   :init
