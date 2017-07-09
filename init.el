@@ -316,7 +316,6 @@
 ;; Save a list of recent files visited
 (use-package recentf
   :init
-  (recentf-mode t)
   ;; Increase recent entries list from default (20)
   (setq recentf-max-saved-items 100)
   :config
