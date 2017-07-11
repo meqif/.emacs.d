@@ -1040,7 +1040,8 @@ naming scheme."
   :config
   (setq paradox-execute-asynchronously t
         paradox-github-token t
-        paradox-automatically-star nil)
+        paradox-automatically-star nil
+        paradox-spinner-type 'moon)
   (evil-add-hjkl-bindings paradox-menu-mode-map 'emacs
     (kbd "J") #'paradox-next-describe
     (kbd "K") #'paradox-previous-describe
