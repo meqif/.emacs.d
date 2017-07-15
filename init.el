@@ -928,10 +928,9 @@ naming scheme."
 
   (defun append-jira-ticket-identifier ()
     (when-let ((jira-ticket-identifier (guess-jira-ticket-identifier)))
-      (goto-char (point-min))
-      (insert "\n\n")
-      (insert jira-ticket-identifier)
-      (goto-char (point-min))))
+      (save-excursion
+        (goto-char (point-min))
+        (insert "\n\n" jira-ticket-identifier))))
 
   (add-hook 'git-commit-setup-hook 'append-jira-ticket-identifier)
   :config
