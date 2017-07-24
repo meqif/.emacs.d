@@ -349,24 +349,9 @@
             company-filter-map
             company-mode-map
             company-search-map)
-    (define-key it [escape] 'company-abort))
+    (define-key it [escape] 'company-abort)))
 
-  (defconst docker-compose-keywords
-    '("aliases" "args" "bridge" "build" "cache_from" "cap_add" "cap_drop" "cgroup_parent" "command" "configs" "container_name" "context" "credential_spec" "depends_on" "deploy" "devices" "dns" "dns_search" "dockerfile" "domainname" "driver" "driver" "driver_opts" "driver_opts" "enable_ipv6" "entrypoint" "env_file" "environment" "expose" "external" "external" "external_links" "extra_hosts" "healthcheck" "hostname" "image" "internal" "ipam" "ipc" "ipv4_address" "ipv6_address" "isolation" "labels" "labels" "labels" "labels" "labels" "links" "logging" "mac_address" "mode" "network_mode" "networks" "overlay" "pid" "placement" "ports" "privileged" "read_only" "replicas" "resources" "restart" "restart_policy" "secrets" "security_opt" "shm_size" "stdin_open" "stop_grace_period" "stop_signal" "sysctls" "tmpfs" "tty" "ulimits" "update_config" "user" "userns_mode" "volumes" "working_dir"))
-
-  (defun company-docker-compose (command &optional arg &rest ignored)
-    (interactive (list 'interactive))
-
-    (case command
-      (interactive (company-begin-backend 'company-docker-compose))
-      (prefix (and (s-matches-p "^docker-compose.*\.yml$" (buffer-name))
-                   (company-grab-symbol)))
-      (candidates
-       (remove-if-not
-        (lambda (c) (string-prefix-p arg c))
-        docker-compose-keywords))
-      (post-completion (insert ": "))))
-  (add-to-list 'company-backends 'company-docker-compose))
+(use-package docker-compose-mode)
 
 ;; Unique buffer names
 (use-package uniquify

@@ -26,6 +26,7 @@
 (depends-on "dash-functional")
 (depends-on "diff-hl")
 (depends-on "diminish")
+(depends-on "docker-compose-mode")
 (depends-on "dockerfile-mode")
 (depends-on "dumb-jump")
 (depends-on "easy-escape")
