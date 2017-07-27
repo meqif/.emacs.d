@@ -21,4 +21,7 @@
 (setq eval-expression-print-level nil
       eval-expression-print-length nil)
 
+;; Recenter to top first when calling `recenter-top-bottom'
+(setq recenter-positions '(top middle bottom))
+
 (provide 'my-misc)
