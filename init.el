@@ -123,7 +123,11 @@
          ("C-h f" . counsel-describe-function)
          ("C-h v" . counsel-describe-variable))
   :config
-  (define-key counsel-find-file-map (kbd "TAB") 'ivy-alt-done))
+  (define-key counsel-find-file-map (kbd "TAB") 'ivy-alt-done)
+  ;; Use rg instead of grep when available -- it's faster!
+  (when (executable-find "rg")
+    (setq counsel-grep-base-command
+          "rg -i -M 120 --no-heading --line-number --color never '%s' %s")))
 
 ;; Use the fish shell in OSX
 (when (eq system-type 'darwin)
