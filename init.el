@@ -261,10 +261,7 @@
    "l" 'avy-goto-line
    "g" 'magit-status
    "s" 'counsel-grep-or-swiper
-   "S" #'(lambda ()
-           (interactive)
-           (let ((current-prefix-arg '(4)))
-             (call-interactively 'counsel-rg)))
+   "S" 'counsel-rg-dwim
    "\\" 'meqif/pop-mark)
 
   ;; LaTeX leader shortcuts

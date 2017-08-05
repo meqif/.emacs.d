@@ -145,4 +145,12 @@ already in fullscreen"
         (aw-flip-window))
     (aw-swap-window first-window)))
 
+(defun counsel-rg-dwim ()
+  "Run counsel-rg in the current project's root directory, or ask for the root directory otherwise."
+  (interactive)
+  (if-let ((project-root (vc-root-dir)))
+      (counsel-rg nil project-root)
+    (let ((current-prefix-arg '(4)))
+      (call-interactively 'counsel-rg))))
+
 (provide 'defuns)
