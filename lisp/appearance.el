@@ -26,7 +26,7 @@
 
 ;; Mac friendly font
 (when window-system
-  (setq meqif/default-font "-apple-Fira Mono-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1"
+  (setq meqif/default-font "Office Code Pro-13"
         meqif/fullscreen-font "-apple-Fira Mono-medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")
   (set-face-attribute 'default nil :font meqif/default-font)
   (add-to-list 'default-frame-alist '(fullscreen . maximized)))
