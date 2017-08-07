@@ -153,4 +153,10 @@ already in fullscreen"
     (let ((current-prefix-arg '(4)))
       (call-interactively 'counsel-rg))))
 
+(defun copy-buffer-name ()
+  "Copy the current buffer's file name to the kill ring."
+  (interactive)
+  (when-let ((buffer-name (buffer-file-name)))
+    (kill-new buffer-name)))
+
 (provide 'defuns)
