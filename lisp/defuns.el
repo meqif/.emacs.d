@@ -146,12 +146,16 @@ already in fullscreen"
     (aw-swap-window first-window)))
 
 (defun counsel-rg-dwim ()
-  "Run counsel-rg in the current project's root directory, or ask for the root directory otherwise."
+  "Run counsel-rg in the current project's root directory, or ask for the root directory otherwise.
+If a region is active, it will be used as the initial input for counsel-rg."
   (interactive)
-  (if-let ((project-root (vc-root-dir)))
-      (counsel-rg nil project-root)
-    (let ((current-prefix-arg '(4)))
-      (call-interactively 'counsel-rg))))
+  (let ((initial-input
+         (when (use-region-p)
+           (buffer-substring-no-properties (region-beginning) (region-end)))))
+    (if-let ((project-root (vc-root-dir)))
+        (counsel-rg initial-input project-root)
+      (let ((current-prefix-arg '(4)))
+        (call-interactively 'counsel-rg)))))
 
 (defun copy-buffer-name ()
   "Copy the current buffer's file name to the kill ring."
