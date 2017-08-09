@@ -1214,6 +1214,10 @@ naming scheme."
   (add-hook 'lisp-mode-hook 'easy-escape-minor-mode)
   (add-hook 'emacs-lisp-mode-hook 'easy-escape-minor-mode))
 
+(use-package eyebrowse
+  :config
+  (setq eyebrowse-new-workspace t))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when (display-graphic-p)

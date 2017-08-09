@@ -43,6 +43,7 @@
 (depends-on "evil-surround")
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")
+(depends-on "eyebrowse")
 (depends-on "f")
 (depends-on "firestarter")
 (depends-on "fish-mode")
