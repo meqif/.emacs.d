@@ -40,6 +40,7 @@
 (depends-on "evil-magit")
 (depends-on "evil-matchit")
 (depends-on "evil-multiedit")
+(depends-on "evil-org")
 (depends-on "evil-surround")
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")
