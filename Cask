@@ -103,6 +103,7 @@
 (depends-on "robe")
 (depends-on "rspec-mode")
 (depends-on "rubocop")
+(depends-on "ruby-refactor")
 (depends-on "ruby-tools")
 (depends-on "rust-mode")
 (depends-on "s")

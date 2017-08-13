@@ -1040,6 +1040,13 @@ naming scheme."
   ;; Add robe to company mode backends
   (push 'company-robe company-backends))
 
+(use-package ruby-refactor
+  :after (:any ruby-mode enh-ruby-mode)
+  :init
+  (add-hook 'ruby-mode-hook 'ruby-refactor-mode)
+  (add-hook 'enh-ruby-mode-hook 'ruby-refactor-mode)
+  :config (setq ruby-refactor-add-parens t))
+
 ;; Better package management
 (use-package paradox
   :defer 5
