@@ -163,4 +163,19 @@ If a region is active, it will be used as the initial input for counsel-rg."
   (when-let ((buffer-name (buffer-file-name)))
     (kill-new buffer-name)))
 
+(defun closing-bracket-p (char)
+  "Returns true if CHAR if is a closing bracket: ')', ']', or '}'."
+  (--any (string-equal char it) '(")" "]" "}")))
+
+(defun meqif/ruby-delete-trailing-comma-before-closing-bracket (original-function &rest args)
+  "Delete trailing comma before closing parentheses."
+  (when (or (eq major-mode 'ruby-mode)
+            (eq major-mode 'enh-ruby-mode))
+    (save-excursion
+      (end-of-line)
+      (backward-char)
+      (when (and (closing-bracket-p (char-to-string (char-after)))
+                 (= (string-to-char ",") (char-before)))
+        (delete-char -1)))))
+
 (provide 'defuns)
