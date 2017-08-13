@@ -1007,7 +1007,7 @@ naming scheme."
 (use-package rspec
   :ensure rspec-mode
   :defer
-  :after (ruby-mode enh-ruby-mode)
+  :after (:any ruby-mode enh-ruby-mode)
   :init
   (setq rspec-command-options "--format progress")
   (defhydra hydra-rspec (:color blue)
@@ -1021,11 +1021,11 @@ naming scheme."
 
 ;; Handy functions to run rubocop from Emacs
 (use-package rubocop
-  :after (ruby-mode enh-ruby-mode))
+  :after (:any ruby-mode enh-ruby-mode))
 
 ;; Automatically expand # to #{} inside double-quoted strings
 (use-package ruby-tools
-  :after (ruby-mode enh-ruby-mode)
+  :after (:any ruby-mode enh-ruby-mode)
   :diminish (ruby-tools-mode . "🛠"))
 
 (use-package inf-ruby
