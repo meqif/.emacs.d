@@ -1047,6 +1047,26 @@ naming scheme."
   (add-hook 'enh-ruby-mode-hook 'ruby-refactor-mode)
   :config (setq ruby-refactor-add-parens t))
 
+;; Emacs Refactor framework -- supports Ruby, Javascript, Emacs Lisp, and more
+(use-package emr
+  :bind (:map prog-mode-map ("M-RET" . meqif/emr-show-refactor-menu))
+  :init (add-hook 'prog-mode-hook 'emr-initialize)
+  :config
+  (defun meqif/emr-show-refactor-menu ()
+    (interactive)
+    (-if-let (actions (->> emr:refactor-commands
+                           (emr:hash-values)
+                           (-map 'emr:make-popup)
+                           (-remove 'null)))
+        ;; display the menu.
+        (atomic-change-group
+          (-when-let (action (ivy-read "refactor: " actions))
+            (call-interactively (popup-item-value action))))
+
+      ;; having no items to show implies that no refactoring commands are
+      ;; available.
+      (message "no refactorings available"))))
+
 ;; Better package management
 (use-package paradox
   :defer 5
