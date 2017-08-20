@@ -99,6 +99,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
      (evil-define-key 'normal ibuffer-mode-map "k" 'ibuffer-backward-line)
      (evil-define-key 'normal ibuffer-mode-map "J" 'ibuffer-jump-to-buffer)))
 (evil-define-key 'normal messages-buffer-mode-map "q" 'quit-window)
+(evil-define-key 'normal dired-mode-map "gr" 'revert-buffer)
 
 ;; Undo like Vim: everything done during an insert session will be undone in one
 ;; step.
