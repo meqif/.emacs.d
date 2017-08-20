@@ -1,3 +1,5 @@
+;;; defuns.el -*- lexical-binding: t; -*-
+
 ;;----------------------------------------------------------------------------
 ;; Eval and replace expression in buffer
 ;; Source: https://github.com/magnars/.emacs.d/blob/master/defuns/lisp-defuns.el
@@ -167,7 +169,7 @@ If a region is active, it will be used as the initial input for counsel-rg."
   "Returns true if CHAR if is a closing bracket: ')', ']', or '}'."
   (--any (string-equal char it) '(")" "]" "}")))
 
-(defun meqif/ruby-delete-trailing-comma-before-closing-bracket (original-function &rest args)
+(defun meqif/ruby-delete-trailing-comma-before-closing-bracket (_original &rest _args)
   "Delete trailing comma before closing parentheses."
   (when (or (eq major-mode 'ruby-mode)
             (eq major-mode 'enh-ruby-mode))
@@ -179,3 +181,4 @@ If a region is active, it will be used as the initial input for counsel-rg."
         (delete-char -1)))))
 
 (provide 'defuns)
+;;; defuns.el ends here

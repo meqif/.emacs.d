@@ -1,3 +1,5 @@
+;;; setup-evil.el -*- lexical-binding: t; -*-
+
 (use-package evil)
 (require 'my-misc)
 (require 'dash)
@@ -107,3 +109,4 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (define-key evil-normal-state-map (kbd "M-,") nil)
 
 (provide 'setup-evil)
+;;; setup-evil.el ends here

@@ -1,7 +1,7 @@
-;; Appearance
+;;; appearance.el -*- lexical-binding: t; -*-
 
 ;; Clean previous themes definitions when loading a theme
-(defun clear-old-theme (&rest args)
+(defun clear-old-theme (&rest _)
   (mapc #'disable-theme custom-enabled-themes))
 (advice-add 'load-theme :before #'clear-old-theme)
 
@@ -16,13 +16,11 @@
   (spaceline-toggle-hud-off)
 
   ;; Automatically recompile separators
-  (advice-add 'load-theme :after
-              #'(lambda (&rest ignored-arguments) (spaceline-compile))))
+  (advice-add 'load-theme :after #'(lambda (&rest _) (spaceline-compile))))
 
 ;; Load theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'gruvbox-dark-hard t)
-(spaceline-install)
 
 ;; Mac friendly font
 (when window-system
@@ -42,3 +40,4 @@
 (add-hook 'prog-mode-hook 'font-lock-comment-annotations)
 
 (provide 'appearance)
+;;; appearance.el ends here

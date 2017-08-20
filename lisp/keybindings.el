@@ -1,3 +1,5 @@
+;;; keybindings.el -*- lexical-binding: t; -*-
+
 ;; Window switching
 (windmove-default-keybindings) ;; Shift+direction
 
@@ -52,3 +54,4 @@
      (switch-to-buffer (get-buffer-create "*scratch*"))))
 
 (provide 'keybindings)
+;;; keybindings.el ends here
