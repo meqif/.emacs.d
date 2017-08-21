@@ -1,7 +1,7 @@
 ;;; appearance.el -*- lexical-binding: t; -*-
 
-;; Clean previous themes definitions when loading a theme
 (defun clear-old-theme (&rest _)
+  "Clean previous themes definitions when loading a theme."
   (mapc #'disable-theme custom-enabled-themes))
 (advice-add 'load-theme :before #'clear-old-theme)
 
