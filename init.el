@@ -41,7 +41,7 @@
 (defvar brew-prefix (find-brew-prefix))
 
 (defun add-subdirs-to-load-path (path)
-  "Recursively add all subdirectories of the given path to load-path."
+  "Recursively add all subdirectories of the given PATH to `load-path'."
   (let ((default-directory path))
     (normal-top-level-add-subdirs-to-load-path)))
 
