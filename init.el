@@ -1253,6 +1253,11 @@ naming scheme."
   :init (eyebrowse-mode t)
   :config (setq eyebrowse-new-workspace t))
 
+(use-package autoinsert
+  :config
+  (setq auto-insert-alist
+        (cons '("\\.rb\\'" nil "# frozen_string_literal: true\n\n") auto-insert-alist)))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when (display-graphic-p)
