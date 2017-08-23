@@ -323,6 +323,8 @@
   :config
   ;; Enable company mode for every programming major mode
   (add-hook 'prog-mode-hook 'company-mode)
+  ;; Enable it for docker-compose-mode as well
+  (add-hook 'docker-compose-mode-hook 'company-mode)
 
   (define-key prog-mode-map (kbd "TAB") #'company-indent-or-complete-common)
 
