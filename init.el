@@ -1199,9 +1199,10 @@ naming scheme."
   :config
   (evil-lion-mode))
 
-;; Unbind s-&, as I hit it accidentally too often and it kills the buffer. 😞
+;; Unbind keys I accidentally hit too often
 (unbind-key (kbd "s-&"))
 (unbind-key (kbd "s-k"))
+(unbind-key (kbd "s-p"))
 
 (use-package faun-mode
   :ensure nil
