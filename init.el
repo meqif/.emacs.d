@@ -814,9 +814,7 @@
   ;; Use Aspell for spellcheck
   (setq ispell-program-name (concat brew-prefix "/bin/aspell"))
   (setq ispell-list-command "--list")
-
-  ;; Default language is Portuguese.
-  (setq ispell-dictionary "pt_PT")
+  (setq ispell-dictionary "en_US")
 
   ;; Flyspell messages slow down the spellchecking process
   (setq flyspell-issue-message-flag nil)
