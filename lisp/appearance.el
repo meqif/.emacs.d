@@ -20,7 +20,9 @@
 
 ;; Load theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'gruvbox-dark-hard t)
+(use-package zerodark-theme
+  :config
+  (zerodark-setup-modeline-format))
 
 ;; Mac friendly font
 (defvar meqif/default-font "Office Code Pro-13")
