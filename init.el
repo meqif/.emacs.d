@@ -192,7 +192,7 @@
   :diminish projectile-mode
   :defer 5
   :init
-  (projectile-global-mode)
+  (projectile-mode)
   ;; Use ivy for completion
   (setq projectile-completion-system 'ivy)
   (--each '("node_modules" "vendor" ".bundle")
@@ -484,10 +484,9 @@
     (require 'reftex)
 
     ;; Set default bibliography file
-    (if (file-exists-p "bibliography.bib")
-        (setq helm-bibtex-bibliography (list "bibliography.bib"))
-      (setq helm-bibtex-bibliography
-            (list (expand-file-name "~/bibliography.bib"))))
+    (setq bibtex-completion-bibliography (if (file-exists-p "bibliography.bib")
+                                             "bibliography.bib"
+                                           (expand-file-name "~/bibliography.bib")))
 
     (add-to-list
      (make-local-variable 'reftex-default-bibliography)
@@ -902,8 +901,8 @@
   ;; Mark setup instructions as read
   (setq magit-last-seen-setup-instructions "1.4.0"
         ;; Silence nag on push
-        magit-push-always-verify nil
-        magit-revert-buffers t)
+        magit-push-always-verify nil)
+
   ;; Make fine-grained changes more obvious
   (setq magit-diff-refine-hunk 'all)
   :config
