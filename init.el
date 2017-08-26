@@ -982,18 +982,7 @@ naming scheme."
             #'(lambda ()
                 (setq mode-name "💎")
                 (setq-local tab-width 2)
-                (setq-local evil-shift-width 2)))
-
-  ;; Run specs on save
-  ;; (firestarter-mode)
-  (defun rspec-verify-firestarter ()
-    (interactive)
-    (when (s-matches-p "\.rb$" (buffer-name))
-      (rspec-verify)))
-  (defun rspec-firestarter ()
-    (setq firestarter #'rspec-verify-firestarter))
-  (add-hook 'ruby-mode-hook #'rspec-firestarter)
-  )
+                (setq-local evil-shift-width 2))))
 
 (use-package enh-ruby-mode
   :defer
