@@ -622,12 +622,9 @@
       (interactive)
       (when (char-equal ?} (following-char)) (forward-char)))
 
-    (add-hook 'LaTeX-mode-hook
-              (lambda ()
-                (define-key LaTeX-mode-map
-                  (kbd "<tab>") #'meqif/latex-skip-closing-curly-brace)
-                (evil-define-key 'normal LaTeX-mode-map (kbd "<tab>")
-                  #'meqif/latex-skip-closing-curly-brace)))
+
+    (define-key latex-mode-map (kbd "<tab>") #'meqif/latex-skip-closing-curly-brace)
+    (evil-define-key 'normal LaTeX-mode-map (kbd "<tab>") #'meqif/latex-skip-closing-curly-brace)
 
     ;; Set up imenu properly
     (setq imenu-generic-expression
