@@ -264,13 +264,6 @@
    "S" 'counsel-rg-dwim
    "\\" 'meqif/pop-mark)
 
-  ;; LaTeX leader shortcuts
-  (general-define-key :keymaps 'latex-mode-map :states 'normal
-                      "s" 'flyspell-buffer
-                      "t" #'(lambda () (interactive) (TeX-insert-macro "todo"))
-                      "cc" 'TeX-command-master
-                      "cv" 'TeX-view)
-
   ;; Org-mode leader shortcuts
   (general-define-key :keymaps 'org-mode-map :states 'normal "ce" #'org-export-dispatch))
 
@@ -550,7 +543,15 @@
 
 (use-package tex-mode
   :mode ("\\.tex\\'" . LaTeX-mode)
+  :functions TeX-command-master TeX-insert-macro
   :config
+  ;; LaTeX leader shortcuts
+  (general-define-key :keymaps 'latex-mode-map :states 'normal
+                      "s" 'flyspell-buffer
+                      "t" #'(lambda () (interactive) (TeX-insert-macro "todo"))
+                      "cc" 'TeX-command-master
+                      "cv" 'TeX-view)
+
   (progn
     ;; Default options
     (setq TeX-auto-save t)
