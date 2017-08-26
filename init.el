@@ -472,38 +472,6 @@
 
 (use-package auto-yasnippet)
 
-(defun configure-helm-bibtex ()
-  (progn
-    (require 'reftex)
-
-    ;; Set default bibliography file
-    (setq bibtex-completion-bibliography (if (file-exists-p "bibliography.bib")
-                                             "bibliography.bib"
-                                           (expand-file-name "~/bibliography.bib")))
-
-    (add-to-list
-     (make-local-variable 'reftex-default-bibliography)
-     "bibliography.bib")
-    ))
-
-(use-package helm-bibtex
-  :defer t
-  :config
-  (unless (boundp 'helm-bibtex-bibliography) (configure-helm-bibtex))
-  ;; Change default action
-  (progn
-    (helm-delete-action-from-source "Insert BibTeX key" helm-source-bibtex)
-    (helm-add-action-to-source
-     "Insert BibTeX key" 'helm-bibtex-insert-key helm-source-bibtex 0))
-  ;; Use LaTeX autocite even in org-mode.
-  (add-to-list
-   'helm-bibtex-format-citation-functions
-   '(org-mode . (lambda (keys) (format "\\autocite{%s}" (s-join ", " keys))))))
-
-(use-package ivy-bibtex
-  :defer t
-  :config (unless (boundp 'helm-bibtex-bibliography) (configure-helm-bibtex)))
-
 ;; Language-specific setup files
 (use-package markdown-mode
   :mode ("\\.md\\'" . gfm-mode)
