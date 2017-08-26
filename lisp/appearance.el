@@ -30,7 +30,9 @@
 
 (when window-system
   (set-face-attribute 'default nil :font meqif/default-font)
-  (add-to-list 'default-frame-alist '(fullscreen . maximized)))
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
 
 ;; Highlight current line
 (global-hl-line-mode 1)
