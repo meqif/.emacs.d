@@ -475,7 +475,7 @@
               (lambda ()
                 ;; Temporarily disable required newline at the end of file
                 ;; This fixes the problem with an extra newline when expanding snippets
-                (setq-local 'require-final-newline nil)))))
+                (setq-local require-final-newline nil)))))
 
 (use-package auto-yasnippet)
 
@@ -544,7 +544,7 @@
 (use-package json-mode
   :mode "\\.json\\'"
   :config
-  (add-hook 'json-mode-hook (lambda (setq js-indent-level 2))))
+  (add-hook 'json-mode-hook (lambda () (setq js-indent-level 2))))
 
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")
