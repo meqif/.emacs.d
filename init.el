@@ -960,9 +960,12 @@ naming scheme."
                 (subword-mode)
                 (flycheck-mode))))
 
-(use-package rspec
-  :ensure rspec-mode
+(use-package rspec-mode
   :defer
+  :functions (rspec-verify
+              rspec-verify-all
+              rspec-verify-single
+              rspec-toggle-spec-and-target-find-example)
   :after (:any ruby-mode enh-ruby-mode)
   :init
   (setq rspec-command-options "--format progress")
