@@ -724,15 +724,6 @@
   ;;   ;; Register rust-mode in company dabbrev code modes
   ;;   (add-to-list 'company-dabbrev-code-modes 'rust-mode)
 
-  ;; Handy keybindings
-  (--each
-      '(("C-c C-c" . "cargo build")
-        ("C-c C-t" . "cargo test")
-        ("C-c C-r" . "cargo run"))
-    (-let* (((keycombo . command) it))
-      (define-key rust-mode-map (kbd keycombo)
-        `(lambda () (interactive) (save-buffer) (compile ,command)))))
-
   ;; Compile a single file
   (defun meqif/compile-single-rust-file ()
     (interactive)
