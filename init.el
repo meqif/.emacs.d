@@ -270,6 +270,10 @@
   ;; Org-mode leader shortcuts
   (general-define-key :keymaps 'org-mode-map :states 'normal "ce" #'org-export-dispatch))
 
+(use-package swiper
+  :config
+  (setq swiper-action-recenter t))
+
 (use-package avy
   :demand
   :bind ("C-c SPC" . avy-goto-char-timer)
