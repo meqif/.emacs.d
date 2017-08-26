@@ -52,6 +52,9 @@
 (setq custom-file (expand-file-name "custom.el" lisp-dir))
 (load custom-file)
 
+;; Always load most recent version of required files
+(setq load-prefer-newer t)
+
 ;; Bring some sanity in
 (require 'sane-defaults)
 
@@ -1215,6 +1218,9 @@ naming scheme."
   :config
   (setq auto-insert-alist
         (cons '("\\.rb\\'" nil "# frozen_string_literal: true\n\n") auto-insert-alist)))
+
+;; Recompile configuration files after saving them
+(add-hook 'after-save-hook 'meqif/compile-configuration-files)
 
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration

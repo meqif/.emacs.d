@@ -180,5 +180,11 @@ If a region is active, it will be used as the initial input for counsel-rg."
                  (= ?, (char-before)))
         (delete-char -1)))))
 
+(defun meqif/compile-configuration-files ()
+  "Compile Emacs configuration files after saving them."
+  (when (or (string-match-p "\\.emacs\\.d/lisp/.+\\.el" (buffer-file-name))
+            (string-match-p "\\.emacs\\.d/init\\.el" (buffer-file-name)))
+    (byte-compile-file (buffer-file-name))))
+
 (provide 'defuns)
 ;;; defuns.el ends here
