@@ -120,11 +120,11 @@
 ;; Replace default functions with much better alternatives
 (use-package counsel
   :defer t
-  :bind (("s-r" . counsel-imenu)
-         ("M-x" . counsel-M-x)
+  :bind (("s-r"     . counsel-imenu)
+         ("M-x"     . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("C-h f" . counsel-describe-function)
-         ("C-h v" . counsel-describe-variable))
+         ("C-h f"   . counsel-describe-function)
+         ("C-h v"   . counsel-describe-variable))
   :config
   (define-key counsel-find-file-map (kbd "TAB") 'ivy-alt-done)
   ;; Use rg instead of grep when available -- it's faster!
@@ -200,20 +200,18 @@
   ;; Use ivy for completion
   (setq projectile-completion-system 'ivy)
   (--each '("node_modules" "vendor" ".bundle")
-    (add-to-list 'projectile-globally-ignored-directories it))
-  )
+    (add-to-list 'projectile-globally-ignored-directories it)))
 
 (use-package smartparens
   :diminish smartparens-mode
-  :init
-  (progn
-    (smartparens-global-mode t)
-    ;; Show matching parentheses
-    (show-smartparens-global-mode t)
-    ;; Remove matching parentheses delay
-    (setq sp-show-pair-delay 0)
-    ;; Load default smartparens configuration
-    (require 'smartparens-config)))
+  :config
+  (smartparens-global-mode t)
+  ;; Show matching parentheses
+  (show-smartparens-global-mode t)
+  ;; Remove matching parentheses delay
+  (setq sp-show-pair-delay 0)
+  ;; Load default smartparens configuration
+  (require 'smartparens-config))
 
 ;; Setup extensions
 (use-package setup-evil :ensure nil)
@@ -231,15 +229,14 @@
 
 (use-package imenu
   :config
-  (progn
-    ;; Make imenu rescan automatically
-    (setq imenu-auto-rescan t)
+  ;; Make imenu rescan automatically
+  (setq imenu-auto-rescan t)
 
-    ;; Make imenu work on larger files
-    (setq imenu-auto-rescan-maxout 120000)
+  ;; Make imenu work on larger files
+  (setq imenu-auto-rescan-maxout 120000)
 
-    ;; Recenter buffer after jumping
-    (add-hook 'imenu-after-jump-hook 'recenter)))
+  ;; Recenter buffer after jumping
+  (add-hook 'imenu-after-jump-hook 'recenter))
 
 ;; compilation-mode
 (use-package compile
@@ -432,30 +429,29 @@
 (use-package yasnippet
   :diminish yas-minor-mode
   :config
-  (progn
-    ;; Use only own snippets, do not use bundled ones
-    (setq yas-snippet-dirs (list (expand-file-name "~/.emacs.d/snippets")))
+  ;; Use only own snippets, do not use bundled ones
+  (setq yas-snippet-dirs (list (expand-file-name "~/.emacs.d/snippets")))
 
-    ;; Don't mess with the indentation
-    (setq yas-indent-line 'fixed)
+  ;; Don't mess with the indentation
+  (setq yas-indent-line 'fixed)
 
-    ;; No need to be so verbose
-    (setq yas-verbosity 1)
+  ;; No need to be so verbose
+  (setq yas-verbosity 1)
 
-    ;; Snippets everywhere
-    (yas-global-mode)
+  ;; Snippets everywhere
+  (yas-global-mode)
 
-    ;; ... but not on compilation-mode buffers
-    (defun meqif/compilation-buffer-p ()
-      ;; Return t if the current buffer is a compilation-mode buffer
-      (compilation-buffer-p (current-buffer)))
-    (add-to-list 'yas-dont-activate-functions #'meqif/compilation-buffer-p)
+  ;; ... but not on compilation-mode buffers
+  (defun meqif/compilation-buffer-p ()
+    ;; Return t if the current buffer is a compilation-mode buffer
+    (compilation-buffer-p (current-buffer)))
+  (add-to-list 'yas-dont-activate-functions #'meqif/compilation-buffer-p)
 
-    (add-hook 'snippet-mode-hook
-              (lambda ()
-                ;; Temporarily disable required newline at the end of file
-                ;; This fixes the problem with an extra newline when expanding snippets
-                (setq-local require-final-newline nil)))))
+  (add-hook 'snippet-mode-hook
+            (lambda ()
+              ;; Temporarily disable required newline at the end of file
+              ;; This fixes the problem with an extra newline when expanding snippets
+              (setq-local require-final-newline nil))))
 
 (use-package auto-yasnippet)
 
@@ -639,13 +635,12 @@
 (use-package sgml-mode
   :defer t
   :config
-  (progn
-    ;; Enable tagedit
-    (use-package tagedit)
-    ;; Auto-close tags and other goodies
-    (tagedit-add-experimental-features)
-    (add-hook 'html-mode-hook (lambda () (tagedit-mode 1)))
-    (add-hook 'mustache-mode (lambda () (tagedit-mode 1)))))
+  ;; Enable tagedit
+  (use-package tagedit)
+  ;; Auto-close tags and other goodies
+  (tagedit-add-experimental-features)
+  (add-hook 'html-mode-hook #'tagedit-mode)
+  (add-hook 'mustache-mode #'tagedit-mode))
 
 (use-package emmet-mode
   :defer
