@@ -423,8 +423,8 @@
 (use-package evil-org
   :after org
   :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook (lambda () (evil-org-set-key-theme))))
+  (add-hook 'org-mode-hook #'evil-org-mode)
+  (add-hook 'evil-org-mode-hook #'evil-org-set-key-theme))
 
 (use-package yasnippet
   :diminish yas-minor-mode
