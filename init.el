@@ -278,23 +278,6 @@
 (use-package avy
   :demand
   :bind ("C-c SPC" . avy-goto-char-timer)
-  :init
-  (defun avy-goto-ibuffer ()
-    "Select and visit buffer"
-    (interactive)
-    (let ((beg nil)
-          (end nil)
-          (avy-keys (number-sequence ?0 ?9)))
-      (save-excursion
-        (goto-char (point-min))
-        (forward-line 2)
-        (setq beg (point))
-        (goto-char (point-max))
-        (forward-line -1)
-        (setq end (point)))
-      (avy-action-goto (avy--line nil beg end))
-      (ibuffer-visit-buffer)))
-  ;; (add-hook 'ibuffer-hook #'avy-goto-ibuffer)
   :config
   (general-define-key "<SPC>" 'avy-goto-char-timer))
 
