@@ -138,8 +138,9 @@
 
 ;; Fix path
 (use-package exec-path-from-shell
-  :init (setq exec-path-from-shell-arguments '("-l"))
-  :config (exec-path-from-shell-initialize))
+  :config
+  (setq exec-path-from-shell-arguments '("-l"))
+  (exec-path-from-shell-initialize))
 
 ;; Functions
 (require 'defuns)
