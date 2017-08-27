@@ -364,11 +364,7 @@
   :config (setq uniquify-buffer-name-style 'forward))
 
 (use-package wgrep
-  :defer t
-  :config
-  (progn
-    (autoload 'wgrep-ag-setup "wgrep-ag")
-    (add-hook 'ag-mode-hook 'wgrep-ag-setup)))
+  :defer t)
 
 (use-package flycheck
   :defer t
@@ -816,12 +812,6 @@
   :init
   (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
   (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
-
-(use-package ag
-  :defer
-  :config
-  ;; Highlight ag's search results
-  (setq ag-highlight-search t))
 
 (use-package magit
   :pin melpa-stable
