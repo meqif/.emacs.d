@@ -186,5 +186,16 @@ If a region is active, it will be used as the initial input for counsel-rg."
             (string-match-p "\\.emacs\\.d/init\\.el" (buffer-file-name)))
     (byte-compile-file (buffer-file-name))))
 
+(defun meqif/set-fill-column-to-rubocop-max-line-length ()
+  (when-let ((max-line-length (meqif/find-rubocop-max-line-length)))
+    (setq-local fill-column max-line-length)))
+
+(defun meqif/find-rubocop-max-line-length ()
+  (-let* ((path (f-join (projectile-project-root) ".rubocop.yml")))
+    (when (f-exists-p path)
+      (let ((raw-file (f-read path)))
+        (when (string-match "Metrics/LineLength:\n  Max: \\([0-9]+\\)" raw-file)
+          (string-to-number (match-string-no-properties 1 raw-file)))))))
+
 (provide 'defuns)
 ;;; defuns.el ends here

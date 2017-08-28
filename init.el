@@ -878,7 +878,11 @@ naming scheme."
             #'(lambda ()
                 (setq mode-name "💎")
                 (setq-local tab-width 2)
-                (setq-local evil-shift-width 2))))
+                (setq-local evil-shift-width 2)))
+  (add-hook 'ruby-mode-hook #'(lambda ()
+                                (meqif/set-fill-column-to-rubocop-max-line-length)
+                                (whitespace-mode -1)
+                                (whitespace-mode +1))))
 
 (use-package enh-ruby-mode
   :defer
