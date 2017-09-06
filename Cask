@@ -116,6 +116,7 @@
 (depends-on "spinner")
 (depends-on "swiper")
 (depends-on "tagedit")
+(depends-on "tern")
 (depends-on "toml-mode")
 (depends-on "tree-mode")
 (depends-on "undo-tree")

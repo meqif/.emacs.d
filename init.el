@@ -484,6 +484,11 @@
               ;; Use symbol for anonymous functions
               (push '("function" . ?ƒ) prettify-symbols-alist))))
 
+(use-package tern
+  :after js2-mode
+  :config
+  (add-hook 'js2-mode-hook #'tern-mode-enable))
+
 (use-package json-mode
   :mode "\\.json\\'"
   :config
