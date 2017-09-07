@@ -848,6 +848,28 @@ naming scheme."
     :config
     (evil-define-key evil-magit-state magit-mode-map "\\" nil)))
 
+(use-package git-timemachine
+  :defer
+  :init
+  (defhydra hydra-git-timemachine
+    (:hint nil
+     :pre (let (golden-ratio-mode)
+            (unless (bound-and-true-p git-timemachine-mode)
+              (call-interactively 'git-timemachine)))
+     :post (when (bound-and-true-p git-timemachine-mode)
+             (git-timemachine-quit))
+     :foreign-keys run)
+    "
+[_p_/_N_] previous [_n_] next [_c_] current [_g_] goto nth rev [_Y_] copy hash [_q_] quit
+"
+    ("c" git-timemachine-show-current-revision)
+    ("g" git-timemachine-show-nth-revision)
+    ("p" git-timemachine-show-previous-revision)
+    ("n" git-timemachine-show-next-revision)
+    ("N" git-timemachine-show-previous-revision)
+    ("Y" git-timemachine-kill-revision)
+    ("q" nil :exit t)))
+
 (use-package diff-mode
   :ensure nil
   :config

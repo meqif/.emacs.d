@@ -54,6 +54,7 @@
 (depends-on "flycheck-rust")
 (depends-on "flycheck-status-emoji")
 (depends-on "general")
+(depends-on "git-timemachine")
 (depends-on "goto-chg")
 (depends-on "gruvbox-theme")
 (depends-on "haskell-mode")
