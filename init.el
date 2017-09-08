@@ -1087,13 +1087,10 @@ naming scheme."
 
 (use-package dumb-jump
   :defer t
-  :commands (dumb-jump-go dumb-jump-back)
-  :init
-  ;; (define-key evil-normal-state-map (kbd "C-]") 'dumb-jump-go)
-  (define-key evil-normal-state-map (kbd "C-]") 'meqif/jump-to-definition)
-  (define-key evil-normal-state-map (kbd "C-t") 'dumb-jump-back)
+  :bind (:map ruby-mode-map ("M-." . dumb-jump-go) ("M-," . dumb-jump-back))
   :config
-  (setq dumb-jump-selector 'ivy))
+  (setq dumb-jump-selector 'ivy
+        dumb-jump-force-searcher 'rg))
 
 (use-package iedit
   :defer
