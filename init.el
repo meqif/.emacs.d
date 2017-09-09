@@ -870,6 +870,11 @@ naming scheme."
     ("Y" git-timemachine-kill-revision)
     ("q" nil :exit t)))
 
+(use-package browse-at-remote
+  :defer
+  :init
+  (general-define-key "o" #'browse-at-remote))
+
 (use-package diff-mode
   :ensure nil
   :config

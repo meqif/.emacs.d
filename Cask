@@ -11,6 +11,7 @@
 (depends-on "auto-yasnippet")
 (depends-on "avy")
 (depends-on "bind-key")
+(depends-on "browse-at-remote")
 (depends-on "browse-kill-ring")
 (depends-on "bundler")
 (depends-on "cargo")
