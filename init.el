@@ -873,7 +873,9 @@ naming scheme."
 (use-package browse-at-remote
   :defer
   :init
-  (general-define-key "o" #'browse-at-remote))
+  (general-define-key "o" #'browse-at-remote)
+  :config
+  (setq browse-at-remote-prefer-symbolic nil))
 
 (use-package diff-mode
   :ensure nil
