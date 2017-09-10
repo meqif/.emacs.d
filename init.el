@@ -492,7 +492,7 @@
 (use-package json-mode
   :mode "\\.json\\'"
   :config
-  (add-hook 'json-mode-hook (lambda () (setq js-indent-level 2))))
+  (setq-default js-indent-level 2))
 
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")
