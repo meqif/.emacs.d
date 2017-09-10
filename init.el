@@ -902,6 +902,10 @@ naming scheme."
          "Vagrantfile\\'")
   ;; Don't deep indent arrays and hashes
   :config
+  ;; Use dumb jump by default
+  (define-key ruby-mode-map (kbd "M-.") #'dumb-jump-go)
+  (define-key ruby-mode-map (kbd "M-,") #'dumb-jump-back)
+
   (advice-add 'join-line :after
               #'meqif/ruby-delete-trailing-comma-before-closing-bracket)
   (setq ruby-deep-ident-paren nil
@@ -1094,7 +1098,6 @@ naming scheme."
 
 (use-package dumb-jump
   :defer t
-  :bind (:map ruby-mode-map ("M-." . dumb-jump-go) ("M-," . dumb-jump-back))
   :config
   (setq dumb-jump-selector 'ivy
         dumb-jump-force-searcher 'rg))
