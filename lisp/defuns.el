@@ -154,7 +154,7 @@ If a region is active, it will be used as the initial input for counsel-rg."
   (let ((initial-input
          (when (use-region-p)
            (buffer-substring-no-properties (region-beginning) (region-end)))))
-    (if-let ((project-root (vc-root-dir)))
+    (-if-let* ((project-root (vc-root-dir)))
         (counsel-rg initial-input project-root)
       (let ((current-prefix-arg '(4)))
         (call-interactively 'counsel-rg)))))
@@ -162,7 +162,7 @@ If a region is active, it will be used as the initial input for counsel-rg."
 (defun copy-buffer-name ()
   "Copy the current buffer's file name to the kill ring."
   (interactive)
-  (when-let ((buffer-name (buffer-file-name)))
+  (-when-let* ((buffer-name (buffer-file-name)))
     (kill-new buffer-name)))
 
 (defun closing-bracket-p (char)
@@ -187,7 +187,7 @@ If a region is active, it will be used as the initial input for counsel-rg."
     (byte-compile-file (buffer-file-name))))
 
 (defun meqif/set-fill-column-to-rubocop-max-line-length ()
-  (when-let ((max-line-length (meqif/find-rubocop-max-line-length)))
+  (-when-let* ((max-line-length (meqif/find-rubocop-max-line-length)))
     (setq-local fill-column max-line-length)))
 
 (defun meqif/find-rubocop-max-line-length ()

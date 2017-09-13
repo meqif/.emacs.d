@@ -833,11 +833,11 @@
 
 It only really works if the branch follows the PROJECT-TICKETNUMBER-description
 naming scheme."
-    (when-let ((current-branch (magit-get-current-branch)))
+    (-when-let* ((current-branch (magit-get-current-branch)))
       (-first-item (s-match "^[A-Z]+-[0-9]+" current-branch))))
 
   (defun append-jira-ticket-identifier ()
-    (when-let ((jira-ticket-identifier (guess-jira-ticket-identifier)))
+    (-when-let* ((jira-ticket-identifier (guess-jira-ticket-identifier)))
       (save-excursion
         (goto-char (point-min))
         (insert "\n\n" jira-ticket-identifier))))
