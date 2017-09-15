@@ -190,12 +190,22 @@ If a region is active, it will be used as the initial input for counsel-rg."
   (-when-let* ((max-line-length (meqif/find-rubocop-max-line-length)))
     (setq-local fill-column max-line-length)))
 
+(defun meqif/f-read-if-exists (path &optional coding)
+  "Read text with PATH if it exists, using CODING.
+CODING defaults to ‘utf-8’.
+
+Return the decoded text as multibyte string."
+  (when (f-exists-p path)
+    (f-read path coding)))
+
+(defun meqif/extract-rubocop-line-length (raw-file)
+  (when (string-match "Metrics/LineLength:\n  Max: \\([0-9]+\\)" raw-file)
+      (string-to-number (match-string-no-properties 1 raw-file))))
+
 (defun meqif/find-rubocop-max-line-length ()
-  (-let* ((path (f-join (projectile-project-root) ".rubocop.yml")))
-    (when (f-exists-p path)
-      (let ((raw-file (f-read path)))
-        (when (string-match "Metrics/LineLength:\n  Max: \\([0-9]+\\)" raw-file)
-          (string-to-number (match-string-no-properties 1 raw-file)))))))
+  (-some-> (f-join (projectile-project-root) ".rubocop.yml")
+           (meqif/f-read-if-exists)
+           (meqif/extract-rubocop-line-length)))
 
 (provide 'defuns)
 ;;; defuns.el ends here
