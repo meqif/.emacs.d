@@ -166,7 +166,7 @@ If a region is active, it will be used as the initial input for counsel-rg."
     (kill-new buffer-name)))
 
 (defun closing-bracket-p (char)
-  "Returns true if CHAR if is a closing bracket: ')', ']', or '}'."
+  "Returns true if CHAR is a closing bracket: ')', ']', or '}'."
   (memq char '(?\) ?\] ?\})))
 
 (defun meqif/ruby-delete-trailing-comma-before-closing-bracket (_original &rest _args)
