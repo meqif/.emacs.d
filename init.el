@@ -244,7 +244,8 @@
   (add-hook 'compilation-mode-hook 'visual-line-mode)
   :config
   ;; Scroll compile buffer automatically but stop on the first error
-  (setq compilation-scroll-output 'first-error))
+  (setq compilation-scroll-output 'first-error)
+  (evil-define-key 'normal compilation-mode-map "gg" #'recompile))
 
 (use-package general
   :config
