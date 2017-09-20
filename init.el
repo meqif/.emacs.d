@@ -948,8 +948,8 @@ naming scheme."
     ("a" rspec-verify-all "run all specs")
     ("s" rspec-verify-single "run specs for this context")
     ("v" rspec-verify "run specs for this buffer")
-    ("t" rspec-toggle-spec-and-target-find-example
-     "toggle between spec and class"))
+    ("t" rspec-toggle-spec-and-target-find-example "toggle between spec and class")
+    ("f" rspec-run-last-failed "rerun last failed specs"))
   (general-define-key :keymaps '(ruby-mode-map enh-ruby-mode-map) :states 'normal "c" #'hydra-rspec/body))
 
 ;; Handy functions to run rubocop from Emacs
