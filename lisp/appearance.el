@@ -22,7 +22,24 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (use-package zerodark-theme
   :config
-  (zerodark-setup-modeline-format))
+  (zerodark-setup-modeline-format)
+  (setq-default mode-line-format
+        `("%e"
+          ;; (:eval evil-mode-line-tag)
+          (:eval (when (boundp 'evil-state) (symbol-name evil-state))) " "
+          ,zerodark-modeline-ro " "
+          ,zerodark-buffer-coding
+          mode-line-frame-identification " "
+          " "
+          ,zerodark-modeline-modified
+          " "
+          ,zerodark-modeline-buffer-identification
+          ,zerodark-modeline-position
+          ,zerodark-modeline-vc
+          "  "
+          (:eval (zerodark-modeline-flycheck-status))
+          "  " mode-line-modes mode-line-misc-info mode-line-end-spaces
+          )))
 
 ;; Mac friendly font
 (defvar meqif/default-font "Office Code Pro-13")
