@@ -942,7 +942,9 @@ naming scheme."
               rspec-toggle-spec-and-target-find-example)
   :after (:any ruby-mode enh-ruby-mode)
   :init
-  (setq rspec-command-options "--format progress")
+  (setq rspec-command-options "--format progress"
+        rspec-use-docker-when-possible t
+        rspec-docker-container "tests")
   (defhydra hydra-rspec (:color blue)
     "rspec"
     ("a" rspec-verify-all "run all specs")
