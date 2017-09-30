@@ -256,7 +256,7 @@
 
   ;; Global evil leader shortcuts
   (general-define-key
-   "f" 'projectile-or-counsel-find-file
+   "f" 'counsel-git
    "p" 'counsel-yank-pop
    "b" 'ivy-switch-buffer
    "r" 'counsel-recentf
