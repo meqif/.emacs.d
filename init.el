@@ -1102,6 +1102,8 @@ naming scheme."
 (use-package dumb-jump
   :defer t
   :config
+  (add-hook 'dumb-jump-after-jump-hook #'recenter)
+  (add-hook 'dumb-jump-after-jump-hook #'xref-pulse-momentarily)
   (setq dumb-jump-selector 'ivy
         dumb-jump-force-searcher 'rg))
 
