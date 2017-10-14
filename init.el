@@ -1093,12 +1093,6 @@ naming scheme."
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer))
 
-(defun meqif/jump-to-definition ()
-  (interactive)
-  (funcall (case major-mode
-             ('rust-mode 'racer-find-definition)
-             (t 'dumb-jump-go))))
-
 (use-package dumb-jump
   :defer t
   :config
