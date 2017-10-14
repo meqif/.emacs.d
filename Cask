@@ -77,6 +77,7 @@
 (depends-on "lispy")
 (depends-on "lispyville")
 (depends-on "list-utils")
+(depends-on "lsp-rust")
 (depends-on "macrostep")
 (depends-on "magit" :archive melpa-stable)
 (depends-on "markdown-mode")

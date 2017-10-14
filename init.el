@@ -665,8 +665,6 @@
 (use-package rust-mode
   :defer t
   :config
-  (require 'lsp-rust)
-  (add-hook 'rust-mode-hook #'lsp-mode)
   ;; Add brackets to smartparens pair list
   (sp-local-pair 'rust-mode "<" ">")
 
@@ -715,6 +713,14 @@
     (when (and (f-exists? (buffer-name))
                (f-file? (buffer-name)))
       (compile (concat "rustc " (buffer-name) " -o " (f-no-ext (buffer-name)))))))
+
+(use-package lsp-mode
+  :defer t)
+
+(use-package lsp-rust
+  :after rust-mode
+  :config
+  (add-hook 'rust-mode-hook #'lsp-mode))
 
 (use-package flyspell
   :defer
