@@ -722,7 +722,7 @@
 (use-package lsp-rust
   :after rust-mode
   :config
-  (add-hook 'rust-mode-hook #'lsp-mode))
+  (add-hook 'rust-mode-hook #'lsp-rust-enable))
 
 (use-package flyspell
   :defer
