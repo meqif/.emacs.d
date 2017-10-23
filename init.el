@@ -672,8 +672,6 @@
             (lambda ()
               ;; Enable on-the-fly syntax checking
               (flycheck-mode 1)
-              ;; Do the required setup
-              (flycheck-rust-setup)
               ;; Rust has different rules for too long lines
               (setq-local fill-column 100)
               ;; Reload whitespace mode to make the previous change effective
@@ -716,6 +714,10 @@
 
 (use-package lsp-mode
   :defer t)
+
+(use-package lsp-flycheck
+  :ensure lsp-mode
+  :after lsp-mode)
 
 (use-package lsp-rust
   :after rust-mode
