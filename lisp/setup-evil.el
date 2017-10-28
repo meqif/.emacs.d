@@ -87,6 +87,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; Better navigation for modes
 (evil-add-hjkl-bindings occur-mode-map 'emacs)
 (evil-add-hjkl-bindings profiler-report-mode-map 'emacs)
+(evil-add-hjkl-bindings paradox-commit-list-mode-map 'emacs)
+
 (eval-after-load 'ibuffer
   '(progn
      ;; Remove ibuffer from evil emacs state modes
