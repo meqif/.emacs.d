@@ -74,9 +74,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       compilation-mode
       finder-mode
       flycheck-error-list-mode
+      ivy-occur-mode
       neotree-mode
-      paradox-menu-mode
       paradox-commit-list-mode
+      paradox-menu-mode
       profiler-report-mode
       racer-help-mode
       special-mode
