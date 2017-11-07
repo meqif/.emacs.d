@@ -51,6 +51,7 @@
 (depends-on "flx")
 (depends-on "flx-ido")
 (depends-on "flycheck")
+(depends-on "flycheck-popup-tip")
 (depends-on "flycheck-status-emoji")
 (depends-on "general")
 (depends-on "git-timemachine")
