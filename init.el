@@ -394,6 +394,10 @@
     ;; Shortcut to capture notes
     (global-set-key (kbd "C-c c") 'org-capture)
 
+    ;; Easier navigation between headings
+    (general-define-key :prefix nil :keymaps 'org-mode-map :states 'normal "C-j" #'org-next-visible-heading)
+    (general-define-key :prefix nil :keymaps 'org-mode-map :states 'normal "C-k" #'org-previous-visible-heading)
+
     ;; Hydra
     (defhydra hydra-org-mode-narrow (:color blue)
       "Narrow buffer to"
