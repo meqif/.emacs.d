@@ -117,6 +117,11 @@
   ;; Allow quitting ivy with ESC
   (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit))
 
+(use-package ivy-xref
+  :after ivy
+  :config
+  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
 ;; Replace default functions with much better alternatives
 (use-package counsel
   :defer t
