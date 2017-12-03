@@ -988,7 +988,9 @@ naming scheme."
 (use-package inf-ruby
   :defer
   :config
-  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
+  (setq inf-ruby-default-implementation "pry")
+  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode)
+  (add-hook 'inf-ruby-mode-hook #'company-mode))
 
 ;; Better completion and documentation access for Ruby
 (use-package robe
