@@ -24,4 +24,7 @@
 ;; Recenter to top first when calling `recenter-top-bottom'
 (setq recenter-positions '(top middle bottom))
 
+;; Use smaller steps for text scaling
+(setq text-scale-mode-step 1.1)
+
 (provide 'my-misc)
