@@ -116,12 +116,7 @@
   :config
   ;; Allow quitting ivy with ESC
   (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit)
-
-  (define-key ivy-switch-buffer-map (kbd "C-k")
-    #'(lambda ()
-      (interactive)
-      (kill-buffer (ivy-state-current ivy-last))
-      (ivy--reset-state ivy-last))))
+  (define-key ivy-switch-buffer-map (kbd "C-k") #'ivy-switch-buffer-kill))
 
 (use-package ivy-xref
   :after ivy
