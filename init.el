@@ -924,12 +924,7 @@ naming scheme."
          "Guardfile\\'"
          "Capfile\\'"
          "Vagrantfile\\'")
-  ;; Don't deep indent arrays and hashes
   :config
-  ;; Use dumb jump by default
-  (define-key ruby-mode-map (kbd "M-.") #'dumb-jump-go)
-  (define-key ruby-mode-map (kbd "M-,") #'dumb-jump-back)
-
   (advice-add 'join-line :after
               #'meqif/ruby-delete-trailing-comma-before-closing-bracket)
   (setq ruby-deep-ident-paren nil
@@ -1105,6 +1100,16 @@ naming scheme."
   (add-hook 'dumb-jump-after-jump-hook #'xref-pulse-momentarily)
   (setq dumb-jump-selector 'ivy
         dumb-jump-force-searcher 'rg))
+
+(use-package etags
+  :config
+  (setq tags-revert-without-query t))
+
+(use-package ctags-update
+  :config
+  (setq ctags-update-command "/usr/local/bin/ctags")
+  (add-hook 'ruby-mode-hook 'turn-on-ctags-auto-update-mode)
+  (add-hook 'enh-ruby-mode-hook 'turn-on-ctags-auto-update-mode))
 
 (use-package iedit
   :defer
