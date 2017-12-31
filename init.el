@@ -1194,9 +1194,6 @@ naming scheme."
   (setq auto-insert-alist
         (cons '("\\.rb\\'" nil "# frozen_string_literal: true\n\n") auto-insert-alist)))
 
-;; Recompile configuration files after saving them
-(add-hook 'after-save-hook 'meqif/compile-configuration-files)
-
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when (display-graphic-p)
