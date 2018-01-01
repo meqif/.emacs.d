@@ -242,6 +242,9 @@
   ;; Make imenu work on larger files
   (setq imenu-auto-rescan-maxout 120000)
 
+  ;; Extend the maximum length of entries
+  (setq imenu-max-item-length 120)
+
   ;; Recenter buffer after jumping
   (add-hook 'imenu-after-jump-hook 'recenter))
 
