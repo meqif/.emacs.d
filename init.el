@@ -1105,6 +1105,26 @@ naming scheme."
   :config
   (setq tags-revert-without-query t))
 
+(use-package etags-table
+  :config
+  ;; Taken from
+  ;; https://github.com/kaushalmodi/.emacs.d/blob/c7e3d5bae08105a7a1853566b44ea65c73c80e69/setup-files/setup-tags.el#L95-L103
+  (defun modi/update-etags-table ()
+    "Update `etags-table-alist' based on the current project directory."
+    (interactive)
+    (when (and (featurep 'projectile)
+               (projectile-project-root))
+      (add-to-list 'etags-table-alist
+                   `(,(concat (projectile-project-root) ".*")
+                     ,(concat (projectile-project-root) "TAGS"))
+                   t)))
+
+  (defun meqif/update-etags-table (&rest _)
+    (modi/update-etags-table))
+
+  ;; Always update the etags table before using it
+  (advice-add 'xref-find-definitions :before #'meqif/update-etags-table))
+
 (use-package ctags-update
   :config
   (setq ctags-update-command "/usr/local/bin/ctags")

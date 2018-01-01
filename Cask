@@ -35,6 +35,7 @@
 (depends-on "enh-ruby-mode")
 (depends-on "epl")
 (depends-on "ess" :archive melpa-stable)
+(depends-on "etags-table")
 (depends-on "evil")
 (depends-on "evil-lion")
 (depends-on "evil-magit")
