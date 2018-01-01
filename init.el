@@ -470,8 +470,6 @@
               ;; This fixes the problem with an extra newline when expanding snippets
               (setq-local require-final-newline nil))))
 
-(use-package auto-yasnippet)
-
 ;; Language-specific setup files
 (use-package markdown-mode
   :mode ("\\.md\\'" . gfm-mode)

@@ -8,7 +8,6 @@
 (depends-on "async")
 (depends-on "auctex")
 (depends-on "auto-complete")
-(depends-on "auto-yasnippet")
 (depends-on "avy")
 (depends-on "bind-key")
 (depends-on "browse-at-remote")
