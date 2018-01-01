@@ -1132,6 +1132,9 @@ naming scheme."
 (use-package ctags-update
   :config
   (setq ctags-update-command "/usr/local/bin/ctags")
+  (add-hook 'ruby-mode-hook #'(lambda ()
+                                (setq-local ctags-update-command "ripper-tags")
+                                (setq-local ctags-update-other-options (cdr ctags-update-other-options))))
   (add-hook 'ruby-mode-hook 'turn-on-ctags-auto-update-mode)
   (add-hook 'enh-ruby-mode-hook 'turn-on-ctags-auto-update-mode))
 
