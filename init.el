@@ -1093,6 +1093,10 @@ naming scheme."
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer))
 
+(use-package xref
+  :config
+  (add-hook 'xref-after-return-hook #'recenter))
+
 (use-package dumb-jump
   :defer t
   :config
