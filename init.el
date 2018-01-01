@@ -725,6 +725,11 @@
 (use-package lsp-mode
   :defer t)
 
+(use-package lsp-ui
+  :after lsp-mode
+  :config
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+
 (use-package lsp-flycheck
   :ensure lsp-mode
   :after lsp-mode)
