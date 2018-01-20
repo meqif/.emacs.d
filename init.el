@@ -235,7 +235,7 @@
 
 (use-package eldoc
   :defer t
-  :diminish "📖")
+  :diminish eldoc-mode)
 
 ;; Awesome project navigation
 (use-package projectile
@@ -397,6 +397,7 @@
   :defer t)
 
 (use-package flycheck
+  :diminish "🔍"
   :defer t
   :config
   (setq-default flycheck-display-errors-delay 0.5)
