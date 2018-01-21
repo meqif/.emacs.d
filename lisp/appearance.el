@@ -20,34 +20,17 @@
 
 ;; Load theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(use-package zerodark-theme
-  :config
-  (zerodark-setup-modeline-format)
-  (setq-default mode-line-format
-        `("%e"
-          ;; (:eval evil-mode-line-tag)
-          (:eval (when (boundp 'evil-state) (symbol-name evil-state))) " "
-          ,zerodark-modeline-ro " "
-          ,zerodark-buffer-coding
-          mode-line-frame-identification " "
-          " "
-          ,zerodark-modeline-modified
-          " "
-          ,zerodark-modeline-buffer-identification
-          ,zerodark-modeline-position
-          ,zerodark-modeline-vc
-          "  "
-          (:eval (zerodark-modeline-flycheck-status))
-          "  " mode-line-modes mode-line-misc-info mode-line-end-spaces
-          )))
+(load-theme 'gruvbox-dark-medium t)
 
 ;; Mac friendly font
-(defvar meqif/default-font "Office Code Pro-13")
+(defvar meqif/default-font "Fira Mono 15")
 (defvar meqif/fullscreen-font "Fira Mono-16")
 
 (when window-system
+  (set-fringe-mode '(16 . 16))
   (set-face-attribute 'default nil :font meqif/default-font)
-  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  (add-to-list 'default-frame-alist '(width . 132))
+  (add-to-list 'default-frame-alist '(height . 32))
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
 
