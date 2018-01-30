@@ -1220,20 +1220,14 @@ naming scheme."
 
 (use-package clojure-mode
   :defer t
-  :init
+  :config
   (add-hook 'clojure-mode-hook 'cider-mode))
 
 (use-package cider
-  :after 'clojure-mode
-  :init
-  (setq cider-repl-display-help-banner nil)
+  :defer t
   :config
-  (evil-define-key 'normal cider-repl-mode-map (kbd "j") 'cider-repl-previous-input)
-  (evil-define-key 'normal cider-repl-mode-map (kbd "k") 'cider-repl-next-input)
-  (--each '('normal 'insert)
-    (progn
-      (evil-define-key it cider-repl-mode-map (kbd "<up>") 'cider-repl-previous-input)
-      (evil-define-key it cider-repl-mode-map (kbd "<down>") 'cider-repl-next-input))))
+  (setq cider-prompt-for-symbol nil
+        cider-repl-display-help-banner nil))
 
 ;; Diffs like vimdiff
 (use-package vdiff
