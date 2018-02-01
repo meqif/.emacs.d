@@ -1256,7 +1256,7 @@ naming scheme."
 (use-package autoinsert
   :config
   (setq auto-insert-alist
-        (cons '("\\.rb\\'" nil "# frozen_string_literal: true\n\n") auto-insert-alist)))
+        (cons '("\\.rb\\'" nil "# frozen_string_literal: true\n") auto-insert-alist)))
 
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
