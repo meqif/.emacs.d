@@ -1227,7 +1227,8 @@ naming scheme."
   :defer t
   :config
   (setq cider-prompt-for-symbol nil
-        cider-repl-display-help-banner nil))
+        cider-repl-display-help-banner nil)
+  (advice-add 'cider-find-var :after #'recenter))
 
 ;; Diffs like vimdiff
 (use-package vdiff
