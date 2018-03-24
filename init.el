@@ -888,6 +888,8 @@
   (setq magit-commit-arguments '("--verbose")
         ;; No fast-forward by default for merge mode
         magit-merge-arguments '("--no-ff")
+        ;; Prune removed branches by default when fetching from remote
+        magit-fetch-arguments '("--prune")
         ;; Use ivy to complete magit's prompts
         magit-completing-read-function 'ivy-completing-read)
 
