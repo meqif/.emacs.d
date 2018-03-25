@@ -1254,6 +1254,11 @@ naming scheme."
   (setq auto-insert-alist
         (cons '("\\.rb\\'" nil "# frozen_string_literal: true\n") auto-insert-alist)))
 
+(use-package atomic-chrome
+  :config
+  (atomic-chrome-start-server)
+  (setq atomic-chrome-buffer-open-style 'frame))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when (display-graphic-p)

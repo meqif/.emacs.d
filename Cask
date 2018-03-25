@@ -6,6 +6,7 @@
 (depends-on "adoc-mode")
 (depends-on "aggressive-indent")
 (depends-on "async")
+(depends-on "atomic-chrome")
 (depends-on "auctex")
 (depends-on "auto-complete")
 (depends-on "avy")
