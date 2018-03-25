@@ -201,12 +201,6 @@
         ;;                          
         #xf091 #xf059 #xf076 #xf075 #xe192  #xf016)
 
-       ;; ("material icons"
-       ;;  ;;        
-       ;;  #xe871 #xe918 #xe3e7
-       ;;  ;;
-       ;;  #xe3d0 #xe3d1 #xe3d2 #xe3d4)
-
        ("Symbola"
         ;; 𝕊    ⨂      ∅      ⟻    ⟼     ⊙      𝕋       𝔽
         #x1d54a #x2a02 #x2205 #x27fb #x27fc #x2299 #x1d54b #x1d53d
