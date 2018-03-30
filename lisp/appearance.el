@@ -20,7 +20,7 @@
 
 ;; Load theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'gruvbox-dark-medium t)
+(load-theme 'gruvbox-dark-hard t)
 
 ;; Mac friendly font
 (defvar meqif/default-font "Fira Mono 15")
