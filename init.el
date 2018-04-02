@@ -1239,7 +1239,11 @@ naming scheme."
   (add-hook 'ess-mode-hook 'company-mode)
   (add-hook 'inferior-ess-mode-hook 'company-mode))
 
-(use-package kotlin-mode)
+(use-package kotlin-mode
+  :mode "\\.kt\\'"
+  :config
+  (add-hook 'kotlin-mode-hook #'whitespace-turn-off)
+  (add-hook 'kotlin-mode-hook #'subword-mode))
 
 (use-package flycheck-kotlin
   :after kotlin-mode
