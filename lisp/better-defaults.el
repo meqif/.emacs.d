@@ -70,4 +70,19 @@
 ;; Always ask before exiting Emacs
 (setq confirm-kill-emacs 'yes-or-no-p)
 
+;; Use https for package archives
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")))
+
+(let ((trustfile (expand-file-name "~/.emacs.d/cacert.pem")))
+  (unless (file-exists-p trustfile)
+    (error (concat "No certificate bundle file found! "
+                   "Please download it with "
+                   (format "`curl https://curl.haxx.se/ca/cacert.pem -o %s`" trustfile))))
+  (setq tls-checktrust 'always
+        tls-program (list (format "gnutls-cli --x509cafile %s -p %%p %%h" trustfile))
+        gnutls-verify-error t
+        gnutls-trustfiles (list trustfile)))
+
 (provide 'better-defaults)
