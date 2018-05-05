@@ -55,26 +55,6 @@
 ;; Always load most recent version of required files
 (setq load-prefer-newer t)
 
-;; Bring some sanity in
-(require 'sane-defaults)
-
-;; Keyboard smooth scrolling: Prevent the awkward "snap to re-center" when
-;; the text cursor moves off-screen. Instead, only scroll the minimum amount
-;; necessary to show the new line. (A number of 101+ disables re-centering.)
-(setq scroll-conservatively 101)
-
-;; Make the minibuffer prompt intangible to stop it from being selectable or
-;; navigable with the movement keys
-;; Source: https://lists.gnu.org/archive/html/emacs-devel/2016-04/msg00857.html
-(unless (version< emacs-version "25.0")
-  (let ((default (eval (car (get 'minibuffer-prompt-properties 'standard-value))))
-        (dont-touch-prompt-prop '(cursor-intangible t)))
-    (setq minibuffer-prompt-properties (append default dont-touch-prompt-prop))
-  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)))
-
-;; Always ask before exiting Emacs
-(setq confirm-kill-emacs 'yes-or-no-p)
-
 ;; Packages
 (require 'cask)
 (cask-initialize)
@@ -106,6 +86,9 @@
         tls-program (list (format "gnutls-cli --x509cafile %s -p %%p %%h" trustfile))
         gnutls-verify-error t
         gnutls-trustfiles (list trustfile)))
+
+;; Bring better defaults
+(use-package better-defaults :ensure nil)
 
 (use-package dash
   :defer t
