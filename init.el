@@ -17,7 +17,7 @@
 
 ;; Reduce how often garbage collection runs (which negatively impacts
 ;; performance)
-(setq gc-cons-threshold 50000000)
+(setq gc-cons-threshold (* 50 1024 1024))
 
 ;; Run garbage collection when the frame is unfocused
 (add-hook 'focus-out-hook 'garbage-collect)
