@@ -82,6 +82,7 @@
 (use-package ivy
   :defer t
   :config
+  (ivy-mode +1)
   (setq ivy-format-function 'ivy-format-function-arrow)
   ;; Allow quitting ivy with ESC
   (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit)
