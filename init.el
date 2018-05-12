@@ -728,20 +728,27 @@
       (compile (concat "rustc " (buffer-name) " -o " (f-no-ext (buffer-name)))))))
 
 (use-package lsp-mode
-  :defer t)
+  :defer t
+  :bind ("M-." . lsp-goto-implementation)
+  :config
+  (setq lsp-highlight-symbol-at-point nil))
 
 (use-package lsp-ui
   :after lsp-mode
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
-(use-package lsp-flycheck
-  :ensure lsp-mode
-  :after lsp-mode)
+(use-package company-lsp
+  :after (lsp-mode company-mode)
+  :config
+  (push 'company-lsp company-backends)
+  (setq company-lsp-enable-snippet t
+        company-lsp-cache-candidates t))
 
 (use-package lsp-rust
   :after rust-mode
   :config
+  (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls"))
   (add-hook 'rust-mode-hook #'lsp-rust-enable))
 
 (use-package flyspell
@@ -1212,7 +1219,9 @@ naming scheme."
   :mode "\\.kt\\'"
   :config
   (add-hook 'kotlin-mode-hook #'whitespace-turn-off)
-  (add-hook 'kotlin-mode-hook #'subword-mode))
+  (add-hook 'kotlin-mode-hook #'subword-mode)
+  (add-hook 'kotlin-mode-hook #'(lambda () (flycheck-mode +1) (flycheck-error-list-set-filter 'warning)))
+  (add-hook 'kotlin-mode-hook #'(lambda () (require 'lsp-intellij) (lsp-intellij-enable))))
 
 (use-package flycheck-kotlin
   :after kotlin-mode
