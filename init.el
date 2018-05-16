@@ -729,8 +729,10 @@
 
 (use-package lsp-mode
   :defer t
-  :bind ("M-." . lsp-goto-implementation)
   :config
+  (setq lsp-mode-map (make-sparse-keymap))
+  (define-key lsp-mode-map (kbd "M-.") 'lsp-goto-implementation)
+  (add-hook 'lsp-mode-hook #'(lambda () (use-local-map lsp-mode-map)))
   (setq lsp-highlight-symbol-at-point nil))
 
 (use-package lsp-ui
