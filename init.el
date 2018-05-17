@@ -752,7 +752,9 @@
   :config
   (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls")))
 
-(use-package eglot)
+(use-package eglot
+  :config
+  (add-to-list 'eglot-server-programs '(kotlin-mode . ("localhost:8080"))))
 
 (use-package flyspell
   :defer
