@@ -748,10 +748,11 @@
         company-lsp-cache-candidates t))
 
 (use-package lsp-rust
-  :after rust-mode
+  :after (lsp-mode rust-mode)
   :config
-  (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls"))
-  (add-hook 'rust-mode-hook #'lsp-rust-enable))
+  (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls")))
+
+(use-package eglot)
 
 (use-package flyspell
   :defer
@@ -1222,8 +1223,7 @@ naming scheme."
   :config
   (add-hook 'kotlin-mode-hook #'whitespace-turn-off)
   (add-hook 'kotlin-mode-hook #'subword-mode)
-  (add-hook 'kotlin-mode-hook #'(lambda () (flycheck-mode +1) (flycheck-error-list-set-filter 'warning)))
-  (add-hook 'kotlin-mode-hook #'(lambda () (require 'lsp-intellij) (lsp-intellij-enable))))
+  (add-hook 'kotlin-mode-hook #'(lambda () (flycheck-mode +1) (flycheck-error-list-set-filter 'warning))))
 
 (use-package flycheck-kotlin
   :after kotlin-mode

@@ -31,6 +31,7 @@
 (depends-on "dumb-jump")
 (depends-on "easy-escape")
 (depends-on "ebib")
+(depends-on "eglot" :git "https://github.com/joaotavora/eglot.git")
 (depends-on "emmet-mode")
 (depends-on "enh-ruby-mode")
 (depends-on "epl")
