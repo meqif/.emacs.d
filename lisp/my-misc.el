@@ -27,4 +27,8 @@
 ;; Use smaller steps for text scaling
 (setq text-scale-mode-step 1.1)
 
+;; Start with a clean scratch buffer
+(setq initial-major-mode 'fundamental-mode
+      initial-scratch-message nil)
+
 (provide 'my-misc)

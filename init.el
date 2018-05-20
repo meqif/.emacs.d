@@ -807,7 +807,7 @@
   (define-key browse-kill-ring-mode-map (kbd "k") #'browse-kill-ring-previous))
 
 ;; Misc
-(require 'my-misc)
+(use-package my-misc :ensure nil)
 
 ;; Highlight excessively long lines
 (use-package whitespace
