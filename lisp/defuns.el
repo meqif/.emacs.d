@@ -230,5 +230,22 @@ Return the decoded text as multibyte string."
               :action (lambda (candidate)
                         (ivy-completion-in-region-action (cdr candidate))))))
 
+(defun meqif/indent-or-complete-common ()
+  "Indent the current line or region, or complete the common part."
+  (interactive)
+  (cond
+   ((use-region-p)
+    (indent-region (region-beginning) (region-end)))
+   ((memq indent-line-function
+          '(indent-relative indent-relative-maybe))
+    (meqif/counsel-company))
+   ((let ((old-point (point))
+          (old-tick (buffer-chars-modified-tick))
+          (tab-always-indent t))
+      (call-interactively #'indent-for-tab-command)
+      (when (and (eq old-point (point))
+                 (eq old-tick (buffer-chars-modified-tick)))
+        (meqif/counsel-company))))))
+
 (provide 'defuns)
 ;;; defuns.el ends here

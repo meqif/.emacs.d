@@ -322,7 +322,7 @@
   ;; Enable it for docker-compose-mode as well
   (add-hook 'docker-compose-mode-hook 'company-mode)
 
-  (define-key company-mode-map (kbd "TAB") #'meqif/counsel-company)
+  (define-key company-mode-map (kbd "TAB") #'meqif/indent-or-complete-common)
 
   (setq
    ;; Offer completions quickly
