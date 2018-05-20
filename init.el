@@ -1143,14 +1143,25 @@ naming scheme."
                    t)))
 
   (defun meqif/update-etags-table (&rest _)
-    (modi/update-etags-table))
+    (modi/update-etags-table)
+    (let ((tags-file (f-join (projectile-project-root) "TAGS")))
+      (unless (and (f-exists? tags-file) (> (f-size tags-file) 0))
+        (ctags-update))))
 
   ;; Always update the etags table before using it
   ;; (advice-add 'xref-find-definitions :before #'meqif/update-etags-table)
   )
 
 (use-package ctags-update
+  :diminish ctags-auto-update-mode
   :config
+  (defun meqif/create-tags-file (&rest _)
+    (let ((tags-file (f-join (projectile-project-root) "TAGS")))
+      (unless (f-exists? tags-file)
+        (f-touch tags-file))))
+
+  (advice-add 'ctags-update :before #'meqif/create-tags-file)
+
   (setq ctags-update-command "/usr/local/bin/ctags")
   (add-hook 'ruby-mode-hook #'(lambda ()
                                 (setq-local ctags-update-command "ripper-tags")
