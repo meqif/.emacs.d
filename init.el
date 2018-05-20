@@ -1146,7 +1146,8 @@ naming scheme."
     (modi/update-etags-table))
 
   ;; Always update the etags table before using it
-  (advice-add 'xref-find-definitions :before #'meqif/update-etags-table))
+  ;; (advice-add 'xref-find-definitions :before #'meqif/update-etags-table)
+  )
 
 (use-package ctags-update
   :config
