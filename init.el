@@ -191,6 +191,8 @@
 ;; Unclutter modeline
 (use-package diminish)
 
+(use-package delight)
+
 ;; Smarter M-x
 (use-package smex
   :init (smex-initialize)
@@ -1039,12 +1041,14 @@ naming scheme."
     (kbd "L") #'(lambda (pkg) (interactive '(nil)) (paradox-menu-view-commit-list pkg))))
 
 (use-package lispy
+  :delight
   :defer t
   :init
   (add-hook 'emacs-lisp-mode-hook #'lispy-mode)
   (add-hook 'clojure-mode-hook #'lispy-mode))
 
 (use-package lispyville
+  :delight
   :defer t
   :init
   (add-hook 'lispy-mode-hook #'lispyville-mode))
@@ -1247,6 +1251,7 @@ naming scheme."
 
 ;; Improve readability of ELisp regular expressions
 (use-package easy-escape
+  :delight easy-escape-minor-mode
   :init
   (add-hook 'lisp-mode-hook 'easy-escape-minor-mode)
   (add-hook 'emacs-lisp-mode-hook 'easy-escape-minor-mode))
