@@ -706,11 +706,11 @@
     ;; Hydra for rust's cargo
     (defhydra hydra-cargo (:color blue :columns 4)
       "cargo"
-      ("c" cargo-process-build "build")
+      ("c" cargo-process-check "check")
       ("tt" cargo-process-test "test all")
       ("tf" cargo-process-current-test "test current function")
       ("b" cargo-process-bench "benchmark all")
-      ("C" cargo-process-clean "clean")
+      ("C" cargo-process-build "build")
       ("dd" cargo-process-doc "build documentation")
       ("do" cargo-process-doc-open "build and open documentation")
       ("r" cargo-process-run "run")
