@@ -683,6 +683,7 @@
   ;; Add brackets to smartparens pair list
   (sp-local-pair 'rust-mode "<" ">")
 
+  (add-hook 'rust-mode-hook 'subword-mode)
   (add-hook 'rust-mode-hook
             (lambda ()
               ;; Enable on-the-fly syntax checking
