@@ -757,7 +757,25 @@
 
 (use-package eglot
   :config
-  (add-to-list 'eglot-server-programs '(kotlin-mode . ("localhost:8080"))))
+  (add-to-list 'eglot-server-programs '(kotlin-mode . ("localhost:8080")))
+
+  ;; IntelliJ-LSP-Server specific stuff
+  (defun eglot-intellij-toggle-workspace ()
+    (interactive)
+    (eglot--notify
+     (eglot--current-server-or-lose)
+     :workspace/executeCommand
+     '((:command . :toggleFrameVisibility))))
+
+  (cl-defmethod eglot-handle-notification
+    ((server eglot-cquery) (_method (eql :idea/indexStarted))
+     &key uri symbols &allow-other-keys)
+    "No-op for unsupported idea/indexStarted extension")
+
+  (cl-defmethod eglot-handle-notification
+    ((server eglot-cquery) (_method (eql :idea/indexEnded))
+     &key uri symbols &allow-other-keys)
+    "No-op for unsupported idea/indexEnded extension"))
 
 (use-package flyspell
   :defer
