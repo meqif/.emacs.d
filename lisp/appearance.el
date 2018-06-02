@@ -12,6 +12,7 @@
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state
         spaceline-minor-modes-separator " · "
         powerline-default-separator nil)
+  (spaceline-toggle-buffer-size-off)
   (spaceline-toggle-buffer-position-off)
   (spaceline-toggle-hud-off)
 
