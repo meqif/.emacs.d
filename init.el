@@ -1267,6 +1267,10 @@ naming scheme."
   :config
   (flycheck-kotlin-setup))
 
+(use-package sh-mode
+  :ensure sh-script
+  :mode "\\.env\\(\..+\\)?\\'")
+
 ;; Improve readability of ELisp regular expressions
 (use-package easy-escape
   :delight easy-escape-minor-mode
