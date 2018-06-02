@@ -361,6 +361,11 @@
 (use-package wgrep
   :defer t)
 
+(use-package flymake
+  :defer
+  :config
+  (add-hook 'flymake-mode-hook #'(lambda () (flycheck-mode -1))))
+
 (use-package flycheck
   :diminish "🔍"
   :defer t
