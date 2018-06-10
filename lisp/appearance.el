@@ -32,6 +32,16 @@
   (set-face-attribute 'default nil :font meqif/default-font)
   (add-to-list 'default-frame-alist '(width . 132))
   (add-to-list 'default-frame-alist '(height . 32))
+
+  (set-face-attribute 'powerline-active0 nil :height 0.9)
+  (set-face-attribute 'powerline-active1 nil :height 0.9)
+  (set-face-attribute 'powerline-active2 nil :height 0.9)
+  (set-face-attribute 'powerline-inactive0 nil :height 0.9)
+  (set-face-attribute 'powerline-inactive1 nil :height 0.9)
+  (set-face-attribute 'powerline-inactive2 nil :height 0.9)
+  (set-face-attribute 'mode-line nil :height 0.9)
+  (set-face-attribute 'mode-line-inactive nil :height 0.9)
+
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
 
