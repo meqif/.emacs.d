@@ -1061,7 +1061,9 @@ naming scheme."
     (kbd "J") #'paradox-next-describe
     (kbd "K") #'paradox-previous-describe
     (kbd "H") #'paradox-menu-quick-help
-    (kbd "L") #'(lambda (pkg) (interactive '(nil)) (paradox-menu-view-commit-list pkg))))
+    (kbd "L") #'(lambda (pkg) (interactive '(nil)) (paradox-menu-view-commit-list pkg))
+    (kbd "C-f") #'evil-scroll-page-down
+    (kbd "C-b") #'evil-scroll-page-up))
 
 (use-package lispy
   :delight
