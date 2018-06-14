@@ -1255,6 +1255,17 @@ naming scheme."
   :config
   (setq ediff-split-window-function 'split-window-horizontally))
 
+(use-package smerge-mode
+  :defer
+  :config
+  (defhydra hydra-smerge ()
+    "smerge"
+    ("j" smerge-next "next")
+    ("k" smerge-prev "previous")
+    ("w" smerge-keep-upper "keep upper")
+    ("s" smerge-keep-lower "keep lower")
+    ("q" nil "quit" :color blue)))
+
 (use-package ess
   :defer t
   :pin melpa-stable
