@@ -687,8 +687,8 @@
 (use-package rust-mode
   :defer t
   :config
-  ;; Add brackets to smartparens pair list
-  (sp-local-pair 'rust-mode "<" ">")
+  ;; Disable evil-matchit, it fails with "Scan error"
+  (add-hook 'rust-mode-hook #'(lambda () (evil-matchit-mode -1)))
 
   (add-hook 'rust-mode-hook 'subword-mode)
   (add-hook 'rust-mode-hook
