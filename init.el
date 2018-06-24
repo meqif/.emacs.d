@@ -772,6 +772,8 @@
 
   (add-hook 'rust-mode-hook 'eglot-ensure)
 
+  (general-define-key :keymap 'eglot-mode-map :prefix nil "M-RET" 'eglot-code-actions)
+
   ;; IntelliJ-LSP-Server specific stuff
   (defun eglot-intellij-toggle-workspace ()
     (interactive)
