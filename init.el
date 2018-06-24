@@ -764,6 +764,8 @@
   :config
   (add-to-list 'eglot-server-programs '(kotlin-mode . ("localhost:8080")))
 
+  (add-hook 'rust-mode-hook 'eglot-ensure)
+
   ;; IntelliJ-LSP-Server specific stuff
   (defun eglot-intellij-toggle-workspace ()
     (interactive)
