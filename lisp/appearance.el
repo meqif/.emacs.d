@@ -28,7 +28,7 @@
 (defvar meqif/fullscreen-font "Fira Mono-16")
 
 (when window-system
-  (set-fringe-mode '(16 . 16))
+  (set-fringe-mode '(4 . 4))
   (set-face-attribute 'default nil :font meqif/default-font)
   (add-to-list 'default-frame-alist '(width . 132))
   (add-to-list 'default-frame-alist '(height . 32))

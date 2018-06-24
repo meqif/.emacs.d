@@ -861,7 +861,11 @@
   :commands diff-hl-magit-post-refresh
   :init
   (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
-  (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
+  (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode)
+  :config
+  (set-face-attribute 'diff-hl-insert nil :foreground "#98971a" :background "#98971a")
+  (set-face-attribute 'diff-hl-change nil :foreground "#458588" :background "#458588")
+  (set-face-attribute 'diff-hl-delete nil :foreground "#cc241d" :background "#cc241d"))
 
 (use-package magit
   :pin melpa-stable
