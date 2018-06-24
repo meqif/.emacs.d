@@ -75,6 +75,10 @@
 ;; Bring better defaults
 (use-package better-defaults :ensure nil)
 
+;; Essential utility libraries!
+(use-package f)
+(use-package s)
+
 (use-package dash
   :defer t
   :config (dash-enable-font-lock))
