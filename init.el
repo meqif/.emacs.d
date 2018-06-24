@@ -85,6 +85,7 @@
 
 (use-package ivy
   :defer t
+  :delight
   :config
   (ivy-mode +1)
   (setq ivy-format-function 'ivy-format-function-arrow)
@@ -193,9 +194,10 @@
 (add-hook 'after-make-frame-functions '--set-emoji-font)
 
 ;; Unclutter modeline
-(use-package diminish)
-
 (use-package delight)
+
+(use-package autorevert
+  :delight auto-revert-mode)
 
 ;; Smarter M-x
 (use-package smex
@@ -204,11 +206,11 @@
 
 (use-package eldoc
   :defer t
-  :diminish eldoc-mode)
+  :delight)
 
 ;; Awesome project navigation
 (use-package projectile
-  :diminish projectile-mode
+  :delight
   :defer 5
   :init
   (projectile-mode)
@@ -218,7 +220,7 @@
     (add-to-list 'projectile-globally-ignored-directories it)))
 
 (use-package smartparens
-  :diminish smartparens-mode
+  :delight
   :config
   (smartparens-global-mode t)
   ;; Show matching parentheses
@@ -319,7 +321,7 @@
 
 ;; Misery loves this
 (use-package company
-  :diminish company-mode
+  :delight
   :config
   ;; Enable company mode for every programming major mode
   (add-hook 'prog-mode-hook 'company-mode)
@@ -371,7 +373,7 @@
   (add-hook 'flymake-mode-hook #'(lambda () (flycheck-mode -1))))
 
 (use-package flycheck
-  :diminish "🔍"
+  :delight "🔍"
   :defer t
   :config
   (setq-default flycheck-display-errors-delay 0.5)
@@ -461,7 +463,7 @@
   (add-hook 'evil-org-mode-hook #'evil-org-set-key-theme))
 
 (use-package yasnippet
-  :diminish yas-minor-mode
+  :delight yas-minor-mode
   :config
   ;; Use only own snippets, do not use bundled ones
   (setq yas-snippet-dirs (list (expand-file-name "~/.emacs.d/snippets")))
@@ -843,14 +845,14 @@
 
 ;; Highlight excessively long lines
 (use-package whitespace
-  :diminish whitespace-mode
+  :delight
   :config
   (setq whitespace-style '(face lines-tail))
   (setq-default whitespace-line-column nil)
   (add-hook 'prog-mode-hook 'whitespace-mode))
 
 (use-package undo-tree
-  :diminish undo-tree-mode
+  :delight
   :config
   ;; Show timestamps
   (setq undo-tree-visualizer-timestamps t)
@@ -966,7 +968,7 @@ naming scheme."
 
 (use-package subword
   :defer t
-  :diminish "_")
+  :delight "_")
 
 ;; Ruby mode
 (use-package ruby-mode
@@ -1034,7 +1036,7 @@ naming scheme."
 ;; Automatically expand # to #{} inside double-quoted strings
 (use-package ruby-tools
   :after (:any ruby-mode enh-ruby-mode)
-  :diminish (ruby-tools-mode . "🛠"))
+  :delight "🛠")
 
 (use-package inf-ruby
   :defer
@@ -1052,6 +1054,7 @@ naming scheme."
 
 (use-package ruby-refactor
   :after (:any ruby-mode enh-ruby-mode)
+  :delight
   :init
   (add-hook 'ruby-mode-hook 'ruby-refactor-mode)
   (add-hook 'enh-ruby-mode-hook 'ruby-refactor-mode)
@@ -1194,7 +1197,7 @@ naming scheme."
   :ensure nil
   :after 'org
   :load-path "lisp/"
-  :diminish (faun-mode . "👹"))
+  :delight "👹")
 
 ;; Wrap lines in visual-line-mode at the fill column
 (use-package visual-fill-column
@@ -1290,7 +1293,7 @@ naming scheme."
             t))
 
 (use-package server
-  :diminish server-buffer-clients
+  :delight server-buffer-clients
   ;; Start server if it isn't already running
   :config
   (unless (server-running-p) (server-start)))
