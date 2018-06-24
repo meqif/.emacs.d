@@ -1164,51 +1164,6 @@ naming scheme."
   (setq dumb-jump-selector 'ivy
         dumb-jump-force-searcher 'rg))
 
-(use-package etags
-  :config
-  (setq tags-revert-without-query t))
-
-(use-package etags-table
-  :config
-  ;; Taken from
-  ;; https://github.com/kaushalmodi/.emacs.d/blob/c7e3d5bae08105a7a1853566b44ea65c73c80e69/setup-files/setup-tags.el#L95-L103
-  (defun modi/update-etags-table ()
-    "Update `etags-table-alist' based on the current project directory."
-    (interactive)
-    (when (and (featurep 'projectile)
-               (projectile-project-root))
-      (add-to-list 'etags-table-alist
-                   `(,(concat (projectile-project-root) ".*")
-                     ,(concat (projectile-project-root) "TAGS"))
-                   t)))
-
-  (defun meqif/update-etags-table (&rest _)
-    (modi/update-etags-table)
-    (let ((tags-file (f-join (projectile-project-root) "TAGS")))
-      (unless (and (f-exists? tags-file) (> (f-size tags-file) 0))
-        (ctags-update))))
-
-  ;; Always update the etags table before using it
-  ;; (advice-add 'xref-find-definitions :before #'meqif/update-etags-table)
-  )
-
-(use-package ctags-update
-  :diminish ctags-auto-update-mode
-  :config
-  (defun meqif/create-tags-file (&rest _)
-    (let ((tags-file (f-join (projectile-project-root) "TAGS")))
-      (unless (f-exists? tags-file)
-        (f-touch tags-file))))
-
-  (advice-add 'ctags-update :before #'meqif/create-tags-file)
-
-  (setq ctags-update-command "/usr/local/bin/ctags")
-  (add-hook 'ruby-mode-hook #'(lambda ()
-                                (setq-local ctags-update-command "ripper-tags")
-                                (setq-local ctags-update-other-options (cdr ctags-update-other-options))))
-  (add-hook 'ruby-mode-hook 'turn-on-ctags-auto-update-mode)
-  (add-hook 'enh-ruby-mode-hook 'turn-on-ctags-auto-update-mode))
-
 (use-package iedit
   :defer
   :init (setq iedit-toggle-key-default nil))
