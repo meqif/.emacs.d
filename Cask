@@ -20,6 +20,7 @@
 (depends-on "clojure-mode")
 (depends-on "color-theme")
 (depends-on "company")
+(depends-on "company-posframe")
 (depends-on "counsel")
 (depends-on "darktooth-theme")
 (depends-on "dash")

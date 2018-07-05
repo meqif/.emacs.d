@@ -356,6 +356,12 @@
             company-search-map)
     (define-key it [escape] 'company-abort)))
 
+(use-package company-posframe
+  :delight
+  :after company
+  :config
+  (company-posframe-mode 1))
+
 (use-package docker-compose-mode)
 
 ;; Unique buffer names
