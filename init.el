@@ -711,15 +711,7 @@
               (setq-local fill-column 100)
               ;; Reload whitespace mode to make the previous change effective
               (whitespace-mode -1)
-              (whitespace-mode 1)
-              ;; Prettify some symbols
-              (--each '((">=" . (?· (Br . Bl) ?≥))
-                        ("<=" . (?· (Br . Bl) ?≤))
-                        ("!=" . (?· (Br . Bl) ?≠))
-                        ("=>" . (?· (Br . Bl) ?➡))
-                        ("->" . (?· (Br . Bl) ?→))
-                        )
-                (push it prettify-symbols-alist))))
+              (whitespace-mode 1)))
 
   (use-package cargo
     :config
