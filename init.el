@@ -1270,6 +1270,8 @@ naming scheme."
 
 (use-package autoinsert
   :config
+  (add-hook 'prog-mode-hook 'auto-insert-mode)
+  (setq auto-insert-query nil)
   (setq auto-insert-alist
         (cons '("\\.rb\\'" nil "# frozen_string_literal: true\n") auto-insert-alist)))
 
