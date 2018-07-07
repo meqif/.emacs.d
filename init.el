@@ -1242,8 +1242,7 @@ naming scheme."
   :mode "\\.kt\\'"
   :config
   (add-hook 'kotlin-mode-hook #'whitespace-turn-off)
-  (add-hook 'kotlin-mode-hook #'subword-mode)
-  (add-hook 'kotlin-mode-hook #'(lambda () (flycheck-mode +1) (flycheck-error-list-set-filter 'warning))))
+  (add-hook 'kotlin-mode-hook #'subword-mode))
 
 (use-package flycheck-kotlin
   :after kotlin-mode
