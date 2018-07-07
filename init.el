@@ -391,9 +391,6 @@
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-popup-tip-mode))
 
-(use-package flycheck-status-emoji
-  :after flycheck
-  :config (add-hook 'flycheck-mode-hook #'flycheck-status-emoji-mode))
 
 (use-package org
   :defer
