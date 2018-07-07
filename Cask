@@ -48,7 +48,6 @@
 (depends-on "expand-region")
 (depends-on "eyebrowse")
 (depends-on "f")
-(depends-on "firestarter")
 (depends-on "fish-mode")
 (depends-on "flx")
 (depends-on "flx-ido")
