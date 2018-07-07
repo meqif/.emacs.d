@@ -391,6 +391,9 @@
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-popup-tip-mode))
 
+(use-package flycheck-cask
+  :after flycheck
+  :config (add-hook 'flycheck-mode-hook #'flycheck-cask-setup))
 
 (use-package org
   :defer

@@ -53,6 +53,7 @@
 (depends-on "flx")
 (depends-on "flx-ido")
 (depends-on "flycheck")
+(depends-on "flycheck-cask")
 (depends-on "flycheck-popup-tip")
 (depends-on "general")
 (depends-on "git-timemachine")
