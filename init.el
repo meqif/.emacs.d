@@ -701,12 +701,9 @@
   :config
   ;; Disable evil-matchit, it fails with "Scan error"
   (add-hook 'rust-mode-hook #'(lambda () (evil-matchit-mode -1)))
-
   (add-hook 'rust-mode-hook 'subword-mode)
   (add-hook 'rust-mode-hook
             (lambda ()
-              ;; Enable on-the-fly syntax checking
-              (flycheck-mode 1)
               ;; Rust has different rules for too long lines
               (setq-local fill-column 100)
               ;; Reload whitespace mode to make the previous change effective
