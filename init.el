@@ -376,7 +376,30 @@
 (use-package flymake
   :defer
   :config
-  (add-hook 'flymake-mode-hook #'(lambda () (flycheck-mode -1))))
+  (add-hook 'flymake-mode-hook #'(lambda () (flycheck-mode -1)))
+
+  (defvar flymake-diagnostic-at-pt-timer nil)
+  (defvar flymake-diagnostic-at-pt-timer-delay 0.5)
+
+  (defun flymake-diagnostic-at-pt-maybe-display ()
+    (when (help-at-pt-string)
+      (popup-tip (help-at-pt-string))))
+
+  (defun flymake-diagnostic-at-pt-set-timer ()
+    (interactive)
+    (unless flymake-diagnostic-at-pt-timer
+      (setq flymake-diagnostic-at-pt-timer
+            (run-with-idle-timer
+             flymake-diagnostic-at-pt-timer-delay t #'flymake-diagnostic-at-pt-maybe-display))))
+
+  (defun flymake-diagnostic-at-pt-cancel-timer ()
+    (interactive)
+    (let ((inhibit-quit t))
+      (when flymake-diagnostic-at-pt-timer
+        (cancel-timer flymake-diagnostic-at-pt-timer)
+        (setq flymake-diagnostic-at-pt-timer nil))))
+
+  (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-pt-set-timer))
 
 (use-package flycheck
   :delight "🔍"
