@@ -1250,6 +1250,10 @@ naming scheme."
   :config
   (flycheck-kotlin-setup))
 
+(use-package groovy-mode
+  :pin melpa-stable
+  :mode "\\.gradle\\'")
+
 (use-package sh-mode
   :ensure sh-script
   :mode "\\.env\\(\..+\\)?\\'")

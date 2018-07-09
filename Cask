@@ -57,6 +57,7 @@
 (depends-on "general")
 (depends-on "git-timemachine")
 (depends-on "goto-chg")
+(depends-on "groovy-mode")
 (depends-on "gruvbox-theme")
 (depends-on "haskell-mode")
 (depends-on "helm")
