@@ -380,10 +380,17 @@
 
   (defvar flymake-diagnostic-at-pt-timer nil)
   (defvar flymake-diagnostic-at-pt-timer-delay 0.5)
+  (defvar flymake-diagnostic-at-pt-posframe-buffer " *flymake-diagnostic-at-pt-posframe-buffer*")
 
   (defun flymake-diagnostic-at-pt-maybe-display ()
-    (when (help-at-pt-string)
-      (popup-tip (help-at-pt-string))))
+    (posframe-delete-frame flymake-diagnostic-at-pt-posframe-buffer)
+    (when (get-char-property (point) 'flymake-diagnostic)
+      (with-current-buffer (get-buffer-create flymake-diagnostic-at-pt-posframe-buffer)
+        (erase-buffer))
+      (posframe-show flymake-diagnostic-at-pt-posframe-buffer
+                     :string (help-at-pt-string)
+                     :background-color "#666666"
+                     :position (point))))
 
   (defun flymake-diagnostic-at-pt-set-timer ()
     (interactive)
