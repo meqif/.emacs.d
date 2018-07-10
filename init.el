@@ -389,7 +389,8 @@
         (erase-buffer))
       (posframe-show flymake-diagnostic-at-pt-posframe-buffer
                      :string (help-at-pt-string)
-                     :background-color "#666666"
+                     :background-color (face-background 'popup-face)
+                     :foreground-color (face-foreground 'popup-face)
                      :position (point))))
 
   (defun flymake-diagnostic-at-pt-set-timer ()
