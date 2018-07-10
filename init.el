@@ -376,53 +376,13 @@
 (use-package flymake
   :defer
   :config
-  (add-hook 'flymake-mode-hook #'(lambda () (flycheck-mode -1)))
+  (add-hook 'flymake-mode-hook #'(lambda () (flycheck-mode -1))))
 
-  (defvar-local flymake-diagnostic-at-pt-timer nil
-    "Timer to automatically show the error at point in a popup.")
-
-  (defvar flymake-diagnostic-at-pt-timer-delay 0.5)
-  (defvar flymake-diagnostic-at-pt-posframe-buffer " *flymake-diagnostic-at-pt-posframe-buffer*")
-
-  (defun flymake-diagnostic-at-pt-maybe-display ()
-    (when (and flymake-mode
-               (get-char-property (point) 'flymake-diagnostic))
-      (with-current-buffer (get-buffer-create flymake-diagnostic-at-pt-posframe-buffer)
-        (erase-buffer))
-      (posframe-show flymake-diagnostic-at-pt-posframe-buffer
-                     :string (help-at-pt-string)
-                     :background-color (face-background 'popup-face)
-                     :foreground-color (face-foreground 'popup-face)
-                     :position (point))
-      (add-hook 'pre-command-hook #'flymake-diagnostic-at-pt-delete-popup nil t)))
-
-  (defun flymake-diagnostic-at-pt-delete-popup ()
-    (posframe-delete-frame flymake-diagnostic-at-pt-posframe-buffer))
-
-  (defun flymake-diagnostic-at-pt-set-timer ()
-    (interactive)
-    (flymake-diagnostic-at-pt-cancel-timer)
-    (unless flymake-diagnostic-at-pt-timer
-      (setq flymake-diagnostic-at-pt-timer
-            (run-with-idle-timer
-             flymake-diagnostic-at-pt-timer-delay nil #'flymake-diagnostic-at-pt-maybe-display))))
-
-  (defun flymake-diagnostic-at-pt-cancel-timer ()
-    "Cancel the error display timer for the current buffer."
-    (interactive)
-    (let ((inhibit-quit t))
-      (when flymake-diagnostic-at-pt-timer
-        (cancel-timer flymake-diagnostic-at-pt-timer)
-        (setq flymake-diagnostic-at-pt-timer nil))))
-
-  ;; Should be part of setup/enable function
-  (defun flymake-diagnostic-at-pt-setup ()
-    (interactive)
-    (add-hook 'focus-out-hook #'flymake-diagnostic-at-pt-cancel-timer nil 'local)
-    (add-hook 'focus-in-hook #'flymake-diagnostic-at-pt-set-timer nil 'local)
-    (add-hook 'post-command-hook #'flymake-diagnostic-at-pt-set-timer nil 'local))
-
-  (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-pt-setup))
+(use-package flymake-diagnostic-at-point
+  :load-path "lisp/"
+  :after flymake
+  :config
+  (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode))
 
 (use-package flycheck
   :delight "🔍"
