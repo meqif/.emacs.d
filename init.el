@@ -378,12 +378,15 @@
   :config
   (add-hook 'flymake-mode-hook #'(lambda () (flycheck-mode -1)))
 
-  (defvar flymake-diagnostic-at-pt-timer nil)
+  (defvar-local flymake-diagnostic-at-pt-timer nil
+    "Timer to automatically show the error at point in a popup.")
+
   (defvar flymake-diagnostic-at-pt-timer-delay 0.5)
   (defvar flymake-diagnostic-at-pt-posframe-buffer " *flymake-diagnostic-at-pt-posframe-buffer*")
 
   (defun flymake-diagnostic-at-pt-maybe-display ()
-    (when (get-char-property (point) 'flymake-diagnostic)
+    (when (and flymake-mode
+               (get-char-property (point) 'flymake-diagnostic))
       (with-current-buffer (get-buffer-create flymake-diagnostic-at-pt-posframe-buffer)
         (erase-buffer))
       (posframe-show flymake-diagnostic-at-pt-posframe-buffer
@@ -398,19 +401,28 @@
 
   (defun flymake-diagnostic-at-pt-set-timer ()
     (interactive)
+    (flymake-diagnostic-at-pt-cancel-timer)
     (unless flymake-diagnostic-at-pt-timer
       (setq flymake-diagnostic-at-pt-timer
             (run-with-idle-timer
-             flymake-diagnostic-at-pt-timer-delay t #'flymake-diagnostic-at-pt-maybe-display))))
+             flymake-diagnostic-at-pt-timer-delay nil #'flymake-diagnostic-at-pt-maybe-display))))
 
   (defun flymake-diagnostic-at-pt-cancel-timer ()
+    "Cancel the error display timer for the current buffer."
     (interactive)
     (let ((inhibit-quit t))
       (when flymake-diagnostic-at-pt-timer
         (cancel-timer flymake-diagnostic-at-pt-timer)
         (setq flymake-diagnostic-at-pt-timer nil))))
 
-  (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-pt-set-timer))
+  ;; Should be part of setup/enable function
+  (defun flymake-diagnostic-at-pt-setup ()
+    (interactive)
+    (add-hook 'focus-out-hook #'flymake-diagnostic-at-pt-cancel-timer nil 'local)
+    (add-hook 'focus-in-hook #'flymake-diagnostic-at-pt-set-timer nil 'local)
+    (add-hook 'post-command-hook #'flymake-diagnostic-at-pt-set-timer nil 'local))
+
+  (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-pt-setup))
 
 (use-package flycheck
   :delight "🔍"
