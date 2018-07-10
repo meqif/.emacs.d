@@ -383,7 +383,6 @@
   (defvar flymake-diagnostic-at-pt-posframe-buffer " *flymake-diagnostic-at-pt-posframe-buffer*")
 
   (defun flymake-diagnostic-at-pt-maybe-display ()
-    (posframe-delete-frame flymake-diagnostic-at-pt-posframe-buffer)
     (when (get-char-property (point) 'flymake-diagnostic)
       (with-current-buffer (get-buffer-create flymake-diagnostic-at-pt-posframe-buffer)
         (erase-buffer))
@@ -391,7 +390,11 @@
                      :string (help-at-pt-string)
                      :background-color (face-background 'popup-face)
                      :foreground-color (face-foreground 'popup-face)
-                     :position (point))))
+                     :position (point))
+      (add-hook 'pre-command-hook #'flymake-diagnostic-at-pt-delete-popup nil t)))
+
+  (defun flymake-diagnostic-at-pt-delete-popup ()
+    (posframe-delete-frame flymake-diagnostic-at-pt-posframe-buffer))
 
   (defun flymake-diagnostic-at-pt-set-timer ()
     (interactive)
