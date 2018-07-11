@@ -211,8 +211,8 @@
 ;; Awesome project navigation
 (use-package projectile
   :delight
-  :defer 5
-  :init
+  :bind ("C-c p p" . projectile-switch-project)
+  :config
   (projectile-mode)
   ;; Use ivy for completion
   (setq projectile-completion-system 'ivy)
