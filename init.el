@@ -375,6 +375,10 @@
 
 (use-package flymake
   :defer
+  :bind (:map flymake-mode-map
+              ("C-c ! l" . flymake-show-diagnostics-buffer)
+              ("C-c ! n" . flymake-goto-next-error)
+              ("C-c ! p" . flymake-goto-prev-error))
   :config
   (add-hook 'flymake-mode-hook #'(lambda () (flycheck-mode -1))))
 
