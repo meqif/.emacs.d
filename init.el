@@ -771,11 +771,9 @@
   (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls")))
 
 (use-package eglot
+  :hook ((rust-mode kotlin-mode) . eglot-ensure)
   :config
   (add-to-list 'eglot-server-programs '(kotlin-mode . ("localhost" 8080)))
-
-  (add-hook 'rust-mode-hook 'eglot-ensure)
-  (add-hook 'kotlin-mode-hook 'eglot-ensure)
 
   (general-define-key :keymap 'eglot-mode-map :prefix nil "M-RET" 'eglot-code-actions)
 
