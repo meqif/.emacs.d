@@ -383,7 +383,6 @@
   (add-hook 'flymake-mode-hook #'(lambda () (flycheck-mode -1))))
 
 (use-package flymake-diagnostic-at-point
-  :load-path "lisp/"
   :after flymake
   :config
   (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode))
