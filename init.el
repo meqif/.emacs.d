@@ -241,6 +241,12 @@
 ;; Setup extensions
 (use-package setup-evil :ensure nil)
 
+;; Port of vim-surround
+(use-package evil-surround
+  :after evil
+  :config
+  (global-evil-surround-mode 1))
+
 ;; Enable IDO mode
 (use-package ido
   :demand t

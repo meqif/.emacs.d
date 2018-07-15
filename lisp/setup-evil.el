@@ -7,11 +7,6 @@
 ;; Improve symbol search to consider snake case symbols
 (setq-default evil-symbol-word-search 'symbol)
 
-;; Evil surround is a must
-(use-package evil-surround
-  :config
-  (global-evil-surround-mode 1))
-
 ;; Enable evil mode
 (evil-mode 1)
 
