@@ -745,31 +745,6 @@
                (f-file? (buffer-name)))
       (compile (concat "rustc " (buffer-name) " -o " (f-no-ext (buffer-name)))))))
 
-(use-package lsp-mode
-  :defer t
-  :config
-  (setq lsp-mode-map (make-sparse-keymap))
-  (define-key lsp-mode-map (kbd "M-.") 'lsp-goto-implementation)
-  (add-hook 'lsp-mode-hook #'(lambda () (use-local-map lsp-mode-map)))
-  (setq lsp-highlight-symbol-at-point nil))
-
-(use-package lsp-ui
-  :after lsp-mode
-  :config
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
-
-(use-package company-lsp
-  :after (lsp-mode company-mode)
-  :config
-  (push 'company-lsp company-backends)
-  (setq company-lsp-enable-snippet t
-        company-lsp-cache-candidates t))
-
-(use-package lsp-rust
-  :after (lsp-mode rust-mode)
-  :config
-  (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls")))
-
 (use-package eglot
   :hook ((rust-mode kotlin-mode) . eglot-ensure)
   :config
