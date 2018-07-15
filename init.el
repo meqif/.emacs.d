@@ -269,25 +269,23 @@
 
 (use-package general
   :config
-  (setq general-default-keymaps '(evil-normal-state-map evil-visual-state-map))
-  (setq general-default-prefix "\\")
+  (general-create-definer general-evil-leader-define-key
+    :states '(normal visual)
+    :prefix "\\")
 
-  (general-define-key :prefix nil :keymaps 'global "<s-return>" #'promote-demote-window-dwim)
+  (general-define-key "<s-return>" #'promote-demote-window-dwim)
 
   ;; Global evil leader shortcuts
-  (general-define-key
-   "f" 'counsel-git
-   "p" 'counsel-yank-pop
-   "b" 'ivy-switch-buffer
-   "r" 'counsel-recentf
-   "l" 'avy-goto-line
-   "g" 'magit-status
-   "s" 'counsel-grep-or-swiper
-   "S" 'counsel-rg-dwim
-   "\\" 'meqif/pop-mark)
-
-  ;; Org-mode leader shortcuts
-  (general-define-key :keymaps 'org-mode-map :states 'normal "ce" #'org-export-dispatch))
+  (general-evil-leader-define-key
+    "f" 'counsel-git
+    "p" 'counsel-yank-pop
+    "b" 'ivy-switch-buffer
+    "r" 'counsel-recentf
+    "l" 'avy-goto-line
+    "g" 'magit-status
+    "s" 'counsel-grep-or-swiper
+    "S" 'counsel-rg-dwim
+    "\\" 'meqif/pop-mark))
 
 (use-package swiper
   :config
@@ -297,18 +295,18 @@
   :demand
   :bind ("C-c SPC" . avy-goto-char-timer)
   :config
-  (general-define-key "<SPC>" 'avy-goto-char-timer))
+  (general-evil-leader-define-key "<SPC>" 'avy-goto-char-timer))
 
 (use-package ace-window
   :init
-  (general-define-key "w" #'ace-window)
+  (general-evil-leader-define-key "w" #'ace-window)
   :config
   (set-face-attribute 'aw-leading-char-face nil :height 10.0))
 
 (use-package expand-region
   :defer t
   :init
-  (general-define-key "e" #'er/expand-region))
+  (general-evil-leader-define-key "e" #'er/expand-region))
 
 ;; Save a list of recent files visited
 (use-package recentf
@@ -432,20 +430,24 @@
     ;; Set default notes file
     (setq org-default-notes-file "~/organizer.org")
 
-    ;; Shortcut to capture notes
-    (global-set-key (kbd "C-c c") 'org-capture)
-
-    ;; Easier navigation between headings
-    (general-define-key :prefix nil :keymaps 'org-mode-map :states 'normal "C-j" #'org-next-visible-heading)
-    (general-define-key :prefix nil :keymaps 'org-mode-map :states 'normal "C-k" #'org-previous-visible-heading)
-
     ;; Hydra
     (defhydra hydra-org-mode-narrow (:color blue)
       "Narrow buffer to"
       ("s" org-narrow-to-subtree "Subtree")
       ("b" org-narrow-to-block "Block")
       ("w" widen "Widen"))
-    (general-define-key :keymaps 'org-mode-map :states 'normal "n" #'hydra-org-mode-narrow/body))
+
+    ;; Shortcut to capture notes
+    (global-set-key (kbd "C-c c") 'org-capture)
+
+    ;; Easier navigation between headings
+    (general-define-key :keymaps 'org-mode-map
+                        :states 'normal
+                        "C-j" #'org-next-visible-heading
+                        "C-k" #'org-previous-visible-heading
+                        "ce" #'org-export-dispatch
+                        "n" #'hydra-org-mode-narrow/body))
+
   :config
   ;; Org-latex configuration
   (use-package ox-latex
@@ -546,11 +548,13 @@
   :functions TeX-command-master TeX-insert-macro
   :config
   ;; LaTeX leader shortcuts
-  (general-define-key :keymaps 'latex-mode-map :states 'normal
-                      "s" 'flyspell-buffer
-                      "t" #'(lambda () (interactive) (TeX-insert-macro "todo"))
-                      "cc" 'TeX-command-master
-                      "cv" 'TeX-view)
+  (general-evil-leader-define-key
+    :keymaps 'latex-mode-map
+    :states 'normal
+    "s" 'flyspell-buffer
+    "t" #'(lambda () (interactive) (TeX-insert-macro "todo"))
+    "cc" 'TeX-command-master
+    "cv" 'TeX-view)
 
   (progn
     ;; Default options
@@ -607,7 +611,10 @@
       ("i" (TeX-font nil ?\C-i) "italic")
       ("t" (TeX-font nil ?\C-t) "monospace")
       ("e" (TeX-font nil ?\C-e) "emphasis"))
-    (general-define-key :keymaps 'latex-mode-map :states 'normal "f" #'hydra-latex-fonts/body)
+    (general-evil-leader-define-key
+      :keymaps 'latex-mode-map
+      :states 'normal
+      "f" #'hydra-latex-fonts/body)
 
     ;; Autosave before compiling
     (setq TeX-save-query nil)
@@ -733,7 +740,10 @@
       ("do" cargo-process-doc-open "build and open documentation")
       ("r" cargo-process-run "run")
       ("y" cargo-process-clippy "clippy"))
-    (general-define-key :keymaps 'rust-mode-map :states 'normal "c" #'hydra-cargo/body))
+    (general-evil-define-key
+      :keymaps 'rust-mode-map
+      :states 'normal
+      "c" #'hydra-cargo/body))
 
   ;;   ;; Register rust-mode in company dabbrev code modes
   ;;   (add-to-list 'company-dabbrev-code-modes 'rust-mode)
@@ -750,7 +760,7 @@
   :config
   (add-to-list 'eglot-server-programs '(kotlin-mode . ("localhost" 8080)))
 
-  (general-define-key :keymap 'eglot-mode-map :prefix nil "M-RET" 'eglot-code-actions)
+  (general-define-key :keymap 'eglot-mode-map "M-RET" 'eglot-code-actions)
 
   ;; IntelliJ-LSP-Server specific stuff
   (defun eglot-intellij-toggle-workspace ()
@@ -933,7 +943,7 @@ naming scheme."
 (use-package browse-at-remote
   :defer
   :init
-  (general-define-key "o" #'browse-at-remote)
+  (general-evil-leader-define-key "o" #'browse-at-remote)
   :config
   (setq browse-at-remote-prefer-symbolic nil))
 
@@ -1006,7 +1016,10 @@ naming scheme."
     ("v" rspec-verify "run specs for this buffer")
     ("t" rspec-toggle-spec-and-target-find-example "toggle between spec and class")
     ("f" rspec-run-last-failed "rerun last failed specs"))
-  (general-define-key :keymaps '(ruby-mode-map enh-ruby-mode-map) :states 'normal "c" #'hydra-rspec/body))
+  (general-evil-leader-define-key
+    :keymaps '(ruby-mode-map enh-ruby-mode-map)
+    :states 'normal
+    "c" #'hydra-rspec/body))
 
 ;; Handy functions to run rubocop from Emacs
 (use-package rubocop
@@ -1114,7 +1127,7 @@ naming scheme."
     ("o" text-scale-decrease "out")
     ("0" (text-scale-adjust 0) "reset")
     ("q" nil "quit" :color blue))
-  (general-define-key "z" #'hydra-zoom/body))
+  (general-evil-leader-define-key "z" #'hydra-zoom/body))
 
 ;; Macro expansion for ease of debugging
 (use-package macrostep
