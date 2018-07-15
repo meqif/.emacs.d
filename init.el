@@ -755,7 +755,7 @@
   ;; IntelliJ-LSP-Server specific stuff
   (defun eglot-intellij-toggle-workspace ()
     (interactive)
-    (eglot--notify
+    (jsonrpc-notify
      (eglot--current-server-or-lose)
      :workspace/executeCommand
      '((:command . :toggleFrameVisibility))))
