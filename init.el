@@ -19,8 +19,16 @@
 ;; performance)
 (setq gc-cons-threshold (* 50 1024 1024))
 
-;; Run garbage collection when the frame is unfocused
-(add-hook 'focus-out-hook 'garbage-collect)
+(defun garbage-collect-when-frame-is-unfocused ()
+  "Run garbage collection when the frame is unfocused."
+  (unless (frame-focus-state)
+    (garbage-collect)))
+
+(if (version< emacs-version "27.0")
+    (add-hook 'focus-out-hook 'garbage-collect)
+  (add-function :after
+                after-focus-change-function
+                #'garbage-collect-when-frame-is-unfocused))
 
 ;; Disable splash screen
 (setq inhibit-startup-message t)
