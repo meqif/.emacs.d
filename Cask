@@ -82,7 +82,7 @@
 (depends-on "lsp-rust")
 (depends-on "lsp-ui")
 (depends-on "macrostep")
-(depends-on "magit" :archive melpa-stable)
+(depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "markup-faces")
 (depends-on "monokai-theme")

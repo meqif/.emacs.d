@@ -881,7 +881,6 @@
   (set-face-attribute 'diff-hl-delete nil :foreground "#cc241d" :background "#cc241d"))
 
 (use-package magit
-  :pin melpa-stable
   :bind ("C-x g" . magit-status)
   :init
   ;; Mark setup instructions as read
