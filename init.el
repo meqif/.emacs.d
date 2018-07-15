@@ -816,17 +816,14 @@
           (setq case-fold-search old-flag))
         (if (and b e (< (point) e)) (setq rlt nil)))
       return-value))
-  (advice-add 'org-mode-flyspell-verify :filter-return 'org-mode-flyspell-verify-ignore-blocks)
+  (advice-add 'org-mode-flyspell-verify :filter-return 'org-mode-flyspell-verify-ignore-blocks))
 
-  :config
-  (use-package flyspell-correct-ivy
-    :defer t
+(use-package flyspell-correct-ivy
+    :after flyspell
+    :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-word-generic))
     :config
     ;; set ivy as correcting interface
-    (setq flyspell-correct-interface 'flyspell-correct-ivy)
-    ;; bind flyspell-correct-word-generic
-    (define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-word-generic)))
-
+    (setq flyspell-correct-interface 'flyspell-correct-ivy))
 
 ;; Easier kill-ring viewing
 (use-package browse-kill-ring
