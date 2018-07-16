@@ -488,6 +488,7 @@
   (add-hook 'evil-org-mode-hook #'evil-org-set-key-theme))
 
 (use-package yasnippet
+  :bind (:map yas-minor-mode ("TAB" . yas-maybe-expand))
   :delight yas-minor-mode
   :config
   ;; Use only own snippets, do not use bundled ones
