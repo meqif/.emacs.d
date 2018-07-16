@@ -327,6 +327,7 @@
 
 ;; Misery loves this
 (use-package company
+  :bind ("TAB" . meqif/indent-or-complete-common)
   :delight
   :config
   ;; Enable company mode for every programming major mode
