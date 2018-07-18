@@ -495,9 +495,10 @@
   (add-hook 'evil-org-mode-hook #'evil-org-set-key-theme))
 
 (use-package yasnippet
-  :bind (:map yas-minor-mode ("TAB" . yas-maybe-expand))
   :delight yas-minor-mode
   :config
+  (general-define-key :keymaps 'yas-minor-mode-map "TAB" yas-maybe-expand)
+
   ;; Use only own snippets, do not use bundled ones
   (setq yas-snippet-dirs (list (expand-file-name "~/.emacs.d/snippets")))
 
