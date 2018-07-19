@@ -757,10 +757,8 @@
       ("do" cargo-process-doc-open "build and open documentation")
       ("r" cargo-process-run "run")
       ("y" cargo-process-clippy "clippy"))
-    (general-evil-define-key
-      :keymaps 'rust-mode-map
-      :states 'normal
-      "c" #'hydra-cargo/body))
+
+    (general-evil-leader-define-key :keymap 'rust-mode-map "c" #'hydra-cargo/body))
 
   ;;   ;; Register rust-mode in company dabbrev code modes
   ;;   (add-to-list 'company-dabbrev-code-modes 'rust-mode)
