@@ -398,7 +398,11 @@
 (use-package flymake-diagnostic-at-point
   :after flymake
   :config
-  (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode))
+  (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode)
+  (setq flymake-diagnostic-at-point-display-diagnostic-function
+        #'(lambda (text)
+            (pos-tip-show (concat flymake-diagnostic-at-point-error-prefix text)
+                          nil nil nil 60))))
 
 (use-package flycheck
   :delight "🔍"
