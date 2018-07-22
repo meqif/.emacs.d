@@ -408,10 +408,9 @@
   (define-key flycheck-error-list-mode-map (kbd "j") 'next-line)
   (define-key flycheck-error-list-mode-map (kbd "k") 'previous-line))
 
-(use-package flycheck-popup-tip
+(use-package flycheck-pos-tip
   :after flycheck
-  :config
-  (add-hook 'flycheck-mode-hook #'flycheck-popup-tip-mode))
+  (add-hook 'flycheck-mode-hook #'flycheck-pop-tip-mode))
 
 (use-package flycheck-cask
   :after flycheck
