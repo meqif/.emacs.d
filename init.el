@@ -15,10 +15,6 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-;; Reduce how often garbage collection runs (which negatively impacts
-;; performance)
-(setq gc-cons-threshold (* 50 1024 1024))
-
 (defun garbage-collect-when-frame-is-unfocused ()
   "Run garbage collection when the frame is unfocused."
   (unless (frame-focus-state)
@@ -1309,3 +1305,8 @@ naming scheme."
   ;; Start server if it isn't already running
   :config
   (unless (server-running-p) (server-start)))
+
+;; After startup, set reasonable values for garbage collection
+(add-hook 'emacs-startup-hook
+          (lambda () (setq gc-cons-threshold 16777216
+                      gc-cons-percentage 0.1)))
