@@ -137,6 +137,9 @@
 (use-package appearance
   :ensure nil)
 
+(use-package rainbow-delimiters
+  :defer)
+
 ;; Display clock in modeline
 (use-package time
   :defer t
