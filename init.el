@@ -1290,6 +1290,9 @@ naming scheme."
   (atomic-chrome-start-server)
   (setq atomic-chrome-buffer-open-style 'frame))
 
+(use-package fish-mode
+  :defer t)
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when (display-graphic-p)
