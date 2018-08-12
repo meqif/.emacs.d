@@ -27,6 +27,7 @@
 (depends-on "dash-functional")
 (depends-on "delight")
 (depends-on "diff-hl")
+(depends-on "dired-sidebar")
 (depends-on "docker-compose-mode")
 (depends-on "dockerfile-mode")
 (depends-on "dumb-jump")

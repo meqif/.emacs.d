@@ -1293,6 +1293,18 @@ naming scheme."
 (use-package fish-mode
   :defer t)
 
+(use-package dired-sidebar
+  :init
+  (general-evil-leader-define-key "a" 'dired-sidebar-toggle-sidebar)
+  (add-hook 'dired-sidebar-mode-hook
+            (lambda ()
+              (whitespace-mode -1)
+              (unless (file-remote-p default-directory)
+                (auto-revert-mode))))
+  :config
+  (setq dired-sidebar-theme 'ascii)
+  (setq dired-sidebar-use-term-integration t))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when (display-graphic-p)
