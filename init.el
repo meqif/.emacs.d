@@ -1319,6 +1319,13 @@ naming scheme."
                           ,load-file-name elapsed)))
             t))
 
+(use-package tramp
+  :defer
+  :config
+  (setq tramp-default-method "ssh")
+  (setq vc-ignore-dir-regexp
+        (format "%s\\|%s" vc-ignore-dir-regexp tramp-file-name-regexp)))
+
 (use-package server
   :delight server-buffer-clients
   ;; Start server if it isn't already running
