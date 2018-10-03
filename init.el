@@ -334,14 +334,13 @@
 (use-package company
   :bind ("TAB" . meqif/indent-or-complete-common)
   :delight
-  :config
+  :init
   ;; Enable company mode for every programming major mode
   (add-hook 'prog-mode-hook 'company-mode)
   ;; Enable it for docker-compose-mode as well
   (add-hook 'docker-compose-mode-hook 'company-mode)
-
+  :config
   (define-key company-mode-map (kbd "TAB") #'meqif/indent-or-complete-common)
-
   (setq
    ;; Offer completions quickly
    company-idle-delay 0.1
