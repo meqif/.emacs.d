@@ -345,7 +345,7 @@
   (define-key company-mode-map (kbd "TAB") #'meqif/indent-or-complete-common)
   (setq
    ;; Offer completions quickly
-   company-idle-delay 0.1
+   company-idle-delay 0.3
    ;; Align tooltips
    company-tooltip-align-annotations t
    ;; Start completing after two chars
