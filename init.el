@@ -292,7 +292,7 @@
 
   ;; Global evil leader shortcuts
   (general-evil-leader-define-key
-    "f" 'counsel-git
+    "f" 'counsel-projectile-find-file
     "p" 'counsel-yank-pop
     "b" 'ivy-switch-buffer
     "r" 'counsel-recentf
