@@ -223,7 +223,8 @@
   :config
   (projectile-mode)
   ;; Use ivy for completion
-  (setq projectile-completion-system 'ivy)
+  (setq projectile-completion-system 'ivy
+        projectile-git-command "fd . -0 --color never")
   (--each '("node_modules" "vendor" ".bundle")
     (add-to-list 'projectile-globally-ignored-directories it)))
 
