@@ -325,6 +325,7 @@
 
 ;; Save a list of recent files visited
 (use-package recentf
+  :after f
   :init
   ;; Increase recent entries list from default (20)
   (setq recentf-max-saved-items 100)
