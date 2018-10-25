@@ -1307,6 +1307,12 @@ naming scheme."
   (setq dired-sidebar-theme 'ascii)
   (setq dired-sidebar-use-term-integration t))
 
+(use-package olivetti
+  :config
+  (setq-default olivetti-body-width 121)
+  (add-hook 'prog-mode-hook 'olivetti-mode)
+  (add-hook 'text-mode-hook 'olivetti-mode))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when (display-graphic-p)
