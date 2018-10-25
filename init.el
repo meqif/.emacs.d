@@ -92,7 +92,8 @@
   :delight
   :config
   (ivy-mode +1)
-  (setq ivy-format-function 'ivy-format-function-arrow)
+  (setq ivy-format-function 'ivy-format-function-arrow
+        ivy-on-del-error-function 'ignore)
   ;; Allow quitting ivy with ESC
   (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit)
   (define-key ivy-switch-buffer-map (kbd "C-k") #'ivy-switch-buffer-kill))
