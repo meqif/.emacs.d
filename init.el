@@ -220,6 +220,7 @@
 (use-package projectile
   :delight
   :bind ("C-c p p" . projectile-switch-project)
+  :commands projectile-project-root
   :config
   (projectile-mode)
   ;; Use ivy for completion
