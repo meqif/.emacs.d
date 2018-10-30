@@ -777,7 +777,7 @@
       (compile (concat "rustc " (buffer-name) " -o " (f-no-ext (buffer-name)))))))
 
 (use-package eglot
-  :hook ((rust-mode kotlin-mode) . eglot-ensure)
+  :hook ((rust-mode kotlin-mode ruby-mode) . eglot-ensure)
   :config
   (add-to-list 'eglot-server-programs '(kotlin-mode . ("localhost" 8080)))
 
