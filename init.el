@@ -781,6 +781,7 @@
   :config
   (add-to-list 'eglot-server-programs '(kotlin-mode . ("localhost" 8080)))
 
+  (add-to-list 'eglot-ignored-server-capabilites ':hoverProvider)
   (general-define-key :keymap 'eglot-mode-map "M-RET" 'eglot-code-actions)
 
   ;; IntelliJ-LSP-Server specific stuff
