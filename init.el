@@ -1289,11 +1289,6 @@ naming scheme."
   (setq auto-insert-alist
         (cons '("\\.rb\\'" nil "# frozen_string_literal: true\n") auto-insert-alist)))
 
-(use-package atomic-chrome
-  :config
-  (atomic-chrome-start-server)
-  (setq atomic-chrome-buffer-open-style 'frame))
-
 (use-package fish-mode
   :defer t)
 
