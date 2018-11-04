@@ -1,10 +1,20 @@
 ;; Mark start point for load time measurement
-
-;; (package-initialize)
-
 (defconst emacs-start-time (current-time))
 (unless noninteractive
   (message "Loading %s..." load-file-name))
+
+(setq user-init-file (or load-file-name buffer-file-name))
+(setq user-emacs-directory (file-name-directory user-init-file))
+
+(require 'package)
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")))
+
+(package-initialize 'no-activate)
+(package-activate 'borg)
+(require 'borg-elpa)
+(borg-elpa-initialize)
 
 ;; Refuse to work with old Emacsen
 (when (version< emacs-version "24.4")
@@ -60,21 +70,9 @@
 (setq load-prefer-newer t)
 
 ;; Packages
-(require 'cask)
-(cask-initialize)
-
-(unless (package-installed-p 'pallet)
-  (package-refresh-contents)
-  (package-install 'pallet))
-(require 'pallet)
-(pallet-mode t)
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
 (setq use-package-enable-imenu-support t
-      use-package-always-ensure t)
-(require 'use-package)
+      use-package-always-ensure t
+      use-package-compute-statistics t)
 
 ;; Bring better defaults
 (use-package better-defaults :ensure nil)
@@ -105,6 +103,7 @@
 
 ;; Replace default functions with much better alternatives
 (use-package counsel
+  :ensure ivy
   :defer t
   :bind (("s-r"     . counsel-imenu)
          ("M-x"     . counsel-M-x)
@@ -304,6 +303,7 @@
     "\\" 'meqif/pop-mark))
 
 (use-package swiper
+  :ensure ivy
   :config
   (setq swiper-action-recenter t))
 
@@ -539,9 +539,6 @@
 (use-package js2-mode
   :mode "\\.js\\'"
   :config
-  ;; Easier refactoring
-  (use-package js2-refactor)
-
   (setq-default js2-global-externs
                 '("module" "export" "require" "describe" "it" "before" "after"))
 
@@ -832,13 +829,6 @@
       return-value))
   (advice-add 'org-mode-flyspell-verify :filter-return 'org-mode-flyspell-verify-ignore-blocks))
 
-(use-package flyspell-correct-ivy
-    :after flyspell
-    :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-word-generic))
-    :config
-    ;; set ivy as correcting interface
-    (setq flyspell-correct-interface 'flyspell-correct-ivy))
-
 ;; Easier kill-ring viewing
 (use-package browse-kill-ring
   :defer t
@@ -1056,39 +1046,6 @@ naming scheme."
   (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode)
   (add-hook 'inf-ruby-mode-hook #'company-mode))
 
-;; Better completion and documentation access for Ruby
-(use-package robe
-  :defer
-  :config
-  ;; Add robe to company mode backends
-  (push 'company-robe company-backends))
-
-(use-package ruby-refactor
-  :after (:any ruby-mode enh-ruby-mode)
-  :delight
-  :init
-  (add-hook 'ruby-mode-hook 'ruby-refactor-mode)
-  (add-hook 'enh-ruby-mode-hook 'ruby-refactor-mode)
-  :config (setq ruby-refactor-add-parens t))
-
-;; Better package management
-(use-package paradox
-  :defer 5
-  ;; Always update in background
-  :init (use-package spinner)
-  :config
-  (setq paradox-execute-asynchronously t
-        paradox-github-token t
-        paradox-automatically-star nil
-        paradox-spinner-type 'moon)
-  (evil-add-hjkl-bindings paradox-menu-mode-map 'emacs
-    (kbd "J") #'paradox-next-describe
-    (kbd "K") #'paradox-previous-describe
-    (kbd "H") #'paradox-menu-quick-help
-    (kbd "L") #'(lambda (pkg) (interactive '(nil)) (paradox-menu-view-commit-list pkg))
-    (kbd "C-f") #'evil-scroll-page-down
-    (kbd "C-b") #'evil-scroll-page-up))
-
 (use-package lispy
   :delight
   :defer t
@@ -1258,11 +1215,6 @@ naming scheme."
   (add-hook 'kotlin-mode-hook #'whitespace-turn-off)
   (add-hook 'kotlin-mode-hook #'subword-mode))
 
-(use-package flycheck-kotlin
-  :after kotlin-mode
-  :config
-  (flycheck-kotlin-setup))
-
 (use-package groovy-mode
   :pin melpa-stable
   :mode "\\.gradle\\'")
@@ -1278,10 +1230,6 @@ naming scheme."
   (add-hook 'lisp-mode-hook 'easy-escape-minor-mode)
   (add-hook 'emacs-lisp-mode-hook 'easy-escape-minor-mode))
 
-(use-package eyebrowse
-  :init (eyebrowse-mode t)
-  :config (setq eyebrowse-new-workspace t))
-
 (use-package autoinsert
   :config
   (add-hook 'prog-mode-hook 'auto-insert-mode)
@@ -1291,24 +1239,6 @@ naming scheme."
 
 (use-package fish-mode
   :defer t)
-
-(use-package dired-sidebar
-  :init
-  (general-evil-leader-define-key "a" 'dired-sidebar-toggle-sidebar)
-  (add-hook 'dired-sidebar-mode-hook
-            (lambda ()
-              (whitespace-mode -1)
-              (unless (file-remote-p default-directory)
-                (auto-revert-mode))))
-  :config
-  (setq dired-sidebar-theme 'ascii)
-  (setq dired-sidebar-use-term-integration t))
-
-(use-package olivetti
-  :config
-  (setq-default olivetti-body-width 121)
-  (add-hook 'prog-mode-hook 'olivetti-mode)
-  (add-hook 'text-mode-hook 'olivetti-mode))
 
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
