@@ -117,14 +117,11 @@
     (setq counsel-grep-base-command
           "rg -i -M 120 --no-heading --line-number --color never '%s' %s")))
 
-;; Use the fish shell in OSX
-(when (eq system-type 'darwin)
-  (setenv "SHELL" (concat brew-prefix "/bin/fish")))
-
 ;; Fix path
 (use-package exec-path-from-shell
   :config
-  (setq exec-path-from-shell-arguments '("-l"))
+  (setq exec-path-from-shell-arguments '("-l")
+        exec-path-from-shell-shell-name "/usr/local/bin/fish")
   (exec-path-from-shell-initialize))
 
 ;; Functions
