@@ -69,10 +69,10 @@
 (setq load-prefer-newer t)
 
 ;; Packages
-(require 'use-package)
 (setq use-package-enable-imenu-support t
-      use-package-always-ensure t
-      use-package-compute-statistics t)
+      use-package-always-ensure t)
+(require 'use-package)
+(setq use-package-compute-statistics t)
 
 ;; Bring better defaults
 (use-package better-defaults :ensure nil)
