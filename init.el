@@ -709,11 +709,13 @@
   :defer t
   :config
   ;; Enable tagedit
-  (use-package tagedit)
   ;; Auto-close tags and other goodies
   (tagedit-add-experimental-features)
   (add-hook 'html-mode-hook #'tagedit-mode)
   (add-hook 'mustache-mode #'tagedit-mode))
+
+(use-package tagedit
+  :after sgml-mode)
 
 (use-package emmet-mode
   :defer
