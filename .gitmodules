@@ -7,6 +7,9 @@
 [submodule "avy"]
 	path = lib/avy
 	url = git@github.com:abo-abo/avy.git
+[submodule "borg"]
+	path = lib/borg
+	url = git@github.com:emacscollective/borg.git
 [submodule "browse-at-remote"]
 	path = lib/browse-at-remote
 	url = git@github.com:rmuslimov/browse-at-remote.git

@@ -6,13 +6,12 @@
 (setq user-init-file (or load-file-name buffer-file-name))
 (setq user-emacs-directory (file-name-directory user-init-file))
 
-(require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")
                          ("melpa-stable" . "https://stable.melpa.org/packages/")))
 
-(package-initialize 'no-activate)
-(package-activate 'borg)
+(setq epkg-repository "~/.emacs.d/epkgs/")
+(add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
 (require 'borg-elpa)
 (borg-elpa-initialize)
 
@@ -70,6 +69,7 @@
 (setq load-prefer-newer t)
 
 ;; Packages
+(require 'use-package)
 (setq use-package-enable-imenu-support t
       use-package-always-ensure t
       use-package-compute-statistics t)
