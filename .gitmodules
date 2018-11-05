@@ -250,6 +250,9 @@
 [submodule "spinner"]
 	path = lib/spinner
 	url = git@github.com:Malabarba/spinner.el.git
+[submodule "tagedit"]
+	path = lib/tagedit
+	url = git@github.com:magnars/tagedit.git
 [submodule "toml-mode"]
 	path = lib/toml-mode
 	url = git@github.com:dryman/toml-mode.el.git
