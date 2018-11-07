@@ -488,7 +488,9 @@
 ;; Use org-mode tables in any mode
 (use-package org-table
   :ensure nil
-  :commands orgtbl-mode)
+  :commands orgtbl-mode
+  :init
+  (defalias 'org-table-mode 'orgtbl-mode))
 
 (use-package evil-org
   :after org
