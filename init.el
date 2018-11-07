@@ -320,11 +320,6 @@
   :config
   (set-face-attribute 'aw-leading-char-face nil :height 10.0))
 
-(use-package expand-region
-  :defer t
-  :init
-  (general-evil-leader-define-key "e" #'er/expand-region))
-
 ;; Save a list of recent files visited
 (use-package recentf
   :after f
