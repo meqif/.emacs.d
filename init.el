@@ -408,6 +408,10 @@
   :defer t
   :config
   (setq-default flycheck-display-errors-delay 0.5)
+  ;; Use rbenv rubocop shim if available
+  (let ((rubocop "~/.rbenv/shims/rubocop"))
+    (when (f-exists? rubocop)
+      (setq flycheck-ruby-rubocop-executable rubocop)))
   (define-key flycheck-error-list-mode-map (kbd "j") 'next-line)
   (define-key flycheck-error-list-mode-map (kbd "k") 'previous-line))
 
