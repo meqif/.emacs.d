@@ -202,6 +202,9 @@
 [submodule "mustache-mode"]
 	path = lib/mustache-mode
 	url = git@github.com:mustache/emacs.git
+[submodule "ox-gfm"]
+	path = lib/ox-gfm
+	url = git@github.com:larstvei/ox-gfm.git
 [submodule "pkg-info"]
 	path = lib/pkg-info
 	url = git@github.com:lunaryorn/pkg-info.el.git
