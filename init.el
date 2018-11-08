@@ -52,19 +52,6 @@
 ;; Set up load path
 (add-to-list 'load-path lisp-dir)
 
-(defun find-brew-prefix ()
-  "Find Homebrew prefix."
-  (substring (shell-command-to-string "brew --prefix") 0 -1))
-(defvar brew-prefix (find-brew-prefix))
-
-(defun add-subdirs-to-load-path (path)
-  "Recursively add all subdirectories of the given PATH to `load-path'."
-  (let ((default-directory path))
-    (normal-top-level-add-subdirs-to-load-path)))
-
-;; Add packages installed by Homebrew to the load path
-(add-subdirs-to-load-path (concat brew-prefix "/share/emacs/site-lisp/"))
-
 ;; Keep emacs Custom-settings in separate file
 (setq custom-file (expand-file-name "custom.el" lisp-dir))
 (load custom-file)
@@ -807,7 +794,7 @@
   :defer
   :init
   ;; Use Aspell for spellcheck
-  (setq ispell-program-name (concat brew-prefix "/bin/aspell"))
+  (setq ispell-program-name "aspell")
   (setq ispell-list-command "--list")
   (setq ispell-dictionary "en_US")
 
