@@ -925,7 +925,18 @@ naming scheme."
         (goto-char (point-min))
         (insert "\n\n" jira-ticket-identifier))))
 
-  (add-hook 'git-commit-setup-hook 'append-jira-ticket-identifier)
+  (defun maybe-append-jira-ticket-identifier ()
+    "Add JIRA ticket identifier only when the commit message doesn't contain it.
+
+When ammending commits, the existing commit message may already
+contain the JIRA ticket identifier, in which case re-adding it is
+unnecessary."
+    (unless (save-excursion
+              (s-matches-p "^[A-Z]+-[0-9]+$"
+                           (buffer-substring-no-properties 1 (re-search-forward "\n\n#"))))
+      (append-jira-ticket-identifier)))
+
+  (add-hook 'git-commit-setup-hook 'maybe-append-jira-ticket-identifier)
   :config
   (use-package evil-magit
     :config
