@@ -106,7 +106,35 @@
   ;; Use rg instead of grep when available -- it's faster!
   (when (executable-find "rg")
     (setq counsel-grep-base-command
-          "rg -i -M 120 --no-heading --line-number --color never '%s' %s")))
+          "rg -i -M 120 --no-heading --line-number --color never '%s' %s"))
+
+  (defun counsel-fd (&optional initial-input initial-directory)
+    "Jump to a file below the current directory.
+List all files within the current directory or any of its subdirectories.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
+    (interactive
+     (list nil
+           (when current-prefix-arg
+             (read-directory-name "From directory: "))))
+    (counsel-require-program "fd")
+    (let* ((default-directory (or initial-directory (vc-root-dir) default-directory)))
+      (ivy-read "Find file"
+                (split-string
+                 (shell-command-to-string
+                  (concat "fd --follow --color never"))
+                 "\n" t)
+                :matcher #'counsel--find-file-matcher
+                :initial-input initial-input
+                :action (lambda (x)
+                          (with-ivy-window
+                            (find-file (expand-file-name x ivy--directory))))
+                :preselect (counsel--preselect-file)
+                :require-match 'confirm-after-completion
+                :history 'file-name-history
+                :keymap counsel-find-file-map
+                :sort t
+                :caller 'counsel-fd))))
 
 ;; Fix path
 (use-package exec-path-from-shell
@@ -280,7 +308,8 @@
 
   ;; Global evil leader shortcuts
   (general-evil-leader-define-key
-    "f" 'counsel-projectile-find-file
+    "f" 'counsel-fd
+    "F" 'counsel-projectile-find-file
     "p" 'counsel-yank-pop
     "b" 'ivy-switch-buffer
     "r" 'counsel-recentf
