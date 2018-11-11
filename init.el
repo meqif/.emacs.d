@@ -820,16 +820,6 @@
       return-value))
   (advice-add 'org-mode-flyspell-verify :filter-return 'org-mode-flyspell-verify-ignore-blocks))
 
-;; Easier kill-ring viewing
-(use-package browse-kill-ring
-  :defer t
-  :config
-  ;; Highlight the current entry in browse-kill-ring
-  (setq browse-kill-ring-highlight-current-entry t)
-  ;; VIM-like navigation between candidates
-  (define-key browse-kill-ring-mode-map (kbd "j") #'browse-kill-ring-forward)
-  (define-key browse-kill-ring-mode-map (kbd "k") #'browse-kill-ring-previous))
-
 ;; Misc
 (use-package my-misc :ensure nil)
 
