@@ -119,7 +119,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
              (read-directory-name "From directory: "))))
     (counsel-require-program "fd")
     (let* ((default-directory (or initial-directory (vc-root-dir) default-directory)))
-      (ivy-read "Find file"
+      (ivy-read "Find file: "
                 (split-string
                  (shell-command-to-string
                   (concat "fd --follow --color never"))
