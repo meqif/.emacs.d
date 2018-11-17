@@ -1226,9 +1226,7 @@ unnecessary."
 ;; Improve readability of ELisp regular expressions
 (use-package easy-escape
   :delight easy-escape-minor-mode
-  :init
-  (add-hook 'lisp-mode-hook 'easy-escape-minor-mode)
-  (add-hook 'emacs-lisp-mode-hook 'easy-escape-minor-mode))
+  :hook ((lisp-mode emacs-lisp-mode) . easy-escape-minor-mode))
 
 (use-package autoinsert
   :config
