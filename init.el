@@ -349,12 +349,8 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
 ;; Misery loves this
 (use-package company
   :bind ("TAB" . meqif/indent-or-complete-common)
+  :hook ((prog-mode comint-mode docker-compose-mode ess-mode cider-repl-mode) . company-mode)
   :delight
-  :init
-  ;; Enable company mode for every programming major mode
-  (add-hook 'prog-mode-hook 'company-mode)
-  ;; Enable it for docker-compose-mode as well
-  (add-hook 'docker-compose-mode-hook 'company-mode)
   :config
   (define-key company-mode-map (kbd "TAB") #'meqif/indent-or-complete-common)
   (setq
@@ -1043,8 +1039,7 @@ unnecessary."
   :defer
   :config
   (setq inf-ruby-default-implementation "pry")
-  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode)
-  (add-hook 'inf-ruby-mode-hook #'company-mode))
+  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
 
 (use-package lispy
   :delight
@@ -1204,10 +1199,7 @@ unnecessary."
 
 (use-package ess
   :defer t
-  :pin melpa-stable
-  :config
-  (add-hook 'ess-mode-hook 'company-mode)
-  (add-hook 'inferior-ess-mode-hook 'company-mode))
+  :pin melpa-stable)
 
 (use-package kotlin-mode
   :mode "\\.kt\\'"
