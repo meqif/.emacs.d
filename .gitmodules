@@ -250,6 +250,9 @@
 [submodule "sesman"]
 	path = lib/sesman
 	url = git@github.com:vspinu/sesman.git
+[submodule "smart-jump"]
+	path = lib/smart-jump
+	url = git@github.com:jojojames/smart-jump.git
 [submodule "smartparens"]
 	path = lib/smartparens
 	url = git@github.com:Fuco1/smartparens.git

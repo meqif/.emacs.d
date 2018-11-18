@@ -1132,6 +1132,11 @@ unnecessary."
   (setq dumb-jump-selector 'ivy
         dumb-jump-force-searcher 'rg))
 
+(use-package smart-jump
+  :after eglot
+  :config
+  (smart-jump-setup-default-registers))
+
 (use-package iedit
   :defer
   :init (setq iedit-toggle-key-default nil))
