@@ -792,6 +792,8 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
 (use-package eglot
   :hook ((rust-mode kotlin-mode ruby-mode) . eglot-ensure)
   :config
+  ;; Fix column calculation when ligatures are used
+  (setq eglot-current-column-function 'eglot-lsp-abiding-column)
   (add-to-list 'eglot-ignored-server-capabilites ':hoverProvider))
 
 (use-package flyspell
