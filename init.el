@@ -751,16 +751,6 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
 (use-package rust-mode
   :defer t
   :config
-  ;; Disable evil-matchit, it fails with "Scan error"
-  (add-hook 'rust-mode-hook #'(lambda () (evil-matchit-mode -1)))
-  (add-hook 'rust-mode-hook
-            (lambda ()
-              ;; Rust has different rules for too long lines
-              (setq-local fill-column 100)
-              ;; Reload whitespace mode to make the previous change effective
-              (whitespace-mode -1)
-              (whitespace-mode 1)))
-
   (use-package cargo
     :config
     ;; Hydra for rust's cargo
