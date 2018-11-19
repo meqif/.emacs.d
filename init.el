@@ -753,7 +753,6 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   :config
   ;; Disable evil-matchit, it fails with "Scan error"
   (add-hook 'rust-mode-hook #'(lambda () (evil-matchit-mode -1)))
-  (add-hook 'rust-mode-hook 'subword-mode)
   (add-hook 'rust-mode-hook
             (lambda ()
               ;; Rust has different rules for too long lines
@@ -963,7 +962,7 @@ unnecessary."
   (set-face-attribute 'diff-refine-removed nil :bold t :background 'unspecified))
 
 (use-package subword
-  :defer t
+  :hook ((rust-mode ruby-mode enh-ruby-mode kotlin-mode) . subword-mode)
   :delight "_")
 
 ;; Ruby mode
@@ -982,7 +981,6 @@ unnecessary."
               #'meqif/ruby-delete-trailing-comma-before-closing-bracket)
   (setq ruby-deep-ident-paren nil
         ruby-insert-encoding-magic-comment nil)
-  (add-hook 'ruby-mode-hook #'subword-mode)
   (add-hook 'ruby-mode-hook #'flycheck-mode)
   (add-hook 'ruby-mode-hook
             #'(lambda ()
@@ -1002,7 +1000,6 @@ unnecessary."
                 (setq mode-name "💎🕷")
                 (setq-local tab-width 2)
                 (setq-local evil-shift-width 2)
-                (subword-mode)
                 (flycheck-mode))))
 
 (use-package rspec-mode
@@ -1211,8 +1208,7 @@ unnecessary."
 (use-package kotlin-mode
   :mode "\\.kt\\'"
   :config
-  (add-hook 'kotlin-mode-hook #'whitespace-turn-off)
-  (add-hook 'kotlin-mode-hook #'subword-mode))
+  (add-hook 'kotlin-mode-hook #'whitespace-turn-off))
 
 (use-package groovy-mode
   :pin melpa-stable
