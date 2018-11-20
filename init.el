@@ -101,6 +101,7 @@
          ("C-x C-f" . counsel-find-file)
          ("C-h f"   . counsel-describe-function)
          ("C-h v"   . counsel-describe-variable))
+  :commands meqif/counsel-fd meqif/counsel-recentf
   :config
   (define-key counsel-find-file-map (kbd "TAB") 'ivy-alt-done)
   ;; Use rg instead of grep when available -- it's faster!
@@ -108,7 +109,7 @@
     (setq counsel-grep-base-command
           "rg -i -M 120 --no-heading --line-number --color never '%s' %s"))
 
-  (defun counsel-fd (&optional initial-input initial-directory)
+  (defun meqif/counsel-fd (&optional initial-input initial-directory)
     "Jump to a file below the current directory.
 List all files within the current directory or any of its subdirectories.
 INITIAL-INPUT can be given as the initial minibuffer input.
@@ -134,7 +135,22 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
                 :history 'file-name-history
                 :keymap counsel-find-file-map
                 :sort t
-                :caller 'counsel-fd))))
+                :caller 'meqif/counsel-fd)))
+
+  (defun meqif/counsel-recentf ()
+    "Find a file on `recentf-list'."
+    (interactive)
+    (require 'recentf)
+    (recentf-mode)
+    (ivy-read "Recentf: "
+              (--map
+               (let ((file-name (substring-no-properties it)))
+                 (cons (abbreviate-file-name file-name) file-name))
+               recentf-list)
+              :action (lambda (f)
+                        (with-ivy-window
+                          (find-file (cdr f))))
+              :caller 'meqif/counsel-recentf)))
 
 ;; Fix path
 (use-package exec-path-from-shell
@@ -315,11 +331,11 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
 
   ;; Global evil leader shortcuts
   (general-evil-leader-define-key
-    "f" 'counsel-fd
+    "f" 'meqif/counsel-fd
     "F" 'counsel-projectile-find-file
     "p" 'counsel-yank-pop
     "b" 'ivy-switch-buffer
-    "r" 'counsel-recentf
+    "r" 'meqif/counsel-recentf
     "l" 'avy-goto-line
     "g" 'magit-status
     "s" 'counsel-grep-or-swiper
