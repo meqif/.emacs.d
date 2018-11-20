@@ -153,6 +153,13 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
 (use-package appearance
   :ensure nil)
 
+(use-package doom-modeline
+  :defer t
+  :hook (after-init . doom-modeline-init)
+  :config
+  (set-face-attribute 'mode-line nil :height 0.8)
+  (set-face-attribute 'mode-line-inactive nil :height 0.8))
+
 (use-package rainbow-delimiters
   :defer)
 

@@ -1,6 +1,9 @@
 [submodule "ace-window"]
 	path = lib/ace-window
 	url = git@github.com:abo-abo/ace-window.git
+[submodule "all-the-icons"]
+	path = lib/all-the-icons
+	url = git@github.com:domtronn/all-the-icons.el.git
 [submodule "autothemer"]
 	path = lib/autothemer
 	url = git@github.com:jasonm23/autothemer.git
@@ -55,6 +58,9 @@
 [submodule "dockerfile-mode"]
 	path = lib/dockerfile-mode
 	url = git@github.com:spotify/dockerfile-mode.git
+[submodule "doom-modeline"]
+	path = lib/doom-modeline
+	url = git@github.com:seagle0128/doom-modeline.git
 [submodule "dumb-jump"]
 	path = lib/dumb-jump
 	url = git@github.com:jacktasia/dumb-jump.git
@@ -64,6 +70,9 @@
 [submodule "eglot"]
 	path = lib/eglot
 	url = git@github.com:joaotavora/eglot.git
+[submodule "eldoc-eval"]
+	path = lib/eldoc-eval
+	url = git@github.com:thierryvolpiatto/eldoc-eval.git
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
@@ -193,6 +202,9 @@
 [submodule "markdown-mode"]
 	path = lib/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
+[submodule "memoize"]
+	path = lib/memoize
+	url = git@github.com:skeeto/emacs-memoize.git
 [submodule "multiple-cursors"]
 	path = lib/multiple-cursors
 	url = git@github.com:magnars/multiple-cursors.el.git
@@ -253,6 +265,9 @@
 [submodule "sesman"]
 	path = lib/sesman
 	url = git@github.com:vspinu/sesman.git
+[submodule "shrink-path"]
+	path = lib/shrink-path
+	url = git@gitlab.com:bennya/shrink-path.el.git
 [submodule "smart-jump"]
 	path = lib/smart-jump
 	url = git@github.com:jojojames/smart-jump.git
