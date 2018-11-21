@@ -1004,7 +1004,24 @@ unnecessary."
   (add-hook 'ruby-mode-hook #'(lambda ()
                                 (meqif/set-fill-column-to-rubocop-max-line-length)
                                 (whitespace-mode -1)
-                                (whitespace-mode +1))))
+                                (whitespace-mode +1)))
+
+  (defun guess-docker-cwd ()
+    "Attempt to guess the value of APP_HOME in the project's Dockerfile."
+    (-when-let* ((dockerfile (concat (projectile-project-root) "Dockerfile"))
+                 (_ (f-exists? dockerfile))
+                 (_ (executable-find "rg"))
+                 (command (concat "rg -o 'ENV APP_HOME (.*)' -r '$1' " dockerfile))
+                 (cwd (s-trim-right (shell-command-to-string command))))
+      (if (s-ends-with? "/" cwd)
+          cwd
+        (concat cwd "/"))))
+
+  (defun maybe-set-docker-cwd ()
+    (-when-let (cwd (guess-docker-cwd))
+      (setq rspec-docker-cwd cwd)))
+
+  (add-hook 'ruby-mode-hook #'maybe-set-docker-cwd))
 
 (use-package enh-ruby-mode
   :defer
