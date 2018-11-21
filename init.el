@@ -1246,6 +1246,21 @@ unnecessary."
 (use-package fish-mode
   :defer t)
 
+;; Improve performance of compilation buffers with colors
+(use-package xterm-color
+  :after compile
+  :config
+  (setq compilation-environment '("TERM=xterm-256color"))
+
+  (add-hook 'compilation-start-hook
+            (lambda (proc)
+              (when (eq (process-filter proc) 'compilation-filter)
+                (set-process-filter
+                 proc
+                 (lambda (proc string)
+                   (funcall 'compilation-filter proc
+                            (xterm-color-filter string))))))))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when (display-graphic-p)
