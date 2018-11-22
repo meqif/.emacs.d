@@ -1044,13 +1044,25 @@ unnecessary."
   (setq rspec-command-options "--format progress"
         rspec-use-docker-when-possible t
         rspec-docker-container "tests")
+
+  (defun rspec-run-test-subset (type)
+    (-let* ((relative-path (pcase type
+                             ('unit "spec/unit")
+                             ('acceptance "spec/acceptance")
+                             (_ (error "Unknown test subset type"))))
+            (path (concat (projectile-project-root) relative-path)))
+      (rspec-run-single-file path (rspec-core-options))))
+
   (defhydra hydra-rspec (:color blue)
     "rspec"
     ("a" rspec-verify-all "run all specs")
     ("s" rspec-verify-single "run specs for this context")
     ("v" rspec-verify "run specs for this buffer")
     ("t" rspec-toggle-spec-and-target-find-example "toggle between spec and class")
-    ("f" rspec-run-last-failed "rerun last failed specs"))
+    ("f" rspec-run-last-failed "rerun last failed specs")
+    ("A" (lambda () (interactive) (rspec-run-test-subset 'unit)) "run unit tests")
+    ("u" (lambda () (interactive) (rspec-run-test-subset 'acceptance)) "run unit tests"))
+
   (general-evil-leader-define-key
     :keymaps '(ruby-mode-map enh-ruby-mode-map)
     :states 'normal
