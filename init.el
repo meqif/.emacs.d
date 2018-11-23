@@ -1060,8 +1060,8 @@ unnecessary."
     ("v" rspec-verify "run specs for this buffer")
     ("t" rspec-toggle-spec-and-target-find-example "toggle between spec and class")
     ("f" rspec-run-last-failed "rerun last failed specs")
-    ("A" (lambda () (interactive) (rspec-run-test-subset 'unit)) "run unit tests")
-    ("u" (lambda () (interactive) (rspec-run-test-subset 'acceptance)) "run unit tests"))
+    ("A" (lambda () (interactive) (rspec-run-test-subset 'acceptance)) "run acceptance tests")
+    ("u" (lambda () (interactive) (rspec-run-test-subset 'unit)) "run unit tests"))
 
   (general-evil-leader-define-key
     :keymaps '(ruby-mode-map enh-ruby-mode-map)
