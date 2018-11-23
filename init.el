@@ -1038,9 +1038,11 @@ unnecessary."
   :functions (rspec-verify
               rspec-verify-all
               rspec-verify-single
-              rspec-toggle-spec-and-target-find-example)
+              rspec-toggle-spec-and-target-find-example
+              rspec-run-test-subset
+              hydra-rspec/body)
   :after (:any ruby-mode enh-ruby-mode)
-  :init
+  :config
   (setq rspec-command-options "--format progress"
         rspec-use-docker-when-possible t
         rspec-docker-container "tests")
