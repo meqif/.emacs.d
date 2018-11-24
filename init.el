@@ -994,7 +994,6 @@ unnecessary."
               #'meqif/ruby-delete-trailing-comma-before-closing-bracket)
   (setq ruby-deep-ident-paren nil
         ruby-insert-encoding-magic-comment nil)
-  (add-hook 'ruby-mode-hook #'flycheck-mode)
   (add-hook 'ruby-mode-hook
             #'(lambda ()
                 (setq mode-name "💎")
