@@ -52,10 +52,6 @@
 ;; Set up load path
 (add-to-list 'load-path lisp-dir)
 
-;; Keep emacs Custom-settings in separate file
-(setq custom-file (expand-file-name "custom.el" lisp-dir))
-(load custom-file)
-
 ;; Always load most recent version of required files
 (setq load-prefer-newer t)
 
