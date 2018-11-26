@@ -903,6 +903,14 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   ;; Make <SPC> insert dashes instead. Useful when creating new branches
   (define-key magit-minibuffer-local-ns-map "\s" "-")
 
+  (defun meqif/open-pr ()
+    (interactive)
+    (-when-let* ((matches (s-match "git@github.com:\\(.+\\)\\(?:\\.git\\)"
+                                   (substring-no-properties (magit-format-remote*url))))
+                 (repository (cadr matches))
+                 (pr-url (concat "https://github.com/" repository "/compare/master..." (magit-get-current-branch))))
+      (browse-url pr-url)))
+
   (defun guess-jira-ticket-identifier ()
     "Attempt to extract JIRA identifier from git branch name.
 
