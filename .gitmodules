@@ -202,6 +202,9 @@
 [submodule "markdown-mode"]
 	path = lib/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
+[submodule "markdown-toc"]
+	path = lib/markdown-toc
+	url = git@github.com:ardumont/markdown-toc.git
 [submodule "memoize"]
 	path = lib/memoize
 	url = git@github.com:skeeto/emacs-memoize.git

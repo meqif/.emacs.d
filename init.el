@@ -570,6 +570,11 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   (setq markdown-command "marked --gfm")
   (add-hook 'gfm-mode-hook #'visual-line-mode))
 
+(use-package markdown-toc
+  :after markdown-mode
+  :config
+  (setq markdown-toc-header-toc-title "## Table of contents"))
+
 (use-package js2-mode
   :mode "\\.js\\'"
   :config
