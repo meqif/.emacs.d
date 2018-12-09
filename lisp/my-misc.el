@@ -4,9 +4,6 @@
 ;; Enable electric indent in all programming modes
 (add-hook 'prog-mode-hook 'electric-indent-mode)
 
-;; Enable rainbow delimiters in all programming modes
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
 ;; Tweaks for modes that show search results
 (--each
     '(occur-mode-hook ag-mode-hook)

@@ -175,7 +175,8 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   (setq doom-modeline-major-mode-icon nil))
 
 (use-package rainbow-delimiters
-  :defer)
+  :defer
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Display clock in modeline
 (use-package time
