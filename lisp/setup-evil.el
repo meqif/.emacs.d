@@ -58,11 +58,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       (kill-buffer nil))))
 (evil-ex-define-cmd "bd[elete]" 'evil-delete-buffer-keep-windows)
 
-;; Work-around for broken indentation in 24.4
-(when (version>= emacs-version "24.4")
-  (define-key evil-insert-state-map [remap newline] 'newline)
-  (define-key evil-insert-state-map [remap newline-and-indent] 'newline-and-indent))
-
 ;; Some more modes that should be in emacs mode
 (--each
     '(cider-stacktrace-mode

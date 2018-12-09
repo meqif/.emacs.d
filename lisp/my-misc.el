@@ -4,9 +4,6 @@
 ;; Enable electric indent in all programming modes
 (add-hook 'prog-mode-hook 'electric-indent-mode)
 
-(defmacro version>= (a b)
-  `(not (version< ,a ,b)))
-
 ;; Don't hide the output of evaluated code
 (setq eval-expression-print-level nil
       eval-expression-print-length nil)
