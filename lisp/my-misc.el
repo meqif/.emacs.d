@@ -4,13 +4,6 @@
 ;; Enable electric indent in all programming modes
 (add-hook 'prog-mode-hook 'electric-indent-mode)
 
-;; Tweaks for modes that show search results
-(--each
-    '(occur-mode-hook ag-mode-hook)
-  (progn
-    ;; Use visual line mode
-    (add-hook it #'visual-line-mode)))
-
 (defmacro version>= (a b)
   `(not (version< ,a ,b)))
 
