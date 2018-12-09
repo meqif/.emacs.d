@@ -171,7 +171,8 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   :hook (after-init . doom-modeline-init)
   :config
   (set-face-attribute 'mode-line nil :height 0.8)
-  (set-face-attribute 'mode-line-inactive nil :inherit 'mode-line :height 1))
+  (set-face-attribute 'mode-line-inactive nil :inherit 'mode-line :height 1)
+  (setq doom-modeline-major-mode-icon nil))
 
 (use-package rainbow-delimiters
   :defer)
