@@ -890,6 +890,9 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   :config
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
+  ;; Disable the new section indicators
+  (setq magit-section-visibility-indicator nil)
+
   ;; Check excessively long summary lines in commit messages
   (add-to-list 'git-commit-style-convention-checks 'overlong-summary-line)
 
