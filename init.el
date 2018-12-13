@@ -536,6 +536,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   (add-hook 'evil-org-mode-hook #'evil-org-set-key-theme))
 
 (use-package yasnippet
+  :defer
   :delight yas-minor-mode
   :config
   (general-define-key :keymaps 'yas-minor-mode-map "TAB" yas-maybe-expand)
@@ -550,7 +551,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   (setq yas-verbosity 1)
 
   ;; Snippets everywhere
-  (yas-global-mode)
+  ;; (yas-global-mode)
 
   ;; ... but not on compilation-mode buffers
   (defun meqif/compilation-buffer-p ()
