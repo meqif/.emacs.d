@@ -28,11 +28,12 @@
 (setq column-number-mode t)
 
 ;; Lines should be 80 characters wide, not 72
+;; Actually, let them reach 120 characters, we're living in the far future
 ;; Make fill-paragraph (Alt-Q and gq) respect the line width
-(set-default 'fill-column 80)
+(setq-default fill-column 120)
 
 ;; Never insert tabs
-(set-default 'indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 ;; Ensure there's an empty line at the end of the file
 (setq-default require-final-newline t)
