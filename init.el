@@ -1284,6 +1284,11 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
     ("C" smerge-combine-with-next)
     ("r" smerge-resolve)
     ("k" smerge-kill-current)
+    ("ZZ" (lambda ()
+            (interactive)
+            (save-buffer)
+            (bury-buffer))
+     "Save and bury buffer" :color blue)
     ("q" nil "cancel" :color blue))
   (defhydra hydra-smerge ()
     "smerge"
