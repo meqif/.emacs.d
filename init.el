@@ -406,7 +406,8 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   :config
   (company-posframe-mode 1))
 
-(use-package docker-compose-mode)
+(use-package docker-compose-mode
+  :defer)
 
 ;; Unique buffer names
 (use-package uniquify
