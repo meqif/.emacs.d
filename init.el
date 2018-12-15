@@ -629,34 +629,25 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   :config (setq scss-compile-at-save nil))
 
 (use-package rust-mode
-  :defer t
+  :defer t)
+
+(use-package cargo
+  :after (rust-mode hydra)
   :config
-  (use-package cargo
-    :config
-    ;; Hydra for rust's cargo
-    (defhydra hydra-cargo (:color blue :columns 4)
-      "cargo"
-      ("c" cargo-process-check "check")
-      ("tt" cargo-process-test "test all")
-      ("tf" cargo-process-current-test "test current function")
-      ("b" cargo-process-bench "benchmark all")
-      ("C" cargo-process-build "build")
-      ("dd" cargo-process-doc "build documentation")
-      ("do" cargo-process-doc-open "build and open documentation")
-      ("r" cargo-process-run "run")
-      ("y" cargo-process-clippy "clippy"))
+  ;; Hydra for rust's cargo
+  (defhydra hydra-cargo (:color blue :columns 4)
+    "cargo"
+    ("c" cargo-process-check "check")
+    ("tt" cargo-process-test "test all")
+    ("tf" cargo-process-current-test "test current function")
+    ("b" cargo-process-bench "benchmark all")
+    ("C" cargo-process-build "build")
+    ("dd" cargo-process-doc "build documentation")
+    ("do" cargo-process-doc-open "build and open documentation")
+    ("r" cargo-process-run "run")
+    ("y" cargo-process-clippy "clippy"))
 
-    (general-evil-leader-define-key :keymap 'rust-mode-map "c" #'hydra-cargo/body))
-
-  ;;   ;; Register rust-mode in company dabbrev code modes
-  ;;   (add-to-list 'company-dabbrev-code-modes 'rust-mode)
-
-  ;; Compile a single file
-  (defun meqif/compile-single-rust-file ()
-    (interactive)
-    (when (and (f-exists? (buffer-name))
-               (f-file? (buffer-name)))
-      (compile (concat "rustc " (buffer-name) " -o " (f-no-ext (buffer-name)))))))
+  (general-evil-leader-define-key :keymap 'rust-mode-map "c" #'hydra-cargo/body))
 
 (use-package eglot
   :hook ((rust-mode kotlin-mode ruby-mode) . eglot-ensure)
