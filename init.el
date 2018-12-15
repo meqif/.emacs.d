@@ -876,7 +876,7 @@ unnecessary."
     "Attempt to guess the value of APP_HOME in the project's Dockerfile."
     (-when-let* ((dockerfile (concat (projectile-project-root) "Dockerfile"))
                  (_ (f-exists? dockerfile))
-                 (command (concat "sed -En 's/ENV APP_HOME (.*)/\1/p' " dockerfile))
+                 (command (concat "rg -o 'ENV APP_HOME (.*)' -r '$1' " dockerfile))
                  (cwd (s-trim-right (shell-command-to-string command))))
       (file-name-as-directory cwd)))
 
