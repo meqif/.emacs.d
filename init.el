@@ -598,15 +598,9 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
 
 (use-package cc-mode
   :defer t
-  :init
-  (add-hook 'c-mode-hook
-            #'(lambda ()
-                (setq c-basic-offset 4
-                      c-default-style "linux")
-                ;; Automatically indent on RET
-                (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
-                ;; Backspace also deletes a whole indentation level
-                (setq c-backspace-function 'backward-delete-char))))
+  :config
+  (setq c-basic-offset 4
+        c-default-style "linux"))
 
 (use-package sgml-mode
   :defer t
