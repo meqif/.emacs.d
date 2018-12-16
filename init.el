@@ -764,11 +764,8 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
     (-when-let* ((matches (s-match "git@github.com:\\(.+\\)\\(?:\\.git\\)"
                                    (substring-no-properties (magit-format-remote*url))))
                  (repository (cadr matches))
-                 (destination-branch (if (-contains? (magit-list-local-branch-names) "qa") "qa" "master"))
-                 (pr-url (concat "https://github.com/" repository "/compare/" destination-branch "..." (magit-get-current-branch))))
-      (if (not (string= (magit-get-current-branch) destination-branch))
-          (browse-url pr-url)
-        (error "Not on a feature branch"))))
+                 (pr-url (concat "https://github.com/" repository "/compare/" (magit-get-current-branch))))
+      (browse-url pr-url)))
 
   (defun guess-jira-ticket-identifier ()
     "Attempt to extract JIRA identifier from git branch name.
