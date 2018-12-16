@@ -132,20 +132,8 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
                 :sort t
                 :caller 'meqif/counsel-fd)))
 
-  (defun meqif/counsel-recentf ()
-    "Find a file on `recentf-list'."
-    (interactive)
-    (require 'recentf)
-    (recentf-mode)
-    (ivy-read "Recentf: "
-              (--map
-               (let ((file-name (substring-no-properties it)))
-                 (cons (abbreviate-file-name file-name) file-name))
-               recentf-list)
-              :action (lambda (f)
-                        (with-ivy-window
-                          (find-file (cdr f))))
-              :caller 'meqif/counsel-recentf)))
+  ;; Abbreviate the file names in counsel-recentf
+  (ivy-set-display-transformer 'counsel-recentf 'abbreviate-file-name))
 
 ;; Fix path
 (use-package exec-path-from-shell
@@ -332,7 +320,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
     "F" 'counsel-projectile-find-file
     "p" 'counsel-yank-pop
     "b" 'ivy-switch-buffer
-    "r" 'meqif/counsel-recentf
+    "r" 'counsel-recentf
     "l" 'avy-goto-line
     "g" 'magit-status
     "s" 'counsel-grep-or-swiper
