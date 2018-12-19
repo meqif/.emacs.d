@@ -230,5 +230,12 @@ Return the decoded text as multibyte string."
                  (eq old-tick (buffer-chars-modified-tick)))
         (meqif/counsel-company))))))
 
+(defun meqif/counsel-grep-or-swiper-dwim ()
+  "Call swiper with the currently selected region, if any."
+  (interactive)
+  (swiper
+   (when (use-region-p)
+     (buffer-substring-no-properties (region-beginning) (region-end)))))
+
 (provide 'defuns)
 ;;; defuns.el ends here

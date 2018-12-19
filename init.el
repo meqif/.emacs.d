@@ -323,7 +323,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
     "r" 'counsel-recentf
     "l" 'avy-goto-line
     "g" 'magit-status
-    "s" 'counsel-grep-or-swiper
+    "s" 'meqif/counsel-grep-or-swiper-dwim
     "S" 'counsel-rg-dwim
     "\\" 'meqif/pop-mark))
 
