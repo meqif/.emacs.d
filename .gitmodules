@@ -133,6 +133,9 @@
 [submodule "flymake-diagnostic-at-point"]
 	path = lib/flymake-diagnostic-at-point
 	url = https://github.com/meqif/flymake-diagnostic-at-point
+[submodule "forge"]
+	path = lib/forge
+	url = https://github.com/magit/forge
 [submodule "general"]
 	path = lib/general
 	url = git@github.com:noctuid/general.el.git
