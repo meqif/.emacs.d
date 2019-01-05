@@ -18,7 +18,4 @@
 (setq initial-major-mode 'fundamental-mode
       initial-scratch-message nil)
 
-;; Indent after pasting
-(advice-add 'insert-for-yank :after #'(lambda (_) (indent-according-to-mode)))
-
 (provide 'my-misc)
