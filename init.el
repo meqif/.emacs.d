@@ -486,9 +486,11 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
     (general-define-key :keymaps 'org-mode-map
                         :states 'normal
                         "C-j" #'org-next-visible-heading
-                        "C-k" #'org-previous-visible-heading
-                        "ce" #'org-export-dispatch
-                        "n" #'hydra-org-mode-narrow/body))
+                        "C-k" #'org-previous-visible-heading))
+
+  (general-evil-leader-define-key :keymap 'org-mode-map
+    "ce" #'org-export-dispatch
+    "n" #'hydra-org-mode-narrow/body)
 
   :config
   ;; Org-latex configuration
