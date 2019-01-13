@@ -181,6 +181,9 @@
 [submodule "json-snatcher"]
 	path = lib/json-snatcher
 	url = git@github.com:Sterlingg/json-snatcher.git
+[submodule "jsonrpc"]
+	path = lib/jsonrpc
+	url = git@github.com:emacsmirror/jsonrpc.git
 [submodule "julia-mode"]
 	path = lib/julia-mode
 	url = git@github.com:JuliaEditorSupport/julia-emacs.git

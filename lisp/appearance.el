@@ -21,6 +21,10 @@
   (add-to-list 'default-frame-alist '(width . 132))
   (add-to-list 'default-frame-alist '(height . 32))
 
+  ;; Use font with ligatures and enable them in Emacs-Mac
+  (when (eq window-system 'mac)
+    (set-face-attribute 'default nil :font "Fira Code Tweak 14")
+    (mac-auto-operator-composition-mode))
 
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
