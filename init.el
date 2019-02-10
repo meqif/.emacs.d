@@ -643,7 +643,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   :config
   ;; Fix column calculation when ligatures are used
   (setq eglot-current-column-function 'eglot-lsp-abiding-column)
-  (add-to-list 'eglot-ignored-server-capabilites ':hoverProvider))
+  (general-define-key :keymap 'eglot-mode-map "C-h ." 'eglot-help-at-point))
 
 (use-package flyspell
   :defer
