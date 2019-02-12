@@ -130,6 +130,9 @@
 [submodule "flycheck-pos-tip"]
 	path = lib/flycheck-pos-tip
 	url = git@github.com:flycheck/flycheck-pos-tip.git
+[submodule "flymake"]
+	path = lib/flymake
+	url = git@github.com:emacsmirror/flymake.git
 [submodule "flymake-diagnostic-at-point"]
 	path = lib/flymake-diagnostic-at-point
 	url = https://github.com/meqif/flymake-diagnostic-at-point
