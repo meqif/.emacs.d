@@ -137,7 +137,7 @@ If a region is active, it will be used as the initial input for counsel-rg."
   (let ((initial-input
          (when (use-region-p)
            (buffer-substring-no-properties (region-beginning) (region-end)))))
-    (-if-let* ((project-root (vc-root-dir)))
+    (-if-let* (((_ . project-root) (project-current)))
         (counsel-rg initial-input project-root)
       (let ((current-prefix-arg '(4)))
         (call-interactively 'counsel-rg)))))
