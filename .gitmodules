@@ -223,6 +223,9 @@
 [submodule "mustache-mode"]
 	path = lib/mustache-mode
 	url = git@github.com:mustache/emacs.git
+[submodule "olivetti"]
+	path = lib/olivetti
+	url = git@github.com:rnkn/olivetti.git
 [submodule "ox-gfm"]
 	path = lib/ox-gfm
 	url = git@github.com:larstvei/ox-gfm.git
