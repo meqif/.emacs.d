@@ -6,7 +6,6 @@
 (advice-add 'load-theme :before #'clear-old-theme)
 
 ;; Load theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (use-package gruvbox-theme
   :config
   (load-theme 'gruvbox-dark-hard t))
