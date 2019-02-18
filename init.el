@@ -545,9 +545,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
               (push '("function" . ?ƒ) prettify-symbols-alist))))
 
 (use-package json-mode
-  :mode "\\.json\\'"
-  :config
-  (setq-default js-indent-level 2))
+  :mode "\\.json\\'")
 
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")
