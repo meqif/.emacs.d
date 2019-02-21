@@ -79,6 +79,7 @@
   (ivy-mode +1)
   (setq ivy-format-function 'ivy-format-function-arrow
         ivy-on-del-error-function 'ignore)
+  (add-to-list 'ivy-initial-inputs-alist '(magit-status . "^"))
   ;; Allow quitting ivy with ESC
   (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit)
   (define-key ivy-switch-buffer-map (kbd "C-k") #'ivy-switch-buffer-kill))
