@@ -251,5 +251,10 @@ Return the decoded text as multibyte string."
             (--remove (string-equal (buffer-name it) "*scratch*"))
             (mapc 'kill-buffer)))
 
+(defun meqif/uuid-v4 ()
+  "Generate and insert a UUIDv4 without dashes."
+  (interactive)
+  (shell-command "uuidgen | tr -d '\n-' | tr -d '\n' | tr '[A-Z]' '[a-z]'" t))
+
 (provide 'defuns)
 ;;; defuns.el ends here
