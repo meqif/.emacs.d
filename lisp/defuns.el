@@ -256,5 +256,9 @@ Return the decoded text as multibyte string."
   (interactive)
   (shell-command "uuidgen | tr -d '\n-' | tr -d '\n' | tr '[A-Z]' '[a-z]'" t))
 
+(defun meqif/hide-window ()
+  (interactive)
+  (shell-command "osascript -e 'tell application \"Finder\" to set visible of process \"Emacs\" to false'" nil))
+
 (provide 'defuns)
 ;;; defuns.el ends here

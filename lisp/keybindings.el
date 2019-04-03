@@ -15,6 +15,7 @@
           mac-option-modifier 'meta
           mac-command-modifier 'super
           mac-right-option-modifier 'none)
+    (global-set-key (kbd "s-h") 'meqif/hide-window)
     (global-set-key (kbd "s-w") 'delete-frame)
     (global-set-key (kbd "s-s") 'save-buffer)
     (global-set-key (kbd "s-v") 'yank)
