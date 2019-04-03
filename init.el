@@ -1144,6 +1144,11 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
                    (funcall 'compilation-filter proc
                             (xterm-color-filter string))))))))
 
+(use-package olivetii-mode
+  :defer
+  :config
+  (setq-default olivetti-body-width 120))
+
 (use-package go-mode
   :defer)
 
