@@ -1144,6 +1144,9 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
                    (funcall 'compilation-filter proc
                             (xterm-color-filter string))))))))
 
+(use-package go-mode
+  :defer)
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when (display-graphic-p)
