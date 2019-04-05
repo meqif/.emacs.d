@@ -1,6 +1,3 @@
-;; Use normal tabs in makefiles
-(add-hook 'makefile-mode-hook 'indent-tabs-mode)
-
 ;; Enable electric indent in all programming modes
 (add-hook 'prog-mode-hook 'electric-indent-mode)
 

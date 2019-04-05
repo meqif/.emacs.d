@@ -644,6 +644,11 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
 ;; Misc
 (use-package my-misc :ensure nil)
 
+(use-package make-mode
+  :defer
+  ;; Use normal tabs in makefiles
+  :hook (makefile-mode . (lambda () (seqt indent-tabs-mode t))))
+
 ;; Highlight excessively long lines
 (use-package whitespace
   :delight
