@@ -152,7 +152,7 @@ If a region is active, it will be used as the initial input for counsel-rg."
   "Copy the current buffer's relative file name to the kill ring."
   (interactive)
   (-when-let* ((buffer-name (buffer-file-name)))
-    (kill-new (f-relative buffer-name))))
+    (kill-new (f-relative buffer-name (-> (project-current) cdr)))))
 
 (defun closing-bracket-p (char)
   "Returns true if CHAR is a closing bracket: ')', ']', or '}'."
