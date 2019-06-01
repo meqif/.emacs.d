@@ -1157,6 +1157,10 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 (use-package go-mode
   :defer)
 
+;; Edit regions of buffers in another window with a different major mode
+(use-package fence-edit
+  :bind (:map fence-edit-mode-map ("s-s" . fence-edit-save)))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when (display-graphic-p)

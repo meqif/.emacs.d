@@ -118,6 +118,9 @@
 [submodule "f"]
 	path = lib/f
 	url = git@github.com:rejeep/f.el.git
+[submodule "fence-edit"]
+	path = lib/fence-edit
+	url = https://github.com/aaronbieber/fence-edit.el
 [submodule "fish-mode"]
 	path = lib/fish-mode
 	url = git@github.com:wwwjfy/emacs-fish.git
