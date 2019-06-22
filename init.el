@@ -1161,6 +1161,18 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 (use-package fence-edit
   :bind (:map fence-edit-mode-map ("s-s" . fence-edit-save)))
 
+(use-package deadgrep
+  :defer
+  :config
+  (evil-define-state deadgrep
+    "Evil deadgrep state"
+    :cursor 'bar
+    :enable (motion))
+    (add-hook 'deadgrep-mode-hook #'evil-deadgrep-state)
+
+    (define-key evil-deadgrep-state-map (kbd "<return>") #'deadgrep-visit-result)
+    (define-key evil-deadgrep-state-map (kbd "gr") #'deadgrep-restart))
+
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
 (when (display-graphic-p)
