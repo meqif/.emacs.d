@@ -1125,11 +1125,14 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   :hook ((lisp-mode emacs-lisp-mode) . easy-escape-minor-mode))
 
 (use-package autoinsert
+  :hook ((prog-mode yaml-mode) . auto-insert-mode)
   :config
-  (add-hook 'prog-mode-hook 'auto-insert-mode)
   (setq auto-insert-query nil)
   (setq auto-insert-alist
-        (cons '("\\.rb\\'" nil "# frozen_string_literal: true\n") auto-insert-alist)))
+        (-cons*
+         '("\\.rb\\'" nil "# frozen_string_literal: true\n")
+         '("\\.ya?ml\\'" nil "---\n")
+         auto-insert-alist)))
 
 (use-package fish-mode
   :defer t)
