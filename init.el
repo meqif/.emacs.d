@@ -355,11 +355,11 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
             company-search-map)
     (define-key it [escape] 'company-abort)))
 
-(use-package company-posframe
-  :delight
+(use-package company-box
   :after company
+  :hook (company-mode . company-box-mode)
   :config
-  (company-posframe-mode 1))
+  (setq company-box-enable-icon nil))
 
 (use-package docker-compose-mode
   :defer)
