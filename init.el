@@ -651,11 +651,11 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
 
 ;; Highlight excessively long lines
 (use-package whitespace
+  :defer
   :delight
   :config
   (setq whitespace-style '(face lines-tail))
-  (setq-default whitespace-line-column nil)
-  (add-hook 'prog-mode-hook 'whitespace-mode))
+  (setq-default whitespace-line-column nil))
 
 (use-package undo-tree
   :delight
@@ -824,10 +824,8 @@ unnecessary."
                 (setq mode-name "💎")
                 (setq-local tab-width 2)
                 (setq-local evil-shift-width 2)))
-  (add-hook 'ruby-mode-hook #'(lambda ()
-                                (meqif/set-fill-column-to-rubocop-max-line-length)
-                                (whitespace-mode -1)
-                                (whitespace-mode +1)))
+
+  (add-hook 'ruby-mode-hook #'meqif/set-fill-column-to-rubocop-max-line-length)
 
   (defun guess-docker-cwd ()
     "Attempt to guess the value of APP_HOME in the project's Dockerfile."
