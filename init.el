@@ -337,7 +337,9 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
    ;; Wrap around candidate list
    company-selection-wrap-around t
    ;; Fix lowercase candidates
-   company-dabbrev-downcase nil)
+   company-dabbrev-downcase nil
+   ;; Ignore case in completion popup
+   completion-ignore-case t)
 
   ;; Traverse candidates with TAB and BACKTAB
   (define-key company-active-map (kbd "TAB") 'company-select-next)
