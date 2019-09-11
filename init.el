@@ -324,11 +324,9 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
 
 ;; Misery loves this
 (use-package company
-  :bind ("TAB" . meqif/indent-or-complete-common)
   :hook ((prog-mode comint-mode docker-compose-mode ess-mode cider-repl-mode) . company-mode)
   :delight
   :config
-  (define-key company-mode-map (kbd "TAB") #'meqif/indent-or-complete-common)
   (setq
    ;; Offer completions quickly
    company-idle-delay 0.3
