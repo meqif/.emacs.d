@@ -793,6 +793,7 @@ unnecessary."
   (setq browse-at-remote-prefer-symbolic nil))
 
 (use-package diff-mode
+  :defer t
   :ensure nil
   :config
   ;; Make fine grained changes more obvious
