@@ -697,7 +697,6 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
   (add-to-list 'magit-repository-directories '("~/.emacs.d/" . 0))
-  (add-to-list 'magit-repository-directories '("~/.emacs.d/lib/" . 1))
 
   ;; Disable the new section indicators
   (setq magit-section-visibility-indicator nil)
