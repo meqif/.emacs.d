@@ -79,6 +79,7 @@
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
+	no-byte-compile = emacsql-pg.el
 [submodule "emmet-mode"]
 	path = lib/emmet-mode
 	url = git@github.com:smihica/emmet-mode.git
