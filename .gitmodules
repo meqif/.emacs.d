@@ -203,6 +203,10 @@
 [submodule "kotlin-mode"]
 	path = lib/kotlin-mode
 	url = git@github.com:Emacs-Kotlin-Mode-Maintainers/kotlin-mode.git
+[submodule "libgit"]
+	path = lib/libgit
+	url = git@github.com:magit/libegit2.git
+	build-step = make
 [submodule "lispy"]
 	path = lib/lispy
 	url = git@github.com:abo-abo/lispy.git
@@ -241,6 +245,9 @@
 [submodule "ox-gfm"]
 	path = lib/ox-gfm
 	url = git@github.com:larstvei/ox-gfm.git
+[submodule "packed"]
+	path = lib/packed
+	url = git@github.com:emacscollective/packed.git
 [submodule "pkg-info"]
 	path = lib/pkg-info
 	url = git@github.com:lunaryorn/pkg-info.el.git
@@ -316,6 +323,9 @@
 [submodule "toml-mode"]
 	path = lib/toml-mode
 	url = git@github.com:dryman/toml-mode.el.git
+[submodule "transient"]
+	path = lib/transient
+	url = git@github.com:magit/transient.git
 [submodule "treepy"]
 	path = lib/treepy
 	url = git@github.com:volrath/treepy.el.git
@@ -343,10 +353,3 @@
 [submodule "yasnippet"]
 	path = lib/yasnippet
 	url = git@github.com:joaotavora/yasnippet.git
-[submodule "packed"]
-	path = lib/packed
-	url = git@github.com:emacscollective/packed.git
-[submodule "libgit"]
-	path = lib/libgit
-	url = git@github.com:magit/libegit2.git
-	build-step = make
