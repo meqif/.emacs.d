@@ -10,20 +10,20 @@
   :config
   (load-theme 'gruvbox-dark-hard t))
 
-;; Mac friendly font
-(defvar meqif/default-font "Fira Mono 15")
-(defvar meqif/fullscreen-font "Fira Mono-16")
-
 (when window-system
   (set-fringe-mode '(4 . 4))
-  (set-face-attribute 'default nil :font meqif/default-font)
-  (add-to-list 'default-frame-alist '(width . 132))
-  (add-to-list 'default-frame-alist '(height . 32))
 
   ;; Use font with ligatures and enable them in Emacs-Mac
   (when (eq window-system 'mac)
-    (set-face-attribute 'default nil :font "Fira Code Tweak 14")
     (mac-auto-operator-composition-mode))
+
+  (when (equal "caffeine" (system-name))
+    (set-face-attribute 'default nil :font "Fira Code Tweak 14")
+    (add-to-list 'default-frame-alist '(width . 216))
+    (add-to-list 'default-frame-alist '(height . 43)))
+
+  (when (equal "ophiuchus" (system-name))
+    (set-face-attribute 'default nil :font "Fira Code Tweak 15"))
 
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
