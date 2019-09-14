@@ -343,9 +343,6 @@
 [submodule "yasnippet"]
 	path = lib/yasnippet
 	url = git@github.com:joaotavora/yasnippet.git
-[submodule "transient"]
-	path = lib/transient
-	url = git@github.com:magit/transient.git
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
