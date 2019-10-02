@@ -113,13 +113,6 @@ already in fullscreen"
     (add-to-list 'company-backends 'company-ispell)
     (message "company-ispell enabled!"))))
 
-(defun projectile-or-counsel-find-file ()
-  "Find file inside project if inside one, with fallback."
-  (interactive)
-  (if (projectile-project-p)
-      (projectile-find-file)
-    (counsel-find-file)))
-
 (defun promote-demote-window-dwim ()
   "Promote current window to top-left window, or swap top-left window with previously used window."
   (interactive)

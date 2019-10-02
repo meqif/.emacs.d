@@ -116,7 +116,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
            (when current-prefix-arg
              (read-directory-name "From directory: "))))
     (counsel-require-program "fd")
-    (let* ((default-directory (or initial-directory (projectile-project-root) default-directory)))
+    (let* ((default-directory (or initial-directory (-some-> (project-current) (project-roots) (car)))))
       (ivy-read "Find file: "
                 (split-string
                  (shell-command-to-string "fd --follow --color never")
@@ -208,19 +208,6 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   :defer t
   :delight)
 
-;; Awesome project navigation
-(use-package projectile
-  :delight
-  :bind ("C-c p p" . projectile-switch-project)
-  :commands projectile-project-root
-  :config
-  (projectile-mode)
-  ;; Use ivy for completion
-  (setq projectile-completion-system 'ivy
-        projectile-git-command "fd . -0 --color never")
-  (--each '("node_modules" "vendor" ".bundle")
-    (add-to-list 'projectile-globally-ignored-directories it)))
-
 (use-package smartparens
   :delight
   :config
@@ -285,7 +272,6 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   ;; Global evil leader shortcuts
   (general-evil-leader-define-key
     "f" 'meqif/counsel-fd
-    "F" 'counsel-projectile-find-file
     "p" 'counsel-yank-pop
     "b" 'ivy-switch-buffer
     "r" 'counsel-recentf
@@ -782,7 +768,8 @@ unnecessary."
 
   (defun guess-docker-cwd ()
     "Attempt to guess the value of APP_HOME in the project's Dockerfile."
-    (-when-let* ((dockerfile (concat (projectile-project-root) "Dockerfile"))
+    (-when-let* ((project-root (-some-> (project-current) (project-roots) (car)))
+                 (dockerfile (concat project-root "Dockerfile"))
                  (_ (f-exists? dockerfile))
                  (command (concat "sed -En 's/ENV APP_HOME (.*)/\\1/p' " dockerfile))
                  (cwd (s-trim-right (shell-command-to-string command))))
@@ -813,7 +800,7 @@ unnecessary."
                              ('unit "spec/unit")
                              ('acceptance "spec/acceptance")
                              (_ (error "Unknown test subset type"))))
-            (path (concat (projectile-project-root) relative-path)))
+            (path (concat (-some-> (project-current) (project-roots) (car)) relative-path)))
       (rspec-run-single-file path (rspec-core-options))))
 
   (defhydra hydra-rspec (:color blue)

@@ -37,9 +37,6 @@
 [submodule "company-box"]
 	path = lib/company-box
 	url = git@github.com:sebastiencs/company-box.git
-[submodule "counsel-projectile"]
-	path = lib/counsel-projectile
-	url = git@github.com:ericdanan/counsel-projectile.git
 [submodule "csv-mode"]
 	path = lib/csv-mode
 	url = git@github.com:emacsmirror/csv-mode.git
@@ -239,9 +236,6 @@
 [submodule "powerline"]
 	path = lib/powerline
 	url = git@github.com:milkypostman/powerline.git
-[submodule "projectile"]
-	path = lib/projectile
-	url = git@github.com:bbatsov/projectile.git
 [submodule "queue"]
 	path = lib/queue
 	url = git@github.com:emacsmirror/queue.git
