@@ -780,7 +780,7 @@ unnecessary."
   (set-face-attribute 'diff-refine-removed nil :bold t :background 'unspecified))
 
 (use-package subword
-  :hook ((rust-mode ruby-mode enh-ruby-mode kotlin-mode) . subword-mode)
+  :hook ((rust-mode ruby-mode kotlin-mode) . subword-mode)
   :delight "_")
 
 ;; Ruby mode
@@ -821,16 +821,6 @@ unnecessary."
 
   (add-hook 'ruby-mode-hook #'maybe-set-docker-cwd))
 
-(use-package enh-ruby-mode
-  :defer
-  :config
-  (add-hook 'enh-ruby-mode-hook
-            #'(lambda ()
-                (setq mode-name "💎🕷")
-                (setq-local tab-width 2)
-                (setq-local evil-shift-width 2)
-                (flycheck-mode))))
-
 (use-package rspec-mode
   :defer
   :functions (rspec-verify
@@ -839,7 +829,7 @@ unnecessary."
               rspec-toggle-spec-and-target-find-example
               rspec-run-test-subset
               hydra-rspec/body)
-  :after (:any ruby-mode enh-ruby-mode)
+  :after (:any ruby-mode)
   :config
   (setq rspec-command-options "--format progress"
         rspec-use-docker-when-possible t
@@ -864,17 +854,17 @@ unnecessary."
     ("u" (lambda () (interactive) (rspec-run-test-subset 'unit)) "run unit tests"))
 
   (general-evil-leader-define-key
-    :keymaps '(ruby-mode-map enh-ruby-mode-map)
+    :keymaps '(ruby-mode-map)
     :states 'normal
     "c" #'hydra-rspec/body))
 
 ;; Handy functions to run rubocop from Emacs
 (use-package rubocop
-  :after (:any ruby-mode enh-ruby-mode))
+  :after (:any ruby-mode))
 
 ;; Automatically expand # to #{} inside double-quoted strings
 (use-package ruby-tools
-  :after (:any ruby-mode enh-ruby-mode)
+  :after (:any ruby-mode)
   :delight "🛠")
 
 (use-package inf-ruby

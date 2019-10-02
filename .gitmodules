@@ -83,9 +83,6 @@
 [submodule "emmet-mode"]
 	path = lib/emmet-mode
 	url = git@github.com:smihica/emmet-mode.git
-[submodule "enh-ruby-mode"]
-	path = lib/enh-ruby-mode
-	url = git@github.com:zenspider/enhanced-ruby-mode.git
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
