@@ -378,9 +378,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   :bind (:map flymake-mode-map
               ("C-c ! l" . flymake-show-diagnostics-buffer)
               ("C-c ! n" . flymake-goto-next-error)
-              ("C-c ! p" . flymake-goto-prev-error))
-  :config
-  (add-hook 'flymake-mode-hook #'(lambda () (flycheck-mode -1))))
+              ("C-c ! p" . flymake-goto-prev-error)))
 
 (use-package flymake-diagnostic-at-point
   :after flymake
@@ -391,26 +389,6 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
         #'(lambda (text)
             (pos-tip-show (concat flymake-diagnostic-at-point-error-prefix text)
                           nil nil nil 60))))
-
-(use-package flycheck
-  :delight "🔍"
-  :defer t
-  :config
-  (setq-default flycheck-display-errors-delay 0.5)
-  ;; Use rbenv rubocop shim if available
-  (let ((rubocop "~/.rbenv/shims/rubocop"))
-    (when (f-exists? rubocop)
-      (setq flycheck-ruby-rubocop-executable rubocop)))
-  (define-key flycheck-error-list-mode-map (kbd "j") 'next-line)
-  (define-key flycheck-error-list-mode-map (kbd "k") 'previous-line))
-
-(use-package flycheck-pos-tip
-  :after flycheck
-  (add-hook 'flycheck-mode-hook #'flycheck-pop-tip-mode))
-
-(use-package flycheck-cask
-  :after flycheck
-  :config (add-hook 'flycheck-mode-hook #'flycheck-cask-setup))
 
 (use-package org
   :defer
@@ -540,8 +518,6 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
 
   (add-hook 'js2-mode-hook
             (lambda ()
-              ;; Enable flycheck
-              (flycheck-mode 1)
               ;; Use symbol for anonymous functions
               (push '("function" . ?ƒ) prettify-symbols-alist))))
 

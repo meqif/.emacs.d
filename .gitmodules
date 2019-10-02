@@ -125,15 +125,6 @@
 [submodule "fish-mode"]
 	path = lib/fish-mode
 	url = git@github.com:wwwjfy/emacs-fish.git
-[submodule "flycheck"]
-	path = lib/flycheck
-	url = git@github.com:flycheck/flycheck.git
-[submodule "flycheck-cask"]
-	path = lib/flycheck-cask
-	url = git@github.com:flycheck/flycheck-cask.git
-[submodule "flycheck-pos-tip"]
-	path = lib/flycheck-pos-tip
-	url = git@github.com:flycheck/flycheck-pos-tip.git
 [submodule "flymake"]
 	path = lib/flymake
 	url = git@github.com:emacsmirror/flymake.git
