@@ -186,7 +186,10 @@ Return the decoded text as multibyte string."
       (string-to-number (match-string-no-properties 1 raw-file))))
 
 (defun meqif/find-rubocop-max-line-length ()
-  (-some-> (f-join (projectile-project-root) ".rubocop.yml")
+  (-some-> (project-current)
+           (project-roots)
+           (car)
+           (f-join ".rubocop.yml")
            (meqif/f-read-if-exists)
            (meqif/extract-rubocop-line-length)))
 
