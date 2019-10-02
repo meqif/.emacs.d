@@ -182,9 +182,6 @@
 [submodule "jsonrpc"]
 	path = lib/jsonrpc
 	url = git@github.com:emacsmirror/jsonrpc.git
-[submodule "julia-mode"]
-	path = lib/julia-mode
-	url = git@github.com:JuliaEditorSupport/julia-emacs.git
 [submodule "kotlin-mode"]
 	path = lib/kotlin-mode
 	url = git@github.com:Emacs-Kotlin-Mode-Maintainers/kotlin-mode.git
@@ -218,9 +215,6 @@
 [submodule "multiple-cursors"]
 	path = lib/multiple-cursors
 	url = git@github.com:magnars/multiple-cursors.el.git
-[submodule "mustache-mode"]
-	path = lib/mustache-mode
-	url = git@github.com:mustache/emacs.git
 [submodule "olivetti"]
 	path = lib/olivetti
 	url = git@github.com:rnkn/olivetti.git

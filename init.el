@@ -551,9 +551,6 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'mustache-mode-hook 'emmet-mode))
 
-(use-package mustache-mode
-  :mode "\\.hjs\\'")
-
 (use-package scss-mode
   :defer t
   ;; Don't autocompile SCSS, I usually have task runners doing that
