@@ -149,6 +149,9 @@
 [submodule "gruvbox-theme"]
 	path = lib/gruvbox-theme
 	url = git@github.com:greduan/emacs-theme-gruvbox.git
+[submodule "htmlize"]
+	path = lib/htmlize
+	url = git@github.com:hniksic/emacs-htmlize.git
 [submodule "hydra"]
 	path = lib/hydra
 	url = git@github.com:abo-abo/hydra.git
@@ -218,6 +221,9 @@
 [submodule "ox-gfm"]
 	path = lib/ox-gfm
 	url = git@github.com:larstvei/ox-gfm.git
+[submodule "ox-reveal"]
+	path = lib/ox-reveal
+	url = git@github.com:yjwen/org-reveal.git
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
