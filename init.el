@@ -144,21 +144,22 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
              (read-directory-name "From directory: "))))
     (counsel-require-program "alt")
     (let* ((default-directory (or initial-directory (-some-> (project-current) (project-roots) (car)))))
-      (ivy-read "Find file: "
-                (split-string
-                 (shell-command-to-string (concat "alt " (f-relative (buffer-file-name) default-directory)))
-                 "\n" t)
-                :matcher #'counsel--find-file-matcher
-                :initial-input initial-input
-                :action (lambda (x)
-                          (with-ivy-window
-                            (find-file (expand-file-name x ivy--directory))))
-                :preselect (counsel--preselect-file)
-                :require-match 'confirm-after-completion
-                :history 'file-name-history
-                :keymap counsel-find-file-map
-                :sort t
-                :caller 'meqif/counsel-alt)))
+      (-when-let (candidates (split-string
+                              (shell-command-to-string (concat "alt " (f-relative (buffer-file-name) default-directory)))
+                              "\n" t))
+        (ivy-read "Find file: "
+                  candidates
+                  :matcher #'counsel--find-file-matcher
+                  :initial-input initial-input
+                  :action (lambda (x)
+                            (with-ivy-window
+                              (find-file (expand-file-name x ivy--directory))))
+                  :preselect (counsel--preselect-file)
+                  :require-match 'confirm-after-completion
+                  :history 'file-name-history
+                  :keymap counsel-find-file-map
+                  :sort t
+                  :caller 'meqif/counsel-alt))))
 
   ;; Abbreviate the file names in counsel-recentf
   (ivy-set-display-transformer 'counsel-recentf 'abbreviate-file-name))
@@ -296,10 +297,14 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
 
   (general-define-key "<s-return>" #'promote-demote-window-dwim)
 
+  (defun meqif/try-counsel-alt ()
+    (interactive)
+    (or (meqif/counsel-alt) (meqif/counsel-fd)))
+
   ;; Global evil leader shortcuts
   (general-evil-leader-define-key
     "f" 'meqif/counsel-fd
-    "F" 'meqif/counsel-alt
+    "F" 'meqif/try-counsel-alt
     "p" 'counsel-yank-pop
     "b" 'ivy-switch-buffer
     "r" 'counsel-recentf
