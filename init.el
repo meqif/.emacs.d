@@ -133,6 +133,33 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
                 :sort t
                 :caller 'meqif/counsel-fd)))
 
+  (defun meqif/counsel-alt (&optional initial-input initial-directory)
+    "Jump to an alternative file in this project.
+Often, this will be used to jump between a source file and its tests.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
+    (interactive
+     (list nil
+           (when current-prefix-arg
+             (read-directory-name "From directory: "))))
+    (counsel-require-program "alt")
+    (let* ((default-directory (or initial-directory (-some-> (project-current) (project-roots) (car)))))
+      (ivy-read "Find file: "
+                (split-string
+                 (shell-command-to-string (concat "alt " (f-relative (buffer-file-name) default-directory)))
+                 "\n" t)
+                :matcher #'counsel--find-file-matcher
+                :initial-input initial-input
+                :action (lambda (x)
+                          (with-ivy-window
+                            (find-file (expand-file-name x ivy--directory))))
+                :preselect (counsel--preselect-file)
+                :require-match 'confirm-after-completion
+                :history 'file-name-history
+                :keymap counsel-find-file-map
+                :sort t
+                :caller 'meqif/counsel-alt)))
+
   ;; Abbreviate the file names in counsel-recentf
   (ivy-set-display-transformer 'counsel-recentf 'abbreviate-file-name))
 
@@ -272,6 +299,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   ;; Global evil leader shortcuts
   (general-evil-leader-define-key
     "f" 'meqif/counsel-fd
+    "F" 'meqif/counsel-alt
     "p" 'counsel-yank-pop
     "b" 'ivy-switch-buffer
     "r" 'counsel-recentf
