@@ -820,23 +820,7 @@ unnecessary."
                              ('acceptance "spec/acceptance")
                              (_ (error "Unknown test subset type"))))
             (path (concat (-some-> (project-current) (project-roots) (car)) relative-path)))
-      (rspec-run-single-file path (rspec-core-options))))
-
-  (defhydra hydra-rspec (:color blue)
-    "rspec"
-    ("a" rspec-verify-all "run all specs")
-    ("s" rspec-verify-single "run specs for this context")
-    ("v" rspec-verify "run specs for this buffer")
-    ("t" rspec-toggle-spec-and-target-find-example "toggle between spec and class")
-    ("f" rspec-run-last-failed "rerun last failed specs")
-    ("A" (lambda () (interactive) (rspec-run-test-subset 'acceptance)) "run acceptance tests")
-    ("u" (lambda () (interactive) (rspec-run-test-subset 'unit)) "run unit tests"))
-
-  (general-evil-leader-define-key
-    :keymaps '(ruby-mode-map)
-    :states 'normal
-    "c" #'hydra-rspec/body))
-
+      (rspec-run-single-file path (rspec-core-options)))))
 ;; Handy functions to run rubocop from Emacs
 (use-package rubocop
   :after (:any ruby-mode))
