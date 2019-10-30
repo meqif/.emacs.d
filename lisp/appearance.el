@@ -22,8 +22,9 @@
     (add-to-list 'default-frame-alist '(width . 216))
     (add-to-list 'default-frame-alist '(height . 43)))
 
-  (when (equal "ophiuchus" (system-name))
-    (set-face-attribute 'default nil :font "Fira Code Tweak 15"))
+  (when (equal "ophiuchus.local" (system-name))
+    (set-face-attribute 'default nil :font "Fira Code Tweak 15")
+    (toggle-frame-maximized))
 
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
