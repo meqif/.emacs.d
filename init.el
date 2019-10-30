@@ -926,6 +926,26 @@ unnecessary."
     ("q" nil "quit" :color blue))
   (general-evil-leader-define-key "z" #'hydra-zoom/body))
 
+(use-package hydra-posframe
+  :after hydra
+  :hook (after-init . hydra-posframe-enable))
+
+(use-package major-mode-hydra
+  :after hydra
+  :bind ("M-SPC" . major-mode-hydra)
+  :config
+  (major-mode-hydra-define ruby-mode
+    (:quit-key "q")
+    ("RSpec"
+     (("a" rspec-verify-all "run all specs")
+      ("s" rspec-verify-single "run specs for this context")
+      ("v" rspec-verify "run specs for this buffer")
+      ("t" rspec-toggle-spec-and-target-find-example "toggle between spec and class"))
+     ""
+     (("f" rspec-run-last-failed "rerun last failed specs")
+      ("A" (lambda () (interactive) (rspec-run-test-subset 'acceptance)) "run acceptance tests")
+      ("u" (lambda () (interactive) (rspec-run-test-subset 'unit)) "run unit tests")))))
+
 ;; Macro expansion for ease of debugging
 (use-package macrostep
   :defer t
