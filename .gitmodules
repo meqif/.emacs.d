@@ -61,6 +61,9 @@
 [submodule "doom-modeline"]
 	path = lib/doom-modeline
 	url = git@github.com:seagle0128/doom-modeline.git
+[submodule "doom-themes"]
+	path = lib/doom-themes
+	url = git@github.com:hlissner/emacs-doom-themes.git
 [submodule "dumb-jump"]
 	path = lib/dumb-jump
 	url = git@github.com:jacktasia/dumb-jump.git
