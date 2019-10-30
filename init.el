@@ -579,22 +579,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
   :defer t)
 
 (use-package cargo
-  :after (rust-mode hydra)
-  :config
-  ;; Hydra for rust's cargo
-  (defhydra hydra-cargo (:color blue :columns 4)
-    "cargo"
-    ("c" cargo-process-check "check")
-    ("tt" cargo-process-test "test all")
-    ("tf" cargo-process-current-test "test current function")
-    ("b" cargo-process-bench "benchmark all")
-    ("C" cargo-process-build "build")
-    ("dd" cargo-process-doc "build documentation")
-    ("do" cargo-process-doc-open "build and open documentation")
-    ("r" cargo-process-run "run")
-    ("y" cargo-process-clippy "clippy"))
-
-  (general-evil-leader-define-key :keymap 'rust-mode-map "c" #'hydra-cargo/body))
+  :after rust-mode)
 
 (use-package eglot
   :hook ((rust-mode kotlin-mode ruby-mode) . eglot-ensure)
@@ -934,6 +919,23 @@ unnecessary."
   :after hydra
   :bind ("M-SPC" . major-mode-hydra)
   :config
+  (major-mode-hydra-define rust-mode
+    (:quit-key "q")
+    ("Build"
+     (("c" cargo-process-check "check")
+      ("b" cargo-process-bench "benchmark all")
+      ("C" cargo-process-build "build")
+      ("r" cargo-process-run "run"))
+     "Test"
+     (("tt" cargo-process-test "test all")
+      ("tf" cargo-process-current-test "test current function"))
+     "Documentation"
+     (("dd" cargo-process-doc "build documentation")
+      ("do" cargo-process-doc-open "build and open documentation"))
+     "Extra"
+     (("y" cargo-process-clippy "clippy")
+      ("f" cargo-process-fmt "format"))))
+
   (major-mode-hydra-define ruby-mode
     (:quit-key "q")
     ("RSpec"
