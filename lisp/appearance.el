@@ -5,6 +5,12 @@
   (mapc #'disable-theme custom-enabled-themes))
 (advice-add 'load-theme :before #'clear-old-theme)
 
+(defun shrink-modeline-font (&rest _)
+  (let ((height (round (* (face-attribute 'default :height) 0.85))))
+    (set-face-attribute 'mode-line nil :height height)
+    (set-face-attribute 'mode-line-inactive nil :height height)))
+(advice-add 'load-theme :after #'shrink-modeline-font)
+
 ;; Load theme
 (use-package gruvbox-theme
   :config
