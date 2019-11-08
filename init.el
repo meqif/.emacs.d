@@ -161,6 +161,20 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
                   :sort t
                   :caller 'meqif/counsel-alt))))
 
+  (defun meqif/counsel-bullet (&optional initial-input initial-directory)
+    "Jump to a file after choosing a project.
+Serves as an alternative to projectile-find-file that doesn't depend on projectile."
+    (interactive)
+    (ivy-read "Find file: " #'read-file-name-internal
+              :matcher #'counsel--find-file-matcher
+              :initial-input initial-input
+              :action #'(lambda (dir) (interactive) (meqif/counsel-fd nil dir))
+              :preselect (counsel--preselect-file)
+              :require-match 'confirm-after-completion
+              :history 'file-name-history
+              :keymap counsel-find-file-map
+              :caller 'counsel-find-file))
+
   ;; Abbreviate the file names in counsel-recentf
   (ivy-set-display-transformer 'counsel-recentf 'abbreviate-file-name))
 
