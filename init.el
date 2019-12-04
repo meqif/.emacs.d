@@ -596,7 +596,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   :after rust-mode)
 
 (use-package eglot
-  :hook ((rust-mode kotlin-mode ruby-mode) . eglot-ensure)
+  :hook ((rust-mode kotlin-mode ruby-mode js2-mode) . eglot-ensure)
   :config
   ;; Fix column calculation when ligatures are used
   (setq eglot-current-column-function 'eglot-lsp-abiding-column
