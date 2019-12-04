@@ -1140,7 +1140,9 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   (setq-default olivetti-body-width 120))
 
 (use-package go-mode
-  :defer)
+  :defer
+  :config
+  (add-hook 'before-save-hook 'gofmt-before-save t t))
 
 ;; Edit regions of buffers in another window with a different major mode
 (use-package fence-edit
