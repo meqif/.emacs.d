@@ -254,7 +254,7 @@ Return the decoded text as multibyte string."
 
 (defun meqif/hide-window ()
   (interactive)
-  (shell-command "osascript -e 'tell application \"Finder\" to set visible of process \"Emacs\" to false'" nil))
+  (call-process "osascript" nil nil nil "-e" "tell application \"Finder\" to set visible of process \"Emacs\" to false"))
 
 (provide 'defuns)
 ;;; defuns.el ends here
