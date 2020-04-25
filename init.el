@@ -388,11 +388,6 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
             company-search-map)
     (define-key it [escape] 'company-abort)))
 
-(use-package company-box
-  :after company
-  :hook (company-mode . company-box-mode)
-  :config
-  (setq company-box-enable-icon nil))
 
 (use-package docker-compose-mode
   :defer)
