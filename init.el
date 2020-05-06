@@ -959,6 +959,15 @@ unnecessary."
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer))
 
+(use-package ibuffer-vc
+  :after ibuffer
+  :config
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (ibuffer-vc-set-filter-groups-by-vc-root)
+              (unless (eq ibuffer-sorting-mode 'alphabetic)
+                (ibuffer-do-sort-by-alphabetic)))))
+
 (use-package xref
   :config
   (add-hook 'xref-after-return-hook #'recenter))

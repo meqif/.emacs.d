@@ -158,6 +158,9 @@
 [submodule "hydra-posframe"]
 	path = lib/hydra-posframe
 	url = git@github.com:Ladicle/hydra-posframe.git
+[submodule "ibuffer-vc"]
+	path = lib/ibuffer-vc
+	url = git@github.com:purcell/ibuffer-vc.git
 [submodule "iedit"]
 	path = lib/iedit
 	url = git@github.com:victorhge/iedit.git
