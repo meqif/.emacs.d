@@ -593,6 +593,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 (use-package eglot
   :hook ((rust-mode kotlin-mode ruby-mode js2-mode) . eglot-ensure)
   :config
+  (add-to-list 'eglot-server-programs '(rust-mode "ra_lsp_server"))
   (setq eglot-autoshutdown t
         eglot-autoreconnect nil)
   (general-define-key :keymap 'eglot-mode-map "C-h ." 'eglot-help-at-point))
