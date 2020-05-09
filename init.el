@@ -75,6 +75,7 @@
 (use-package ivy
   :defer t
   :delight
+  :bind (("C-c C-r" . ivy-resume))
   :config
   (ivy-mode +1)
   (setq ivy-format-function 'ivy-format-function-arrow
