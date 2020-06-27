@@ -149,6 +149,9 @@
 [submodule "gruvbox-theme"]
 	path = lib/gruvbox-theme
 	url = git@github.com:greduan/emacs-theme-gruvbox.git
+[submodule "hcl-mode"]
+	path = lib/hcl-mode
+	url = git@github.com:purcell/emacs-hcl-mode.git
 [submodule "htmlize"]
 	path = lib/htmlize
 	url = git@github.com:hniksic/emacs-htmlize.git
