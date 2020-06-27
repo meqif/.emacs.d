@@ -596,7 +596,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   :bind (:map eglot-mode-map
               ("M-RET" . eglot-code-actions))
   :config
-  (add-to-list 'eglot-server-programs '(rust-mode "ra_lsp_server"))
+  (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
   (setq eglot-autoshutdown t
         eglot-autoreconnect nil)
   (general-define-key :keymap 'eglot-mode-map "C-h ." 'eglot-help-at-point))
