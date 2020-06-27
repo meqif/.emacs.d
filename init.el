@@ -907,7 +907,7 @@ unnecessary."
 
 (use-package hydra-posframe
   :after hydra
-  :hook (after-init . hydra-posframe-enable))
+  :hook (after-init . hydra-posframe-mode))
 
 (use-package major-mode-hydra
   :after hydra
