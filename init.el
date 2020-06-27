@@ -551,7 +551,9 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
               (push '("function" . ?ƒ) prettify-symbols-alist))))
 
 (use-package json-mode
-  :mode "\\.json\\'")
+  :mode "\\.json\\'"
+  :config
+  (setq-default js-indent-level 2))
 
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")
