@@ -318,6 +318,8 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 
   ;; Global evil leader shortcuts
   (general-evil-leader-define-key
+    "q" 'counsel-zettelkasten-open
+    "Q" 'counsel-zettelkasten-find-by-tag
     "f" 'meqif/counsel-fd
     "F" 'meqif/try-counsel-alt
     "p" 'counsel-yank-pop
@@ -1019,6 +1021,12 @@ unnecessary."
   :after 'org
   :load-path "lisp/"
   :delight "👹")
+
+(use-package zettelkasten
+  :bind ("C-\\" . zettelkasten-create-note)
+  :defer 1
+  :ensure nil
+  :load-path "lisp/")
 
 ;; Wrap lines in visual-line-mode at the fill column
 (use-package visual-fill-column
