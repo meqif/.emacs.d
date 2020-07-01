@@ -31,7 +31,13 @@
 
 (defvar zettelkasten-directory "~/.zettelkasten")
 (defvar zettelkasten-extension "md")
-(defvar zettelkasten-link-format "§[0-9][0-9][0-9][0-9]-[012][0-9]-[0123][0-9]-[012][0-9]-[0-5][0-9]")
+(defvar zettelkasten-link-prefix "§")
+(defvar zettelkasten-link-suffix "")
+(defvar zettelkasten-identifier-format "[0-9][0-9][0-9][0-9]-[012][0-9]-[0123][0-9]-[012][0-9]-[0-5][0-9]")
+(defvar zettelkasten-link-format
+  (format "%s\\(%s\\)%s" zettelkasten-link-prefix zettelkasten-identifier-format zettelkasten-link-suffix))
+(defvar zettelkasten-filename-format
+  (format "^\\(%s\\) .+\.md" zettelkasten-identifier-format))
 
 ;;;###autoload
 (defun zettelkasten-follow-link ()
@@ -104,7 +110,7 @@
 
 (defun zettelkasten--find-backreferences ()
   "Find backreferences to the current Zettelkasten note."
-  (-when-let (current-id (cadr (s-match "^\\([0-9][0-9][0-9][0-9]-[012][0-9]-[0123][0-9]-[012][0-9]-[0-5][0-9]\\) .+\.md" (buffer-name))))
+  (-when-let (current-id (cadr (s-match zettelkasten-filename-format (buffer-name))))
     (s-split
      "\n"
      (shell-command-to-string
@@ -141,7 +147,7 @@
     (-if-let* ((_ (thing-at-point-looking-at zettelkasten-link-format))
                (identifier (match-string-no-properties 0)))
         (s-chop-prefix "§" identifier)
-      (cadr (s-match "^\\([0-9][0-9][0-9][0-9]-[012][0-9]-[0123][0-9]-[012][0-9]-[0-5][0-9]\\) .+\.md" (buffer-name))))))
+      (cadr (s-match zettelkasten-filename-format (buffer-name))))))
 
 (cl-defmethod xref-backend-definitions ((_backend (eql zettelkasten-xref)) identifier)
   (-when-let (filename (s-trim-right
