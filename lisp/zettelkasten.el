@@ -96,10 +96,11 @@
 (defun zettelkasten--list-all (&rest _ignored)
   "List all Zettelkasten notes with some structure."
   (--map
-   (propertize (format "%s — %s" (alist-get 'title it) (s-join ", " (alist-get 'tags it))) 'filename (alist-get 'filename it))
+   (propertize (alist-get 'title it)
+               'filename (alist-get 'filename it)
+               'tags (alist-get 'tags it))
    (json-read-from-string (shell-command-to-string "zettelkasten-searcher list-files"))))
 
-;; TODO: Display tags
 ;;;###autoload
 (defun counsel-zettelkasten-open ()
   (interactive)
@@ -107,6 +108,12 @@
             #'zettelkasten--list-all
             :action #'(lambda (note) (find-file (f-join zettelkasten-directory (get-text-property 0 'filename note))))
             :caller #'counsel-zettelkasten-open))
+
+(ivy-set-display-transformer
+ 'counsel-zettelkasten-open
+ '(lambda (input)
+    (concat (s-pad-right 80 " " input)
+            (propertize (s-join ", " (get-text-property 0 'tags input)) 'face 'ivy-virtual))))
 
 (defun zettelkasten--find-backreferences ()
   "Find backreferences to the current Zettelkasten note."
