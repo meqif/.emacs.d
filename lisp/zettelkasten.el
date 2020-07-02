@@ -78,19 +78,18 @@
             :dynamic-collection nil
             :action #'counsel-zettelkasten-tag--files-matching-tag))
 
-(defun zettelkasten--find (keyword)
-  "Find Zettelkasten notes containing the given KEYWORD."
-  (-remove #'s-blank?
-           (s-split "\n"
-                    (shell-command-to-string
-                     (format "zettelkasten-searcher find '%s'" keyword)))))
-
 ;;;###autoload
 (defun counsel-zettelkasten-find ()
+  "Find Zettelkasten notes by searching the title, tags and body for keywords."
   (interactive)
   (ivy-read "Find note: "
-            #'zettelkasten--find
+            #'(lambda (needle)
+                (counsel--async-command (format "zettelkasten-searcher find %s" (shell-quote-argument needle)))
+                nil)
             :dynamic-collection t
+            :unwind (lambda ()
+                      (counsel-delete-process)
+                      (swiper--cleanup))
             :action #'(lambda (id) (find-file (f-join zettelkasten-directory id)))))
 
 (defun zettelkasten--list-all (&rest _ignored)
@@ -103,6 +102,7 @@
 
 ;;;###autoload
 (defun counsel-zettelkasten-open ()
+  "List all Zettelkasten notes by title."
   (interactive)
   (ivy-read "Find note: "
             #'zettelkasten--list-all
