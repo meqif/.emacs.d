@@ -92,12 +92,16 @@
                       (swiper--cleanup))
             :action #'(lambda (id) (find-file (f-join zettelkasten-directory id)))))
 
-(defun zettelkasten--list-all (&rest _ignored)
-  "List all Zettelkasten notes with some structure."
+(defun zettelkasten--parse-result (json)
   (--map
    (propertize (alist-get 'title it)
                'filename (alist-get 'filename it)
                'tags (alist-get 'tags it))
+   json))
+
+(defun zettelkasten--list-all (&rest _ignored)
+  "List all Zettelkasten notes with some structure."
+  (zettelkasten--parse-result
    (json-read-from-string (shell-command-to-string "zettelkasten-searcher list-files"))))
 
 ;;;###autoload
