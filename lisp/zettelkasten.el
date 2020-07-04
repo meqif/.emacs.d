@@ -53,10 +53,10 @@
 
 (defun zettelkasten-find-tag (tag)
   "Find files matching TAG."
-  (-remove #'s-blank?
-           (s-split "\n"
-                    (shell-command-to-string
-                     (format "zettelkasten-searcher find-tag '%s'" tag)))))
+  (zettelkasten--parse-result
+   (json-read-from-string
+    (shell-command-to-string
+     (format "zettelkasten-searcher find-tag '%s'" tag)))))
 
 (defun zettelkasten-list-tags (&rest _rest)
   "List all known tags."
@@ -67,7 +67,8 @@
   "Find Zettelkasten notes containing TAG."
   (ivy-read "Find note: "
             (zettelkasten-find-tag tag)
-            :action #'(lambda (id) (find-file (f-join zettelkasten-directory id)))))
+            :action #'(lambda (note) (find-file (f-join zettelkasten-directory (get-text-property 0 'filename note))))
+            :caller 'counsel-zettelkasten-tag--files-matching-tag))
 
 ;;;###autoload
 (defun counsel-zettelkasten-find-by-tag ()
@@ -120,6 +121,10 @@
 
 (ivy-set-display-transformer
  'counsel-zettelkasten-open
+ 'zettelkasten--ivy-display-transformer)
+
+(ivy-set-display-transformer
+ 'counsel-zettelkasten-tag--files-matching-tag
  'zettelkasten--ivy-display-transformer)
 
 (defun zettelkasten--find-backreferences ()
