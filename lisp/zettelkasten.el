@@ -109,11 +109,14 @@
             :action #'(lambda (note) (find-file (f-join zettelkasten-directory (get-text-property 0 'filename note))))
             :caller #'counsel-zettelkasten-open))
 
+(defun zettelkasten--ivy-display-transformer (input)
+  "Transforms a propertized zettelkasten-searcher result into a string with the note's title and tags."
+  (concat (s-pad-right 80 " " input)
+          (propertize (s-join ", " (get-text-property 0 'tags input)) 'face 'ivy-virtual)))
+
 (ivy-set-display-transformer
  'counsel-zettelkasten-open
- '(lambda (input)
-    (concat (s-pad-right 80 " " input)
-            (propertize (s-join ", " (get-text-property 0 'tags input)) 'face 'ivy-virtual))))
+ 'zettelkasten--ivy-display-transformer)
 
 (defun zettelkasten--find-backreferences ()
   "Find backreferences to the current Zettelkasten note."
