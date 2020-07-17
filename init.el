@@ -1104,9 +1104,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   :pin melpa-stable)
 
 (use-package kotlin-mode
-  :mode "\\.kt\\'"
-  :config
-  (add-hook 'kotlin-mode-hook #'whitespace-turn-off))
+  :mode "\\.kt\\'")
 
 (use-package groovy-mode
   :pin melpa-stable
