@@ -1023,10 +1023,13 @@ unnecessary."
   :delight "👹")
 
 (use-package zettelkasten
+  :after ivy-xref
   :bind ("C-\\" . zettelkasten-create-note)
   :defer 1
   :ensure nil
-  :load-path "lisp/")
+  :load-path "lisp/"
+  :config
+  (evil-define-key 'normal zettelkasten-mode-map (kbd "<tab>") 'markdown-cycle))
 
 ;; Wrap lines in visual-line-mode at the fill column
 (use-package visual-fill-column

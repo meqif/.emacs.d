@@ -28,6 +28,9 @@
 
 (require 'f)
 (require 's)
+(require 'dash)
+(require 'xref)
+(require 'ivy)
 
 (defvar zettelkasten-directory "~/.zettelkasten")
 (defvar zettelkasten-extension "md")
@@ -85,13 +88,13 @@
   (interactive)
   (ivy-read "Find note: "
             #'(lambda (needle)
-                (counsel--async-command (format "zettelkasten-searcher find %s" (shell-quote-argument needle)))
-                nil)
+                (zettelkasten--parse-result (json-read-from-string (shell-command-to-string (format "zettelkasten-searcher find %s" (shell-quote-argument needle))))))
             :dynamic-collection t
-            :unwind (lambda ()
+            :unwind #'(lambda ()
                       (counsel-delete-process)
                       (swiper--cleanup))
-            :action #'(lambda (id) (find-file (f-join zettelkasten-directory id)))))
+            :action #'(lambda (note) (find-file (f-join zettelkasten-directory (get-text-property 0 'filename note))))
+            :caller 'counsel-zettelkasten-find))
 
 (defun zettelkasten--parse-result (json)
   (--map
@@ -119,13 +122,10 @@
   (concat (s-pad-right 80 " " input)
           (propertize (s-join ", " (get-text-property 0 'tags input)) 'face 'ivy-virtual)))
 
-(ivy-set-display-transformer
- 'counsel-zettelkasten-open
- 'zettelkasten--ivy-display-transformer)
+(--each
+    '(counsel-zettelkasten-open counsel-zettelkasten-tag--files-matching-tag counsel-zettelkasten-find)
+  (ivy-set-display-transformer it 'zettelkasten--ivy-display-transformer))
 
-(ivy-set-display-transformer
- 'counsel-zettelkasten-tag--files-matching-tag
- 'zettelkasten--ivy-display-transformer)
 
 (defun zettelkasten--find-backreferences ()
   "Find backreferences to the current Zettelkasten note."
@@ -163,10 +163,9 @@
 
 (cl-defmethod xref-backend-identifier-at-point ((_backend (eql zettelkasten-xref)))
   (save-match-data
-    (-if-let* ((_ (thing-at-point-looking-at zettelkasten-link-format))
+    (-when-let* ((_ (thing-at-point-looking-at zettelkasten-link-format))
                (identifier (match-string-no-properties 0)))
-        (s-chop-prefix "§" identifier)
-      (cadr (s-match zettelkasten-filename-format (buffer-name))))))
+        (s-chop-prefix "§" identifier))))
 
 (cl-defmethod xref-backend-definitions ((_backend (eql zettelkasten-xref)) identifier)
   (-when-let (filename (s-trim-right
@@ -201,7 +200,7 @@
     (font-lock-add-keywords 'zettelkasten-mode `((,zettelkasten-link-format . 'font-lock-warning-face)))))
 
 (add-to-list 'auto-mode-alist
-             (cons (format "^%s" (f-expand zettelkasten-directory))
+             (cons (format "^%s/.*\\.md" (f-expand zettelkasten-directory))
                    'zettelkasten-mode))
 
 (provide 'zettelkasten)
