@@ -23,6 +23,9 @@
 (when (version< emacs-version "24.4")
   (error "This Emacs is too old!"))
 
+;; Cargo culting stuff to make new windows open faster
+(modify-frame-parameters nil '((wait-for-wm . nil)))
+
 ;; Disable mouse interface
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
