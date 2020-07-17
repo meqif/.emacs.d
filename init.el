@@ -88,6 +88,7 @@
 (use-package ivy-xref
   :after ivy
   :config
+  (setq xref-show-definitions-function #'ivy-xref-show-defs)
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 ;; Replace default functions with much better alternatives
