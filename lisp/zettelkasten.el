@@ -91,8 +91,8 @@
                 (zettelkasten--parse-result (json-read-from-string (shell-command-to-string (format "zettelkasten-searcher find %s" (shell-quote-argument needle))))))
             :dynamic-collection t
             :unwind #'(lambda ()
-                      (counsel-delete-process)
-                      (swiper--cleanup))
+                        (counsel-delete-process)
+                        (swiper--cleanup))
             :action #'(lambda (note) (find-file (f-join zettelkasten-directory (get-text-property 0 'filename note))))
             :caller 'counsel-zettelkasten-find))
 
@@ -123,23 +123,25 @@
           (propertize (s-join ", " (get-text-property 0 'tags input)) 'face 'ivy-virtual)))
 
 (--each
-    '(counsel-zettelkasten-open counsel-zettelkasten-tag--files-matching-tag counsel-zettelkasten-find)
+    '(counsel-zettelkasten-open
+      counsel-zettelkasten-tag--files-matching-tag
+      counsel-zettelkasten-backreferences
+      counsel-zettelkasten-find)
   (ivy-set-display-transformer it 'zettelkasten--ivy-display-transformer))
-
 
 (defun zettelkasten--find-backreferences ()
   "Find backreferences to the current Zettelkasten note."
-  (-when-let (current-id (cadr (s-match zettelkasten-filename-format (buffer-name))))
-    (s-split
-     "\n"
-     (shell-command-to-string
-      (format "rg --files-with-matches §%s %s" current-id zettelkasten-directory)) t)))
+  (-when-let* ((current-id (cadr (s-match zettelkasten-filename-format (buffer-name))))
+               (command (format "zettelkasten-searcher find §%s" current-id)))
+    (json-read-from-string (shell-command-to-string command))))
 
 ;;;###autoload
 (defun counsel-zettelkasten-backreferences ()
   (interactive)
-  (ivy-read "Backreferences: " (zettelkasten--find-backreferences)
-            :action #'(lambda (id) (find-file (f-join zettelkasten-directory id)))))
+  (ivy-read "Backreferences: "
+            (zettelkasten--parse-result (zettelkasten--find-backreferences))
+            :action #'(lambda (note) (find-file (f-join zettelkasten-directory (get-text-property 0 'filename note))))
+            :caller #'counsel-zettelkasten-backreferences))
 
 ;;;###autoload
 (defun zettelkasten-create-note ()
@@ -164,8 +166,8 @@
 (cl-defmethod xref-backend-identifier-at-point ((_backend (eql zettelkasten-xref)))
   (save-match-data
     (-when-let* ((_ (thing-at-point-looking-at zettelkasten-link-format))
-               (identifier (match-string-no-properties 0)))
-        (s-chop-prefix "§" identifier))))
+                 (identifier (match-string-no-properties 0)))
+      (s-chop-prefix "§" identifier))))
 
 (cl-defmethod xref-backend-definitions ((_backend (eql zettelkasten-xref)) identifier)
   (-when-let (filename (s-trim-right
