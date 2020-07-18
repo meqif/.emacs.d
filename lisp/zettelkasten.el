@@ -138,10 +138,12 @@
 ;;;###autoload
 (defun counsel-zettelkasten-backreferences ()
   (interactive)
-  (ivy-read "Backreferences: "
-            (zettelkasten--parse-result (zettelkasten--find-backreferences))
-            :action #'(lambda (note) (find-file (f-join zettelkasten-directory (get-text-property 0 'filename note))))
-            :caller #'counsel-zettelkasten-backreferences))
+  (if-let (backreferences (zettelkasten--parse-result (zettelkasten--find-backreferences)))
+      (ivy-read "Backreferences: "
+                backreferences
+                :action #'(lambda (note) (find-file (f-join zettelkasten-directory (get-text-property 0 'filename note))))
+                :caller #'counsel-zettelkasten-backreferences)
+    (message "No backreferences found")))
 
 ;;;###autoload
 (defun zettelkasten-create-note ()
