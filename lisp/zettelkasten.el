@@ -202,7 +202,7 @@
 (define-key zettelkasten-connections-mode-map (kbd "<return>")
   #'(lambda () (interactive)
       (when-let (filename (get-text-property 0 'filename (thing-at-point 'symbol)))
-        (find-file filename))))
+        (find-file-other-window filename))))
 
 (defun zettelkasten--generate-id ()
   (format-time-string "%Y-%m-%d-%H-%M"))
