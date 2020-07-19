@@ -96,9 +96,23 @@
             :action #'(lambda (note) (find-file (f-join zettelkasten-directory (get-text-property 0 'filename note))))
             :caller 'counsel-zettelkasten-find))
 
+(defun counsel-zettelkasten-insert-reference ()
+  "Insert a reference to a Zettelkasten note by searching the title, tags and body for keywords."
+  (interactive)
+  (ivy-read "Find note: "
+            #'(lambda (needle)
+                (zettelkasten--parse-result (json-read-from-string (shell-command-to-string (format "zettelkasten-searcher find %s" (shell-quote-argument needle))))))
+            :dynamic-collection t
+            :unwind #'(lambda ()
+                        (counsel-delete-process)
+                        (swiper--cleanup))
+            :action #'(lambda (note) (insert (format "§%s" (get-text-property 0 'id note))))
+            :caller 'counsel-zettelkasten-find))
+
 (defun zettelkasten--parse-result (json)
   (--map
    (propertize (alist-get 'title it)
+               'id (alist-get 'id it)
                'filename (alist-get 'filename it)
                'tags (alist-get 'tags it))
    json))
@@ -153,6 +167,42 @@
      (f-join zettelkasten-directory
              (format "%s %s.%s" (zettelkasten--generate-id) (downcase note-title) zettelkasten-extension)))
     (insert (format "---\ntitle: %s\ntags:\n---\n\n" note-title))))
+
+(defun zettelkasten--curent-note-id ()
+ (cadr (s-match zettelkasten-filename-format (buffer-name))))
+
+(defun zettelkasten-display-connections ()
+  (interactive)
+  (-let* ((note-info (json-read-from-string
+                      (shell-command-to-string
+                       (format "zettelkasten-searcher note-info '%s'" (zettelkasten--curent-note-id)))))
+          (forward-references (alist-get 'forward_references note-info))
+          (back-references (alist-get 'back_references note-info)))
+    (with-current-buffer (get-buffer-create "*Zettelkasten connections*")
+      (zettelkasten-connections-mode)
+      (read-only-mode -1)
+      (erase-buffer)
+      (insert (propertize "Forward References\n" 'face 'markdown-header-face-1))
+      (mapc (lambda (it)
+              (insert (propertize (format "* %s\n" (alist-get 'title it))
+                                  'tags (alist-get 'tags it)
+                                  'filename (alist-get 'filename it))))
+            forward-references)
+      (insert "\n")
+      (insert (propertize "Back References\n" 'face 'markdown-header-face-1))
+      (mapc (lambda (it)
+              (insert (propertize (format "* %s\n" (alist-get 'title it))
+                                  'tags (alist-get 'tags it)
+                                  'filename (alist-get 'filename it))))
+            back-references)
+      (read-only-mode +1)
+      (display-buffer (current-buffer)))))
+
+(define-derived-mode zettelkasten-connections-mode fundamental-mode "Zettelkasten connections" "")
+(define-key zettelkasten-connections-mode-map (kbd "<return>")
+  #'(lambda () (interactive)
+      (when-let (filename (get-text-property 0 'filename (thing-at-point 'symbol)))
+        (find-file filename))))
 
 (defun zettelkasten--generate-id ()
   (format-time-string "%Y-%m-%d-%H-%M"))
