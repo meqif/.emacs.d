@@ -59,7 +59,7 @@
   (zettelkasten--parse-result
    (json-read-from-string
     (shell-command-to-string
-     (format "zettelkasten-searcher find-tag '%s'" tag)))))
+     (format "zettelkasten-searcher find-tag '\"%s\"'" tag)))))
 
 (defun zettelkasten-list-tags (&rest _rest)
   "List all known tags."
