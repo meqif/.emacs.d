@@ -219,10 +219,13 @@
 (define-derived-mode zettelkasten-connections-mode fundamental-mode "Zettelkasten connections"
   "Major mode for displaying connections between Zettelkasten notes")
 
-(define-key zettelkasten-connections-mode-map (kbd "<return>")
-  #'(lambda () (interactive)
-      (when-let (filename (get-text-property 0 'filename (thing-at-point 'symbol)))
-        (find-file-other-window filename))))
+(defun zettelkasten-connections-goto ()
+  "Go to the Zettelkasten note at point."
+  (interactive)
+  (when-let (filename (get-text-property 0 'filename (thing-at-point 'symbol)))
+    (find-file-other-window filename)))
+
+(define-key zettelkasten-connections-mode-map (kbd "<return>") #'zettelkasten-connections-goto)
 
 (defun zettelkasten--generate-id ()
   (format-time-string "%Y-%m-%d-%H-%M"))
