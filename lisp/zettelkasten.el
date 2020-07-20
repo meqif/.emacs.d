@@ -192,7 +192,9 @@
                 (insert " ")
                 (mapc
                  (lambda (tag)
-                   (insert (propertize tag 'face 'markdown-reference-face))
+                   (insert (propertize tag
+                                       'tag tag
+                                       'face 'markdown-reference-face))
                    (insert " "))
                  (alist-get 'tags note)))
               (insert "\n"))
@@ -208,7 +210,9 @@
                 (insert " ")
                 (mapc
                  (lambda (tag)
-                   (insert (propertize tag 'face 'markdown-reference-face))
+                   (insert (propertize tag
+                                       'tag tag
+                                       'face 'markdown-reference-face))
                    (insert " "))
                  (alist-get 'tags note)))
               (insert "\n"))
@@ -220,10 +224,12 @@
   "Major mode for displaying connections between Zettelkasten notes")
 
 (defun zettelkasten-connections-goto ()
-  "Go to the Zettelkasten note at point."
+  "Follow the reference (Zettelkasten note or tag) at point."
   (interactive)
   (when-let (filename (get-text-property 0 'filename (thing-at-point 'symbol)))
-    (find-file-other-window filename)))
+    (find-file-other-window filename))
+  (when-let (tag (get-text-property 0 'tag (thing-at-point 'symbol)))
+    (counsel-zettelkasten-tag--files-matching-tag tag)))
 
 (define-key zettelkasten-connections-mode-map (kbd "<return>") #'zettelkasten-connections-goto)
 
