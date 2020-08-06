@@ -239,8 +239,8 @@ Return the decoded text as multibyte string."
    (when (use-region-p)
      (buffer-substring-no-properties (region-beginning) (region-end)))))
 
-(defun meqif/kill-buffers ()
-  "Kill all buffers except for *Messages* and *scratch*."
+(defun meqif/close-buffers ()
+  "Close all buffers except for *Messages* and *scratch*."
   (interactive)
   (-some->> (buffer-list)
             (--remove (string-equal (buffer-name it) "*Messages*"))
