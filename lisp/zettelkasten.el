@@ -41,6 +41,7 @@
   (format "%s\\(%s\\)%s" zettelkasten-link-prefix zettelkasten-identifier-format zettelkasten-link-suffix))
 (defvar zettelkasten-filename-format
   (format "^\\(%s\\) .+\.md" zettelkasten-identifier-format))
+(defvar zettelkasten-connections-buffer "*Zettelkasten connections*")
 
 (defun zettelkasten--json-read-from-string (string)
   "Read the JSON object contained in STRING and return it."
@@ -188,47 +189,43 @@
                        (format "zettelkasten-searcher note-info '%s'" (zettelkasten--curent-note-id)))))
           (forward-references (alist-get 'forward_references note-info))
           (back-references (alist-get 'back_references note-info)))
-    (with-current-buffer (get-buffer-create "*Zettelkasten connections*")
+    (with-current-buffer (get-buffer-create zettelkasten-connections-buffer)
       (zettelkasten-connections-mode)
       (read-only-mode -1)
       (erase-buffer)
-      (insert (propertize "Forward References\n" 'face 'markdown-header-face-1))
-      (mapc (lambda (note)
-              (insert (propertize (format "* %s" (alist-get 'title note))
-                                  'face 'markdown-link-face
-                                  'tags (alist-get 'tags note)
-                                  'filename (alist-get 'filename note)))
-              (when (< 0 (length (alist-get 'tags note)))
-                (insert " ")
-                (mapc
-                 (lambda (tag)
-                   (insert (propertize tag
-                                       'tag tag
-                                       'face 'markdown-reference-face))
-                   (insert " "))
-                 (alist-get 'tags note)))
-              (insert "\n"))
-            forward-references)
+      (insert (propertize "Tags\n" 'face 'markdown-header-face-1))
+      (mapc (lambda (tag)
+              (insert (propertize tag
+                                  'tag tag
+                                  'face 'markdown-reference-face))
+              (insert " "))
+            (alist-get 'tags note-info))
+      (insert "\n\n")
+      (zettelkasten--display-references "Forward References" forward-references)
       (insert "\n")
-      (insert (propertize "Back References\n" 'face 'markdown-header-face-1))
-      (mapc (lambda (note)
-              (insert (propertize (format "* %s" (alist-get 'title note))
-                                  'face 'markdown-link-face
-                                  'tags (alist-get 'tags note)
-                                  'filename (alist-get 'filename note)))
-              (when (< 0 (length (alist-get 'tags note)))
-                (insert " ")
-                (mapc
-                 (lambda (tag)
-                   (insert (propertize tag
-                                       'tag tag
-                                       'face 'markdown-reference-face))
-                   (insert " "))
-                 (alist-get 'tags note)))
-              (insert "\n"))
-            back-references)
+      (zettelkasten--display-references "Back References" back-references)
       (read-only-mode +1)
       (display-buffer (current-buffer)))))
+
+(defun zettelkasten--display-references (title references)
+  (insert (propertize (concat title "\n") 'face 'markdown-header-face-1))
+  (mapc (lambda (note)
+          (insert (propertize (format "* %s" (alist-get 'title note))
+                              'face 'markdown-link-face
+                              'tags (alist-get 'tags note)
+                              'filename (alist-get 'filename note)))
+          ;; Display note's tags beside the title
+          (when (< 0 (length (alist-get 'tags note)))
+            (insert " ")
+            (mapc
+             (lambda (tag)
+               (insert (propertize tag
+                                   'tag tag
+                                   'face 'markdown-reference-face))
+               (insert " "))
+             (alist-get 'tags note)))
+          (insert "\n"))
+        references))
 
 (define-derived-mode zettelkasten-connections-mode fundamental-mode "Zettelkasten connections"
   "Major mode for displaying connections between Zettelkasten notes")
@@ -242,6 +239,10 @@
     (counsel-zettelkasten-tag--files-matching-tag tag)))
 
 (define-key zettelkasten-connections-mode-map (kbd "<return>") #'zettelkasten-connections-goto)
+(evil-define-key 'normal 'zettelkasten-connections-mode-map "q" #'delete-window)
+
+;; TODO: Create mode-specific face
+(set-face-attribute 'markdown-reference-face nil :box t)
 
 (defun zettelkasten--generate-id ()
   (format-time-string "%Y-%m-%d-%H-%M"))
@@ -289,6 +290,7 @@
 (define-derived-mode zettelkasten-mode gfm-mode "🆉"
   "Major mode for Zettelkasten notes."
   (progn
+    (zettelkasten-display-connections)
     (add-hook 'xref-backend-functions 'zettelkasten-xref-backend nil t)
     (font-lock-add-keywords 'zettelkasten-mode `((,zettelkasten-link-format . 'font-lock-warning-face)))))
 
