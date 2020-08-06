@@ -42,6 +42,16 @@
 (defvar zettelkasten-filename-format
   (format "^\\(%s\\) .+\.md" zettelkasten-identifier-format))
 
+(defun zettelkasten--json-read-from-string (string)
+  "Read the JSON object contained in STRING and return it."
+  (if (fboundp 'json-parse-string)
+      (json-parse-string string
+                         :object-type 'alist
+                         :null-object 'nil
+                         :array-type 'array
+                         :false-object :json-false))
+  (json-read-from-string string))
+
 ;;;###autoload
 (defun zettelkasten-follow-link ()
   (interactive)
@@ -57,7 +67,7 @@
 (defun zettelkasten-find-tag (tag)
   "Find files matching TAG."
   (zettelkasten--parse-result
-   (json-read-from-string
+   (zettelkasten--json-read-from-string
     (shell-command-to-string
      (format "zettelkasten-searcher find-tag '\"%s\"'" tag)))))
 
@@ -88,7 +98,7 @@
   (interactive)
   (ivy-read "Find note: "
             #'(lambda (needle)
-                (zettelkasten--parse-result (json-read-from-string (shell-command-to-string (format "zettelkasten-searcher find %s" (shell-quote-argument needle))))))
+                (zettelkasten--parse-result (zettelkasten--json-read-from-string (shell-command-to-string (format "zettelkasten-searcher find %s" (shell-quote-argument needle))))))
             :dynamic-collection t
             :unwind #'(lambda ()
                         (counsel-delete-process)
@@ -101,7 +111,7 @@
   (interactive)
   (ivy-read "Find note: "
             #'(lambda (needle)
-                (zettelkasten--parse-result (json-read-from-string (shell-command-to-string (format "zettelkasten-searcher find %s" (shell-quote-argument needle))))))
+                (zettelkasten--parse-result (zettelkasten--json-read-from-string (shell-command-to-string (format "zettelkasten-searcher find %s" (shell-quote-argument needle))))))
             :dynamic-collection t
             :unwind #'(lambda ()
                         (counsel-delete-process)
@@ -120,7 +130,7 @@
 (defun zettelkasten--list-all (&rest _ignored)
   "List all Zettelkasten notes with some structure."
   (zettelkasten--parse-result
-   (json-read-from-string (shell-command-to-string "zettelkasten-searcher list-files"))))
+   (zettelkasten--json-read-from-string (shell-command-to-string "zettelkasten-searcher list-files"))))
 
 ;;;###autoload
 (defun counsel-zettelkasten-open ()
@@ -147,7 +157,7 @@
   "Find backreferences to the current Zettelkasten note."
   (-when-let* ((current-id (cadr (s-match zettelkasten-filename-format (buffer-name))))
                (command (format "zettelkasten-searcher find §%s" current-id)))
-    (json-read-from-string (shell-command-to-string command))))
+    (zettelkasten--json-read-from-string (shell-command-to-string command))))
 
 ;;;###autoload
 (defun counsel-zettelkasten-backreferences ()
@@ -173,7 +183,7 @@
 
 (defun zettelkasten-display-connections ()
   (interactive)
-  (-let* ((note-info (json-read-from-string
+  (-let* ((note-info (zettelkasten--json-read-from-string
                       (shell-command-to-string
                        (format "zettelkasten-searcher note-info '%s'" (zettelkasten--curent-note-id)))))
           (forward-references (alist-get 'forward_references note-info))
