@@ -12,9 +12,9 @@
 (advice-add 'load-theme :after #'shrink-modeline-font)
 
 ;; Load theme
-(use-package gruvbox-theme
+(use-package doom-themes
   :config
-  (load-theme 'gruvbox-dark-hard t))
+  (load-theme 'doom-oceanic-next t))
 
 (when window-system
   (set-fringe-mode '(4 . 4))
