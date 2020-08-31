@@ -336,6 +336,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
     "\\" 'meqif/pop-mark))
 
 (use-package swiper
+  :defer t
   :ensure ivy
   :config
   (setq swiper-action-recenter t))
@@ -355,6 +356,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 ;; Save a list of recent files visited
 (use-package recentf
   :after f
+  :defer 1
   :init
   ;; Increase recent entries list from default (20)
   (setq recentf-max-saved-items 100)
@@ -1202,6 +1204,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
         (format "%s\\|%s" vc-ignore-dir-regexp tramp-file-name-regexp)))
 
 (use-package server
+  :defer 2
   :delight server-buffer-clients
   ;; Start server if it isn't already running
   :config
