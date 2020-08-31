@@ -383,12 +383,6 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
    ;; Ignore case in completion popup
    completion-ignore-case t)
 
-  ;; Traverse candidates with TAB and BACKTAB
-  (define-key company-active-map (kbd "TAB") 'company-select-next)
-  (define-key company-active-map [tab] 'company-select-next)
-  (define-key company-active-map (kbd "BACKTAB") 'company-select-previous)
-  (define-key company-active-map [backtab] 'company-select-previous)
-
   ;; Make ESC abort the completion popup
   (--each
       (list company-active-map
@@ -396,7 +390,6 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
             company-mode-map
             company-search-map)
     (define-key it [escape] 'company-abort)))
-
 
 (use-package docker-compose-mode
   :defer)
@@ -1123,10 +1116,6 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 (use-package groovy-mode
   :pin melpa-stable
   :mode "\\.gradle\\'")
-
-(use-package sh-mode
-  :ensure sh-script
-  :mode "\\.env\\(\..+\\)?\\'")
 
 ;; Improve readability of ELisp regular expressions
 (use-package easy-escape
