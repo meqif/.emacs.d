@@ -26,11 +26,13 @@
 
 ;;; Code:
 
+(require 'markdown-mode)
 (require 'f)
 (require 's)
 (require 'dash)
 (require 'xref)
 (require 'ivy)
+(require 'counsel)
 
 (defvar zettelkasten-directory "~/.zettelkasten")
 (defvar zettelkasten-extension "md")

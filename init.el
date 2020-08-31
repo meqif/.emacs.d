@@ -1029,12 +1029,17 @@ unnecessary."
   :delight "👹")
 
 (use-package zettelkasten
-  :after ivy-xref
+  :after (f s dash xref ivy ivy-xref counsel general)
+  :commands (counsel-zettelkasten-find counsel-zettelkasten-open)
   :bind ("C-\\" . zettelkasten-create-note)
   :defer 1
   :ensure nil
   :load-path "lisp/"
   :config
+  (add-hook 'zettelkasten-mode-hook #'variable-pitch-mode)
+  (add-hook 'zettelkasten-connections-mode-hook #'variable-pitch-mode)
+  (general-evil-leader-define-key :keymap 'zettelkasten-mode-map
+    "," #'counsel-zettelkasten-backreferences)
   (evil-define-key 'normal zettelkasten-mode-map (kbd "<tab>") 'markdown-cycle))
 
 ;; Wrap lines in visual-line-mode at the fill column
@@ -1158,6 +1163,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 
 (use-package olivetti
   :defer
+  :hook (zettelkasten-mode . olivetti-mode)
   :config
   (setq-default olivetti-body-width 120))
 
