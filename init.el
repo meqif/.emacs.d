@@ -442,6 +442,8 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
           org-export-with-toc nil
           ;; Place footnotes at the end of the current outline node
           org-footnote-section nil
+          ;; Add an intermediate "doing" state in todo keywords
+          org-todo-keywords '((sequence "TODO" "DOING" "DONE"))
           ;; Change the collapsed-tree ellipsis to something more compact
           org-ellipsis "⤵")
     ;; Enable wordwrap
