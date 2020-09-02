@@ -289,7 +289,7 @@
 	url = git@github.com:vspinu/sesman.git
 [submodule "shrink-path"]
 	path = lib/shrink-path
-	url = git@gitlab.com:bennya/shrink-path.el.git
+	url = https://gitlab.com/bennya/shrink-path.el
 [submodule "smart-jump"]
 	path = lib/smart-jump
 	url = git@github.com:jojojames/smart-jump.git
