@@ -16,3 +16,6 @@ url
 network-security.data
 elpa
 lisp/local.el
+epkgs
+transient/
+/abbrev_defs
