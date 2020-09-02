@@ -27,18 +27,9 @@
   (when (eq window-system 'mac)
     (mac-auto-operator-composition-mode))
 
-  (when (equal "caffeine" (system-name))
-    (set-face-attribute 'default nil :font "Fira Code Tweak 14")
-    (add-to-list 'default-frame-alist '(width . 216))
-    (add-to-list 'default-frame-alist '(height . 43)))
-
-  (when (or (equal "antares.local" (system-name))
-            (equal "ophiuchus.local" (system-name)))
-    (progn
-      (set-face-attribute 'default nil :font "Jetbrains Mono 15")
-      (set-face-attribute 'variable-pitch nil :font "Adobe Caslon Pro 18")
-      (setq default-text-properties '(line-spacing 0.5)))
-    (toggle-frame-maximized))
+  (set-face-attribute 'default nil :font "Jetbrains Mono 15")
+  (set-face-attribute 'variable-pitch nil :font "Adobe Caslon Pro 18")
+  (setq default-text-properties '(line-spacing 0.5))
 
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
