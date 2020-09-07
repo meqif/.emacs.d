@@ -259,13 +259,13 @@ Return the decoded text as multibyte string."
 (defun find-monitor-by-name (name monitors)
   "Find monitor by NAME."
   (--find
-   (string-equal name (cdr (assoc-string "name" it)))
+   (string-equal name (alist-get 'name it))
    monitors))
 
 (defun frame-in-monitor-p (name)
   "Whether the current frame is in a monitor named NAME."
   (-when-let* ((monitor-attributes (find-monitor-by-name name (display-monitor-attributes-list)))
-               (frames (cdr (assoc-string "frames" monitor-attributes))))
+               (frames (alist-get 'frames monitor-attributes)))
     (-contains? frames (selected-frame))))
 
 (provide 'defuns)
