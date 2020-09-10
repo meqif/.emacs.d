@@ -516,7 +516,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   (add-hook 'evil-org-mode-hook #'evil-org-set-key-theme))
 
 (use-package yasnippet
-  :hook (rust-mode . yas-minor-mode)
+  :hook ((org-mode ruby-mode rust-mode) . yas-minor-mode)
   :defer
   :delight yas-minor-mode
   :config
