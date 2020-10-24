@@ -19,3 +19,5 @@ lisp/local.el
 epkgs
 transient/
 /abbrev_defs
+/recentf
+/smex-items
