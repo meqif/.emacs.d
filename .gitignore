@@ -21,3 +21,6 @@ transient/
 /abbrev_defs
 /recentf
 /smex-items
+/straight/repos
+/straight/build
+/straight/build-cache.el

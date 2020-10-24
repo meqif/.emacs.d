@@ -17,14 +17,22 @@
 (setq user-init-file (or load-file-name buffer-file-name))
 (setq user-emacs-directory (file-name-directory user-init-file))
 
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")
-                         ("melpa-stable" . "https://stable.melpa.org/packages/")))
+(setq package-archives nil)
 
-(setq epkg-repository "~/.emacs.d/epkgs/")
-(add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
-(require 'borg-elpa)
-(borg-elpa-initialize)
+;; straight package manager
+(setq straight-use-package-by-default t)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
 ;; Refuse to work with old Emacsen
 (when (version< emacs-version "24.4")
@@ -68,11 +76,11 @@
 ;; Packages
 (setq use-package-enable-imenu-support t
       use-package-always-ensure t)
-(require 'use-package)
+(straight-use-package 'use-package)
 (setq use-package-compute-statistics t)
 
 ;; Bring better defaults
-(use-package better-defaults :ensure nil)
+(use-package better-defaults :straight nil)
 
 ;; Essential utility libraries!
 (use-package f)
@@ -103,7 +111,7 @@
 
 ;; Replace default functions with much better alternatives
 (use-package counsel
-  :ensure ivy
+  :straight ivy
   :defer t
   :bind (("s-r"     . counsel-imenu)
          ("M-x"     . counsel-M-x)
@@ -211,7 +219,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 
 ;; Appearance
 (use-package appearance
-  :ensure nil)
+  :straight nil)
 
 (use-package doom-modeline
   :defer t
@@ -233,7 +241,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
         display-time-default-load-average nil))
 
 (use-package prog-mode
-  :ensure nil
+  :straight nil
   :config
   ;; Enable prettify symbols mode globally
   (global-prettify-symbols-mode +1)
@@ -279,7 +287,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   (require 'smartparens-config))
 
 ;; Setup extensions
-(use-package setup-evil :ensure nil)
+(use-package setup-evil :straight nil)
 
 ;; Port of vim-surround
 (use-package evil-surround
@@ -349,7 +357,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 
 (use-package swiper
   :defer t
-  :ensure ivy
+  :straight ivy
   :config
   (setq swiper-action-recenter t))
 
@@ -398,7 +406,6 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   ;; Make ESC abort the completion popup
   (--each
       (list company-active-map
-            company-filter-map
             company-mode-map
             company-search-map)
     (define-key it [escape] 'company-abort)))
@@ -408,7 +415,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 
 ;; Unique buffer names
 (use-package uniquify
-  :ensure nil
+  :straight nil
   ;; Make uniquify rename buffers like in path name notation
   :config (setq uniquify-buffer-name-style 'forward))
 
@@ -422,11 +429,12 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
               ("C-c ! n" . flymake-goto-next-error)
               ("C-c ! p" . flymake-goto-prev-error)))
 
+(use-package pos-tip :defer t)
+
 (use-package flymake-diagnostic-at-point
   :after flymake
   :config
   (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode)
-  (require 'pos-tip)
   (setq flymake-diagnostic-at-point-display-diagnostic-function
         #'(lambda (text)
             (pos-tip-show (concat flymake-diagnostic-at-point-error-prefix text)
@@ -434,6 +442,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 
 (use-package org
   :defer
+  :after hydra
   :init
   (progn
     ;; Don't truncate lines
@@ -485,7 +494,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   :config
   ;; Org-latex configuration
   (use-package ox-latex
-    :ensure org
+    :straight org
     :defer t
     :config
     ;; Use latexmk and xelatex to generate PDFs
@@ -500,11 +509,11 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   (use-package ox-gfm :defer t)
 
   ;; Allow editing html blocks
-  (use-package ox-html :ensure org))
+  (use-package ox-html :straight org))
 
 ;; Use org-mode tables in any mode
 (use-package org-table
-  :ensure nil
+  :straight nil
   :commands orgtbl-mode
   :init
   (defalias 'org-table-mode 'orgtbl-mode))
@@ -651,7 +660,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   (advice-add 'org-mode-flyspell-verify :filter-return 'org-mode-flyspell-verify-ignore-blocks))
 
 ;; Misc
-(use-package my-misc :ensure nil)
+(use-package my-misc :straight nil)
 
 (use-package make-mode
   :defer
@@ -779,7 +788,7 @@ unnecessary."
 
 (use-package diff-mode
   :defer t
-  :ensure nil
+  :straight nil
   :config
   ;; Make fine grained changes more obvious
   (set-face-attribute 'diff-refine-added nil :bold t :background 'unspecified)
@@ -882,6 +891,9 @@ unnecessary."
   :init
   (add-hook 'lispy-mode-hook #'lispyville-mode))
 
+(use-package default-text-scale
+  :straight (default-text-scale :type git :host github :repo "purcell/default-text-scale"))
+
 ;; Group reusable keyboard bindings behind a common prefix
 (use-package hydra
   :config
@@ -929,6 +941,7 @@ unnecessary."
   (general-evil-leader-define-key "z" #'hydra-zoom/body))
 
 (use-package hydra-posframe
+  :straight (hydra-posframe :type git :host github :repo "Ladicle/hydra-posframe")
   :after hydra
   :hook (after-init . hydra-posframe-mode))
 
@@ -974,7 +987,7 @@ unnecessary."
   (evil-define-key 'normal macrostep-keymap "q" 'macrostep-collapse-all))
 
 (use-package dired
-  :ensure nil
+  :straight nil
   :defer t
   :config
   ;; Show human-friendly file sizes and sort numbers properly
@@ -1036,7 +1049,7 @@ unnecessary."
 (unbind-key (kbd "s-p"))
 
 (use-package faun-mode
-  :ensure nil
+  :straight nil
   :after 'org
   :load-path "lisp/"
   :delight "👹")
@@ -1046,7 +1059,7 @@ unnecessary."
   :commands (counsel-zettelkasten-find counsel-zettelkasten-open)
   :bind ("C-\\" . zettelkasten-create-note)
   :defer 1
-  :ensure nil
+  :straight nil
   :load-path "lisp/"
   :config
   (add-hook 'zettelkasten-mode-hook #'variable-pitch-mode)
@@ -1127,14 +1140,12 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
     ("q" nil "quit" :color blue)))
 
 (use-package ess
-  :defer t
-  :pin melpa-stable)
+  :defer t)
 
 (use-package kotlin-mode
   :mode "\\.kt\\'")
 
 (use-package groovy-mode
-  :pin melpa-stable
   :mode "\\.gradle\\'")
 
 ;; Improve readability of ELisp regular expressions
@@ -1180,10 +1191,6 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   :defer
   :config
   (add-hook 'before-save-hook 'gofmt-before-save t t))
-
-;; Edit regions of buffers in another window with a different major mode
-(use-package fence-edit
-  :bind (:map fence-edit-mode-map ("s-s" . fence-edit-save)))
 
 (use-package deadgrep
   :defer
