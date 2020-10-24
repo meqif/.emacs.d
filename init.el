@@ -793,6 +793,7 @@ unnecessary."
 ;; Ruby mode
 (use-package ruby-mode
   :mode ("\\.rb\\'"
+         "\\.rbi\\'"
          "\\.rake\\'"
          "Rakefile\\'"
          "\\.gemspec\\'"
@@ -1147,7 +1148,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   (setq auto-insert-query nil)
   (setq auto-insert-alist
         (-cons*
-         '("\\.rb\\'" nil "# frozen_string_literal: true\n")
+         '("\\.rb\\'" nil "# typed: strict\n# frozen_string_literal: true\n")
          '("\\.ya?ml\\'" nil "---\n")
          auto-insert-alist)))
 
