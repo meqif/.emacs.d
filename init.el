@@ -864,8 +864,9 @@ unnecessary."
 (use-package inf-ruby
   :defer
   :config
-  (setq inf-ruby-default-implementation "pry")
-  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
+  (setq inf-ruby-default-implementation "ruby")
+  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode)
+  (general-define-key :keymap 'ruby-mode-map "C-c C-c" 'ruby-send-buffer))
 
 (use-package lispy
   :delight
