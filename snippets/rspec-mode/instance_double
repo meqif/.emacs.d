@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: instance_double
+# key: id
+# --
+instance_double($0)
