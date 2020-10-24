@@ -520,6 +520,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   :defer
   :delight yas-minor-mode
   :config
+  (yas-reload-all)
   (general-define-key :keymaps 'yas-minor-mode-map "TAB" yas-maybe-expand)
 
   ;; Use only own snippets, do not use bundled ones
