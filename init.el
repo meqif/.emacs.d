@@ -851,7 +851,9 @@ unnecessary."
       (rspec-run-single-file path (rspec-core-options)))))
 ;; Handy functions to run rubocop from Emacs
 (use-package rubocop
-  :after (:any ruby-mode))
+  :after (:any ruby-mode)
+  :config
+  (setq rubocop-check-command "rubocop --format emacs --parallel"))
 
 ;; Automatically expand # to #{} inside double-quoted strings
 (use-package ruby-tools
