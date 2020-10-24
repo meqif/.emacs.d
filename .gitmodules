@@ -43,6 +43,9 @@
 [submodule "deadgrep"]
 	path = lib/deadgrep
 	url = git@github.com:Wilfred/deadgrep.git
+[submodule "default-text-scale"]
+	path = lib/default-text-scale
+	url = git@github.com:purcell/default-text-scale.git
 [submodule "delight"]
 	path = lib/delight
 	url = https://git.savannah.nongnu.org/git/delight.git

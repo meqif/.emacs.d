@@ -917,9 +917,9 @@ unnecessary."
 
   (defhydra hydra-zoom ()
     "zoom"
-    ("i" text-scale-increase "in")
-    ("o" text-scale-decrease "out")
-    ("0" (text-scale-adjust 0) "reset")
+    ("i" default-text-scale-increase "in")
+    ("o" default-text-scale-decrease "out")
+    ("0" default-text-scale-reset "reset")
     ("q" nil "quit" :color blue))
   (general-evil-leader-define-key "z" #'hydra-zoom/body))
 
