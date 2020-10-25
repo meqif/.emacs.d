@@ -212,14 +212,14 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 ;; Keybindings
 (require 'keybindings)
 
+;; Appearance
+(use-package appearance
+  :straight nil)
+
 ;; Load local-only settings, not tracked by VCS
 ;; Makes it easy to customize settings for each machine that I don't want to persist in VCS
 (when (f-exists? (f-join lisp-dir "local.el"))
   (require 'local))
-
-;; Appearance
-(use-package appearance
-  :straight nil)
 
 (use-package doom-modeline
   :defer t
