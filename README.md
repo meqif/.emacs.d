@@ -10,14 +10,10 @@ Enjoy and copy freely to your configuration files!
 
 ```bash
 git clone $REPO_URL
-cd ~/.emacs.d
-# Ensure borg is present
-git submodule update --init --remote --rebase lib/borg
-make bootstrap
+emacs
 ```
 
-You may need to manually update some packages with `git submodule update --remote --rebase lib/$package` in case you get a fatal error about invalid objects.
-Some people rewrite the git history and break the process.
+Nothing else is necessary, straight.el will take care of downloading the dependencies according to the [lockfile](./straight/versions/default.el).
 
 ## Misc
 
