@@ -28,7 +28,8 @@
     (mac-auto-operator-composition-mode))
 
   (set-face-attribute 'default nil :font "Jetbrains Mono 15")
-  (set-face-attribute 'variable-pitch nil :font "Adobe Caslon Pro 18")
+  (set-face-attribute 'variable-pitch nil :font "Georgia 18")
+
   (setq default-text-properties '(line-spacing 0.5))
 
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
