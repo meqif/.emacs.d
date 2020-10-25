@@ -712,6 +712,8 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   :config
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
+  (add-hook 'magit-status-mode-hook 'visual-line-mode)
+
   (add-to-list 'magit-repository-directories '("~/.emacs.d/" . 0))
 
   ;; Disable the new section indicators
