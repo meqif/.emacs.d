@@ -835,7 +835,6 @@ unnecessary."
   (add-hook 'ruby-mode-hook #'maybe-set-docker-cwd))
 
 (use-package rspec-mode
-  :defer
   :functions (rspec-verify
               rspec-verify-all
               rspec-verify-single
