@@ -289,6 +289,11 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 ;; Setup extensions
 (use-package setup-evil :straight nil)
 
+(use-package undo-fu
+  :after evil
+  :config
+  (evil-set-undo-system 'undo-fu))
+
 ;; Port of vim-surround
 (use-package evil-surround
   :after evil
@@ -674,19 +679,6 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   :config
   (setq whitespace-style '(face lines-tail))
   (setq-default whitespace-line-column nil))
-
-(use-package undo-tree
-  :delight
-  :config
-  ;; Show timestamps
-  (setq undo-tree-visualizer-timestamps t)
-  ;; Split undo-tree side-by-side, like decent people do.
-  (defun undo-tree-split-side-by-side (original-function &rest args)
-    "Split undo-tree side-by-side"
-    (let ((split-height-threshold nil)
-          (split-width-threshold 0))
-      (apply original-function args)))
-  (advice-add 'undo-tree-visualize :around #'undo-tree-split-side-by-side))
 
 ;; Enable diff indication on the fringe
 (use-package diff-hl
