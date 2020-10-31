@@ -48,7 +48,7 @@
  ("hydra" . "112e689f75b59398d8eca79ac6562dca12b8a959")
  ("hydra-posframe" . "343a269b52d6fb6e5ae6c09d91833ff4620490ec")
  ("ibuffer-vc" . "5fa6aea09bc67f71ea743302d609f459967b1e81")
- ("iedit" . "def0c19ff77aef32ccf11eb118771a11cff59584")
+ ("iedit" . "77eb0a1e2e44b453e4ebf4c38409affa353f5139")
  ("inf-ruby" . "b0124578db09b64902c8ca981b02e74bec92ef36")
  ("ivy-xref" . "3d4c35fe2b243d948d8fe02a1f0d76a249d63de9")
  ("js2-mode" . "ffb70990c1a4d4616034cb810b4ce36953aecb47")
