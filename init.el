@@ -139,7 +139,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
     (let* ((default-directory (or initial-directory (-some-> (project-current) (project-roots) (car)))))
       (ivy-read "Find file: "
                 (split-string
-                 (shell-command-to-string "fd --follow --color never")
+                 (shell-command-to-string "fd --follow --color never --hidden --exclude '/.git/'")
                  "\n" t)
                 :matcher #'counsel--find-file-matcher
                 :initial-input initial-input
