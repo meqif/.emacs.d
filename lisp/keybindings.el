@@ -55,5 +55,8 @@
      (interactive)
      (switch-to-buffer (get-buffer-create "*scratch*"))))
 
+;; Get nicer output when evaluating expressions
+(global-set-key (kbd "M-:") 'pp-eval-expression)
+
 (provide 'keybindings)
 ;;; keybindings.el ends here
