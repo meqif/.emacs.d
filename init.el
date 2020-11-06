@@ -449,8 +449,6 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
           ;; Stop org-mode from replacing my window-moving keys
           ;; Has to be defined before loading org-mode
           org-replace-disputed-keys t
-          ;; Enable syntax highlighting in source blocks
-          org-src-fontify-natively t
           ;; Don't export a table of content by default
           org-export-with-toc nil
           ;; Place footnotes at the end of the current outline node
@@ -463,6 +461,17 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
     (add-hook 'org-mode-hook 'visual-line-mode)
     ;; Break lines automatically
     (add-hook 'org-mode-hook 'auto-fill-mode)
+
+    ;; Source block tweaks
+    (setq
+     ;; Enable syntax highlighting in source blocks
+     org-src-fontify-natively t
+     ;; Don't insert two spaces at the start of each line in source blocks
+     org-src-preserve-indentation t
+     ;; Make tabs act the same as in the source block's associated major mode
+     org-src-tab-acts-natively t
+     ;; Re-use the same window for source block edits
+     org-src-window-setup 'current-window)
 
     ;; Organizing stuff
     ;; http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
