@@ -1188,6 +1188,8 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   :config
   (add-hook 'before-save-hook 'gofmt-before-save t t))
 
+(use-package terraform-mode)
+
 (use-package deadgrep
   :defer
   :config
