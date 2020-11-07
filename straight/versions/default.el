@@ -92,7 +92,7 @@
  ("straight.el" . "4656560c49ae7545ee7d6c3847057e03a60c047b")
  ("swiper" . "49f9d662a42d51db39b6a84c3fd1d78ca8c5103d")
  ("tagedit" . "b3a70101a0dcf85498c92b7fcfa7fdbac869746c")
- ("terraform-mode" . "2967e7bdc05d15617e121052f6e43c61439b9070")
+ ("terraform-mode" . "b8003ec131566fd2b753fb423e01640eab07e12c")
  ("tramp" . "f8aad33a7e585efdb243a1ec14972c803d800e3e")
  ("transient" . "990eb0a292d622b80b52460d445aa58232ef2645")
  ("use-package" . "4fb1f9a68f1e7e7d614652afc017a6652fd029f1")
