@@ -3,10 +3,6 @@
 (unless noninteractive
   (message "Loading %s..." load-file-name))
 
-;; Increase the threshold for garbage collection to speed up start process
-(setq gc-cons-threshold (* 256 1024 1024)
-      gc-cons-percentage 0.1)
-
 (setq user-init-file (or load-file-name buffer-file-name))
 (setq user-emacs-directory (file-name-directory user-init-file))
 
