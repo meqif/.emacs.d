@@ -446,6 +446,8 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   (progn
     ;; Don't truncate lines
     (setq org-startup-truncated nil
+          ;; Fold all items in new buffers
+          org-startup-folded t
           ;; Stop org-mode from replacing my window-moving keys
           ;; Has to be defined before loading org-mode
           org-replace-disputed-keys t
