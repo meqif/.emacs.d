@@ -635,6 +635,13 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
         eglot-autoreconnect nil)
   (general-define-key :keymap 'eglot-mode-map "C-h ." 'eglot-help-at-point))
 
+(use-package elpy
+  :defer t
+  :init
+  (advice-add 'python-mode :before 'elpy-enable)
+  :config
+  (add-hook 'elpy-mode-hook '(lambda () (pyvenv-activate "~/.emacs.d/elpy/rpc-venv/"))))
+
 (use-package flyspell
   :defer
   :init
