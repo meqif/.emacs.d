@@ -941,11 +941,6 @@ unnecessary."
     ("q" nil "quit" :color blue))
   (general-evil-leader-define-key "z" #'hydra-zoom/body))
 
-(use-package hydra-posframe
-  :straight (hydra-posframe :type git :host github :repo "Ladicle/hydra-posframe")
-  :after hydra
-  :hook (after-init . hydra-posframe-mode))
-
 (use-package major-mode-hydra
   :after hydra
   :bind ("M-SPC" . major-mode-hydra)
