@@ -779,11 +779,12 @@ unnecessary."
   (add-hook 'git-commit-setup-hook 'maybe-append-jira-ticket-identifier)
 
   ;; The fill-column for git commits is 72 characters as per https://commit.style/
-  (add-hook 'git-commit-setup-hook #'(lambda () (setq fill-column 72)))
+  (add-hook 'git-commit-setup-hook #'(lambda () (setq fill-column 72))))
+
+(use-package evil-magit
+  :after magit
   :config
-  (use-package evil-magit
-    :config
-    (evil-define-key evil-magit-state magit-mode-map "\\" nil)))
+  (evil-define-key evil-magit-state magit-mode-map "\\" nil))
 
 (use-package browse-at-remote
   :defer
