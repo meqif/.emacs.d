@@ -94,6 +94,18 @@
   (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit)
   (define-key ivy-switch-buffer-map (kbd "C-k") #'ivy-switch-buffer-kill))
 
+(use-package prescient
+  :straight (prescient :type git :host github :repo "raxod502/prescient.el"
+                       :fork (:host github :repo "tsdh/prescient.el"))
+  :config
+  (prescient-persist-mode +1)
+  (setq prescient-filter-method '(literal-prefix regexp)))
+
+(use-package ivy-prescient
+  :after (:all (:any ivy counsel) (:any prescient))
+  :config
+  (ivy-prescient-mode +1))
+
 (use-package ivy-xref
   :after ivy
   :config
