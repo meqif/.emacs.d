@@ -621,6 +621,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   :config
   (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
   (setq eglot-autoshutdown t
+        eglot-sync-connect nil
         eglot-autoreconnect nil)
   (general-define-key :keymap 'eglot-mode-map "C-h ." 'eldoc-doc-buffer))
 
