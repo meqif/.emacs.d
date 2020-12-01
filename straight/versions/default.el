@@ -24,6 +24,7 @@
  ("eldoc" . "9bd5c80cf5f0ad215073581be15a2d7e0bbf224f")
  ("elpy" . "c3aa42f805d06e837514d5e4f646bec28cea58b3")
  ("emacs-async" . "14f48de586b0977e3470f053b810d77b07ea427a")
+ ("emacs-doom-themes" . "becbc4bfb6dd2c93b05d6c73e7d327b8a64985ca")
  ("emacs-fish" . "db257db81058b0b12f788c324c264cc59b9a5bf4")
  ("emacs-hcl-mode" . "e12b1df2ca28d2b06c471cd709c038a2dc0bcdbd")
  ("emacs-memoize" . "51b075935ca7070f62fae1d69fe0ff7d8fa56fdd")
