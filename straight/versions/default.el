@@ -67,6 +67,7 @@
  ("markdown-mode" . "cf6403186119cd3d25adc702845f969071060e20")
  ("markdown-toc" . "9565eeaa1d26bc0ab83eb65bd30470888f724044")
  ("melpa" . "fe7889550dd0004d2ed5e3099f538eef47d8fa4b")
+ ("no-littering" . "f14d5548211109b0e5e850706d8d2cc182dc60be")
  ("olivetti" . "f4499948d12190cdc4272fb3c8bb0dc268d84efb")
  ("org" . "7ae31038e7f96341585ddfc324772660134d0d35")
  ("parseclj" . "eff941126859bc9e949eae5cd6c2592e731629f2")

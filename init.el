@@ -79,6 +79,8 @@
   :defer t
   :config (dash-enable-font-lock))
 
+(use-package no-littering)
+
 (use-package ivy
   :defer t
   :delight
@@ -364,8 +366,8 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   ;; Increase recent entries list from default (20)
   (setq recentf-max-saved-items 100)
   :config
-  ;; Exclude installed packages
-  (push (f-join user-emacs-directory ".cask") recentf-exclude))
+  (add-to-list 'recentf-exclude no-littering-var-directory)
+  (add-to-list 'recentf-exclude no-littering-etc-directory))
 
 ;; Misery loves this
 (use-package company
