@@ -289,17 +289,6 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   :config
   (global-evil-surround-mode 1))
 
-;; Enable IDO mode
-(use-package ido
-  :demand t
-  :config
-  (ido-mode t)
-  (setq ido-enable-prefix nil
-        ido-enable-flex-matching t
-        ido-create-new-buffer 'always
-        ido-use-filename-at-point nil
-        ido-max-prospects 10))
-
 (use-package imenu
   :config
   ;; Make imenu rescan automatically
