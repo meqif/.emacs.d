@@ -95,7 +95,7 @@
  ("smex" . "55aaebe3d793c2c990b39a302eb26c184281c42c")
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
  ("straight.el" . "4656560c49ae7545ee7d6c3847057e03a60c047b")
- ("swiper" . "49f9d662a42d51db39b6a84c3fd1d78ca8c5103d")
+ ("swiper" . "ab36ccb32322f2b500f947bbe10f62194a9ef6c8")
  ("tagedit" . "b3a70101a0dcf85498c92b7fcfa7fdbac869746c")
  ("terraform-mode" . "b8003ec131566fd2b753fb423e01640eab07e12c")
  ("tramp" . "f8aad33a7e585efdb243a1ec14972c803d800e3e")
