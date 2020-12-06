@@ -498,13 +498,12 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 
   (general-evil-leader-define-key :keymap 'org-mode-map
     "ce" #'org-export-dispatch
-    "n" #'hydra-org-mode-narrow/body)
+    "n" #'hydra-org-mode-narrow/body))
 
-  :config
-  ;; Org-latex configuration
-  (use-package ox-latex
+;; Org-latex configuration
+(use-package ox-latex
+    :after org
     :straight org
-    :defer t
     :config
     ;; Use latexmk and xelatex to generate PDFs
     (setq org-latex-pdf-process '("latexmk -pdflatex=xelatex -pdf -f %f"))
@@ -514,11 +513,14 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
     (add-to-list 'org-latex-packages-alist
                  '("" "microtype" nil)))
 
-  ;; Add Github-Flavored Markdown exporter
-  (use-package ox-gfm :defer t)
+;; Add Github-Flavored Markdown exporter
+(use-package ox-gfm
+  :after org)
 
-  ;; Allow editing html blocks
-  (use-package ox-html :straight org))
+;; Allow editing html blocks
+(use-package ox-html
+  :after org
+  :straight org)
 
 ;; Use org-mode tables in any mode
 (use-package org-table

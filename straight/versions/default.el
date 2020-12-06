@@ -71,6 +71,7 @@
  ("no-littering" . "f14d5548211109b0e5e850706d8d2cc182dc60be")
  ("olivetti" . "f4499948d12190cdc4272fb3c8bb0dc268d84efb")
  ("org" . "7ae31038e7f96341585ddfc324772660134d0d35")
+ ("ox-gfm" . "99f93011b069e02b37c9660b8fcb45dab086a07f")
  ("parseclj" . "eff941126859bc9e949eae5cd6c2592e731629f2")
  ("parseedn" . "90cfe3df51b96f85e346f336c0a0ee6bf7fee508")
  ("pkg-info" . "76ba7415480687d05a4353b27fea2ae02b8d9d61")
