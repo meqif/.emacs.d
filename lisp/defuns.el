@@ -186,52 +186,6 @@ Return the decoded text as multibyte string."
            (meqif/f-read-if-exists)
            (meqif/extract-rubocop-line-length)))
 
-(defun meqif/company-candidates ()
-  (let ((longest-candidate (-max (-map 'length company-candidates))))
-    (mapcar (lambda (candidate)
-              (let ((annotation
-                     (company-call-backend 'annotation candidate)))
-                (if (> (length annotation) 0)
-                    (progn
-                      (set-text-properties
-                       0 (length annotation)
-                       '(face success) annotation)
-                      (cons (concat candidate (s-repeat (- longest-candidate (length candidate)) " ") "\t\t" annotation) candidate))
-                  (cons candidate candidate))))
-            company-candidates)))
-
-(defun meqif/counsel-company ()
-  "Complete using `company-candidates'."
-  (interactive)
-  (company-mode 1)
-  (unless company-candidates
-    (company-complete))
-  (when company-point
-    (when (looking-back company-common (line-beginning-position))
-      (setq ivy-completion-beg (match-beginning 0))
-      (setq ivy-completion-end (match-end 0)))
-    (ivy-read "company cand: " (meqif/company-candidates)
-              :unwind #'company-abort
-              :action (lambda (candidate)
-                        (ivy-completion-in-region-action (cdr candidate))))))
-
-(defun meqif/indent-or-complete-common ()
-  "Indent the current line or region, or complete the common part."
-  (interactive)
-  (cond
-   ((use-region-p)
-    (indent-region (region-beginning) (region-end)))
-   ((memq indent-line-function
-          '(indent-relative indent-relative-maybe))
-    (meqif/counsel-company))
-   ((let ((old-point (point))
-          (old-tick (buffer-chars-modified-tick))
-          (tab-always-indent t))
-      (call-interactively #'indent-for-tab-command)
-      (when (and (eq old-point (point))
-                 (eq old-tick (buffer-chars-modified-tick)))
-        (meqif/counsel-company))))))
-
 (defun meqif/counsel-grep-or-swiper-dwim ()
   "Call swiper with the currently selected region, if any."
   (interactive)
