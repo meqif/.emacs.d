@@ -102,7 +102,7 @@
  ("transient" . "990eb0a292d622b80b52460d445aa58232ef2645")
  ("use-package" . "4fb1f9a68f1e7e7d614652afc017a6652fd029f1")
  ("with-editor" . "c4768f51c7415119519b4626d8643d60e584098c")
- ("xref" . "c869d761af7b6d83a00f59fcbd965c07fe22e403")
+ ("xref" . "aaa823a31befded016aa5370c4a22545e480911a")
  ("xterm-color" . "b9b1f84fb10fff5261702e38bf15b3ae75a4b6bb")
  ("yaml-mode" . "68fecb5f0dec712a10c8655df6881392a4613617")
  ("yasnippet" . "5cbdbf0d2015540c59ed8ee0fcf4788effdf75b6")
