@@ -1010,6 +1010,7 @@ unnecessary."
 
 (use-package xref
   :config
+  (setq xref-search-program 'ripgrep)
   (add-hook 'xref-after-return-hook #'recenter))
 
 (use-package dumb-jump
