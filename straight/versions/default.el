@@ -78,7 +78,7 @@
  ("popup-el" . "13364d7674535db225789b03da766746734a4f28")
  ("pos-tip" . "179cc126b363f72ca12fab1e0dc462ce0ee79742")
  ("prescient.el" . "a13a90f3de24aba40a77f759b05c99825304d67f")
- ("project" . "2965f90868bdd8ad7696fa22a764b510e133b67a")
+ ("project" . "0003fe4f3f81be08a9427888ead29f182e0b2527")
  ("pyvenv" . "861998b6d157ae73b829f02a5a6c8a9118310831")
  ("queue" . "52206c0f78afc0dfb9a287cb928c1e725103336d")
  ("rainbow-delimiters" . "f43d48a24602be3ec899345a3326ed0247b960c6")
