@@ -787,9 +787,12 @@ unnecessary."
 
 (use-package evil-collection
   :config
+  ;; magit
   (eval-after-load 'magit (evil-collection-magit-setup))
   (eval-after-load 'evil-collection-magit
-    '(evil-define-key evil-collection-magit-state magit-mode-map "\\" nil)))
+    '(evil-define-key evil-collection-magit-state magit-mode-map "\\" nil))
+  ;; deadgrep
+  (eval-after-load 'deadgrep (evil-collection-deadgrep-setup)))
 
 (use-package browse-at-remote
   :defer
@@ -1202,16 +1205,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 (use-package terraform-mode)
 
 (use-package deadgrep
-  :defer
-  :config
-  (evil-define-state deadgrep
-    "Evil deadgrep state"
-    :cursor 'bar
-    :enable (motion))
-    (add-hook 'deadgrep-mode-hook #'evil-deadgrep-state)
-
-    (define-key evil-deadgrep-state-map (kbd "<return>") #'deadgrep-visit-result)
-    (define-key evil-deadgrep-state-map (kbd "gr") #'deadgrep-restart))
+  :defer)
 
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
