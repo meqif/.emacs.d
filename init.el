@@ -290,7 +290,9 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   (require 'smartparens-config))
 
 ;; Setup extensions
-(use-package setup-evil :straight nil)
+(use-package setup-evil
+  :straight nil
+  :init (setq evil-want-keybinding nil))
 
 (use-package undo-fu
   :after evil
@@ -783,10 +785,11 @@ unnecessary."
   ;; The fill-column for git commits is 72 characters as per https://commit.style/
   (add-hook 'git-commit-setup-hook #'(lambda () (setq fill-column 72))))
 
-(use-package evil-magit
-  :after magit
+(use-package evil-collection
   :config
-  (evil-define-key evil-magit-state magit-mode-map "\\" nil))
+  (eval-after-load 'magit (evil-collection-magit-setup))
+  (eval-after-load 'evil-collection-magit
+    '(evil-define-key evil-collection-magit-state magit-mode-map "\\" nil)))
 
 (use-package browse-at-remote
   :defer
