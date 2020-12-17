@@ -1168,6 +1168,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   :hook ((prog-mode yaml-mode) . auto-insert-mode)
   :config
   (setq auto-insert-query nil)
+  (assoc-delete-all '("\\.el\\'" . "Emacs Lisp header") auto-insert-alist)
   (setq auto-insert-alist
         (-cons*
          '("\\.rb\\'" nil "# typed: strict\n# frozen_string_literal: true\n")
