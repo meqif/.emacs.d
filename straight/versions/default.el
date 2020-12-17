@@ -31,6 +31,7 @@
  ("emacs-memoize" . "51b075935ca7070f62fae1d69fe0ff7d8fa56fdd")
  ("emacs-undo-fu" . "c0806c1903c5a0e4c69b6615cdc3366470a9b8ca")
  ("emacs-vdiff" . "c0541ae9c2cb878be9ab3935da058a72155a14fc")
+ ("emacs-which-key" . "428aedfce0157920814fbb2ae5d00b4aea89df88")
  ("emacsmirror-mirror" . "83bfe8b5f9bcd3653dbea383776183c6d36841ac")
  ("emmet-mode" . "1acb821e0142136344ccf40c1e5fb664d7db2e70")
  ("epl" . "78ab7a85c08222cd15582a298a364774e3282ce6")

@@ -988,6 +988,10 @@ unnecessary."
       ("A" (lambda () (interactive) (rspec-run-test-subset 'acceptance)) "run acceptance tests")
       ("u" (lambda () (interactive) (rspec-run-test-subset 'unit)) "run unit tests")))))
 
+(use-package which-key
+  :config
+  (which-key-mode +1))
+
 ;; Macro expansion for ease of debugging
 (use-package macrostep
   :defer t
