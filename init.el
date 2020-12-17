@@ -345,6 +345,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
     "Q" 'counsel-zettelkasten-find-by-tag
     "f" 'meqif/counsel-fd
     "F" 'meqif/try-counsel-alt
+    "a" 'meqif/goto-alternate-file
     "p" 'counsel-yank-pop
     "b" 'ivy-switch-buffer
     "r" 'counsel-recentf
