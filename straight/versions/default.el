@@ -21,7 +21,7 @@
  ("doom-modeline" . "86d91e891b7d587b6680b19eda5ce2ca3df5b0ab")
  ("dumb-jump" . "97b0dfb617533cce128dcfe4956da5d88de07bca")
  ("easy-escape" . "a6449f22cb97160ee1c90121968de89e193268df")
- ("eglot" . "21726416e6e580b20dfa90833c6dab2a8a15ea48")
+ ("eglot" . "4edd4782f1c16c0516533b52e16b02b772812d16")
  ("eldoc" . "9bd5c80cf5f0ad215073581be15a2d7e0bbf224f")
  ("elpy" . "c3aa42f805d06e837514d5e4f646bec28cea58b3")
  ("emacs-async" . "14f48de586b0977e3470f053b810d77b07ea427a")
