@@ -1188,6 +1188,17 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
                    (funcall 'compilation-filter proc
                             (xterm-color-filter string))))))))
 
+(use-package vterm
+  :commands vterm
+  :config
+  (add-hook 'vterm-mode-hook
+            #'(lambda ()
+                (setq-local
+                 ;; Disable font height override in vterm because it messes up the displayed text area
+                 default-text-properties nil
+                 ;; Disable line highlight
+                 global-hl-line-mode nil))))
+
 (use-package olivetti
   :defer
   :hook (zettelkasten-mode . olivetti-mode)
