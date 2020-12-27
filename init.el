@@ -1236,6 +1236,15 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   (setq vc-ignore-dir-regexp
         (format "%s\\|%s" vc-ignore-dir-regexp tramp-file-name-regexp)))
 
+(use-package project
+  :config
+  (setq project-switch-commands
+        '((?f "Find file" project-find-file)
+          (?g "Find regexp" project-find-regexp)
+          (?d "Dired" project-dired)
+          (?m "Magit" (lambda () (interactive) (magit-status (project-root (project-current t)))))
+          (?s "Vterm" vterm))))
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
