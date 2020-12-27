@@ -492,11 +492,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
     (general-define-key :keymaps 'org-mode-map
                         :states 'normal
                         "C-j" #'org-next-visible-heading
-                        "C-k" #'org-previous-visible-heading))
-
-  (general-evil-leader-define-key :keymap 'org-mode-map
-    "ce" #'org-export-dispatch
-    "n" #'hydra-org-mode-narrow/body))
+                        "C-k" #'org-previous-visible-heading)))
 
 ;; Org-latex configuration
 (use-package ox-latex
