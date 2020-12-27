@@ -434,12 +434,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 (use-package flymake-diagnostic-at-point
   :after flymake
   :config
-  (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode)
-  (setq flymake-diagnostic-at-point-display-diagnostic-function
-        #'(lambda (text)
-            (require 'pos-tip)
-            (pos-tip-show (concat flymake-diagnostic-at-point-error-prefix text)
-                          nil nil nil 60))))
+  (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode))
 
 (use-package org
   :defer
