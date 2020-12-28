@@ -530,7 +530,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   (add-hook 'evil-org-mode-hook #'evil-org-set-key-theme))
 
 (use-package yasnippet
-  :hook ((org-mode rspec-mode ruby-mode rust-mode) . yas-minor-mode)
+  :hook ((org-mode rspec-mode ruby-mode enh-ruby-mode rust-mode) . yas-minor-mode)
   :defer
   :delight yas-minor-mode
   :config
@@ -625,11 +625,12 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   :after rust-mode)
 
 (use-package eglot
-  :hook ((rust-mode kotlin-mode ruby-mode js2-mode) . eglot-ensure)
+  :hook ((rust-mode kotlin-mode ruby-mode enh-ruby-mode js2-mode) . eglot-ensure)
   :bind (:map eglot-mode-map
               ("M-RET" . eglot-code-actions))
   :config
   (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
+  (add-to-list 'eglot-server-programs '(enh-ruby-mode "solargraph" "socket" "--port" :autoport))
   (setq eglot-autoshutdown t
         eglot-sync-connect nil
         eglot-autoreconnect nil)
@@ -803,7 +804,7 @@ unnecessary."
   (set-face-attribute 'diff-refine-removed nil :bold t :background 'unspecified))
 
 (use-package subword
-  :hook ((rust-mode ruby-mode kotlin-mode) . subword-mode)
+  :hook ((rust-mode ruby-mode enh-ruby-mode kotlin-mode python-mode) . subword-mode)
   :delight "_")
 
 ;; Ruby mode
@@ -853,7 +854,7 @@ unnecessary."
               rspec-toggle-spec-and-target-find-example
               rspec-run-test-subset
               hydra-rspec/body)
-  :after (:any ruby-mode)
+  :after (:any ruby-mode enh-ruby-mode)
   :config
   (setq rspec-command-options "--format progress"
         rspec-use-docker-when-possible t
@@ -868,13 +869,13 @@ unnecessary."
       (rspec-run-single-file path (rspec-core-options)))))
 ;; Handy functions to run rubocop from Emacs
 (use-package rubocop
-  :after (:any ruby-mode)
+  :after (:any ruby-mode enh-ruby-mode)
   :config
   (setq rubocop-check-command "rubocop --format emacs --parallel"))
 
 ;; Automatically expand # to #{} inside double-quoted strings
 (use-package ruby-tools
-  :after (:any ruby-mode)
+  :after (:any ruby-mode enh-ruby-mode)
   :delight "🛠")
 
 (use-package inf-ruby
@@ -967,7 +968,7 @@ unnecessary."
      (("y" cargo-process-clippy "clippy")
       ("f" cargo-process-fmt "format"))))
 
-  (major-mode-hydra-define ruby-mode
+  (major-mode-hydra-define enh-ruby-mode
     (:quit-key "q")
     ("RSpec"
      (("a" rspec-verify-all "run all specs")
