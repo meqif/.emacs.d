@@ -36,7 +36,7 @@
  ("emmet-mode" . "1acb821e0142136344ccf40c1e5fb664d7db2e70")
  ("epl" . "78ab7a85c08222cd15582a298a364774e3282ce6")
  ("evil" . "32b2783d2cb7e093ac284fa6af9ceed8e4418826")
- ("evil-collection" . "c9ccc3065f46c1654f1cc0d41cd2f5cff184d273")
+ ("evil-collection" . "16e14ea9c58aa1224c09d02e40ad3edde72c820a")
  ("evil-lion" . "6b03593f5dd6e7c9ca02207f9a73615cf94c93ab")
  ("evil-matchit" . "539192328ec521796c3f2bd8c1ac1a1b0e4f08f9")
  ("evil-multiedit" . "9f271e0e6048297692f80ed6c5ae8994ac523abc")
