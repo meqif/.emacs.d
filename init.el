@@ -94,18 +94,6 @@
   (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit)
   (define-key ivy-switch-buffer-map (kbd "C-k") #'ivy-switch-buffer-kill))
 
-(use-package prescient
-  :straight (prescient :type git :host github :repo "raxod502/prescient.el"
-                       :fork (:host github :repo "tsdh/prescient.el"))
-  :config
-  (prescient-persist-mode +1)
-  (setq prescient-filter-method '(literal-prefix regexp)))
-
-(use-package ivy-prescient
-  :after (:all (:any ivy counsel) (:any prescient))
-  :config
-  (ivy-prescient-mode +1))
-
 (use-package ivy-xref
   :after ivy
   :config
@@ -116,11 +104,11 @@
 (use-package counsel
   :straight ivy
   :defer t
-  :bind (("s-r"     . counsel-imenu)
-         ("M-x"     . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-h f"   . counsel-describe-function)
-         ("C-h v"   . counsel-describe-variable))
+  ;; :bind (("s-r"     . counsel-imenu)
+  ;;        ("M-x"     . counsel-M-x)
+  ;;        ("C-x C-f" . counsel-find-file)
+  ;;        ("C-h f"   . counsel-describe-function)
+  ;;        ("C-h v"   . counsel-describe-variable))
   :commands meqif/counsel-fd meqif/counsel-recentf
   :config
   (define-key counsel-find-file-map (kbd "TAB") 'ivy-alt-done)
@@ -353,6 +341,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
     "g" 'magit-status
     "s" 'meqif/counsel-grep-or-swiper-dwim
     "S" 'counsel-rg-dwim
+    "x" 'project-switch-project
     "\\" 'meqif/pop-mark))
 
 (use-package swiper
@@ -360,6 +349,52 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   :straight ivy
   :config
   (setq swiper-action-recenter t))
+
+(use-package selectrum
+  :config
+  (ivy-mode -1)
+  (selectrum-mode +1)
+  (set-face-attribute 'selectrum-current-candidate nil
+                      :inherit nil
+                      :background "#4F5B66")
+  ;; Allow completion-at-point while in minibuffer
+  (setq enable-recursive-minibuffers t))
+
+(use-package prescient)
+
+(use-package selectrum-prescient
+  :after (:all selectrum prescient)
+  :config
+  (selectrum-prescient-mode +1))
+
+(use-package consult
+  :after (:all selectrum prescient)
+  :bind (("s-r" . consult-imenu))
+  :config
+  (consult-preview-mode)
+  (general-evil-leader-define-key
+    "r" 'consult-recent-file
+    "R" 'consult-recent-file-other-window
+    "p" 'consult-yank-pop
+    "s" 'consult-line
+    "b" 'consult-buffer
+    "B" 'consult-buffer-other-window))
+
+(use-package consult-selectrum
+  :after (:all consult selectrum)
+  :demand t)
+
+(use-package marginalia
+  :after selectrum
+  :config
+  (marginalia-mode +1))
+
+(use-package orderless
+  :after selectrum
+  :config
+  (setq selectrum-refine-candidates-function #'orderless-filter
+        selectrum-highlight-candidates-function #'orderless-highlight-matches
+        orderless-matching-styles '(orderless-prefixes)))
 
 (use-package avy
   :demand
@@ -737,6 +772,8 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
         magit-fetch-arguments '("--prune")
         ;; Use ivy to complete magit's prompts
         magit-completing-read-function 'ivy-completing-read)
+
+  (setq magit-completing-read-function 'selectrum-completing-read)
 
   ;; Make <SPC> insert dashes instead. Useful when creating new branches
   (define-key magit-minibuffer-local-ns-map "\s" "-")
@@ -1240,6 +1277,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 
 (use-package project
   :config
+  (general-evil-leader-define-key "f" #'project-find-file)
   (setq project-switch-commands
         '((?f "Find file" project-find-file)
           (?g "Find regexp" project-find-regexp)
