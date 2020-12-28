@@ -625,6 +625,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   :after rust-mode)
 
 (use-package eglot
+  :after project
   :hook ((rust-mode kotlin-mode ruby-mode enh-ruby-mode js2-mode) . eglot-ensure)
   :bind (:map eglot-mode-map
               ("M-RET" . eglot-code-actions))
