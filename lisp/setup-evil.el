@@ -66,19 +66,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       flycheck-error-list-mode
       ivy-occur-mode
       neotree-mode
-      paradox-commit-list-mode
-      paradox-menu-mode
-      profiler-report-mode
-      racer-help-mode
       special-mode
       term-mode
       TeX-error-overview-mode)
   (add-to-list 'evil-emacs-state-modes it))
-
-;; Better navigation for modes
-(evil-add-hjkl-bindings occur-mode-map 'emacs)
-(evil-add-hjkl-bindings profiler-report-mode-map 'emacs)
-(evil-add-hjkl-bindings paradox-commit-list-mode-map 'emacs)
 
 (eval-after-load 'ibuffer
   '(progn
