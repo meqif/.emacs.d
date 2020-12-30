@@ -180,8 +180,7 @@ Return the decoded text as multibyte string."
 
 (defun meqif/find-rubocop-max-line-length ()
   (-some-> (project-current)
-           (project-roots)
-           (car)
+           (project-root)
            (f-join ".rubocop.yml")
            (meqif/f-read-if-exists)
            (meqif/extract-rubocop-line-length)))
@@ -212,7 +211,7 @@ Return the decoded text as multibyte string."
 
 (defun meqif/goto-alternate-file ()
   (interactive)
-  (-if-let* ((default-directory (-some-> (project-current) (project-roots) (car)))
+  (-if-let* ((default-directory (-some-> (project-current) (project-root)))
              (target-filename (f-relative (buffer-file-name) default-directory))
              (cmd (concat "alt " target-filename))
              (candidates (split-string (shell-command-to-string cmd) "\n" t))

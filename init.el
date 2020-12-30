@@ -127,7 +127,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
            (when current-prefix-arg
              (read-directory-name "From directory: "))))
     (counsel-require-program "fd")
-    (let* ((default-directory (or initial-directory (-some-> (project-current) (project-roots) (car)))))
+    (let* ((default-directory (or initial-directory (-some-> (project-current) (project-root)))))
       (ivy-read "Find file: "
                 (split-string
                  (shell-command-to-string "fd --follow --color never --hidden --exclude '/.git/'")
@@ -154,7 +154,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
            (when current-prefix-arg
              (read-directory-name "From directory: "))))
     (counsel-require-program "alt")
-    (let* ((default-directory (or initial-directory (-some-> (project-current) (project-roots) (car)))))
+    (let* ((default-directory (or initial-directory (-some-> (project-current) (project-root)))))
       (-when-let (candidates (split-string
                               (shell-command-to-string (concat "alt " (f-relative (buffer-file-name) default-directory)))
                               "\n" t))
@@ -881,7 +881,7 @@ unnecessary."
 
   (defun guess-docker-cwd ()
     "Attempt to guess the value of APP_HOME in the project's Dockerfile."
-    (-when-let* ((project-root (-some-> (project-current) (project-roots) (car)))
+    (-when-let* ((project-root (-some-> (project-current) (project-root)))
                  (dockerfile (concat project-root "Dockerfile"))
                  (_ (f-exists? dockerfile))
                  (command (concat "sed -En 's/ENV APP_HOME (.*)/\\1/p' " dockerfile))
@@ -912,7 +912,7 @@ unnecessary."
                              ('unit "spec/unit")
                              ('acceptance "spec/acceptance")
                              (_ (error "Unknown test subset type"))))
-            (path (concat (-some-> (project-current) (project-roots) (car)) relative-path)))
+            (path (concat (-some-> (project-current) (project-root)) relative-path)))
       (rspec-run-single-file path (rspec-core-options)))))
 ;; Handy functions to run rubocop from Emacs
 (use-package rubocop
