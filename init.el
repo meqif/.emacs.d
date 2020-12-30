@@ -360,7 +360,9 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   ;; Allow completion-at-point while in minibuffer
   (setq enable-recursive-minibuffers t))
 
-(use-package prescient)
+(use-package prescient
+  :config
+  (setq prescient-persist-mode +1))
 
 (use-package selectrum-prescient
   :after (:all selectrum prescient)
