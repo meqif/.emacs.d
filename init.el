@@ -355,6 +355,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   :config
   (ivy-mode -1)
   (selectrum-mode +1)
+  (general-evil-leader-define-key "TAB" #'selectrum-repeat)
   (set-face-attribute 'selectrum-current-candidate nil
                       :inherit nil
                       :background "#4F5B66")
