@@ -334,6 +334,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
     "f" 'meqif/counsel-fd
     "F" 'meqif/try-counsel-alt
     "a" 'meqif/goto-alternate-file
+    "A" 'meqif/goto-alternate-file-other-window
     "p" 'counsel-yank-pop
     "b" 'ivy-switch-buffer
     "r" 'counsel-recentf
