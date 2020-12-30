@@ -396,6 +396,10 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
         selectrum-highlight-candidates-function #'orderless-highlight-matches
         orderless-matching-styles '(orderless-prefixes)))
 
+(use-package embark
+  :config
+  (bind-key "C-c C-o" 'embark-occur minibuffer-local-map))
+
 (use-package avy
   :demand
   :bind ("C-c SPC" . avy-goto-char-timer)
