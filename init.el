@@ -817,6 +817,7 @@ unnecessary."
 
 (use-package evil-collection
   :config
+  (eval-after-load 'replace (evil-collection-occur-setup))
   ;; magit
   (eval-after-load 'magit (evil-collection-magit-setup))
   (eval-after-load 'evil-collection-magit
