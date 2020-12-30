@@ -416,6 +416,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   ;; Increase recent entries list from default (20)
   (setq recentf-max-saved-items 100)
   :config
+  (recentf-mode +1)
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude no-littering-etc-directory))
 
