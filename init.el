@@ -1250,6 +1250,13 @@ unnecessary."
           (?m "Magit" (lambda () (interactive) (magit-status (project-root (project-current t)))))
           (?s "Vterm" vterm))))
 
+(use-package replace
+  :straight nil
+  :config
+  ;; Make jumping from occur results easier to follow visually
+  (add-hook 'occur-mode-find-occurrence-hook 'recenter)
+  (add-hook 'occur-mode-find-occurrence-hook 'xref-pulse-momentarily))
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
