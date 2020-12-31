@@ -1252,6 +1252,11 @@ unnecessary."
   (add-hook 'occur-mode-find-occurrence-hook 'recenter)
   (add-hook 'occur-mode-find-occurrence-hook 'xref-pulse-momentarily))
 
+(use-package helpful
+  :bind (("C-h f" . #'helpful-callable)
+         ("C-h v" . #'helpful-variable)
+         ("C-h k" . #'helpful-key)))
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
