@@ -219,6 +219,16 @@ Return the decoded text as multibyte string."
       (find-file candidate)
     (message "No alternative found!")))
 
+(defun meqif/goto-alternate-file-other-window ()
+  (interactive)
+  (-if-let* ((default-directory (-some-> (project-current) (project-root)))
+             (target-filename (f-relative (buffer-file-name) default-directory))
+             (cmd (concat "alt " target-filename))
+             (candidates (split-string (shell-command-to-string cmd) "\n" t))
+             (candidate (car candidates)))
+      (find-file-other-window candidate)
+    (message "No alternative found!")))
+
 (defun find-monitor-by-name (name monitors)
   "Find monitor by NAME."
   (--find

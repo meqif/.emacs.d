@@ -331,18 +331,9 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
   (general-evil-leader-define-key
     "q" 'counsel-zettelkasten-open
     "Q" 'counsel-zettelkasten-find-by-tag
-    "f" 'meqif/counsel-fd
-    "F" 'meqif/try-counsel-alt
     "a" 'meqif/goto-alternate-file
     "A" 'meqif/goto-alternate-file-other-window
-    "p" 'counsel-yank-pop
-    "b" 'ivy-switch-buffer
-    "r" 'counsel-recentf
     "l" 'avy-goto-line
-    "g" 'magit-status
-    "s" 'meqif/counsel-grep-or-swiper-dwim
-    "S" 'counsel-rg-dwim
-    "x" 'project-switch-project
     "\\" 'meqif/pop-mark))
 
 (use-package swiper
@@ -374,15 +365,19 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 (use-package consult
   :after (:all selectrum prescient)
   :bind (("s-r" . consult-imenu))
-  :config
-  (consult-preview-mode)
+  :init
   (general-evil-leader-define-key
     "r" 'consult-recent-file
     "R" 'consult-recent-file-other-window
     "p" 'consult-yank-pop
     "s" 'consult-line
+    "S" 'consult-ripgrep
     "b" 'consult-buffer
-    "B" 'consult-buffer-other-window))
+    "B" 'consult-buffer-other-window)
+  :config
+  (setq consult-preview-buffer nil
+        consult-project-root-function #'(lambda () (project-root (project-current))))
+  (consult-preview-mode))
 
 (use-package consult-selectrum
   :after (:all consult selectrum)
@@ -747,6 +742,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 (use-package magit
   :bind ("C-x g" . magit-status)
   :init
+  (general-evil-leader-define-key "g" #'magit-status)
   ;; Mark setup instructions as read
   (setq magit-last-seen-setup-instructions "1.4.0"
         ;; Silence nag on push
@@ -1242,8 +1238,11 @@ unnecessary."
 
 (use-package project
   :commands project-root
+  :init
+  (general-evil-leader-define-key
+    "f" #'project-find-file
+    "x" #'project-switch-project)
   :config
-  (general-evil-leader-define-key "f" #'project-find-file)
   (setq project-switch-commands
         '((?f "Find file" project-find-file)
           (?g "Find regexp" project-find-regexp)
