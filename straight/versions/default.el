@@ -99,7 +99,6 @@
  ("shrink-path.el" . "c14882c8599aec79a6e8ef2d06454254bb3e1e41")
  ("smart-jump" . "07800ddd508cf620e6360e4a1f5bb25f8eab3ab1")
  ("smartparens" . "c59bfef7e8f1687ac77b0afaaaed86d8051d3de1")
- ("smex" . "55aaebe3d793c2c990b39a302eb26c184281c42c")
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
  ("straight.el" . "4656560c49ae7545ee7d6c3847057e03a60c047b")
  ("swiper" . "ab36ccb32322f2b500f947bbe10f62194a9ef6c8")

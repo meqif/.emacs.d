@@ -257,11 +257,6 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 (use-package autorevert
   :delight auto-revert-mode)
 
-;; Smarter M-x
-(use-package smex
-  :init (smex-initialize)
-  :config (setq smex-completion-method 'ivy))
-
 (use-package eldoc
   :defer t
   :delight)
