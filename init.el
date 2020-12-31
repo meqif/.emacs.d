@@ -81,114 +81,6 @@
 
 (use-package no-littering)
 
-(use-package ivy
-  :defer t
-  :delight
-  :bind (("C-c C-r" . ivy-resume))
-  :config
-  (ivy-mode +1)
-  (setq ivy-format-function 'ivy-format-function-arrow
-        ivy-on-del-error-function 'ignore)
-  (add-to-list 'ivy-initial-inputs-alist '(magit-status . "^"))
-  ;; Allow quitting ivy with ESC
-  (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit)
-  (define-key ivy-switch-buffer-map (kbd "C-k") #'ivy-switch-buffer-kill))
-
-(use-package ivy-xref
-  :after ivy
-  :config
-  (setq xref-show-definitions-function #'ivy-xref-show-defs)
-  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
-
-;; Replace default functions with much better alternatives
-(use-package counsel
-  :straight ivy
-  :defer t
-  ;; :bind (("s-r"     . counsel-imenu)
-  ;;        ("M-x"     . counsel-M-x)
-  ;;        ("C-x C-f" . counsel-find-file)
-  ;;        ("C-h f"   . counsel-describe-function)
-  ;;        ("C-h v"   . counsel-describe-variable))
-  :commands meqif/counsel-fd meqif/counsel-recentf
-  :config
-  (define-key counsel-find-file-map (kbd "TAB") 'ivy-alt-done)
-  ;; Use rg instead of grep when available -- it's faster!
-  (when (executable-find "rg")
-    (setq counsel-grep-base-command
-          "rg -i -M 120 --no-heading --line-number --color never '%s' %s"))
-
-  (defun meqif/counsel-fd (&optional initial-input initial-directory)
-    "Jump to a file below the current directory.
-List all files within the current directory or any of its subdirectories.
-INITIAL-INPUT can be given as the initial minibuffer input.
-INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
-    (interactive
-     (list nil
-           (when current-prefix-arg
-             (read-directory-name "From directory: "))))
-    (counsel-require-program "fd")
-    (let* ((default-directory (or initial-directory (-some-> (project-current) (project-root)))))
-      (ivy-read "Find file: "
-                (split-string
-                 (shell-command-to-string "fd --follow --color never --hidden --exclude '/.git/'")
-                 "\n" t)
-                :matcher #'counsel--find-file-matcher
-                :initial-input initial-input
-                :action (lambda (x)
-                          (with-ivy-window
-                            (find-file (expand-file-name x ivy--directory))))
-                :preselect (counsel--preselect-file)
-                :require-match 'confirm-after-completion
-                :history 'file-name-history
-                :keymap counsel-find-file-map
-                :sort t
-                :caller 'meqif/counsel-fd)))
-
-  (defun meqif/counsel-alt (&optional initial-input initial-directory)
-    "Jump to an alternative file in this project.
-Often, this will be used to jump between a source file and its tests.
-INITIAL-INPUT can be given as the initial minibuffer input.
-INITIAL-DIRECTORY, if non-nil, is used as the root directory for search."
-    (interactive
-     (list nil
-           (when current-prefix-arg
-             (read-directory-name "From directory: "))))
-    (counsel-require-program "alt")
-    (let* ((default-directory (or initial-directory (-some-> (project-current) (project-root)))))
-      (-when-let (candidates (split-string
-                              (shell-command-to-string (concat "alt " (f-relative (buffer-file-name) default-directory)))
-                              "\n" t))
-        (ivy-read "Find file: "
-                  candidates
-                  :matcher #'counsel--find-file-matcher
-                  :initial-input initial-input
-                  :action (lambda (x)
-                            (with-ivy-window
-                              (find-file (expand-file-name x ivy--directory))))
-                  :preselect (counsel--preselect-file)
-                  :require-match 'confirm-after-completion
-                  :history 'file-name-history
-                  :keymap counsel-find-file-map
-                  :sort t
-                  :caller 'meqif/counsel-alt))))
-
-  (defun meqif/counsel-bullet (&optional initial-input initial-directory)
-    "Jump to a file after choosing a project.
-Serves as an alternative to projectile-find-file that doesn't depend on projectile."
-    (interactive)
-    (ivy-read "Find file: " #'read-file-name-internal
-              :matcher #'counsel--find-file-matcher
-              :initial-input initial-input
-              :action #'(lambda (dir) (interactive) (meqif/counsel-fd nil dir))
-              :preselect (counsel--preselect-file)
-              :require-match 'confirm-after-completion
-              :history 'file-name-history
-              :keymap counsel-find-file-map
-              :caller 'counsel-find-file))
-
-  ;; Abbreviate the file names in counsel-recentf
-  (ivy-set-display-transformer 'counsel-recentf 'abbreviate-file-name))
-
 ;; Fix path
 (use-package exec-path-from-shell
   :config
@@ -318,10 +210,6 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
 
   (general-define-key "<s-return>" #'promote-demote-window-dwim)
 
-  (defun meqif/try-counsel-alt ()
-    (interactive)
-    (or (meqif/counsel-alt) (meqif/counsel-fd)))
-
   ;; Global evil leader shortcuts
   (general-evil-leader-define-key
     "q" 'counsel-zettelkasten-open
@@ -331,15 +219,8 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
     "l" 'avy-goto-line
     "\\" 'meqif/pop-mark))
 
-(use-package swiper
-  :defer t
-  :straight ivy
-  :config
-  (setq swiper-action-recenter t))
-
 (use-package selectrum
   :config
-  (ivy-mode -1)
   (selectrum-mode +1)
   (general-evil-leader-define-key "TAB" #'selectrum-repeat)
   (set-face-attribute 'selectrum-current-candidate nil
@@ -768,11 +649,11 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
         ;; No fast-forward by default for merge mode
         magit-merge-arguments '("--no-ff")
         ;; Prune removed branches by default when fetching from remote
-        magit-fetch-arguments '("--prune")
-        ;; Use ivy to complete magit's prompts
-        magit-completing-read-function 'ivy-completing-read)
+        magit-fetch-arguments '("--prune"))
 
-  (setq magit-completing-read-function 'selectrum-completing-read)
+  (when (fboundp 'selectrum-completing-read)
+    ;; Use selectrum to complete magit's prompts
+    (setq magit-completing-read-function 'selectrum-completing-read))
 
   ;; Make <SPC> insert dashes instead. Useful when creating new branches
   (define-key magit-minibuffer-local-ns-map "\s" "-")
@@ -1059,7 +940,7 @@ unnecessary."
   :config
   (add-hook 'dumb-jump-after-jump-hook #'recenter)
   (add-hook 'dumb-jump-after-jump-hook #'xref-pulse-momentarily)
-  (setq dumb-jump-selector 'ivy
+  (setq dumb-jump-selector 'completing-read
         dumb-jump-force-searcher 'rg))
 
 (use-package smart-jump
@@ -1098,20 +979,6 @@ unnecessary."
   :after 'org
   :load-path "lisp/"
   :delight "👹")
-
-(use-package zettelkasten
-  :after (f s dash xref ivy ivy-xref counsel general)
-  :commands (counsel-zettelkasten-find counsel-zettelkasten-open)
-  :bind ("C-\\" . zettelkasten-create-note)
-  :defer 1
-  :straight nil
-  :load-path "lisp/"
-  :config
-  (add-hook 'zettelkasten-mode-hook #'variable-pitch-mode)
-  (add-hook 'zettelkasten-connections-mode-hook #'variable-pitch-mode)
-  (general-evil-leader-define-key :keymap 'zettelkasten-mode-map
-    "," #'counsel-zettelkasten-backreferences)
-  (evil-define-key 'normal zettelkasten-mode-map (kbd "<tab>") 'markdown-cycle))
 
 ;; Wrap lines in visual-line-mode at the fill column
 (use-package visual-fill-column

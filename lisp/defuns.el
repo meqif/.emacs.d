@@ -123,18 +123,6 @@ already in fullscreen"
         (aw-flip-window))
     (aw-swap-window first-window)))
 
-(defun counsel-rg-dwim ()
-  "Run counsel-rg in the current project's root directory, or ask for the root directory otherwise.
-If a region is active, it will be used as the initial input for counsel-rg."
-  (interactive)
-  (let ((initial-input
-         (when (use-region-p)
-           (buffer-substring-no-properties (region-beginning) (region-end)))))
-    (-if-let* (((_ . project-root) (project-current)))
-        (counsel-rg initial-input project-root)
-      (let ((current-prefix-arg '(4)))
-        (call-interactively 'counsel-rg)))))
-
 (defun copy-buffer-name ()
   "Copy the current buffer's file name to the kill ring."
   (interactive)
@@ -184,13 +172,6 @@ Return the decoded text as multibyte string."
            (f-join ".rubocop.yml")
            (meqif/f-read-if-exists)
            (meqif/extract-rubocop-line-length)))
-
-(defun meqif/counsel-grep-or-swiper-dwim ()
-  "Call swiper with the currently selected region, if any."
-  (interactive)
-  (swiper
-   (when (use-region-p)
-     (buffer-substring-no-properties (region-beginning) (region-end)))))
 
 (defun meqif/close-buffers ()
   "Close all buffers except for *Messages* and *scratch*."
