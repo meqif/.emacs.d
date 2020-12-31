@@ -376,7 +376,7 @@ Serves as an alternative to projectile-find-file that doesn't depend on projecti
     "B" 'consult-buffer-other-window)
   :config
   (setq consult-preview-buffer nil
-        consult-project-root-function #'(lambda () (project-root (project-current))))
+        consult-project-root-function #'(lambda () (-some-> (project-current) (project-root))))
   (consult-preview-mode))
 
 (use-package consult-selectrum
