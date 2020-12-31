@@ -101,7 +101,7 @@
  ("smart-jump" . "07800ddd508cf620e6360e4a1f5bb25f8eab3ab1")
  ("smartparens" . "c59bfef7e8f1687ac77b0afaaaed86d8051d3de1")
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
- ("straight.el" . "4656560c49ae7545ee7d6c3847057e03a60c047b")
+ ("straight.el" . "2d407bccd9378f1d5218f8ba2ae85c6be73fbaf1")
  ("swiper" . "ab36ccb32322f2b500f947bbe10f62194a9ef6c8")
  ("tagedit" . "b3a70101a0dcf85498c92b7fcfa7fdbac869746c")
  ("terraform-mode" . "b8003ec131566fd2b753fb423e01640eab07e12c")
