@@ -58,7 +58,6 @@
  ("ibuffer-vc" . "5fa6aea09bc67f71ea743302d609f459967b1e81")
  ("iedit" . "77eb0a1e2e44b453e4ebf4c38409affa353f5139")
  ("inf-ruby" . "b0124578db09b64902c8ca981b02e74bec92ef36")
- ("ivy-xref" . "3d4c35fe2b243d948d8fe02a1f0d76a249d63de9")
  ("js2-mode" . "ffb70990c1a4d4616034cb810b4ce36953aecb47")
  ("json-mode" . "0e819e519ae17a2686e0881c4ca51fa873fa9b83")
  ("json-reformat" . "8eb6668ed447988aea06467ba8f42e1f2178246f")
