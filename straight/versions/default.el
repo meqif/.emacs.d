@@ -73,7 +73,7 @@
  ("marginalia" . "401993562dbf636054dd64988e44d19b5030867f")
  ("markdown-mode" . "cf6403186119cd3d25adc702845f969071060e20")
  ("markdown-toc" . "9565eeaa1d26bc0ab83eb65bd30470888f724044")
- ("melpa" . "fe7889550dd0004d2ed5e3099f538eef47d8fa4b")
+ ("melpa" . "3b8b731674a5c5d4f83d998258a5d4c9aabb2048")
  ("no-littering" . "f14d5548211109b0e5e850706d8d2cc182dc60be")
  ("olivetti" . "f4499948d12190cdc4272fb3c8bb0dc268d84efb")
  ("orderless" . "0826fd4eb42417b6c12609cf9c4122d359e13c2f")
