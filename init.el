@@ -438,6 +438,13 @@
   (add-hook 'org-mode-hook #'evil-org-mode)
   (add-hook 'evil-org-mode-hook #'evil-org-set-key-theme))
 
+(use-package org-superstar
+  :after org
+  :hook (org-mode . org-superstar-mode)
+  :config
+  (setq org-superstar-leading-bullet ?\s
+        org-superstar-headline-bullets-list '(?① ?② ?③ ?④ ?⑤ ?⑥)))
+
 (use-package yasnippet
   :hook ((org-mode rspec-mode ruby-mode enh-ruby-mode rust-mode) . yas-minor-mode)
   :defer
