@@ -370,8 +370,6 @@
           org-ellipsis "⤵")
     ;; Enable wordwrap
     (add-hook 'org-mode-hook 'visual-line-mode)
-    ;; Break lines automatically
-    (add-hook 'org-mode-hook 'auto-fill-mode)
 
     ;; Source block tweaks
     (setq
