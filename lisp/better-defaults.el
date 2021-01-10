@@ -71,6 +71,10 @@
 ;; Always ask before exiting Emacs
 (setq confirm-kill-emacs 'yes-or-no-p)
 
+;; Don't bother me with "You can run the command X with Y" suggestions in the minibuffer
+(setq extended-command-suggest-shorter nil
+      suggest-key-bindings nil)
+
 ;; Use https for package archives
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")
