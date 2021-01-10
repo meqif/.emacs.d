@@ -223,9 +223,6 @@
   :config
   (selectrum-mode +1)
   (general-evil-leader-define-key "TAB" #'selectrum-repeat)
-  (set-face-attribute 'selectrum-current-candidate nil
-                      :inherit nil
-                      :background "#4F5B66")
   ;; Allow completion-at-point while in minibuffer
   (setq enable-recursive-minibuffers t))
 
