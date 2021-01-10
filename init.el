@@ -248,9 +248,8 @@
     "b" 'consult-buffer
     "B" 'consult-buffer-other-window)
   :config
-  (setq consult-preview-buffer nil
-        consult-project-root-function #'(lambda () (-some-> (project-current) (project-root))))
-  (consult-preview-mode))
+  (setq consult-config `((consult-buffer :preview-key ,(kbd "M-p")))
+        consult-project-root-function #'(lambda () (-some-> (project-current) (project-root)))))
 
 (use-package consult-selectrum
   :after (:all consult selectrum)
@@ -270,7 +269,8 @@
 
 (use-package embark
   :config
-  (bind-key "C-c C-o" 'embark-occur minibuffer-local-map))
+  (bind-key "C-c C-o" 'embark-occur minibuffer-local-map)
+  (bind-key "C-c C-c" 'embark-act minibuffer-local-map))
 
 (use-package avy
   :demand
