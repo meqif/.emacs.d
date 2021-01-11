@@ -269,7 +269,7 @@
 
 (use-package embark
   :config
-  (bind-key "C-c C-o" 'embark-occur minibuffer-local-map)
+  (bind-key "C-c C-o" 'embark-collect-snapshot minibuffer-local-map)
   (bind-key "C-c C-c" 'embark-act minibuffer-local-map))
 
 (use-package avy
