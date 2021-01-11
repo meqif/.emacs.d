@@ -270,7 +270,12 @@
 (use-package embark
   :config
   (bind-key "C-c C-o" 'embark-collect-snapshot minibuffer-local-map)
-  (bind-key "C-c C-c" 'embark-act minibuffer-local-map))
+  (bind-key "C-c C-c" 'embark-act minibuffer-local-map)
+  (setq embark-action-indicator
+        (lambda (map)
+          (which-key--show-keymap "Embark" map nil nil 'no-paging)
+          #'which-key--hide-popup-ignore-command)
+        embark-become-indicator embark-action-indicator))
 
 (use-package avy
   :demand
