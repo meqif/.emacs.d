@@ -337,6 +337,7 @@
   :config (setq uniquify-buffer-name-style 'forward))
 
 (use-package wgrep
+  :commands wgrep-change-to-wgrep-mode
   :defer t)
 
 (use-package flymake
