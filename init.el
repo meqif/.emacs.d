@@ -264,8 +264,18 @@
   :after selectrum
   :config
   (setq selectrum-refine-candidates-function #'orderless-filter
-        selectrum-highlight-candidates-function #'orderless-highlight-matches
-        orderless-matching-styles '(orderless-prefixes)))
+        selectrum-highlight-candidates-function #'orderless-highlight-matches)
+
+  (defun without-if-bang (pattern _index _total)
+    (when (string-prefix-p "!" pattern)
+      `(orderless-without-literal . ,(substring pattern 1))))
+
+  (defun exact-match-if-equals-suffix (pattern _index _total)
+    (when (string-suffix-p "=" pattern)
+      `(orderless-literal . ,(s-chop-suffix "=" pattern))))
+
+  (setq orderless-style-dispatchers '(without-if-bang exact-match-if-equals-suffix)
+        orderless-matching-styles '(orderless-initialism orderless-prefixes orderless-regexp)))
 
 (use-package embark
   :config
