@@ -251,6 +251,10 @@
   (setq consult-config `((consult-buffer :preview-key ,(kbd "M-p")))
         consult-project-root-function #'(lambda () (-some-> (project-current) (project-root)))))
 
+(use-package consult-selectrum
+  :after (:all consult selectrum)
+  :demand t)
+
 (use-package marginalia
   :after selectrum
   :config
