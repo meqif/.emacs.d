@@ -253,7 +253,7 @@
 
 (use-package consult-selectrum
   :after (:all consult selectrum)
-  :demand t)
+  :straight consult)
 
 (use-package marginalia
   :after selectrum
