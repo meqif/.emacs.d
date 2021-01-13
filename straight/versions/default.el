@@ -30,6 +30,7 @@
  ("emacs-async" . "14f48de586b0977e3470f053b810d77b07ea427a")
  ("emacs-fish" . "db257db81058b0b12f788c324c264cc59b9a5bf4")
  ("emacs-hcl-mode" . "e12b1df2ca28d2b06c471cd709c038a2dc0bcdbd")
+ ("emacs-libvterm" . "2c4d2c9fc8e6e89746e6aa191aee2b8974c8eab9")
  ("emacs-memoize" . "51b075935ca7070f62fae1d69fe0ff7d8fa56fdd")
  ("emacs-undo-fu" . "c0806c1903c5a0e4c69b6615cdc3366470a9b8ca")
  ("emacs-vdiff" . "c0541ae9c2cb878be9ab3935da058a72155a14fc")
