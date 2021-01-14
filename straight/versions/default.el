@@ -7,6 +7,7 @@
  ("annalist.el" . "134fa3f0fb91a636a1c005c483516d4b64905a6d")
  ("avy" . "bbf1e7339eba06784dfe86643bb0fbddf5bb0342")
  ("browse-at-remote" . "fadf99d6d8e891f3b112e36c772e0eea0b9bc7f2")
+ ("bufler.el" . "097f4349920215bdd829fceabc1afdbba172c32a")
  ("cargo.el" . "91ccfef6e36ff9e96352a03c4a057b5ee181438d")
  ("cider" . "fde37a3a9d93af20c2b944a3aea1db77faba0adf")
  ("clojure-mode" . "75c28897c7e91aa130c71c076aa2a6ce2e02da8f")

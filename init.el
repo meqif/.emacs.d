@@ -957,6 +957,9 @@ unnecessary."
               (unless (eq ibuffer-sorting-mode 'alphabetic)
                 (ibuffer-do-sort-by-alphabetic)))))
 
+(use-package bufler
+  :bind ("C-x C-b" . bufler))
+
 (use-package xref
   :config
   (setq xref-search-program 'ripgrep)
