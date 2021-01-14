@@ -13,7 +13,7 @@
  ("clojure-mode" . "75c28897c7e91aa130c71c076aa2a6ce2e02da8f")
  ("company-box" . "be37a9a30dc112ab172af21af694e2cb04a74f85")
  ("company-mode" . "5f5949b6ae8ea9df94c6cb3e01d9cae43623b794")
- ("consult" . "a5c68f3f249174b1abf56108e9790be863f842cf")
+ ("consult" . "e7dd0f02f2234d9e4e4044f04174fee2bf8c7724")
  ("dash.el" . "b92ab5a39b987e4fe69317b9d9fda452300baf20")
  ("deadgrep" . "baa352b982bded5fbca1ec9c14fec20e78b2089b")
  ("default-text-scale" . "bfc0987c37e93742255d3b23d86c17096fda8e7e")

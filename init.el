@@ -248,8 +248,8 @@
     "b" 'consult-buffer
     "B" 'consult-buffer-other-window)
   :config
-  (setq consult-config `((consult-buffer :preview-key ,(kbd "M-p")))
-        consult-project-root-function #'(lambda () (-some-> (project-current) (project-root)))))
+  (setq consult-preview-key nil
+        consult-project-root-function #'(lambda () (-some-> (project-current) (project-root))))
 
 (use-package consult-selectrum
   :after (:all consult selectrum)
