@@ -1149,6 +1149,12 @@ unnecessary."
     "f" #'project-find-file
     "x" #'project-switch-project)
   :config
+  (defun meqif/clean-removed-projects ()
+    "Clean removed directories from `project-switch-project'."
+    (when (listp project--list)
+      (setq project--list (--filter (f-directory-p (car it)) project--list))))
+  (run-with-timer 1 300 'meqif/clean-removed-projects)
+
   (setq project-switch-commands
         '((?f "Find file" project-find-file)
           (?g "Find regexp" project-find-regexp)
