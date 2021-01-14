@@ -55,7 +55,6 @@
  ("general.el" . "a0b17d207badf462311b2eef7c065b884462cb7c")
  ("gnu-elpa-mirror" . "6a1561f5e75ff52398db79d231eca3ea29e1b67c")
  ("go-mode.el" . "d17d21060b16a77f9ee28ff453e674225acbf1b1")
- ("golden-ratio.el" . "007911d8a431b72670f5fe5f0e5b4380c2777a31")
  ("goto-chg" . "5c057c8623abadf7fd57ce625843435d231f2739")
  ("groovy-emacs-modes" . "26da902d1158c0312628d57578109be54eca2415")
  ("helpful" . "584ecc887bb92133119f93a6716cdf7af0b51dca")

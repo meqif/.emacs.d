@@ -299,11 +299,6 @@
   :config
   (set-face-attribute 'aw-leading-char-face nil :height 10.0))
 
-(use-package golden-ratio
-  :config
-  (add-to-list 'golden-ratio-extra-commands 'evil-window-next)
-  (golden-ratio-mode +1))
-
 ;; Save a list of recent files visited
 (use-package recentf
   :after f
