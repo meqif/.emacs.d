@@ -59,6 +59,7 @@
  ("goto-chg" . "5c057c8623abadf7fd57ce625843435d231f2739")
  ("groovy-emacs-modes" . "26da902d1158c0312628d57578109be54eca2415")
  ("helpful" . "584ecc887bb92133119f93a6716cdf7af0b51dca")
+ ("hercules" . "557da39878d0637395fdded91243b340c37eff7b")
  ("hydra" . "112e689f75b59398d8eca79ac6562dca12b8a959")
  ("ibuffer-vc" . "5fa6aea09bc67f71ea743302d609f459967b1e81")
  ("iedit" . "77eb0a1e2e44b453e4ebf4c38409affa353f5139")
