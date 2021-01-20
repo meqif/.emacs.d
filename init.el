@@ -926,20 +926,6 @@ unnecessary."
   :config
   (which-key-mode +1))
 
-(use-package hercules
-  :after which-key
-  :config
-  (eval-after-load 'macrostep
-    (hercules-def
-     :toggle-funs #'macrostep-mode
-     :keymap 'macrostep-keymap))
-  (eval-after-load 'smerge-mode
-    (hercules-def
-     :toggle-funs #'smerge-mode
-     :keymap 'smerge-mode-map
-     :transient t
-     :flatten t)))
-
 ;; Macro expansion for ease of debugging
 (use-package macrostep
   :defer t
