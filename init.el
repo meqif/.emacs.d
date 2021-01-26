@@ -258,6 +258,7 @@
 
 (use-package marginalia
   :after selectrum
+  :bind (:map minibuffer-local-map ("C-M-a" . marginalia-cycle))
   :config
   (marginalia-mode +1))
 
