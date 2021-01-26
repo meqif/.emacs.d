@@ -110,7 +110,8 @@
   :config
   (set-face-attribute 'mode-line nil :height 0.8)
   (set-face-attribute 'mode-line-inactive nil :inherit 'mode-line :height 1)
-  (setq doom-modeline-major-mode-icon nil))
+  (setq doom-modeline-major-mode-icon nil
+        doom-modeline-lsp nil))
 
 (use-package rainbow-delimiters
   :defer
