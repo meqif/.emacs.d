@@ -1163,6 +1163,10 @@ unnecessary."
   :config
   (ctrlf-mode +1))
 
+(use-package origami
+  :config
+  (global-origami-mode +1))
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
