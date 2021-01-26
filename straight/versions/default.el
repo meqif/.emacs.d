@@ -100,7 +100,7 @@
  ("rust-mode" . "ca7d99c6fd90fc1e636aa9d4020a2f077786a0c3")
  ("s.el" . "43ba8b563bee3426cead0e6d4ddc09398e1a349d")
  ("scss-mode" . "cf58dbec5394280503eb5502938f3b5445d1b53d")
- ("selectrum" . "fcd9734b0d228364f5cf631c92ab3751143896e5")
+ ("selectrum" . "5ef7570a97dd52083449668e6dd56a57956a4989")
  ("sesman" . "edee869c209c016e5f0c5cbb8abb9f3ccd2d1e05")
  ("shrink-path.el" . "c14882c8599aec79a6e8ef2d06454254bb3e1e41")
  ("smart-jump" . "07800ddd508cf620e6360e4a1f5bb25f8eab3ab1")
