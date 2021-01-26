@@ -27,6 +27,7 @@
  ("easy-escape" . "a6449f22cb97160ee1c90121968de89e193268df")
  ("eglot" . "4edd4782f1c16c0516533b52e16b02b772812d16")
  ("eldoc" . "9bd5c80cf5f0ad215073581be15a2d7e0bbf224f")
+ ("eldoc-eval" . "f6e639047d9b3695877e63dd3de8f24e704d6d23")
  ("elisp-refs" . "b3634a4567c655a1cda51b217629849cba0ac6a7")
  ("elpy" . "c3aa42f805d06e837514d5e4f646bec28cea58b3")
  ("emacs-async" . "14f48de586b0977e3470f053b810d77b07ea427a")

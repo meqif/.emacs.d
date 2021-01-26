@@ -1164,6 +1164,10 @@ unnecessary."
          ("C-h v" . #'helpful-variable)
          ("C-h k" . #'helpful-key)))
 
+(use-package eldoc-eval
+  :config
+  (eldoc-in-minibuffer-mode +1))
+
 (use-package ctrlf
   :config
   (ctrlf-mode +1))
