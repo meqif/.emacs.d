@@ -14,6 +14,7 @@
  ("company-box" . "be37a9a30dc112ab172af21af694e2cb04a74f85")
  ("company-mode" . "5f5949b6ae8ea9df94c6cb3e01d9cae43623b794")
  ("consult" . "5b03564e1337e77f2442941728ee59db3c28b24c")
+ ("ctrlf" . "5acefdc9a6f8e35febf6f71b6a34a0d4fc499269")
  ("dash.el" . "b92ab5a39b987e4fe69317b9d9fda452300baf20")
  ("deadgrep" . "baa352b982bded5fbca1ec9c14fec20e78b2089b")
  ("default-text-scale" . "bfc0987c37e93742255d3b23d86c17096fda8e7e")

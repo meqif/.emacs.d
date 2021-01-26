@@ -1156,6 +1156,10 @@ unnecessary."
          ("C-h v" . #'helpful-variable)
          ("C-h k" . #'helpful-key)))
 
+(use-package ctrlf
+  :config
+  (ctrlf-mode +1))
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
