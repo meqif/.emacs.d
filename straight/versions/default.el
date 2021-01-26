@@ -52,6 +52,7 @@
  ("f.el" . "1814209e2ff43cf2e6d38c4cd476218915f550fb")
  ("flymake" . "999af0e0f46a2cd8c8940b4cac3a9791ba2d8c1b")
  ("flymake-diagnostic-at-point" . "379616b1c6f5ebeaf08fbe54ae765008a78b3be7")
+ ("flyspell-correct" . "d19a090b978a249fc8f6d8b14309a5705a6bb483")
  ("frame-local" . "7ee1106c3bcd4022f48421f8cb1ef4f995da816e")
  ("general.el" . "a0b17d207badf462311b2eef7c065b884462cb7c")
  ("gnu-elpa-mirror" . "6a1561f5e75ff52398db79d231eca3ea29e1b67c")

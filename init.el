@@ -587,7 +587,7 @@
   ;; Use Aspell for spellcheck
   (setq ispell-program-name "aspell")
   (setq ispell-list-command "--list")
-  (setq ispell-dictionary "en_US")
+  (setq ispell-dictionary "english")
 
   ;; Flyspell messages slow down the spellchecking process
   (setq flyspell-issue-message-flag nil)
@@ -610,6 +610,9 @@
         (if (and b e (< (point) e)) (setq rlt nil)))
       return-value))
   (advice-add 'org-mode-flyspell-verify :filter-return 'org-mode-flyspell-verify-ignore-blocks))
+
+(use-package flyspell-correct
+     :after flyspell)
 
 ;; Misc
 (use-package my-misc :straight nil)
