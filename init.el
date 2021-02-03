@@ -1150,6 +1150,7 @@ unnecessary."
   (setq project-switch-commands
         '((?f "Find file" project-find-file)
           (?g "Find regexp" project-find-regexp)
+          (?G "Find expression (deadgrep)" deadgrep)
           (?d "Dired" project-dired)
           (?m "Magit" (lambda () (interactive) (magit-status (project-root (project-current t)))))
           (?s "Vterm" vterm))))
