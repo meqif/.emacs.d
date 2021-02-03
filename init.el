@@ -249,9 +249,10 @@
     "b" 'consult-buffer
     "B" 'consult-buffer-other-window)
   :config
+  (setq consult-config `((consult-recent-file :preview-key nil)))
   (setq consult-project-root-function #'(lambda () (-some-> (project-current) (project-root))))
   (setq consult-ripgrep-command
-        '("rg" "--null" "--line-buffered" "--color=always" "--max-columns=500" "--no-heading" "--line-number" "--smart-case" "." "-e")))
+        "rg --null --line-buffered --color=always --max-columns=500 --smart-case --no-heading --line-number . -e ARG OPTS"))
 
 (use-package consult-selectrum
   :after (:all consult selectrum)
