@@ -76,7 +76,7 @@
  ("macrostep" . "424e3734a1ee526a1bd7b5c3cd1d3ef19d184267")
  ("magit" . "f97d14d9851cf65d9d78188d87d75958b2723570")
  ("major-mode-hydra.el" . "20362323f66883c1336ffe70be24f91509addf54")
- ("marginalia" . "c5e89cf4220196205f6d6ce21f5cef87d186c1b4")
+ ("marginalia" . "bc8e5f2f46282de149d738062697a38ad3417f92")
  ("markdown-mode" . "cf6403186119cd3d25adc702845f969071060e20")
  ("markdown-toc" . "9565eeaa1d26bc0ab83eb65bd30470888f724044")
  ("melpa" . "783ac844937e8ae0fbf879ad005c07947ad4bd69")
