@@ -80,7 +80,7 @@
  ("markdown-mode" . "cf6403186119cd3d25adc702845f969071060e20")
  ("markdown-toc" . "9565eeaa1d26bc0ab83eb65bd30470888f724044")
  ("melpa" . "783ac844937e8ae0fbf879ad005c07947ad4bd69")
- ("modus-themes" . "88d9a463b4280cfba06f8dd69d4efc949eade027")
+ ("modus-themes" . "8839c91460eb30df1090bb6769647338d458de18")
  ("no-littering" . "f14d5548211109b0e5e850706d8d2cc182dc60be")
  ("olivetti" . "f4499948d12190cdc4272fb3c8bb0dc268d84efb")
  ("orderless" . "0826fd4eb42417b6c12609cf9c4122d359e13c2f")
