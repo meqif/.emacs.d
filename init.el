@@ -295,6 +295,10 @@
           #'which-key--hide-popup-ignore-command)
         embark-become-indicator embark-action-indicator))
 
+(use-package embark-consult
+ :after (embark consult)
+ :hook (embark-collect-mode . embark-consult-preview-minor-mode))
+
 (use-package avy
   :demand
   :bind ("C-c SPC" . avy-goto-char-timer)
