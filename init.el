@@ -483,7 +483,6 @@
   :defer
   :delight yas-minor-mode
   :config
-  (yas-reload-all)
   (general-define-key :keymaps 'yas-minor-mode-map "TAB" yas-maybe-expand)
 
   ;; Use only own snippets, do not use bundled ones
@@ -494,6 +493,8 @@
 
   ;; No need to be so verbose
   (setq yas-verbosity 1)
+
+  (yas-reload-all)
 
   (add-hook 'snippet-mode-hook
             (lambda ()
