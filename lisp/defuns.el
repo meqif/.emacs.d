@@ -184,7 +184,10 @@ Return the decoded text as multibyte string."
 (defun meqif/uuid-v4 ()
   "Generate and insert a UUIDv4 without dashes."
   (interactive)
-  (shell-command "uuidgen | tr -d '\n-' | tr -d '\n' | tr '[A-Z]' '[a-z]'" t))
+  (->
+   (shell-command-to-string "uuidgen | tr -d '\n-' | tr -d '\n' | tr '[A-Z]' '[a-z]'")
+   (kill-new)
+   (insert)))
 
 (defun meqif/hide-window ()
   (interactive)
