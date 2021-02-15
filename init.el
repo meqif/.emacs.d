@@ -264,6 +264,9 @@
   :init
   (marginalia-mode +1)
 
+  ;; Prefer richer, more heavy, annotations over the lighter default variant.
+  (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+
   ;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations.
   (advice-add #'marginalia-cycle :after
               (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit)))))
