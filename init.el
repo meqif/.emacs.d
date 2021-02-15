@@ -261,7 +261,7 @@
 (use-package marginalia
   :after selectrum
   :bind (:map minibuffer-local-map ("C-M-a" . marginalia-cycle))
-  :config
+  :init
   (marginalia-mode +1)
 
   ;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations.
