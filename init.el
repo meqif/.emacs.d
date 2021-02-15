@@ -526,6 +526,8 @@
   ;; jshint does not warn about this now for some reason
   (setq-default js2-strict-trailing-comma-warning t)
 
+  (setq js-indent-level 2)
+
   (add-hook 'js2-mode-hook
             (lambda ()
               ;; Use symbol for anonymous functions
