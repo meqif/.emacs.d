@@ -971,7 +971,9 @@ unnecessary."
                 (ibuffer-do-sort-by-alphabetic)))))
 
 (use-package bufler
-  :bind ("C-x C-b" . bufler))
+  :bind ("C-x C-b" . bufler)
+  :config
+  (setq bufler-filter-buffer-modes '(bufler-list-mode special-mode timer-list-mode)))
 
 (use-package xref
   :config
