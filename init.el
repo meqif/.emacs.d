@@ -213,11 +213,8 @@
 
   ;; Global evil leader shortcuts
   (general-evil-leader-define-key
-    "q" 'counsel-zettelkasten-open
-    "Q" 'counsel-zettelkasten-find-by-tag
     "a" 'meqif/goto-alternate-file
     "A" 'meqif/goto-alternate-file-other-window
-    "l" 'avy-goto-line
     "\\" 'meqif/pop-mark))
 
 (use-package selectrum
