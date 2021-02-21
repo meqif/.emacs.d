@@ -69,7 +69,7 @@
 (setq use-package-compute-statistics t)
 
 ;; Bring better defaults
-(use-package better-defaults :straight nil)
+(use-package better-defaults :straight nil :ensure nil)
 
 ;; Essential utility libraries!
 (use-package f)
@@ -97,7 +97,8 @@
 
 ;; Appearance
 (use-package appearance
-  :straight nil)
+  :straight nil
+  :ensure nil)
 
 ;; Load local-only settings, not tracked by VCS
 ;; Makes it easy to customize settings for each machine that I don't want to persist in VCS
@@ -126,6 +127,7 @@
 
 (use-package prog-mode
   :straight nil
+  :ensure nil
   :config
   ;; Enable prettify symbols mode globally
   (global-prettify-symbols-mode +1)
@@ -168,6 +170,7 @@
 ;; Setup extensions
 (use-package setup-evil
   :straight nil
+  :ensure nil
   :init (setq evil-want-keybinding nil))
 
 (use-package undo-fu
@@ -364,6 +367,7 @@
 ;; Unique buffer names
 (use-package uniquify
   :straight nil
+  :ensure nil
   ;; Make uniquify rename buffers like in path name notation
   :config (setq uniquify-buffer-name-style 'forward))
 
@@ -465,6 +469,7 @@
 ;; Use org-mode tables in any mode
 (use-package org-table
   :straight nil
+  :ensure nil
   :commands orgtbl-mode
   :init
   (defalias 'org-table-mode 'orgtbl-mode))
@@ -636,7 +641,7 @@
      :after flyspell)
 
 ;; Misc
-(use-package my-misc :straight nil)
+(use-package my-misc :straight nil :ensure nil)
 
 (use-package make-mode
   :defer
@@ -763,6 +768,7 @@ unnecessary."
 (use-package diff-mode
   :defer t
   :straight nil
+  :ensure nil
   :config
   ;; Make fine grained changes more obvious
   (set-face-attribute 'diff-refine-added nil :bold t :background 'unspecified)
@@ -936,6 +942,7 @@ unnecessary."
 
 (use-package dired
   :straight nil
+  :ensure nil
   :defer t
   :config
   ;; Show human-friendly file sizes and sort numbers properly
@@ -1004,6 +1011,7 @@ unnecessary."
 
 (use-package faun-mode
   :straight nil
+  :ensure nil
   :after 'org
   :load-path "lisp/"
   :delight "👹")
@@ -1149,6 +1157,7 @@ unnecessary."
 
 (use-package replace
   :straight nil
+  :ensure nil
   :config
   ;; Make jumping from occur results easier to follow visually
   (add-hook 'occur-mode-find-occurrence-hook 'recenter)
