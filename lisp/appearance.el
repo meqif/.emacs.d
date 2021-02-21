@@ -53,10 +53,7 @@
     (mac-auto-operator-composition-mode))
 
   (set-face-attribute 'default nil :font "Jetbrains Mono 15")
-  (set-face-attribute 'variable-pitch nil :font "Georgia 18")
-
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
+  (set-face-attribute 'variable-pitch nil :font "Georgia 18"))
 
 ;; Highlight current line
 (global-hl-line-mode 1)
