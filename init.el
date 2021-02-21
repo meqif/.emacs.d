@@ -355,6 +355,9 @@
   :config
   (setq company-tooltip-maximum-width 60))
 
+(use-package company-posframe
+  :hook (company-mode . company-posframe-mode))
+
 (use-package docker-compose-mode
   :defer)
 
