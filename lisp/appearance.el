@@ -40,7 +40,9 @@
           (bg-tab-active . "#120f18")
           (bg-tab-inactive . "#3a3a5a")
           (fg-unfocused . "#9a9aab")))
-  (load-theme 'modus-operandi t))
+  (load-theme 'modus-operandi t)
+  (set-face-attribute 'org-done nil :inverse-video t)
+  (set-face-attribute 'org-todo nil :inverse-video t))
 
 (when window-system
   (set-fringe-mode '(4 . 4))
