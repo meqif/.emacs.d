@@ -45,18 +45,12 @@
 (when window-system
   (set-fringe-mode '(4 . 4))
 
-  ;; Vertically center text in line when `line-spacing' is changed
-  ;; Requires this patch: https://lists.gnu.org/archive/html/emacs-devel/2019-08/msg00662.html
-  (setq-default line-spacing-vertical-center t)
-
   ;; Use font with ligatures and enable them in Emacs-Mac
   (when (eq window-system 'mac)
     (mac-auto-operator-composition-mode))
 
   (set-face-attribute 'default nil :font "Jetbrains Mono 15")
   (set-face-attribute 'variable-pitch nil :font "Georgia 18")
-
-  (setq default-text-properties '(line-spacing 0.5))
 
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
