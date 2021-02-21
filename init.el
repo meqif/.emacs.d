@@ -542,6 +542,9 @@
   :config
   (setq-default js-indent-level 2))
 
+(use-package rjsx-mode
+  :defer)
+
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")
 
