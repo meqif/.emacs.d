@@ -872,22 +872,6 @@ unnecessary."
   :config
   ;; Easy error navigation
   (global-set-key
-   (kbd "M-ç")
-   (defhydra hydra-flyspell (:color red)
-     "spellchecking"
-     ("r" flyspell-buffer "rerun on buffer")
-     ("n" flyspell-goto-next-error "next")
-     ("c" ispell-word "correct word")
-     ("en" #'(lambda ()
-               (interactive)
-               (setq-local ispell-local-dictionary "en_GB"))
-      "change language to en_GB")
-     ("pt" #'(lambda ()
-               (interactive)
-               (setq-local ispell-local-dictionary "pt_PT"))
-      "change language to pt_PT")
-     ("q" nil "quit")))
-  (global-set-key
    (kbd "M-g")
    (defhydra hydra-error (:color red)
      "goto-error"
@@ -896,14 +880,6 @@ unnecessary."
      ("p" previous-error "prev")
      ("v" recenter-top-bottom "recenter")
      ("q" nil "quit")))
-  (global-set-key
-   (kbd "M-n")
-   (defhydra hydra-narrow (:color blue)
-     "narrow"
-     ("f" narrow-to-defun "to function")
-     ("p" narrow-to-page "to page")
-     ("r" narrow-to-region "to region")
-     ("w" widen "widen")))
 
   (defhydra hydra-zoom ()
     "zoom"
