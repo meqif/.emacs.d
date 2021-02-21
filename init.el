@@ -584,7 +584,7 @@
   :after rust-mode)
 
 (use-package eglot
-  :hook ((rust-mode kotlin-mode ruby-mode enh-ruby-mode js2-mode) . eglot-ensure)
+  :hook ((rust-mode kotlin-mode ruby-mode enh-ruby-mode) . eglot-ensure)
   :bind (:map eglot-mode-map
               ("M-RET" . eglot-code-actions))
   :config
