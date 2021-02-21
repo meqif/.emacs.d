@@ -225,7 +225,10 @@
   (selectrum-mode +1)
   (general-evil-leader-define-key "TAB" #'selectrum-repeat)
   ;; Allow completion-at-point while in minibuffer
-  (setq enable-recursive-minibuffers t))
+  (setq enable-recursive-minibuffers t)
+  ;; selectrum's height is kinda broken in Emacs 28
+  (when (version< "28.0" emacs-version)
+    (setq selectrum-fix-vertical-window-height t)))
 
 (use-package prescient
   :config
