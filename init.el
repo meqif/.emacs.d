@@ -752,14 +752,17 @@ unnecessary."
   (add-hook 'git-commit-setup-hook #'(lambda () (setq fill-column 72))))
 
 (use-package evil-collection
+  :after evil
   :config
-  (eval-after-load 'replace (evil-collection-occur-setup))
+  (with-eval-after-load 'replace (evil-collection-occur-setup))
   ;; magit
-  (eval-after-load 'magit (evil-collection-magit-setup))
-  (eval-after-load 'evil-collection-magit
-    '(evil-define-key evil-collection-magit-state magit-mode-map "\\" nil))
+  (with-eval-after-load 'magit (evil-collection-magit-setup))
+  (with-eval-after-load 'evil-collection-magit
+    (evil-define-key evil-collection-magit-state magit-mode-map "\\" nil))
+  (with-eval-after-load 'vterm (evil-collection-vterm-setup))
   ;; deadgrep
-  (eval-after-load 'deadgrep (evil-collection-deadgrep-setup)))
+  (with-eval-after-load 'deadgrep (evil-collection-deadgrep-setup))
+  (with-eval-after-load 'helpful (evil-collection-helpful-setup)))
 
 (use-package browse-at-remote
   :defer
