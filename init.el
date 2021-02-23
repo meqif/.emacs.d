@@ -965,8 +965,18 @@ unnecessary."
 
 (use-package bufler
   :bind ("C-x C-b" . bufler)
+  :init
+  ;; `bufler-list-mode' derives from `magit-section-mode', which has some magic
+  ;; applied through `evil-collection-magit', so we have to put things back to
+  ;; normal here
+  (evil-set-initial-state 'bufler-list-mode 'normal)
   :config
-  (setq bufler-filter-buffer-modes '(bufler-list-mode special-mode timer-list-mode)))
+  (setq bufler-filter-buffer-modes '(bufler-list-mode special-mode timer-list-mode))
+  ;; Restore some keybindings in evil's normal state
+  (general-define-key :states 'normal :keymaps 'bufler-list-mode-map
+                      "C-k" #'bufler-list-buffer-kill
+                      "TAB" #'magit-section-toggle
+                      "q" #'quit-window))
 
 (use-package xref
   :config
