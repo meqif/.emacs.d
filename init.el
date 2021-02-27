@@ -978,7 +978,9 @@ unnecessary."
   ;; Restore some keybindings in evil's normal state
   (general-define-key :states 'normal :keymaps 'bufler-list-mode-map
                       "C-k" #'bufler-list-buffer-kill
+                      "RET" #'bufler-list-buffer-switch
                       "TAB" #'magit-section-toggle
+                      "gr" #'bufler-list
                       "q" #'quit-window))
 
 (use-package xref
