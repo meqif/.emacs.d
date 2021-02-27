@@ -601,6 +601,14 @@
   (setq eglot-autoshutdown t
         eglot-sync-connect nil
         eglot-autoreconnect nil)
+
+  ;; Fix "proc macro Deserialize not expanded"
+  (setq-default eglot-workspace-configuration
+                `((:rust-analyzer . (:procMacro
+                                     (:enable t)
+                                     :cargo
+                                     (:loadOutDirsFromCheck t)))))
+
   (general-define-key :keymap 'eglot-mode-map "C-h ." 'eldoc-doc-buffer))
 
 (use-package elpy
