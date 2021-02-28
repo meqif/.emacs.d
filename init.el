@@ -1141,7 +1141,9 @@ unnecessary."
 (use-package terraform-mode)
 
 (use-package deadgrep
-  :defer)
+  :defer
+  :init
+  (evil-set-initial-state 'deadgrep-mode 'normal))
 
 ;; Post initialization -- calculate loading time
 ;; Copied from jwiegley's configuration
@@ -1197,7 +1199,9 @@ unnecessary."
   :bind (("C-h f" . #'helpful-callable)
          ("C-h v" . #'helpful-variable)
          ("C-h k" . #'helpful-key))
-  :hook (helpful-mode . visual-line-mode))
+  :hook (helpful-mode . visual-line-mode)
+  :init
+  (evil-set-initial-state 'helpful-mode 'normal))
 
 (use-package eldoc-eval
   :config
