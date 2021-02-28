@@ -766,15 +766,15 @@ unnecessary."
 (use-package evil-collection
   :after evil
   :config
-  (with-eval-after-load 'replace (evil-collection-occur-setup))
-  ;; magit
-  (with-eval-after-load 'magit (evil-collection-magit-setup))
   (with-eval-after-load 'evil-collection-magit
     (evil-define-key evil-collection-magit-state magit-mode-map "\\" nil))
-  (with-eval-after-load 'vterm (evil-collection-vterm-setup))
-  ;; deadgrep
-  (with-eval-after-load 'deadgrep (evil-collection-deadgrep-setup))
-  (with-eval-after-load 'helpful (evil-collection-helpful-setup)))
+  (setq evil-collection-mode-list
+        '((occur replace)
+          magit
+          vterm
+          deadgrep
+          helpful))
+  (evil-collection-init))
 
 (use-package browse-at-remote
   :defer
