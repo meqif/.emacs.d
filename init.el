@@ -296,6 +296,10 @@
   :config
   (bind-key "C-c C-o" 'embark-collect-snapshot minibuffer-local-map)
   (bind-key "C-c C-c" 'embark-act minibuffer-local-map)
+
+  ;; embarQue
+  (general-evil-leader-define-key "q" 'embark-act)
+
   (setq embark-action-indicator
         (lambda (map)
           (which-key--show-keymap "Embark" map nil nil 'no-paging)
