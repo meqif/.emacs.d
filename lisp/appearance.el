@@ -65,5 +65,42 @@
           1 font-lock-warning-face t))))
 (add-hook 'prog-mode-hook 'font-lock-comment-annotations)
 
+;; *** Ligatures
+;; These are the ligatures for the JetBrains Mono font. Since =composite.el= is
+;; quite a new feature, I had to build this list myself. The format for this
+;; ligature alist and the way that =composition-function-table= works, is that the
+;; car for each cons cell is the first character of the ligature sequence, and the
+;; cdr is a regexp that matches ligatures that starts with that character. If you
+;; have a list of supported ligatures for a font, it's really easy to build these
+;; regexps using the =regexp-opt= function.
+;; Taken from: https://github.com/robbert-vdh/dotfiles/blob/master/user/emacs/.config/doom/config.org#ligatures
+;; Thank you, Robbert!
+(let ((alist '((?! . "\\(?:!\\(?:==\\|[!=]\\)\\)")
+               (?# . "\\(?:#\\(?:###?\\|_(\\|[!#(:=?[_{]\\)\\)")
+               (?$ . "\\(?:\\$>\\)")
+               (?& . "\\(?:&&&?\\)")
+               (?* . "\\(?:\\*\\(?:\\*\\*\\|[/>]\\)\\)")
+               (?+ . "\\(?:\\+\\(?:\\+\\+\\|[+>]\\)\\)")
+               (?- . "\\(?:-\\(?:-[>-]\\|<<\\|>>\\|[<>|~-]\\)\\)")
+               (?. . "\\(?:\\.\\(?:\\.[.<]\\|[.=?-]\\)\\)")
+               (?/ . "\\(?:/\\(?:\\*\\*\\|//\\|==\\|[*/=>]\\)\\)")
+               (?: . "\\(?::\\(?:::\\|\\?>\\|[:<-?]\\)\\)")
+               (?\; . "\\(?:;;\\)")
+               (?< . "\\(?:<\\(?:!--\\|\\$>\\|\\*>\\|\\+>\\|-[<>|]\\|/>\\|<[<=-]\\|=\\(?:=>\\|[<=>|]\\)\\||\\(?:||::=\\|[>|]\\)\\|~[>~]\\|[$*+/:<=>|~-]\\)\\)")
+               (?= . "\\(?:=\\(?:!=\\|/=\\|:=\\|=[=>]\\|>>\\|[=>]\\)\\)")
+               (?> . "\\(?:>\\(?:=>\\|>[=>-]\\|[]:=-]\\)\\)")
+               (?? . "\\(?:\\?[.:=?]\\)")
+               (?\[ . "\\(?:\\[\\(?:||]\\|[<|]\\)\\)")
+               (?\ . "\\(?:\\\\/?\\)")
+               (?\] . "\\(?:]#\\)")
+               (?^ . "\\(?:\\^=\\)")
+               (?_ . "\\(?:_\\(?:|?_\\)\\)")
+               (?{ . "\\(?:{|\\)")
+               (?| . "\\(?:|\\(?:->\\|=>\\||\\(?:|>\\|[=>-]\\)\\|[]=>|}-]\\)\\)")
+               (?~ . "\\(?:~\\(?:~>\\|[=>@~-]\\)\\)"))))
+  (dolist (char-regexp alist)
+    (set-char-table-range composition-function-table (car char-regexp)
+                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
+
 (provide 'appearance)
 ;;; appearance.el ends here
