@@ -353,12 +353,10 @@
    ;; Ignore case in completion popup
    completion-ignore-case t)
 
-  ;; Make ESC abort the completion popup
-  (--each
-      (list company-active-map
-            company-mode-map
-            company-search-map)
-    (define-key it [escape] 'company-abort)))
+  (with-eval-after-load
+      (progn
+        (evil-collection-company-setup)
+        (define-key company-active-map (kbd "RET") 'company-complete))))
 
 (use-package company-box
   :hook (company-mode . company-box-mode)
