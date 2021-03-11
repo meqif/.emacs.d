@@ -1209,6 +1209,13 @@ unnecessary."
   :config
   (global-origami-mode +1))
 
+(use-package bookmark
+  :ensure nil
+  :straight nil
+  :config
+  ;; Persist bookmarks to file after every change
+  (setq bookmark-save-flag 1))
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
