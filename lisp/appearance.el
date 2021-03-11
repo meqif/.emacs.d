@@ -40,10 +40,19 @@
           (bg-tab-active . "#120f18")
           (bg-tab-inactive . "#3a3a5a")
           (fg-unfocused . "#9a9aab")))
-  (load-theme 'modus-operandi t)
+
   (with-eval-after-load 'org
     (set-face-attribute 'org-done nil :inverse-video t)
-    (set-face-attribute 'org-todo nil :inverse-video t)))
+    (set-face-attribute 'org-todo nil :inverse-video t))
+
+  (defun meqif/theme-changer (appearance)
+    (interactive)
+    (cond ((eq appearance 'dark) (modus-themes-load-vivendi))
+          ((eq appearance 'light) (modus-themes-load-operandi))))
+
+  (if (eq window-system 'ns)
+      (add-to-list 'ns-system-appearance-change-functions #'meqif/theme-changer)
+    (modus-themes-load-operandi)))
 
 (when window-system
   (set-fringe-mode '(4 . 4))
