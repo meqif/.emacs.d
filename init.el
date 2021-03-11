@@ -295,6 +295,10 @@
   (bind-key "C-c C-o" 'embark-collect-snapshot minibuffer-local-map)
   (bind-key "C-c C-c" 'embark-act minibuffer-local-map)
 
+  (general-define-key :keymaps 'embark-collect-mode-map
+                      "M-n" #'(lambda () (interactive) (forward-button 1) (push-button))
+                      "M-p" #'(lambda () (interactive) (backward-button 1) (push-button)))
+
   ;; embarQue
   (general-evil-leader-define-key "q" 'embark-act)
 
