@@ -1220,6 +1220,8 @@ unnecessary."
   ;; Persist bookmarks to file after every change
   (setq bookmark-save-flag 1))
 
+(use-package burly)
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
