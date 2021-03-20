@@ -1222,6 +1222,61 @@ unnecessary."
 
 (use-package burly)
 
+(defvar meqif/subscribed-github-repositories nil)
+
+(use-package ts)
+(use-package ghub
+  :config
+  (defun meqif/labels-to-tags (labels)
+    (s-replace "::" ":" (s-join "" (--map (format ":%s:" (s-replace " " "_" it)) labels))))
+
+  (defun meqif/format-pull-request (pull-request)
+    (-let* ((html-url (alist-get 'html_url pull-request))
+            (title (alist-get 'title pull-request))
+            (number (alist-get 'number pull-request))
+            (created-at (alist-get 'created_at pull-request))
+            (updated-at (alist-get 'updated_at pull-request))
+            (author (alist-get 'login (alist-get 'user pull-request)))
+            (labels (--map (alist-get 'name it) (alist-get 'labels pull-request)))
+            ;; Mark pull requests without activity for over a week as stale
+            (labels (if (> (ts-difference (ts-now) (ts-parse updated-at))
+                           (* 3600 24 7))
+                        (cons "stale" labels)
+                      labels)))
+      (format
+       "** [[%s][%s (#%s)]] %s\n   :PROPERTIES:\n   :created-at: %s\n   :author: %s\n   :END:\n\n"
+       html-url
+       title
+       number
+       (meqif/labels-to-tags labels)
+       (ts-format (ts-parse created-at))
+       author)))
+
+  (defun display-pending-pull-requests ()
+    "Display all pending pull requests for the chosen Github repositories."
+    (interactive)
+    (let ((buffer (get-buffer-create "*Pending pull requests*"))
+          (repo-names meqif/subscribed-github-repositories))
+      (with-current-buffer buffer
+        (erase-buffer)
+        (save-excursion
+          (insert "#+TITLE: Pending Pull Requests\n")
+          (insert "#+STARTUP: content\n")
+          (insert (format "#+UPDATED_AT: %s\n" (ts-format (ts-now))))
+          (insert "\n")
+          (-map (lambda (repository)
+                  ;; Insert repository header
+                  (insert (format "* %s\n" repository))
+                  ;; Insert pull requests
+                  (-let ((pull-requests (ghub-get (format "/repos/%s/pulls" repository))))
+                    (-map (lambda (pull-request)
+                            ;; Insert pull request header and details
+                            (insert (meqif/format-pull-request pull-request)))
+                          pull-requests)))
+                meqif/subscribed-github-repositories))
+        (org-mode)
+        (switch-to-buffer buffer)))))
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
