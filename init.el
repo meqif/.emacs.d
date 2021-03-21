@@ -1234,12 +1234,12 @@ unnecessary."
 
   (defun meqif/pr-needs-attention-p (pull-request)
     (-let* ((updated-at (alist-get 'updated_at pull-request))
-            (author (alist-get 'login (alist-get 'user pull-request)))
+            (author (map-nested-elt pull-request '(user login)))
             (reviews-url (s-concat
                           (s-chop-prefix "https://api.github.com" (alist-get 'url pull-request))
                           "/reviews"))
             (reviews (ghub-get reviews-url))
-            (reviews-by-me (--filter (string-equal meqif/github-username (alist-get 'login (alist-get 'user it))) reviews))
+            (reviews-by-me (--filter (string-equal meqif/github-username (map-nested-elt it '(user login))) reviews))
             (latest-review-by-me (-last-item reviews-by-me)))
       ;; A pull request needs attention if:
       (and
@@ -1259,7 +1259,7 @@ unnecessary."
             (number (alist-get 'number pull-request))
             (created-at (alist-get 'created_at pull-request))
             (updated-at (alist-get 'updated_at pull-request))
-            (author (alist-get 'login (alist-get 'user pull-request)))
+            (author (map-nested-elt pull-request '(user login)))
             (labels (--map (alist-get 'name it) (alist-get 'labels pull-request)))
             ;; Mark pull requests without activity for over a week as stale
             (labels (if (> (ts-difference (ts-now) (ts-parse updated-at))
