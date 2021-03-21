@@ -1222,6 +1222,8 @@ unnecessary."
 
 (use-package burly)
 
+;; TODO: Move this into a namespace for the functionality below
+(defvar meqif/github-username (ghub--username "api.github.com"))
 (defvar meqif/subscribed-github-repositories nil)
 
 (use-package ts)
@@ -1229,6 +1231,27 @@ unnecessary."
   :config
   (defun meqif/labels-to-tags (labels)
     (s-replace "::" ":" (s-join "" (--map (format ":%s:" (s-replace " " "_" it)) labels))))
+
+  (defun meqif/pr-needs-attention-p (pull-request)
+    (-let* ((updated-at (alist-get 'updated_at pull-request))
+            (author (alist-get 'login (alist-get 'user pull-request)))
+            (reviews-url (s-concat
+                          (s-chop-prefix "https://api.github.com" (alist-get 'url pull-request))
+                          "/reviews"))
+            (reviews (ghub-get reviews-url))
+            (reviews-by-me (--filter (string-equal meqif/github-username (alist-get 'login (alist-get 'user it))) reviews))
+            (latest-review-by-me (-last-item reviews-by-me)))
+      ;; A pull request needs attention if:
+      (and
+       ;; isn't mine
+       (not (string-equal author meqif/github-username))
+       (or
+        ;; it hasn't been reviewed
+        (= 0 (seq-length reviews))
+        ;; or it has been reviewed by me and has been updated since my last review
+        (and latest-review-by-me
+             ;; (not (string-equal "APPROVED" (alist-get 'state latest-review-by-me)))
+             (string< (alist-get 'submitted_at latest-review-by-me) updated-at))))))
 
   (defun meqif/format-pull-request (pull-request)
     (-let* ((html-url (alist-get 'html_url pull-request))
@@ -1244,7 +1267,8 @@ unnecessary."
                         (cons "stale" labels)
                       labels)))
       (format
-       "** [[%s][%s (#%s)]] %s\n   :PROPERTIES:\n   :created-at: %s\n   :author: %s\n   :END:\n\n"
+       "** %s[[%s][%s (#%s)]] %s\n   :PROPERTIES:\n   :created-at: %s\n   :author: %s\n   :END:\n\n"
+       (if (meqif/pr-needs-attention-p pull-request) "TODO " "")
        html-url
        title
        number
