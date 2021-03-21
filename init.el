@@ -1253,19 +1253,21 @@ unnecessary."
              ;; (not (string-equal "APPROVED" (alist-get 'state latest-review-by-me)))
              (string< (alist-get 'submitted_at latest-review-by-me) updated-at))))))
 
+  (defun meqif/pr-is-stale (pull-request)
+    (-let ((updated-at (alist-get 'updated_at pull-request))
+           (labels (--map (alist-get 'name it) (alist-get 'labels pull-request))))
+      (> (ts-difference (ts-now) (ts-parse updated-at))
+         (* 3600 24 7))))
+
   (defun meqif/format-pull-request (pull-request)
     (-let* ((html-url (alist-get 'html_url pull-request))
             (title (alist-get 'title pull-request))
             (number (alist-get 'number pull-request))
             (created-at (alist-get 'created_at pull-request))
-            (updated-at (alist-get 'updated_at pull-request))
             (author (map-nested-elt pull-request '(user login)))
             (labels (--map (alist-get 'name it) (alist-get 'labels pull-request)))
             ;; Mark pull requests without activity for over a week as stale
-            (labels (if (> (ts-difference (ts-now) (ts-parse updated-at))
-                           (* 3600 24 7))
-                        (cons "stale" labels)
-                      labels)))
+            (labels (if (meqif/pr-is-stale pull-request) (cons "stale" labels) labels)))
       (format
        "** %s[[%s][%s (#%s)]] %s\n   :PROPERTIES:\n   :created-at: %s\n   :author: %s\n   :END:\n\n"
        (if (meqif/pr-needs-attention-p pull-request) "TODO " "")
