@@ -56,11 +56,23 @@
             ;; (not (string-equal "APPROVED" (alist-get 'state latest-review-by-me)))
             (string< (alist-get 'submitted_at latest-review-by-me) updated-at)))))))
 
+(defun dipper--pr-reviewed-by-me-p (pull-request reviews)
+  (-let* ((updated-at (alist-get 'updated_at pull-request))
+          (author (map-nested-elt pull-request '(user login)))
+          (reviews-by-me (--filter (string-equal dipper-github-username (map-nested-elt it '(user login))) reviews))
+          (latest-review-by-me (-last-item reviews-by-me)))
+    latest-review-by-me))
+
 (defun dipper--pr-is-stale (pull-request)
   (-let ((updated-at (alist-get 'updated_at pull-request))
          (labels (--map (alist-get 'name it) (alist-get 'labels pull-request))))
     (> (ts-difference (ts-now) (ts-parse updated-at))
        (* 3600 24 7))))
+
+(defun dipper--format-org-todo-state (pull-request reviews)
+  (cond ((dipper--pr-needs-attention-p pull-request reviews) "TODO ")
+        ((dipper--pr-reviewed-by-me-p pull-request reviews) "DONE ")
+        (t "")))
 
 (defun dipper--format-pull-request (pull-request)
   (-let* ((url (alist-get 'url pull-request))
@@ -77,7 +89,7 @@
           (labels (if (dipper--pr-is-stale pull-request) (cons "stale" labels) labels)))
     (format
      "** %s[[%s][%s (#%s)]] %s\n   :PROPERTIES:\n   :created-at: %s\n   :author: %s\n%s   :END:\n\n"
-     (if (dipper--pr-needs-attention-p pull-request reviews) "TODO " "")
+     (dipper--format-org-todo-state pull-request reviews)
      html-url
      title
      number
