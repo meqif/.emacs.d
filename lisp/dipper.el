@@ -39,16 +39,22 @@
           (reviews-by-me (--filter (string-equal dipper-github-username (map-nested-elt it '(user login))) reviews))
           (latest-review-by-me (-last-item reviews-by-me)))
     ;; A pull request needs attention if:
-    (and
-     ;; isn't mine
-     (not (string-equal author dipper-github-username))
-     (or
-      ;; it hasn't been reviewed
-      (= 0 (seq-length reviews))
-      ;; or it has been reviewed by me and has been updated since my last review
-      (and latest-review-by-me
-           ;; (not (string-equal "APPROVED" (alist-get 'state latest-review-by-me)))
-           (string< (alist-get 'submitted_at latest-review-by-me) updated-at))))))
+    (or
+     (and
+      ;; is mine
+      (string-equal author dipper-github-username)
+      ;; has been reviewed
+      (< 0 (seq-length reviews)))
+     (and
+      ;; isn't mine
+      (not (string-equal author dipper-github-username))
+      (or
+       ;; it hasn't been reviewed
+       (= 0 (seq-length reviews))
+       ;; or it has been reviewed by me and has been updated since my last review
+       (and latest-review-by-me
+            ;; (not (string-equal "APPROVED" (alist-get 'state latest-review-by-me)))
+            (string< (alist-get 'submitted_at latest-review-by-me) updated-at)))))))
 
 (defun dipper--pr-is-stale (pull-request)
   (-let ((updated-at (alist-get 'updated_at pull-request))
