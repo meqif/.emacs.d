@@ -60,6 +60,7 @@
   (-let* ((url (alist-get 'url pull-request))
           (reviews-url (s-concat (s-chop-prefix "https://api.github.com" url) "/reviews"))
           (reviews (ghub-get reviews-url))
+          (reviewers (-uniq (-sort 'string< (--map (map-nested-elt it '(user login)) reviews))))
           (html-url (alist-get 'html_url pull-request))
           (title (alist-get 'title pull-request))
           (number (alist-get 'number pull-request))
@@ -69,14 +70,15 @@
           ;; Mark pull requests without activity for over a week as stale
           (labels (if (dipper--pr-is-stale pull-request) (cons "stale" labels) labels)))
     (format
-     "** %s[[%s][%s (#%s)]] %s\n   :PROPERTIES:\n   :created-at: %s\n   :author: %s\n   :END:\n\n"
+     "** %s[[%s][%s (#%s)]] %s\n   :PROPERTIES:\n   :created-at: %s\n   :author: %s\n%s   :END:\n\n"
      (if (dipper--pr-needs-attention-p pull-request reviews) "TODO " "")
      html-url
      title
      number
      (dipper--labels-to-tags labels)
      (ts-format (ts-parse created-at))
-     author)))
+     author
+     (if (not (eq nil reviewers)) (format "   :reviewed-by: %s\n" (s-join " " reviewers)) ""))))
 
 ;;;###autoload
 (defun display-pending-pull-requests ()
