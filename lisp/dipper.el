@@ -33,13 +33,9 @@
 (defun dipper--labels-to-tags (labels)
   (s-replace "::" ":" (s-join "" (--map (format ":%s:" (s-replace " " "_" it)) labels))))
 
-(defun dipper--pr-needs-attention-p (pull-request)
+(defun dipper--pr-needs-attention-p (pull-request reviews)
   (-let* ((updated-at (alist-get 'updated_at pull-request))
           (author (map-nested-elt pull-request '(user login)))
-          (reviews-url (s-concat
-                        (s-chop-prefix "https://api.github.com" (alist-get 'url pull-request))
-                        "/reviews"))
-          (reviews (ghub-get reviews-url))
           (reviews-by-me (--filter (string-equal dipper-github-username (map-nested-elt it '(user login))) reviews))
           (latest-review-by-me (-last-item reviews-by-me)))
     ;; A pull request needs attention if:
@@ -61,7 +57,10 @@
        (* 3600 24 7))))
 
 (defun dipper--format-pull-request (pull-request)
-  (-let* ((html-url (alist-get 'html_url pull-request))
+  (-let* ((url (alist-get 'url pull-request))
+          (reviews-url (s-concat (s-chop-prefix "https://api.github.com" url) "/reviews"))
+          (reviews (ghub-get reviews-url))
+          (html-url (alist-get 'html_url pull-request))
           (title (alist-get 'title pull-request))
           (number (alist-get 'number pull-request))
           (created-at (alist-get 'created_at pull-request))
@@ -71,7 +70,7 @@
           (labels (if (dipper--pr-is-stale pull-request) (cons "stale" labels) labels)))
     (format
      "** %s[[%s][%s (#%s)]] %s\n   :PROPERTIES:\n   :created-at: %s\n   :author: %s\n   :END:\n\n"
-     (if (dipper--pr-needs-attention-p pull-request) "TODO " "")
+     (if (dipper--pr-needs-attention-p pull-request reviews) "TODO " "")
      html-url
      title
      number
