@@ -98,6 +98,22 @@
      author
      (if (not (eq nil reviewers)) (format "   :reviewed-by: %s\n" (s-join " " reviewers)) ""))))
 
+(defun dipper--insert-org-preamble ()
+  (insert "#+TITLE: Pending Pull Requests\n")
+  (insert "#+STARTUP: content\n")
+  (insert (format "#+UPDATED_AT: %s\n" (ts-format (ts-now))))
+  (insert "\n"))
+
+(defun dipper--process-repository (repository)
+  ;; Insert repository header
+  (insert (format "* %s\n" repository))
+  ;; Insert pull requests
+  (-let ((pull-requests (ghub-get (format "/repos/%s/pulls" repository))))
+    (-map (lambda (pull-request)
+            ;; Insert pull request header and details
+            (insert (dipper--format-pull-request pull-request)))
+          pull-requests)))
+
 ;;;###autoload
 (defun display-pending-pull-requests ()
   "Display all pending pull requests for the chosen Github repositories."
@@ -107,20 +123,8 @@
     (with-current-buffer buffer
       (erase-buffer)
       (save-excursion
-        (insert "#+TITLE: Pending Pull Requests\n")
-        (insert "#+STARTUP: content\n")
-        (insert (format "#+UPDATED_AT: %s\n" (ts-format (ts-now))))
-        (insert "\n")
-        (-map (lambda (repository)
-                ;; Insert repository header
-                (insert (format "* %s\n" repository))
-                ;; Insert pull requests
-                (-let ((pull-requests (ghub-get (format "/repos/%s/pulls" repository))))
-                  (-map (lambda (pull-request)
-                          ;; Insert pull request header and details
-                          (insert (dipper--format-pull-request pull-request)))
-                        pull-requests)))
-              dipper-subscribed-github-repositories))
+        (dipper--insert-org-preamble)
+        (-map 'dipper--process-repository repo-names))
       (org-mode)
       (org-align-tags t)
       (switch-to-buffer buffer))))
