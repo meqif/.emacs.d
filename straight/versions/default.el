@@ -111,7 +111,7 @@
  ("sesman" . "edee869c209c016e5f0c5cbb8abb9f3ccd2d1e05")
  ("shrink-path.el" . "c14882c8599aec79a6e8ef2d06454254bb3e1e41")
  ("smart-jump" . "07800ddd508cf620e6360e4a1f5bb25f8eab3ab1")
- ("smartparens" . "c59bfef7e8f1687ac77b0afaaaed86d8051d3de1")
+ ("smartparens" . "f54116c93144cedb6f13a8fdfbf73f48fa89fcc7")
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
  ("straight.el" . "2d407bccd9378f1d5218f8ba2ae85c6be73fbaf1")
  ("swiper" . "4235010d2aaba907c7dceb48f09e5edfde1058c0")
