@@ -33,28 +33,34 @@
 (defun dipper--labels-to-tags (labels)
   (s-replace "::" ":" (s-join "" (--map (format ":%s:" (s-replace " " "_" it)) labels))))
 
-(defun dipper--pr-needs-attention-p (pull-request reviews)
-  (-let* ((updated-at (alist-get 'updated_at pull-request))
-          (author (map-nested-elt pull-request '(user login)))
+(defun dipper--pr-is-mine-and-has-been-reviewed (pull-request reviews)
+  (-let* ((author (map-nested-elt pull-request '(user login))))
+    (and
+     ;; is mine
+     (string-equal author dipper-github-username)
+     ;; has been reviewed
+     (< 0 (seq-length reviews)))))
+
+(defun dipper--pr-is-not-mine-and-needs-reviews (pull-request reviews)
+  (-let* ((author (map-nested-elt pull-request '(user login)))
+          (updated-at (alist-get 'updated_at pull-request))
           (reviews-by-me (--filter (string-equal dipper-github-username (map-nested-elt it '(user login))) reviews))
           (latest-review-by-me (-last-item reviews-by-me)))
-    ;; A pull request needs attention if:
-    (or
-     (and
-      ;; is mine
-      (string-equal author dipper-github-username)
-      ;; has been reviewed
-      (< 0 (seq-length reviews)))
-     (and
-      ;; isn't mine
-      (not (string-equal author dipper-github-username))
-      (or
-       ;; it hasn't been reviewed
-       (= 0 (seq-length reviews))
-       ;; or it has been reviewed by me and has been updated since my last review
-       (and latest-review-by-me
-            ;; (not (string-equal "APPROVED" (alist-get 'state latest-review-by-me)))
-            (string< (alist-get 'submitted_at latest-review-by-me) updated-at)))))))
+    (and
+     ;; isn't mine
+     (not (string-equal author dipper-github-username))
+     (or
+      ;; it hasn't been reviewed
+      (= 0 (seq-length reviews))
+      ;; or it has been reviewed by me and has been updated since my last review
+      (and latest-review-by-me
+           ;; (not (string-equal "APPROVED" (alist-get 'state latest-review-by-me)))
+           (string< (alist-get 'submitted_at latest-review-by-me) updated-at))))))
+
+(defun dipper--pr-needs-attention-p (pull-request reviews)
+  (or
+   (dipper--pr-is-mine-and-has-been-reviewed pull-request reviews)
+   (dipper--pr-is-not-mine-and-needs-reviews pull-request reviews)))
 
 (defun dipper--pr-reviewed-by-me-p (pull-request reviews)
   (-let* ((updated-at (alist-get 'updated_at pull-request))
