@@ -820,6 +820,20 @@ unnecessary."
 
   (add-hook 'ruby-mode-hook #'meqif/set-fill-column-to-rubocop-max-line-length)
 
+  (defun meqif/rename-rails-migration ()
+    "Rename a Rails migration to the current moment."
+    (interactive)
+    (require 'magit-files)
+    (-when-let* ((root (project-root (project-current)))
+                 (migrations-directory (f-join root "db" "migrate"))
+                 (filename (completing-read
+                            "Migration to rename: "
+                            (-map 'f-filename (f-files migrations-directory))))
+                 (new-name (s-concat (format-time-string "%Y%m%d%H%M%S")
+                                     (s-replace-regexp "^[0-9]+_" "_" filename))))
+      (magit-file-rename (f-join migrations-directory filename)
+                         (f-join migrations-directory new-name))))
+
   (defun guess-docker-cwd ()
     "Attempt to guess the value of APP_HOME in the project's Dockerfile."
     (-when-let* ((project-root (-some-> (project-current) (project-root)))
