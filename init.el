@@ -277,7 +277,10 @@
   :after selectrum
   :config
   (setq selectrum-refine-candidates-function #'orderless-filter
-        selectrum-highlight-candidates-function #'orderless-highlight-matches)
+        selectrum-highlight-candidates-function #'orderless-highlight-matches
+        selectrum-prescient-enable-filtering nil
+        orderless-skip-highlighting (lambda () selectrum-is-active)
+        completion-styles '(orderless))
 
   (defun without-if-bang (pattern _index _total)
     (when (string-prefix-p "!" pattern)
