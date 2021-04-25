@@ -68,6 +68,9 @@
 (straight-use-package 'use-package)
 (setq use-package-compute-statistics t)
 
+;; Answering just 'y' or 'n' will do
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; Bring better defaults
 (use-package better-defaults :straight nil :ensure nil)
 

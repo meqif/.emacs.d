@@ -13,9 +13,6 @@
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
 
-;; Answering just 'y' or 'n' will do
-(fset 'yes-or-no-p 'y-or-n-p)
-
 ;; UTF-8 please
 (setq locale-coding-system 'utf-8) ; pretty
 (set-terminal-coding-system 'utf-8) ; pretty
