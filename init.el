@@ -1242,6 +1242,12 @@ unnecessary."
   :straight nil
   :load-path "lisp/")
 
+(use-package vundo
+  :after general
+  :straight (vundo :type git :host github :repo "casouri/vundo")
+  :config
+  (general-evil-leader-define-key "u" #'vundo))
+
 (use-package server
   :defer 2
   :delight server-buffer-clients

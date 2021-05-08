@@ -124,6 +124,7 @@
  ("transient" . "cc16a5eaa73617a281b0bbf71b24432c38994e30")
  ("ts.el" . "b7ca357a0ed57694e0b25ec1b1ca12e24a4ce541")
  ("use-package" . "a7422fb8ab1baee19adb2717b5b47b9c3812a84c")
+ ("vundo" . "a3e27e84f1e4c6859157cb926b49fe4a53563c3e")
  ("with-editor" . "c4768f51c7415119519b4626d8643d60e584098c")
  ("xref" . "aaa823a31befded016aa5370c4a22545e480911a")
  ("xterm-color" . "b9b1f84fb10fff5261702e38bf15b3ae75a4b6bb")
