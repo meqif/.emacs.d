@@ -1248,6 +1248,9 @@ unnecessary."
   :config
   (general-evil-leader-define-key "u" #'vundo))
 
+;; Annotate files without polluting them!
+(use-package annotate)
+
 (use-package server
   :defer 2
   :delight server-buffer-clients

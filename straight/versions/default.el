@@ -5,6 +5,7 @@
  ("ace-window" . "c7cb315c14e36fded5ac4096e158497ae974bec9")
  ("all-the-icons.el" . "19c8708b6ed9463e6c9a3bcce92e7e92d6260008")
  ("annalist.el" . "134fa3f0fb91a636a1c005c483516d4b64905a6d")
+ ("annotate.el" . "54ac759facadacbfea5c1e7c2975e2da6434cdda")
  ("avy" . "bbf1e7339eba06784dfe86643bb0fbddf5bb0342")
  ("browse-at-remote" . "fadf99d6d8e891f3b112e36c772e0eea0b9bc7f2")
  ("bufler.el" . "097f4349920215bdd829fceabc1afdbba172c32a")
