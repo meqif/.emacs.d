@@ -1230,13 +1230,25 @@ unnecessary."
 
 (use-package burly)
 
-(use-package ts)
-(use-package ghub)
+(use-package ts :defer)
+(use-package ghub :defer)
 (use-package dipper
-  :after (:all ghub dash s ts)
+  :defer
+  :commands display-pending-pull-requests filtered-pending-pull-requests
+  ;; :after (:all ghub dash s ts)
   :ensure nil
+  ;; :straight (dipper :host github :repo "meqif/.emacs.d" :files ("lisp/dipper.el"))
   :straight nil
-  :load-path "lisp/")
+  :load-path "lisp/"
+  :config
+  (defun dipper-filtered ()
+    (interactive)
+    (org-ql-search
+      (list (get-buffer "*Pending pull requests*"))
+      '(and (todo) (not (tags "stale")))
+      :sort '(date)
+      :narrow nil
+      :super-groups '((:auto-parent)))))
 
 (use-package vundo
   :after general

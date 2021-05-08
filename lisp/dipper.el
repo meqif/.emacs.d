@@ -135,5 +135,17 @@
       (org-align-tags t)
       (switch-to-buffer buffer))))
 
+;;;###autoload
+(defun filtered-pending-pull-requests ()
+  "Display only pending pull requests that need attention."
+  (interactive)
+  (require 'org-ql)
+  (-let ((buffer (or (get-buffer "*Pending pull requests*")
+                     (progn (display-pending-pull-requests)
+                            (get-buffer "*Pending pull requests*")))))
+    (org-ql-search
+      (list (get-buffer "*Pending pull requests*"))
+      '(and (todo) (not (tags "WIP" "stale"))))))
+
 (provide 'dipper)
 ;;; dipper.el ends here
