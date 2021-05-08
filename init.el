@@ -362,10 +362,6 @@
         (evil-collection-company-setup)
         (define-key company-active-map (kbd "RET") 'company-complete))))
 
-(use-package company-box
-  :hook (company-mode . company-box-mode)
-  :config
-  (setq company-tooltip-maximum-width 60))
 
 (use-package company-posframe
   :hook (company-mode . company-posframe-mode))
