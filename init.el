@@ -615,13 +615,6 @@
 
   (general-define-key :keymap 'eglot-mode-map "C-h ." 'eldoc-doc-buffer))
 
-(use-package elpy
-  :defer t
-  :init
-  (advice-add 'python-mode :before 'elpy-enable)
-  :config
-  (add-hook 'elpy-mode-hook '(lambda () (pyvenv-activate "~/.emacs.d/elpy/rpc-venv/"))))
-
 (use-package flyspell
   :defer
   :init
