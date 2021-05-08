@@ -496,6 +496,9 @@
   (setq org-superstar-leading-bullet ?\s
         org-superstar-headline-bullets-list '(?① ?② ?③ ?④ ?⑤ ?⑥)))
 
+(use-package org-ql
+  :after org)
+
 (use-package yasnippet
   :hook ((org-mode rspec-mode ruby-mode enh-ruby-mode rust-mode) . yas-minor-mode)
   :defer
