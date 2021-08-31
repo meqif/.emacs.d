@@ -28,3 +28,6 @@
 ;; compiled ahead-of-time when they are installed and site files are compiled
 ;; when gccemacs is installed.
 (setq comp-deferred-compilation nil)
+
+;; Fix native compilation issues in macOS + homebrew
+(setenv "LIBRARY_PATH" "/usr/local/opt/gcc@11/lib/gcc/11:/usr/local/opt/libgccjit/lib/gcc/11:/usr/local/lib/gcc/11/gcc/x86_64-apple-darwin19/11.1.0")
