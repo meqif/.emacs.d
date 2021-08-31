@@ -1139,7 +1139,7 @@ unnecessary."
   :defer
   :hook ((org-mode zettelkasten-mode) . olivetti-mode)
   :config
-  (setq-default olivetti-body-width 80))
+  (setq-default olivetti-body-width 100))
 
 (use-package go-mode
   :defer
