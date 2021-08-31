@@ -155,7 +155,10 @@
 
 (use-package eldoc
   :defer t
-  :delight)
+  :delight
+  :hook (eldoc-mode . visual-line-mode)
+  :config
+  (with-eval-after-load 'evil (evil-set-initial-state 'eldoc-mode 'emacs)))
 
 (use-package smartparens
   :delight
