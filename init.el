@@ -1261,6 +1261,9 @@ unnecessary."
 ;; Annotate files without polluting them!
 (use-package annotate)
 
+(use-package emojify
+  :defer t)
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
