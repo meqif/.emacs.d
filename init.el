@@ -767,6 +767,7 @@ unnecessary."
           magit
           vterm
           deadgrep
+          xref
           helpful))
   (evil-collection-init))
 
@@ -1004,6 +1005,8 @@ unnecessary."
                       "q" #'quit-window))
 
 (use-package xref
+  :init
+  (evil-set-initial-state 'xref-mode 'normal)
   :config
   (setq xref-search-program 'ripgrep)
   (add-hook 'xref-after-return-hook #'recenter))
