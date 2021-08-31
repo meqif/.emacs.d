@@ -400,7 +400,6 @@
 (use-package org
   :defer
   :after hydra
-  :hook (org-mode . variable-pitch-mode)
   :init
   (progn
     ;; Don't truncate lines
