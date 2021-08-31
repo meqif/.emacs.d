@@ -1252,6 +1252,10 @@ unnecessary."
       :narrow nil
       :super-groups '((:auto-parent)))))
 
+;; First try to indent the current line, and if the line
+;; was already indented, then try `completion-at-point'
+(setq tab-always-indent 'complete)
+
 (use-package vundo
   :after general
   :straight (vundo :type git :host github :repo "casouri/vundo")
