@@ -22,7 +22,7 @@
  ("delight" . "70cb8cec9e5eb2c24364e065d85c2ea8f14a587c")
  ("diff-hl" . "2281a89a3ddc6616073da6f190dda08d23b18ba6")
  ("docker-compose-mode" . "abaa4f3aeb5c62d7d16e186dd7d77f4e846e126a")
- ("dockerfile-mode" . "d31f7685ebc5832d957e25070a930aa42984327d")
+ ("dockerfile-mode" . "628315e2e4ab2f269548126444234caa057b2c75")
  ("doom-modeline" . "86d91e891b7d587b6680b19eda5ce2ca3df5b0ab")
  ("dumb-jump" . "97b0dfb617533cce128dcfe4956da5d88de07bca")
  ("easy-escape" . "a6449f22cb97160ee1c90121968de89e193268df")
