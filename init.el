@@ -222,7 +222,11 @@
   (general-evil-leader-define-key
     "a" 'meqif/goto-alternate-file
     "A" 'meqif/goto-alternate-file-other-window
-    "\\" 'meqif/pop-mark))
+    "\\" 'meqif/pop-mark
+    ;; (t)ake (t)odo items
+    "tt" #'(lambda () (interactive) (find-file "~/todo.org"))
+    ;; (t)ake (m)eeting notes
+    "tm" #'(lambda () (interactive) (find-file (f-join "~/meeting-notes" (s-concat (s-dashed-words (read-from-minibuffer "Topic of the meeting notes: ")) ".org"))))))
 
 (use-package selectrum
   :config
@@ -1099,7 +1103,7 @@ unnecessary."
   :hook ((lisp-mode emacs-lisp-mode) . easy-escape-minor-mode))
 
 (use-package autoinsert
-  :hook ((prog-mode yaml-mode) . auto-insert-mode)
+  :hook ((prog-mode yaml-mode org-mode) . auto-insert-mode)
   :config
   (setq auto-insert-query nil)
   (assoc-delete-all '("\\.el\\'" . "Emacs Lisp header") auto-insert-alist)
@@ -1107,6 +1111,7 @@ unnecessary."
         (-cons*
          '("\\.rb\\'" nil "# typed: strict\n# frozen_string_literal: true\n")
          '("\\.ya?ml\\'" nil "---\n")
+         '("/meeting-notes/.+\\.org\\'" . [(lambda () (yas-expand-snippet (yas-lookup-snippet "<meeting-note" 'org-mode)))])
          auto-insert-alist)))
 
 (use-package fish-mode
