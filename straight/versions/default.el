@@ -88,7 +88,7 @@
  ("olivetti" . "f4499948d12190cdc4272fb3c8bb0dc268d84efb")
  ("orderless" . "44935d8962be5724d8a3a4358ce0a4222450ee26")
  ("org" . "a9f38b1c2279fec0604a4474de891f88af6b205e")
- ("org-ql" . "208e103ecc146db71d878df3bd09c6eb60c2797d")
+ ("org-ql" . "31aeb0a2505acf8044c07824888ddec7f3e529c1")
  ("org-super-agenda" . "f5e80e4d0da6b2eeda9ba21e021838fa6a495376")
  ("org-superstar-mode" . "7f83636db215bf5a10edbfdf11d12a132864a914")
  ("origami.el" . "e558710a975e8511b9386edc81cd6bdd0a5bda74")
