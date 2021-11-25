@@ -226,7 +226,7 @@
     ;; (t)ake (t)odo items
     "tt" #'(lambda () (interactive) (find-file "~/todo.org"))
     ;; (t)ake (m)eeting notes
-    "tm" #'(lambda () (interactive) (find-file (f-join "~/meeting-notes" (s-concat (s-dashed-words (read-from-minibuffer "Topic of the meeting notes: ")) ".org"))))))
+    "tm" 'meqif/create-meeting-note))
 
 (use-package selectrum
   :config

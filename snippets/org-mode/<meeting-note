@@ -2,7 +2,7 @@
 # name: <meeting-note
 # key: <meeting-note
 # --
-#+TITLE: ${1:`(s-titleized-words (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`}
+#+TITLE: ${1:`(s-titleized-words (s-chop-prefix (format-time-string "%Y-%m-%d") (file-name-nondirectory (file-name-sans-extension (buffer-file-name)))))`}
 #+DATE: `(format-time-string "%Y-%m-%d")`
 
 * Agenda

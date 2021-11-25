@@ -225,5 +225,14 @@ Return the decoded text as multibyte string."
                (frames (alist-get 'frames monitor-attributes)))
     (-contains? frames (selected-frame))))
 
+(defun meqif/create-meeting-note ()
+  (interactive)
+  (-let* ((meeting-note-directory "~/meeting-notes")
+          (meeting-note-title (read-from-minibuffer "Topic of the meeting notes: "))
+          (current-date (format-time-string "%Y-%m-%d"))
+          (meeting-note-filename (s-concat current-date "-" (s-dashed-words meeting-note-title) ".org"))
+          (meeting-note-path (f-join meeting-note-directory meeting-note-filename)))
+    (find-file meeting-note-path)))
+
 (provide 'defuns)
 ;;; defuns.el ends here
