@@ -1,5 +1,10 @@
 ;;; appearance.el -*- lexical-binding: t; -*-
 
+;; Restore monospaced mode-line face in Emacs 29
+(when (not (version<= emacs-version "29.0"))
+  (set-face-attribute 'mode-line-active nil :inherit 'mode-line)
+  (set-face-attribute 'mode-line-inactive nil :inherit 'mode-line))
+
 (defun clear-old-theme (&rest _)
   "Clean previous themes definitions when loading a theme."
   (mapc #'disable-theme custom-enabled-themes))
