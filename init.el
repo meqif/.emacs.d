@@ -1277,6 +1277,10 @@ unnecessary."
 (use-package emojify
   :defer t)
 
+(use-package svg-tag-mode
+  :config
+  (global-svg-tag-mode t))
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
