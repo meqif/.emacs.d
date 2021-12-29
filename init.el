@@ -364,11 +364,12 @@
    ;; Ignore case in completion popup
    completion-ignore-case t)
 
-  (with-eval-after-load
-      (progn
-        (evil-collection-company-setup)
-        (define-key company-active-map (kbd "RET") 'company-complete))))
+  (setq company-format-margin-function #'company-vscode-light-icons-margin)
 
+  (with-eval-after-load 'evil-collection
+    (progn
+      (evil-collection-company-setup)
+      (define-key company-active-map (kbd "RET") 'company-complete))))
 
 (use-package company-posframe
   :hook (company-mode . company-posframe-mode))
