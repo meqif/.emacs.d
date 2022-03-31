@@ -1124,6 +1124,12 @@ unnecessary."
 (use-package fish-mode
   :defer t)
 
+(use-package flymake-shellcheck
+  :commands flymake-shellcheck-load
+  :init
+  (add-hook 'sh-mode-hook 'flymake-shellcheck-load)
+  (add-hook 'sh-mode-hook 'flymake-mode))
+
 ;; Improve performance of compilation buffers with colors
 (use-package xterm-color
   :after compile
