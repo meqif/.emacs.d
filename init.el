@@ -440,6 +440,9 @@
     ;; Set default notes file
     (setq org-default-notes-file "~/organizer.org")
 
+    ;; Make it easier to change TODO status
+    (evil-define-key 'motion org-mode-map "t" 'org-todo)
+
     ;; Hydra
     (defhydra hydra-org-mode-narrow (:color blue)
       "Narrow buffer to"
