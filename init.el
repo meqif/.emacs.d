@@ -609,6 +609,7 @@
   (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
   (add-to-list 'eglot-server-programs '(enh-ruby-mode "solargraph" "socket" "--port" :autoport))
   (add-to-list 'eglot-server-programs '(terraform-mode "terraform-ls" "serve" "-port" :autoport))
+  (add-to-list 'eglot-server-programs '(python-mode "pyright-langserver" "--stdio"))
   (setq eglot-autoshutdown t
         eglot-sync-connect nil
         eglot-autoreconnect nil)
