@@ -891,6 +891,10 @@ unnecessary."
   (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode)
   (general-define-key :keymap 'ruby-mode-map "C-c C-c" 'ruby-send-buffer))
 
+(use-package blacken
+  :after python
+  :hook (python-mode . blacken-mode))
+
 (use-package lispy
   :delight
   :defer t
