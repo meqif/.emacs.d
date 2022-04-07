@@ -69,7 +69,9 @@
 (setq use-package-compute-statistics t)
 
 ;; Answering just 'y' or 'n' will do
-(defalias 'yes-or-no-p 'y-or-n-p)
+(if (version< emacs-version "28.1")
+    (defalias 'yes-or-no-p 'y-or-n-p)
+  (setq use-short-answers t))
 
 ;; Bring better defaults
 (use-package better-defaults :straight nil :ensure nil)
