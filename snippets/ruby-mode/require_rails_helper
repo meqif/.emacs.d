@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: rh
+# key: rh
+# --
+require 'rails_helper'$0
