@@ -4,6 +4,6 @@
 # binding: direct-keybinding
 # --
 #[test]
-fn ${1:test_$2}() {
+fn ${1:test_$2}()${3: -> Result<(), ${4:anyhow::Error}>} {
     $0
 }
