@@ -606,6 +606,10 @@
 (use-package cargo
   :after rust-mode)
 
+(use-package cargo-transient
+  :bind (:map rust-mode-map
+              ("C-c C-c" . cargo-transient)))
+
 (use-package eglot
   :hook ((rust-mode kotlin-mode ruby-mode enh-ruby-mode) . eglot-ensure)
   :bind (:map eglot-mode-map
