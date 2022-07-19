@@ -1133,7 +1133,7 @@ unnecessary."
   (assoc-delete-all '("\\.el\\'" . "Emacs Lisp header") auto-insert-alist)
   (setq auto-insert-alist
         (-cons*
-         '("\\.rb\\'" nil "# typed: strict\n# frozen_string_literal: true\n")
+         '("\\.rb\\'" nil "# frozen_string_literal: true\n")
          '("\\.ya?ml\\'" nil "---\n")
          '("/meeting-notes/.+\\.org\\'" . [(lambda () (yas-expand-snippet (yas-lookup-snippet "<meeting-note" 'org-mode)))])
          auto-insert-alist)))
