@@ -87,4 +87,7 @@
         gnutls-verify-error t
         gnutls-trustfiles (list trustfile)))
 
+;; Highlight the error (or item in lists like M-x occur and so on) we just jumped to.
+(setq next-error-message-highlight t)
+
 (provide 'better-defaults)
