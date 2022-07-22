@@ -1255,7 +1255,8 @@ unnecessary."
 
 (use-package ctrlf
   :config
-  (ctrlf-mode +1))
+  (ctrlf-mode +1)
+  (setq ctrlf-auto-recenter t))
 
 (use-package origami
   :config
