@@ -232,27 +232,22 @@
     ;; (t)ake (m)eeting notes
     "tm" 'meqif/create-meeting-note))
 
-(use-package selectrum
+(use-package vertico
+  :init
+  (vertico-mode)
   :config
-  (selectrum-mode +1)
-  (general-evil-leader-define-key "TAB" #'selectrum-repeat)
   ;; Allow completion-at-point while in minibuffer
-  (setq enable-recursive-minibuffers t)
-  ;; selectrum's height is kinda broken in Emacs 28
-  (when (version< "28.0" emacs-version)
-    (setq selectrum-fix-vertical-window-height t)))
+  (setq enable-recursive-minibuffers t))
+
+(use-package savehist
+  :init
+  (savehist-mode))
 
 (use-package prescient
   :config
   (setq prescient-persist-mode +1))
 
-(use-package selectrum-prescient
-  :after (:all selectrum prescient)
-  :config
-  (selectrum-prescient-mode +1))
-
 (use-package consult
-  :after (:all selectrum prescient)
   :bind (("s-r" . consult-imenu))
   :init
   (general-evil-leader-define-key
@@ -264,18 +259,12 @@
     "b" 'consult-buffer
     "B" 'consult-buffer-other-window)
   :config
-  (setq consult-config `((consult-recent-file :preview-key nil)
-                         (consult-buffer :preview-key ,(kbd "s-p"))))
-  (setq consult-project-root-function #'(lambda () (-some-> (project-current) (project-root))))
-  (setq consult-ripgrep-command
-        "rg --null --line-buffered --color=always --max-columns=200 --smart-case --no-heading --line-number . -e ARG OPTS"))
-
-(use-package consult-selectrum
-  :after (:all consult selectrum)
-  :straight consult)
+  (consult-customize
+   consult-recent-file :preview-key nil
+   consult-buffer :preview-key (kbd "s-p"))
+  (setq consult-project-root-function #'(lambda () (-some-> (project-current) (project-root)))))
 
 (use-package marginalia
-  :after selectrum
   :bind (:map minibuffer-local-map ("C-M-a" . marginalia-cycle))
   :init
   (marginalia-mode +1)
@@ -284,13 +273,13 @@
   (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil)))
 
 (use-package orderless
-  :after selectrum
+  :after vertico
   :config
-  (setq selectrum-refine-candidates-function #'orderless-filter
-        selectrum-highlight-candidates-function #'orderless-highlight-matches
-        selectrum-prescient-enable-filtering nil
-        orderless-skip-highlighting (lambda () selectrum-is-active)
-        completion-styles '(orderless))
+  ;; The basic completion style is specified as fallback in addition to orderless in order to ensure that completion
+  ;; commands which rely on dynamic completion tables, e.g., completion-table-dynamic or completion-table-in-turn, work
+  ;; correctly.
+  (setq completion-styles '(orderless basic)
+        completion-category-overrides '((file (styles partial-completion))))
 
   (defun without-if-bang (pattern _index _total)
     (when (string-prefix-p "!" pattern)
@@ -313,13 +302,7 @@
                       "M-p" #'(lambda () (interactive) (backward-button 1) (push-button)))
 
   ;; embarQue
-  (general-evil-leader-define-key "q" 'embark-act)
-
-  (setq embark-action-indicator
-        (lambda (map)
-          (which-key--show-keymap "Embark" map nil nil 'no-paging)
-          #'which-key--hide-popup-ignore-command)
-        embark-become-indicator embark-action-indicator))
+  (general-evil-leader-define-key "q" 'embark-act))
 
 (use-package embark-consult
  :after (embark consult)
@@ -755,10 +738,6 @@
         magit-merge-arguments '("--no-ff")
         ;; Prune removed branches by default when fetching from remote
         magit-fetch-arguments '("--prune"))
-
-  (when (fboundp 'selectrum-completing-read)
-    ;; Use selectrum to complete magit's prompts
-    (setq magit-completing-read-function 'selectrum-completing-read))
 
   ;; Make <SPC> insert dashes instead. Useful when creating new branches
   (define-key magit-minibuffer-local-ns-map "\s" "-")
