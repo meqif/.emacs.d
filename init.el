@@ -351,6 +351,7 @@
 
 ;; Misery loves this
 (use-package company
+  :disabled
   :hook ((prog-mode comint-mode docker-compose-mode ess-mode cider-repl-mode) . company-mode)
   :delight
   :config
@@ -377,6 +378,25 @@
 
 (use-package company-posframe
   :hook (company-mode . company-posframe-mode))
+
+(use-package corfu
+  :config
+  (global-corfu-mode)
+  (setq corfu-auto t
+        corfu-cycle t))
+
+(use-package corfu-doc
+  :after corfu
+  :hook (corfu-doc-mode . corfu-mode))
+
+(use-package kind-icon
+  :ensure t
+  :after corfu
+  :custom
+  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
+  (kind-icon-default-style '(:padding 0 :stroke 0 :margin 0 :radius 0 :height 1.0 :scale 0.7))
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
 (use-package docker-compose-mode
   :defer)
