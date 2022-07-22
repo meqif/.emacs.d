@@ -1321,6 +1321,12 @@ unnecessary."
   :config
   (general-evil-leader-define-key "u" #'vundo))
 
+(use-package tree-sitter
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+(use-package tree-sitter-langs :after tree-sitter)
+
 ;; Annotate files without polluting them!
 (use-package annotate)
 
