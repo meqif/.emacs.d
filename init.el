@@ -304,10 +304,11 @@
         orderless-matching-styles '(orderless-initialism orderless-prefixes orderless-regexp)))
 
 (use-package embark
+  :bind (:map minibuffer-local-map
+              ("C-u C-c C-o" . embark-collect)
+              ("C-c C-o" . embark-export)
+              ("C-c C-c" . embark-act))
   :config
-  (bind-key "C-c C-o" 'embark-collect-snapshot minibuffer-local-map)
-  (bind-key "C-c C-c" 'embark-act minibuffer-local-map)
-
   (general-define-key :keymaps 'embark-collect-mode-map
                       "M-n" #'(lambda () (interactive) (forward-button 1) (push-button))
                       "M-p" #'(lambda () (interactive) (backward-button 1) (push-button)))
