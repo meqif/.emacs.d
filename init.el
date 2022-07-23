@@ -388,7 +388,7 @@
 
 (use-package corfu-doc
   :after corfu
-  :hook (corfu-doc-mode . corfu-mode))
+  :hook (corfu-mode . corfu-doc-mode))
 
 (use-package kind-icon
   :ensure t
