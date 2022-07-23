@@ -374,9 +374,16 @@
   :hook (company-mode . company-posframe-mode))
 
 (use-package corfu
+  :bind
+  (:map corfu-map
+        ("TAB" . corfu-next)
+        ([tab] . corfu-next)
+        ("S-TAB" . corfu-previous)
+        ([backtab] . corfu-previous))
   :config
   (global-corfu-mode)
   (setq corfu-auto t
+        corfu-preselect-first nil
         corfu-cycle t))
 
 (use-package corfu-doc
