@@ -259,6 +259,7 @@
   (setq prescient-persist-mode +1))
 
 (use-package consult
+  :demand
   :bind (("s-r" . consult-imenu))
   :init
   (general-evil-leader-define-key
