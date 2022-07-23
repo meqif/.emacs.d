@@ -390,6 +390,11 @@
   :after corfu
   :hook (corfu-mode . corfu-doc-mode))
 
+(use-package svg-lib
+  :defer
+  :init
+  (setq svg-lib-icons-dir (f-join no-littering-var-directory "svg-lib" "cache")))
+
 (use-package kind-icon
   :ensure t
   :after corfu
