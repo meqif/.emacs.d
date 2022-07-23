@@ -14,7 +14,7 @@
  ("clojure-mode" . "75c28897c7e91aa130c71c076aa2a6ce2e02da8f")
  ("company-mode" . "f3aacd77d0135c09227400fef45c54b717d33f2e")
  ("company-posframe" . "c7a820a35ff132aaec53c81e05afc829de39eb68")
- ("consult" . "f84ba528b54db5e2f2a196303d1fb07dbdc2c98a")
+ ("consult" . "6319aec3513cd587a8817269bc32c8283d419710")
  ("corfu" . "0fa9debaa158ab516980dca9751720205e8c28b2")
  ("corfu-doc" . "da931367802d01e87e1e496ba5b51aa9126a705d")
  ("ctrlf" . "5acefdc9a6f8e35febf6f71b6a34a0d4fc499269")

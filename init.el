@@ -234,8 +234,19 @@
 
 (use-package vertico
   :init
-  (vertico-mode)
+  ;; Use consult-completion-in-region to get completion in minibuffer a la selectrum-completion-in-region
+  ;;
+  ;; References:
+  ;;   - https://github.com/minad/vertico/issues/127
+  ;;   - https://github.com/minad/vertico/issues/24
+  (setq completion-in-region-function
+        (lambda (&rest args)
+          (apply (if vertico-mode
+                     #'consult-completion-in-region
+                   #'completion--in-region)
+                 args)))
   :config
+  (vertico-mode)
   ;; Allow completion-at-point while in minibuffer
   (setq enable-recursive-minibuffers t))
 
