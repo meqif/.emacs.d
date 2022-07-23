@@ -1335,6 +1335,9 @@ unnecessary."
 (use-package emojify
   :defer t)
 
+(use-package lua-mode
+  :defer t)
+
 (use-package server
   :defer 2
   :delight server-buffer-clients

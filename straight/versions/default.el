@@ -79,6 +79,7 @@
  ("let-alist" . "b299c78897cc307f9d5521927376fbd06a26f123")
  ("lispy" . "38a7df4cbb16cfe3d62dc8ea98b50e2d9a572e58")
  ("lispyville" . "89316f01822b2135e52ca27fd308d207ef618052")
+ ("lua-mode" . "5a9bee8d5fc978dc64fcb677167417010321ba65")
  ("macrostep" . "424e3734a1ee526a1bd7b5c3cd1d3ef19d184267")
  ("magit" . "f50c3aa56704cddd46ca987722642584bc8290b0")
  ("major-mode-hydra.el" . "20362323f66883c1336ffe70be24f91509addf54")
