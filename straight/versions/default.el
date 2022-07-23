@@ -42,7 +42,7 @@
  ("emacs-vdiff" . "c0541ae9c2cb878be9ab3935da058a72155a14fc")
  ("emacs-which-key" . "428aedfce0157920814fbb2ae5d00b4aea89df88")
  ("emacsmirror-mirror" . "83bfe8b5f9bcd3653dbea383776183c6d36841ac")
- ("embark" . "0da967adf0b1c17c59d1c0a1c166c983afe640b2")
+ ("embark" . "5d0459d27aa7cf738b5af36cf862723a62bef955")
  ("emmet-mode" . "1acb821e0142136344ccf40c1e5fb664d7db2e70")
  ("epl" . "78ab7a85c08222cd15582a298a364774e3282ce6")
  ("evil" . "881a9ef5b92678c420617bfd60434c99ffb924b6")
