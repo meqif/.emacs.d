@@ -376,6 +376,7 @@
   :hook (company-mode . company-posframe-mode))
 
 (use-package corfu
+  :demand
   :bind
   (:map corfu-map
         ("TAB" . corfu-next)
