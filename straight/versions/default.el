@@ -9,6 +9,7 @@
  ("browse-at-remote" . "fadf99d6d8e891f3b112e36c772e0eea0b9bc7f2")
  ("bufler.el" . "097f4349920215bdd829fceabc1afdbba172c32a")
  ("burly.el" . "291c2b34eee255f64c0fd889b67dc11a3b69ef12")
+ ("cargo-transient" . "69b56ef92cac91384b21dbeed370646285288517")
  ("cargo.el" . "91ccfef6e36ff9e96352a03c4a057b5ee181438d")
  ("cider" . "fde37a3a9d93af20c2b944a3aea1db77faba0adf")
  ("clojure-mode" . "75c28897c7e91aa130c71c076aa2a6ce2e02da8f")

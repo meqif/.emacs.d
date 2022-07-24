@@ -642,6 +642,7 @@
   :after rust-mode)
 
 (use-package cargo-transient
+  :after rust-mode
   :bind (:map rust-mode-map
               ("C-c C-c" . cargo-transient)))
 
