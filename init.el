@@ -270,6 +270,10 @@
     "S" 'consult-ripgrep
     "b" 'consult-buffer
     "B" 'consult-buffer-other-window)
+
+  ;; Use Consult to select xref locations with preview
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
   :config
   (consult-customize
    consult-recent-file :preview-key nil
