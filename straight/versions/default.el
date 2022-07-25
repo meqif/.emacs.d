@@ -48,6 +48,7 @@
  ("epl" . "78ab7a85c08222cd15582a298a364774e3282ce6")
  ("evil" . "881a9ef5b92678c420617bfd60434c99ffb924b6")
  ("evil-collection" . "16e14ea9c58aa1224c09d02e40ad3edde72c820a")
+ ("evil-commentary" . "2dab6ac34d1617971768ad219d73af48f7473fec")
  ("evil-lion" . "6b03593f5dd6e7c9ca02207f9a73615cf94c93ab")
  ("evil-matchit" . "539192328ec521796c3f2bd8c1ac1a1b0e4f08f9")
  ("evil-multiedit" . "9f271e0e6048297692f80ed6c5ae8994ac523abc")

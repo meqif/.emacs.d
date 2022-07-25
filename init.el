@@ -1103,6 +1103,10 @@ unnecessary."
   :config
   (evil-lion-mode))
 
+(use-package evil-commentary
+  :after evil
+  :config (evil-commentary-mode))
+
 ;; Unbind keys I accidentally hit too often
 (unbind-key (kbd "s-&"))
 (unbind-key (kbd "s-k"))
