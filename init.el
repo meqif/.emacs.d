@@ -1335,7 +1335,54 @@ unnecessary."
   :config
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-(use-package tree-sitter-langs :after tree-sitter)
+
+(use-package tree-sitter-langs
+  :after tree-sitter
+  :config
+  (add-to-list 'tree-sitter-major-mode-language-alist '(yaml-mode . yaml))
+
+  ;; Add helpers to parse YAML files using tree-sitter and populate imenu.
+  ;; All credit to meain, the emacs-tree-sitter API is gnarly.
+  ;;
+  ;; References:
+  ;;   - https://blog.meain.io/2022/navigating-config-files-using-tree-sitter/
+  ;;   - https://github.com/meain/dotfiles/blob/278f863cb687c63ce3a9e0f419ca5ad16be2da2e/emacs/.config/emacs/init.el
+  (defun meain/get-config-nesting-paths ()
+    "Get out all the nested paths in a config file."
+    (when-let* ((query-s "(block_mapping_pair (flow_node) @key (_)) @item")
+                (root-node (tsc-root-node tree-sitter-tree))
+                (query (tsc-make-query tree-sitter-language query-s))
+                (matches (tsc-query-matches query root-node #'tsc--buffer-substring-no-properties))
+                (item-ranges (seq-map (lambda (x)
+                                        (let ((item (seq-elt (cdr x) 0))
+                                              (key (seq-elt (cdr x) 1)))
+                                          (list (tsc-node-text (cdr key))
+                                                (tsc-node-range (cdr key))
+                                                (tsc-node-range (cdr item)))))
+                                      matches))
+                (parent-nodes '(("#" 0))))
+      (mapcar (lambda (x)
+                (let* ((current-end (seq-elt (cadr (cdr x)) 1))
+                       (parent-end (cadar parent-nodes))
+                       (current-key (car x)))
+                  (progn
+                    (if (> current-end parent-end)
+                        (setq parent-nodes
+                              (-filter (lambda (y) (< current-end (cadr y)))
+                                       parent-nodes)))
+                    (setq parent-nodes (cons (list current-key current-end) parent-nodes))
+                    (list (reverse (mapcar #'car parent-nodes))
+                          (seq-elt (cadr x) 0)))))
+              item-ranges)))
+
+  (defun meain/imenu-config-nesting-path ()
+    "Return config-nesting paths for use in imenu"
+    (mapcar (lambda (x)
+              (cons (string-join (car x) ".") (cadr x)))
+            (meain/get-config-nesting-paths)))
+
+  (when (alist-get 'yaml-mode tree-sitter-major-mode-language-alist)
+    (add-hook 'yaml-mode-hook (lambda () (setq imenu-create-index-function #'meain/imenu-config-nesting-path)))))
 
 ;; Annotate files without polluting them!
 (use-package annotate)
