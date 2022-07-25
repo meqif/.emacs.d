@@ -1343,7 +1343,10 @@ unnecessary."
 (use-package tree-sitter-langs
   :after tree-sitter
   :config
-  (add-to-list 'tree-sitter-major-mode-language-alist '(yaml-mode . yaml))
+
+  ;; Manually set up yaml language parser if it exists
+  (when (-any? #'file-exists-p (--map (f-join it "yaml.so") tree-sitter-load-path))
+    (add-to-list 'tree-sitter-major-mode-language-alist '(yaml-mode . yaml)))
 
   ;; Add helpers to parse YAML files using tree-sitter and populate imenu.
   ;; All credit to meain, the emacs-tree-sitter API is gnarly.
