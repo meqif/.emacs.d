@@ -1357,43 +1357,65 @@ unnecessary."
           (jsonnet-mode .  "(expr (member (field (fieldname) @key) @item))")))
 
   ;; Add helpers to parse YAML files using tree-sitter and populate imenu.
-  ;; All credit to meain, the emacs-tree-sitter API is gnarly.
+  ;; Heavily borrowed from meain's code. Refactored and commented by me for readability.
   ;;
   ;; References:
   ;;   - https://blog.meain.io/2022/navigating-config-files-using-tree-sitter/
   ;;   - https://github.com/meain/dotfiles/blob/278f863cb687c63ce3a9e0f419ca5ad16be2da2e/emacs/.config/emacs/init.el
-  (defun meain/get-config-nesting-paths ()
-    "Get out all the nested paths in a config file."
+
+  (defun meqif/tree-sitter-matches-for-current-buffer ()
+    "Get tree-sitter matches (user pointers) for the current buffer.
+Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
+`major-mode' to decide the appropriate tree-sitter query."
     (when-let* ((query-s (alist-get major-mode meqif/tree-sitter-imenu-queries))
                 (root-node (tsc-root-node tree-sitter-tree))
                 (query (tsc-make-query tree-sitter-language query-s))
-                (matches (tsc-query-matches query root-node #'tsc--buffer-substring-no-properties))
-                (item-ranges (seq-map (lambda (x)
-                                        (let ((item (seq-elt (cdr x) 0))
-                                              (key (seq-elt (cdr x) 1)))
-                                          (list (tsc-node-text (cdr key))
-                                                (tsc-node-range (cdr key))
-                                                (tsc-node-range (cdr item)))))
-                                      matches))
+                (matches (tsc-query-matches query root-node #'tsc--buffer-substring-no-properties)))
+      matches))
+
+  (defun meain/get-config-nesting-paths ()
+    "Get out all the nested paths in a config file."
+    (when-let* ((matches (meqif/tree-sitter-matches-for-current-buffer))
+                ;; Convert match vectors to lists
+                (entries (--map (append (cdr it) nil) matches))
+                ;; Convert each match (key and item) into list with key text and positions
+                ;;
+                ;; Each entry looks like:
+                ;; ("os"
+                ;;  [349 351 (24 . 8) (24 . 10)]
+                ;;  [349 368 (24 . 8) (24 . 27)])
+                ;;
+                ;; That is,
+                ;; (key
+                ;;  [START-BYTEPOS END-BYTEPOS START-POINT END-POINT]  ;; key
+                ;;  [START-BYTEPOS END-BYTEPOS START-POINT END-POINT]) ;; item
+                ;;
+                ;;  Each tree-sitter "point" is a (LINE-NUMBER . BYTE-COLUMN) pair.
+                (item-ranges (--map
+                              (-let* (((&alist 'item item 'key key) it))
+                                (list (tsc-node-text key)
+                                      (tsc-node-range key)
+                                      (tsc-node-range item)))
+                              entries))
                 (parent-nodes '(("#" 0))))
+      ;; Build a list of paths where each element is a (path, position) pair like `(("parent" "child") 123)'
       (mapcar (lambda (x)
-                (let* ((current-end (seq-elt (cadr (cdr x)) 1))
-                       (parent-end (cadar parent-nodes))
-                       (current-key (car x)))
-                  (progn
-                    (if (> current-end parent-end)
-                        (setq parent-nodes
-                              (-filter (lambda (y) (< current-end (cadr y)))
-                                       parent-nodes)))
-                    (setq parent-nodes (cons (list current-key current-end) parent-nodes))
-                    (list (reverse (mapcar #'car parent-nodes))
-                          (seq-elt (cadr x) 0)))))
+                (-let* (((current-key key-data item-data) x)
+                        ([key-start-bytepos _ _ _] key-data)
+                        ([_ current-end _ _] item-data)     ;; item end bytepos
+                        (parent-end (cadar parent-nodes)))  ;; position of the most recent child
+                  ;; Get only likely ancestors from `parent-nodes' so that we can get their keys to build the current node's path
+                  (when (> current-end parent-end)
+                    (setq parent-nodes
+                          (--filter (< current-end (cadr it)) parent-nodes)))
+                  (setq parent-nodes (cons (list current-key current-end) parent-nodes))
+                  (list (reverse (mapcar #'car parent-nodes))
+                        key-start-bytepos)))
               item-ranges)))
 
   (defun meain/imenu-config-nesting-path ()
     "Return config-nesting paths for use in imenu"
-    (mapcar (lambda (x)
-              (cons (string-join (car x) ".") (cadr x)))
+    (--map (cons (string-join (car it) ".") (cadr it))
             (meain/get-config-nesting-paths)))
 
   (when (alist-get 'yaml-mode tree-sitter-major-mode-language-alist)
