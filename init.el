@@ -1407,7 +1407,7 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
                   ;; Get only likely ancestors from `parent-nodes' so that we can get their keys to build the current node's path
                   (when (> current-end parent-end)
                     (setq parent-nodes
-                          (--filter (< current-end (cadr it)) parent-nodes)))
+                          (--filter (<= current-end (cadr it)) parent-nodes)))
                   (setq parent-nodes (cons (list current-key current-end) parent-nodes))
                   (list (reverse (mapcar #'car parent-nodes))
                         key-start-bytepos)))
