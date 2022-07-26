@@ -1344,6 +1344,10 @@ unnecessary."
   :after tree-sitter
   :config
 
+  ;; Manually set up jsonnet language parser if it exists
+  (when (-any? #'file-exists-p (--map (f-join it "jsonnet.so") tree-sitter-load-path))
+    (add-to-list 'tree-sitter-major-mode-language-alist '(jsonnet-mode . jsonnet)))
+
   ;; Manually set up yaml language parser if it exists
   (when (-any? #'file-exists-p (--map (f-join it "yaml.so") tree-sitter-load-path))
     (add-to-list 'tree-sitter-major-mode-language-alist '(yaml-mode . yaml)))
@@ -1382,14 +1386,52 @@ unnecessary."
                           (seq-elt (cadr x) 0)))))
               item-ranges)))
 
+  ;; TODO: Refactor this to handle multiple languages more nicely
+  (defun meain/get-config-nesting-paths-jsonnet ()
+    "Get out all the nested paths in a config file."
+    (when-let* ((query-s "(expr (member (field (fieldname) @key) @item))")
+                (root-node (tsc-root-node tree-sitter-tree))
+                (query (tsc-make-query tree-sitter-language query-s))
+                (matches (tsc-query-matches query root-node #'tsc--buffer-substring-no-properties))
+                (item-ranges (seq-map (lambda (x)
+                                        (let ((item (seq-elt (cdr x) 0))
+                                              (key (seq-elt (cdr x) 1)))
+                                          (list (tsc-node-text (cdr key))
+                                                (tsc-node-range (cdr key))
+                                                (tsc-node-range (cdr item)))))
+                                      matches))
+                (parent-nodes '(("#" 0))))
+      (mapcar (lambda (x)
+                (let* ((current-end (seq-elt (cadr (cdr x)) 1))
+                       (parent-end (cadar parent-nodes))
+                       (current-key (car x)))
+                  (progn
+                    (if (> current-end parent-end)
+                        (setq parent-nodes
+                              (-filter (lambda (y) (< current-end (cadr y)))
+                                       parent-nodes)))
+                    (setq parent-nodes (cons (list current-key current-end) parent-nodes))
+                    (list (reverse (mapcar #'car parent-nodes))
+                          (seq-elt (cadr x) 0)))))
+              item-ranges)))
+
   (defun meain/imenu-config-nesting-path ()
     "Return config-nesting paths for use in imenu"
     (mapcar (lambda (x)
               (cons (string-join (car x) ".") (cadr x)))
             (meain/get-config-nesting-paths)))
 
+  (defun meain/imenu-config-nesting-path-jsonnet ()
+    "Return config-nesting paths for use in imenu"
+    (mapcar (lambda (x)
+              (cons (string-join (car x) ".") (cadr x)))
+            (meain/get-config-nesting-paths-jsonnet)))
+
   (when (alist-get 'yaml-mode tree-sitter-major-mode-language-alist)
-    (add-hook 'yaml-mode-hook (lambda () (setq imenu-create-index-function #'meain/imenu-config-nesting-path)))))
+    (add-hook 'yaml-mode-hook (lambda () (setq imenu-create-index-function #'meain/imenu-config-nesting-path))))
+
+  (when (alist-get 'jsonnet-mode tree-sitter-major-mode-language-alist)
+    (add-hook 'jsonnet-mode-hook (lambda () (setq imenu-create-index-function #'meain/imenu-config-nesting-path-jsonnet)))))
 
 ;; Annotate files without polluting them!
 (use-package annotate)
@@ -1398,6 +1440,9 @@ unnecessary."
   :defer t)
 
 (use-package lua-mode
+  :defer t)
+
+(use-package jsonnet-mode
   :defer t)
 
 (use-package server

@@ -75,6 +75,7 @@
  ("json-mode" . "0e819e519ae17a2686e0881c4ca51fa873fa9b83")
  ("json-reformat" . "8eb6668ed447988aea06467ba8f42e1f2178246f")
  ("json-snatcher" . "b28d1c0670636da6db508d03872d96ffddbc10f2")
+ ("jsonnet-mode" . "f3d1f5118fa8328a2a43fd3d750c2afdd02b65ac")
  ("jsonrpc" . "5bb00b63bc3a240966d7d7902a7669edb2888874")
  ("kind-icon" . "cce18f777e2e6fedb09e50108ebb06810f436039")
  ("kotlin-mode" . "0e4bafb31d1fc2a0a420a521c2723d5526646c0b")
