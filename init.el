@@ -1365,6 +1365,7 @@ unnecessary."
 
   (setq meqif/tree-sitter-imenu-queries
         '((yaml-mode . "(block_mapping_pair (flow_node) @key (_)) @item")
+          (json-mode . "(object (pair (string (string_content) @key) (_)) @item)")
           (jsonnet-mode .  "(expr (member (field (fieldname) @key) @item))")
           (graphql-mode . "(selection (field (name) @key)) @item")))
 
