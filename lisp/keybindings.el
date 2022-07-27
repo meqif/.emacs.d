@@ -8,6 +8,11 @@
 ; Let right alt work as usual
 (setq ns-right-option-modifier 'none)
 
+;; Imitate mac keyboard layout in Linux
+(when (eq window-system 'pgtk)
+  (setq x-meta-keysym 'super
+        x-super-keysym 'meta))
+
 ;; For emacs-mac
 (when (eq window-system 'mac)
   (progn
