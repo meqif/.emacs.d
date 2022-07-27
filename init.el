@@ -1430,14 +1430,11 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
     (--map (cons (string-join (car it) ".") (cadr it))
             (meain/get-config-nesting-paths)))
 
-  (when (alist-get 'yaml-mode tree-sitter-major-mode-language-alist)
-    (add-hook 'yaml-mode-hook (lambda () (setq imenu-create-index-function #'meain/imenu-config-nesting-path))))
-
-  (when (alist-get 'jsonnet-mode tree-sitter-major-mode-language-alist)
-    (add-hook 'jsonnet-mode-hook (lambda () (setq imenu-create-index-function #'meain/imenu-config-nesting-path))))
-
-  (when (alist-get 'graphql-mode tree-sitter-major-mode-language-alist)
-    (add-hook 'graphql-mode-hook (lambda () (setq imenu-create-index-function #'meain/imenu-config-nesting-path)))))
+  ;; Set up tree-sitter-based imenu index function for the major modes with registered queries
+  (-each meqif/tree-sitter-imenu-queries
+    (-lambda ((major-mode . _))
+      (add-hook (intern (s-concat (symbol-name major-mode) "-hook"))
+                (lambda () (setq imenu-create-index-function #'meain/imenu-config-nesting-path))))))
 
 ;; Annotate files without polluting them!
 (use-package annotate)
