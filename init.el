@@ -1360,9 +1360,13 @@ unnecessary."
   (when (-any? #'file-exists-p (--map (f-join it "yaml.so") tree-sitter-load-path))
     (add-to-list 'tree-sitter-major-mode-language-alist '(yaml-mode . yaml)))
 
+  (when (-any? #'file-exists-p (--map (f-join it "graphql.so") tree-sitter-load-path))
+    (add-to-list 'tree-sitter-major-mode-language-alist '(graphql-mode . graphql)))
+
   (setq meqif/tree-sitter-imenu-queries
         '((yaml-mode . "(block_mapping_pair (flow_node) @key (_)) @item")
-          (jsonnet-mode .  "(expr (member (field (fieldname) @key) @item))")))
+          (jsonnet-mode .  "(expr (member (field (fieldname) @key) @item))")
+          (graphql-mode . "(selection (field (name) @key)) @item")))
 
   ;; Add helpers to parse YAML files using tree-sitter and populate imenu.
   ;; Heavily borrowed from meain's code. Refactored and commented by me for readability.
@@ -1430,7 +1434,10 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
     (add-hook 'yaml-mode-hook (lambda () (setq imenu-create-index-function #'meain/imenu-config-nesting-path))))
 
   (when (alist-get 'jsonnet-mode tree-sitter-major-mode-language-alist)
-    (add-hook 'jsonnet-mode-hook (lambda () (setq imenu-create-index-function #'meain/imenu-config-nesting-path)))))
+    (add-hook 'jsonnet-mode-hook (lambda () (setq imenu-create-index-function #'meain/imenu-config-nesting-path))))
+
+  (when (alist-get 'graphql-mode tree-sitter-major-mode-language-alist)
+    (add-hook 'graphql-mode-hook (lambda () (setq imenu-create-index-function #'meain/imenu-config-nesting-path)))))
 
 ;; Annotate files without polluting them!
 (use-package annotate)
