@@ -173,7 +173,9 @@
   ;; Remove matching parentheses delay
   (setq sp-show-pair-delay 0)
   ;; Load default smartparens configuration
-  (require 'smartparens-config))
+  (require 'smartparens-config)
+  ;; Fix single quote behavior in minibuffer
+  (sp-with-modes '(minibuffer-inactive-mode minibuffer-mode) (sp-local-pair "'" nil :actions nil)))
 
 ;; Setup extensions
 (use-package setup-evil
