@@ -1428,10 +1428,11 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
                         key-start-bytepos)))
               item-ranges)))
 
-  (defun meain/imenu-config-nesting-path ()
+  (defun meain/imenu-config-nesting-path (&optional separator)
     "Return config-nesting paths for use in imenu"
-    (--map (cons (string-join (car it) ".") (cadr it))
-            (meain/get-config-nesting-paths)))
+    (let ((separator (or separator ".")))
+      (--map (cons (string-join (car it) separator) (cadr it))
+             (meain/get-config-nesting-paths))))
 
   ;; Set up tree-sitter-based imenu index function for the major modes with registered queries
   (-each meqif/tree-sitter-imenu-queries
