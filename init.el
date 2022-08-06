@@ -1458,9 +1458,10 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
   ;; Start server if it isn't already running
   :config
   (unless (server-running-p) (server-start))
-  (ignore-errors
-    (burly-open-bookmark "restart-emacs"))
-  (ignore-errors
+
+  ;; Restore bookmark saved by `restart-emacs-with-current-windows' if it exists
+  (when (-contains? (bookmark-all-names) "restart-emacs")
+    (burly-open-bookmark "restart-emacs")
     (bookmark-delete "restart-emacs")))
 
 ;; After startup, set reasonable values for garbage collection
