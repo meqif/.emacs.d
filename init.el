@@ -1457,14 +1457,14 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
   :delight server-buffer-clients
   ;; Start server if it isn't already running
   :config
-  (unless (server-running-p) (server-start))
-
-  ;; Restore bookmark saved by `restart-emacs-with-current-windows' if it exists
-  (when (-contains? (bookmark-all-names) "restart-emacs")
-    (burly-open-bookmark "restart-emacs")
-    (bookmark-delete "restart-emacs")))
+  (unless (server-running-p) (server-start)))
 
 ;; After startup, set reasonable values for garbage collection
 (add-hook 'emacs-startup-hook
           (lambda () (setq gc-cons-threshold 16777216
                       gc-cons-percentage 0.1)))
+
+;; Restore bookmark saved by `restart-emacs-with-current-windows' if it exists
+(when (-contains? (bookmark-all-names) "restart-emacs")
+  (burly-open-bookmark "restart-emacs")
+  (bookmark-delete "restart-emacs"))
