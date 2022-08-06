@@ -1464,7 +1464,3 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
           (lambda () (setq gc-cons-threshold 16777216
                       gc-cons-percentage 0.1)))
 
-;; Restore bookmark saved by `restart-emacs-with-current-windows' if it exists
-(when (-contains? (bookmark-all-names) "restart-emacs")
-  (burly-open-bookmark "restart-emacs")
-  (bookmark-delete "restart-emacs"))
