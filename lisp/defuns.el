@@ -234,5 +234,11 @@ Return the decoded text as multibyte string."
           (meeting-note-path (f-join meeting-note-directory meeting-note-filename)))
     (find-file meeting-note-path)))
 
+(defun restart-emacs-with-current-windows ()
+  "Restart Emacs and restore the current windows."
+  (interactive)
+  (burly-bookmark-windows "restart-emacs")
+  (restart-emacs))
+
 (provide 'defuns)
 ;;; defuns.el ends here
