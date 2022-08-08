@@ -31,20 +31,7 @@
           (bg-tab-bar . "#dcd3d3")
           (bg-tab-active . "#fdf6eb")
           (bg-tab-inactive . "#c8bab8")
-          (fg-unfocused . "#55556f"))
-        modus-themes-vivendi-color-overrides
-        '((bg-main . "#100b17")
-          (bg-dim . "#161129")
-          (bg-alt . "#181732")
-          (bg-hl-line . "#191628")
-          (bg-active . "#282e46")
-          (bg-inactive . "#1a1e39")
-          (bg-region . "#393a53")
-          (bg-header . "#202037")
-          (bg-tab-bar . "#262b41")
-          (bg-tab-active . "#120f18")
-          (bg-tab-inactive . "#3a3a5a")
-          (fg-unfocused . "#9a9aab")))
+          (fg-unfocused . "#55556f")))
 
   (with-eval-after-load 'org
     (set-face-attribute 'org-done nil :inverse-video t)
