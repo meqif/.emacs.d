@@ -18,6 +18,7 @@
  ("consult" . "6319aec3513cd587a8817269bc32c8283d419710")
  ("corfu" . "0fa9debaa158ab516980dca9751720205e8c28b2")
  ("corfu-doc" . "da931367802d01e87e1e496ba5b51aa9126a705d")
+ ("csv-mode" . "e13282b678af6b9ba74e5232610c6a4406c87877")
  ("ctrlf" . "5acefdc9a6f8e35febf6f71b6a34a0d4fc499269")
  ("dash.el" . "b92ab5a39b987e4fe69317b9d9fda452300baf20")
  ("deadgrep" . "baa352b982bded5fbca1ec9c14fec20e78b2089b")
