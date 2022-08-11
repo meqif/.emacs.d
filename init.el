@@ -1452,6 +1452,10 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
 (use-package jsonnet-mode
   :defer t)
 
+(use-package csv-mode
+  :defer t
+  :hook (csv-mode . csv-align-mode))
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
