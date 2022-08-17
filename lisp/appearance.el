@@ -14,7 +14,7 @@
   (let ((height (round (* (face-attribute 'default :height) 0.85))))
     (set-face-attribute 'mode-line nil :height height)
     (set-face-attribute 'mode-line-inactive nil :height height)))
-(advice-add 'load-theme :after #'shrink-modeline-font)
+(advice-add 'enable-theme :after #'shrink-modeline-font)
 
 ;; Load theme
 (use-package modus-themes
