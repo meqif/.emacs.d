@@ -113,6 +113,7 @@
  ("posframe" . "5cc13723139181ba77694080fc772c645b200135")
  ("prescient.el" . "8573df977eaceffc6607b7242ff8c0dab02aad65")
  ("project" . "6f2c238c66407bb6e93008b60ac6de44ddd3881e")
+ ("pulsar" . "57010e2c6cdee14acfd87b4c2bd75c796f04a75e")
  ("queue" . "52206c0f78afc0dfb9a287cb928c1e725103336d")
  ("rainbow-delimiters" . "f43d48a24602be3ec899345a3326ed0247b960c6")
  ("rjsx-mode" . "b697fe4d92cc84fa99a7bcb476f815935ea0d919")

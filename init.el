@@ -1070,13 +1070,14 @@ unnecessary."
   (evil-set-initial-state 'xref-mode 'normal)
   :config
   (setq xref-search-program 'ripgrep)
-  (add-hook 'xref-after-return-hook #'recenter))
+  (setq xref-after-jump-hook '(pulsar-recenter-middle pulsar-pulse-line))
+  (setq xref-after-return-hook '(pulsar-recenter-middle pulsar-pulse-line)))
 
 (use-package dumb-jump
   :defer t
   :config
-  (add-hook 'dumb-jump-after-jump-hook #'recenter)
-  (add-hook 'dumb-jump-after-jump-hook #'xref-pulse-momentarily)
+  (add-hook 'dumb-jump-after-jump-hook #'pulsar-recenter-middle)
+  (add-hook 'dumb-jump-after-jump-hook #'pulsar-pulse-line)
   (setq dumb-jump-selector 'completing-read
         dumb-jump-force-searcher 'rg))
 
@@ -1283,8 +1284,8 @@ unnecessary."
   :ensure nil
   :config
   ;; Make jumping from occur results easier to follow visually
-  (add-hook 'occur-mode-find-occurrence-hook 'recenter)
-  (add-hook 'occur-mode-find-occurrence-hook 'xref-pulse-momentarily))
+  (add-hook 'occur-mode-find-occurrence-hook 'pulsar-recenter-middle)
+  (add-hook 'occur-mode-find-occurrence-hook 'pulsar-pulse-line))
 
 (use-package helpful
   :bind (("C-h f" . #'helpful-callable)
@@ -1456,6 +1457,29 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
 (use-package csv-mode
   :defer t
   :hook (csv-mode . csv-align-mode))
+
+(use-package pulsar
+  :config
+  (setq pulsar-pulse t)
+  (setq pulsar-highlight-face 'pulsar-yellow)
+  (pulsar-global-mode +1)
+
+  ;; integration with errors in compilation buffers
+  (add-hook 'next-error-hook #'pulsar-pulse-line)
+
+  ;; integration with the `avy' package:
+  (advice-add 'avy-action-goto :after #'(lambda (_) (pulsar-pulse-line) (pulsar-recenter-middle)))
+
+  ;; integration with the `ctrlf' package:
+  (advice-add 'ctrlf--finalize :after #'(lambda () (pulsar-pulse-line) (pulsar-recenter-middle)))
+
+  ;; integration with the `consult' package:
+  (add-hook 'consult-after-jump-hook #'pulsar-recenter-top)
+  (add-hook 'consult-after-jump-hook #'pulsar-reveal-entry)
+
+  ;; integration with the built-in `imenu':
+  (add-hook 'imenu-after-jump-hook #'pulsar-recenter-top)
+  (add-hook 'imenu-after-jump-hook #'pulsar-reveal-entry))
 
 (use-package server
   :defer 2
