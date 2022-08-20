@@ -311,6 +311,7 @@
         orderless-matching-styles '(orderless-initialism orderless-prefixes orderless-regexp)))
 
 (use-package embark
+  :demand
   :bind (:map minibuffer-local-map
               ("C-u C-c C-o" . embark-collect)
               ("C-c C-o" . embark-export)
