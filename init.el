@@ -641,6 +641,7 @@
 (use-package rust-mode
   :defer t
   :config
+  (setq rust-prettify-symbols-alist nil)
   (add-hook 'rust-mode-hook #'(lambda () (setq-local default-directory (cargo-process--workspace-root)))))
 
 (use-package cargo
