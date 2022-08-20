@@ -639,7 +639,9 @@
   :config (setq scss-compile-at-save nil))
 
 (use-package rust-mode
-  :defer t)
+  :defer t
+  :config
+  (add-hook 'rust-mode-hook #'(lambda () (setq-local default-directory (cargo-process--workspace-root)))))
 
 (use-package cargo
   :after rust-mode)
