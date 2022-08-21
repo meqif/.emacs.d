@@ -1467,6 +1467,9 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
   (setq pulsar-highlight-face 'pulsar-yellow)
   (pulsar-global-mode +1)
 
+  ;; recenter and pulse line after popping the mark
+  (advice-add 'meqif/pop-mark :after #'(lambda () (pulsar-pulse-line) (pulsar-recenter-middle)))
+
   ;; integration with errors in compilation buffers
   (add-hook 'next-error-hook #'pulsar-pulse-line)
 
@@ -1475,6 +1478,9 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
 
   ;; integration with the `ctrlf' package:
   (advice-add 'ctrlf--finalize :after #'(lambda () (pulsar-pulse-line) (pulsar-recenter-middle)))
+
+  ;; integration with the `deadgrep' package:
+  (advice-add 'deadgrep--visit-result :after #'(lambda (_) (pulsar-pulse-line) (pulsar-recenter-middle)))
 
   ;; integration with the `consult' package:
   (add-hook 'consult-after-jump-hook #'pulsar-recenter-top)
