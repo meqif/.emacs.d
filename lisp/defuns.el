@@ -133,7 +133,7 @@ already in fullscreen"
   "Copy the current buffer's relative file name to the kill ring."
   (interactive)
   (-when-let* ((buffer-name (buffer-file-name)))
-    (kill-new (f-relative buffer-name (-> (project-current) cdr)))))
+    (kill-new (f-relative buffer-name (project-root (project-current))))))
 
 (defun closing-bracket-p (char)
   "Returns true if CHAR is a closing bracket: ')', ']', or '}'."
