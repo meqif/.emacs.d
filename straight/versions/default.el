@@ -135,7 +135,7 @@
  ("terraform-mode" . "b8003ec131566fd2b753fb423e01640eab07e12c")
  ("tramp" . "6f69a0ba117f78265279dd418fa0bc042989f8d5")
  ("transient" . "b47e9d7d769437e279628d801a95c173c4ff26b4")
- ("tree-sitter-langs" . "deb2d8674be8f777ace50e15c7c041aeddb1d0b2")
+ ("tree-sitter-langs" . "4896a562df42990c33891eda043b78420adbd3a0")
  ("treepy.el" . "3ac940e97f3d03e48ca9d7fcd74916a9b01c72f3")
  ("ts.el" . "b7ca357a0ed57694e0b25ec1b1ca12e24a4ce541")
  ("use-package" . "a7422fb8ab1baee19adb2717b5b47b9c3812a84c")
