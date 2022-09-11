@@ -1363,10 +1363,6 @@ unnecessary."
   (when (-any? #'file-exists-p (--map (f-join it "jsonnet.so") tree-sitter-load-path))
     (add-to-list 'tree-sitter-major-mode-language-alist '(jsonnet-mode . jsonnet)))
 
-  ;; Manually set up yaml language parser if it exists
-  (when (-any? #'file-exists-p (--map (f-join it "yaml.so") tree-sitter-load-path))
-    (add-to-list 'tree-sitter-major-mode-language-alist '(yaml-mode . yaml)))
-
   (when (-any? #'file-exists-p (--map (f-join it "graphql.so") tree-sitter-load-path))
     (add-to-list 'tree-sitter-major-mode-language-alist '(graphql-mode . graphql)))
 
