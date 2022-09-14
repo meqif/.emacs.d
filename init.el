@@ -1379,19 +1379,19 @@ unnecessary."
   ;;   - https://blog.meain.io/2022/navigating-config-files-using-tree-sitter/
   ;;   - https://github.com/meain/dotfiles/blob/278f863cb687c63ce3a9e0f419ca5ad16be2da2e/emacs/.config/emacs/init.el
 
-  (defun meqif/tree-sitter-matches-for-current-buffer ()
+  (defun meqif/tree-sitter-matches-for-current-buffer (&optional query)
     "Get tree-sitter matches (user pointers) for the current buffer.
 Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
 `major-mode' to decide the appropriate tree-sitter query."
-    (when-let* ((query-s (alist-get major-mode meqif/tree-sitter-imenu-queries))
+    (when-let* ((query-s (or query (alist-get major-mode meqif/tree-sitter-imenu-queries)))
                 (root-node (tsc-root-node tree-sitter-tree))
                 (query (tsc-make-query tree-sitter-language query-s))
                 (matches (tsc-query-matches query root-node #'tsc--buffer-substring-no-properties)))
       matches))
 
-  (defun meain/get-config-nesting-paths ()
+  (defun meain/get-config-nesting-paths (&optional query)
     "Get out all the nested paths in a config file."
-    (when-let* ((matches (meqif/tree-sitter-matches-for-current-buffer))
+    (when-let* ((matches (meqif/tree-sitter-matches-for-current-buffer query))
                 ;; Convert match vectors to lists
                 (entries (--map (append (cdr it) nil) matches))
                 ;; Convert each match (key and item) into list with key text and positions
@@ -1429,11 +1429,20 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
                         key-start-bytepos)))
               item-ranges)))
 
-  (defun meain/imenu-config-nesting-path (&optional separator)
+  (defun meain/imenu-config-nesting-path (&optional separator query)
     "Return config-nesting paths for use in imenu"
     (let ((separator (or separator ".")))
       (--map (cons (string-join (car it) separator) (cadr it))
-             (meain/get-config-nesting-paths))))
+             (meain/get-config-nesting-paths query))))
+
+  (defun meqif/imenu-ruby-test ()
+    (let ((query "(call (((identifier) @id (#match? @id \"x?(describe|it)\")) (argument_list [(string (string_content) @key) ((constant) @key)]))) @item"))
+      (meain/imenu-config-nesting-path "." query)))
+
+  (add-hook 'ruby-mode-hook
+            (lambda () (when (or (s-suffix? "_test.rb" (buffer-name))
+                            (s-suffix? "_spec.rb" (buffer-name)))
+                    (setq-local imenu-create-index-function #'meqif/imenu-ruby-test))))
 
   ;; Set up tree-sitter-based imenu index function for the major modes with registered queries
   (-each meqif/tree-sitter-imenu-queries
