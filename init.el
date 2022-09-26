@@ -1436,7 +1436,7 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
              (meain/get-config-nesting-paths query))))
 
   (defun meqif/imenu-ruby-test ()
-    (let ((query "(call (((identifier) @id (#match? @id \"x?(describe|it)\")) (argument_list [(string (string_content) @key) ((constant) @key)]))) @item"))
+    (let ((query "(call (((identifier) @id (#match? @id \"x?(describe|context|it)\")) (argument_list [(string (string_content) @key) ((constant) @key)]))) @item"))
       (meain/imenu-config-nesting-path "." query)))
 
   (add-hook 'ruby-mode-hook
