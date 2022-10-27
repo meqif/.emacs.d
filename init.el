@@ -93,6 +93,7 @@
         exec-path-from-shell-shell-name (-first
                                          #'file-exists-p
                                          '("/usr/local/bin/fish" "/usr/bin/fish"))
+        exec-path-from-shell-check-startup-files nil
         shell-file-name exec-path-from-shell-shell-name)
   (exec-path-from-shell-initialize))
 
