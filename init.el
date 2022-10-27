@@ -115,7 +115,7 @@
 
 (use-package doom-modeline
   :defer t
-  :hook (after-init . doom-modeline-init)
+  :hook (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-major-mode-icon nil
         doom-modeline-lsp nil))
