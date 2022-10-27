@@ -17,8 +17,10 @@
 (advice-add 'enable-theme :after #'shrink-modeline-font)
 
 ;; Load theme
-(use-package modus-themes
-  :config
+(when (version< emacs-version "29.0")
+    (use-package modus-themes))
+
+(progn
   (setq modus-themes-operandi-color-overrides
         '((bg-main . "#fefcf4")
           (bg-dim . "#faf6ef")
@@ -37,14 +39,7 @@
     (set-face-attribute 'org-done nil :inverse-video t)
     (set-face-attribute 'org-todo nil :inverse-video t))
 
-  (defun meqif/theme-changer (appearance)
-    (interactive)
-    (cond ((eq appearance 'dark) (modus-themes-load-vivendi))
-          ((eq appearance 'light) (modus-themes-load-operandi))))
-
-  (if (eq window-system 'ns)
-      (add-to-list 'ns-system-appearance-change-functions #'meqif/theme-changer)
-    (modus-themes-load-operandi)))
+  (load-theme 'modus-operandi t))
 
 (when window-system
   (set-fringe-mode '(4 . 4))
