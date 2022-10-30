@@ -748,11 +748,6 @@
   (setq magit-diff-refine-hunk 'all)
   :config
 
-  ;; Use (more recent) git installed at /usr/local/bin/git if available
-  ;; This should speed things up in macOS when Homebrew git is installed
-  (when (file-exists-p "/usr/local/bin/git")
-    (setq magit-git-executable "/usr/local/bin/git"))
-
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
   (add-hook 'magit-status-mode-hook 'visual-line-mode)
