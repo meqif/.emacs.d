@@ -15,7 +15,7 @@
 (when (version< emacs-version "29.0")
     (use-package modus-themes))
 
-(progn
+(when (version< emacs-version "30.0")
   (setq modus-themes-operandi-color-overrides
         '((bg-main . "#fefcf4")
           (bg-dim . "#faf6ef")
@@ -28,13 +28,18 @@
           (bg-tab-bar . "#dcd3d3")
           (bg-tab-active . "#fdf6eb")
           (bg-tab-inactive . "#c8bab8")
-          (fg-unfocused . "#55556f")))
+          (fg-unfocused . "#55556f"))))
 
-  (with-eval-after-load 'org
-    (set-face-attribute 'org-done nil :inverse-video t)
-    (set-face-attribute 'org-todo nil :inverse-video t))
+(with-eval-after-load 'org
+  (set-face-attribute 'org-done nil :inverse-video t)
+  (set-face-attribute 'org-todo nil :inverse-video t))
 
-  (load-theme 'modus-operandi t))
+(use-package circadian
+  :config
+  (setq circadian-themes
+        `(("8:00" . ,(if (version< emacs-version "30.0") 'modus-operandi 'modus-operandi-tinted))
+          ("17:00" . ,(if (version< emacs-version "30.0") 'modus-vivendi 'modus-vivendi-tinted))))
+  (circadian-setup))
 
 (when window-system
   (set-fringe-mode '(4 . 4))

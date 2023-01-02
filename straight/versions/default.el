@@ -12,6 +12,7 @@
  ("cargo-transient" . "69b56ef92cac91384b21dbeed370646285288517")
  ("cargo.el" . "91ccfef6e36ff9e96352a03c4a057b5ee181438d")
  ("cider" . "fde37a3a9d93af20c2b944a3aea1db77faba0adf")
+ ("circadian.el" . "52e336d9bb66cfd6d6dc5b9213ea21796ac873d4")
  ("clojure-mode" . "75c28897c7e91aa130c71c076aa2a6ce2e02da8f")
  ("company-mode" . "f3aacd77d0135c09227400fef45c54b717d33f2e")
  ("company-posframe" . "c7a820a35ff132aaec53c81e05afc829de39eb68")
