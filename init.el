@@ -1491,6 +1491,11 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
   (add-hook 'imenu-after-jump-hook #'pulsar-recenter-top)
   (add-hook 'imenu-after-jump-hook #'pulsar-reveal-entry))
 
+(use-package substitute
+  :straight (substitute :type git :host sourcehut :repo "meqif/substitute")
+  :config
+  (setq substitute-highlight t))
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
