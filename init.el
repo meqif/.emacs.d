@@ -1503,7 +1503,9 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
   (defhydra hydra-git-hunk-navigation ()
     "Navigate to hunk"
     ("j" #'(lambda () (interactive) (git-gutter:next-hunk 1) (recenter)) "next")
+    ("n" #'(lambda () (interactive) (git-gutter:next-hunk 1) (recenter)) "next")
     ("k" #'(lambda () (interactive) (git-gutter:previous-hunk 1) (recenter)) "previous")
+    ("p" #'(lambda () (interactive) (git-gutter:previous-hunk 1) (recenter)) "previous")
     ("q" nil "quit" :color blue))
   (general-evil-leader-define-key "j" #'hydra-git-hunk-navigation/body))
 
