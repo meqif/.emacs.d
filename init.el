@@ -1500,11 +1500,12 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
   :hook (prog-mode . git-gutter-mode)
   :config
   (setq git-gutter:window-width 0)
-  (general-evil-leader-define-key
-    "jn" 'git-gutter:next-hunk
-    "jj" 'git-gutter:next-hunk
-    "jp" 'git-gutter:previous-hunk
-    "jk" 'git-gutter:previous-hunk))
+  (defhydra hydra-git-hunk-navigation ()
+    "Navigate to hunk"
+    ("j" git-gutter:next-hunk "next")
+    ("k" git-gutter:previous-hunk "previous")
+    ("q" nil "quit" :color blue))
+  (general-evil-leader-define-key "j" #'hydra-git-hunk-navigation/body))
 
 (use-package server
   :defer 2
