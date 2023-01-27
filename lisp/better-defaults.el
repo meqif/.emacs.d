@@ -90,4 +90,7 @@
 ;; Highlight the error (or item in lists like M-x occur and so on) we just jumped to.
 (setq next-error-message-highlight t)
 
+;; Reduce delay before deleting pair
+(setq delete-pair-blink-delay 0.1)
+
 (provide 'better-defaults)
