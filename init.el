@@ -1496,6 +1496,16 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
   :config
   (setq substitute-highlight t))
 
+(use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
+  :config
+  (setq git-gutter:window-width 0)
+  (general-evil-leader-define-key
+    "jn" 'git-gutter:next-hunk
+    "jj" 'git-gutter:next-hunk
+    "jp" 'git-gutter:previous-hunk
+    "jk" 'git-gutter:previous-hunk))
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
