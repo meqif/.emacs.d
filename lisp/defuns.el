@@ -238,7 +238,7 @@ Return the decoded text as multibyte string."
   "Increment the leading numbers in the active region or the entire buffer."
   (interactive)
   (save-excursion
-    (let ((bounds (if (region-active-p) (car (region-bounds)) `(,(point-min) . ,(point-max)))))
+    (let ((bounds (if (region-active-p) (car (region-bounds)) (cons (point-min) (point-max)))))
       (goto-char (car bounds))
       (while (re-search-forward "\\( *\\)\\([0-9]+\\)" (cdr bounds) t)
         (-let* ((leading-space (match-string 1))
