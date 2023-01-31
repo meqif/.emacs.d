@@ -234,5 +234,17 @@ Return the decoded text as multibyte string."
           (meeting-note-path (f-join meeting-note-directory meeting-note-filename)))
     (find-file meeting-note-path)))
 
+(defun meqif/increment-leading-numbers ()
+  "Increment the leading numbers in the active region or the entire buffer."
+  (interactive)
+  (save-excursion
+    (let ((bounds (if (region-active-p) (car (region-bounds)) `(,(point-min) . ,(point-max)))))
+      (goto-char (car bounds))
+      (while (re-search-forward "\\( *\\)\\([0-9]+\\)" (cdr bounds) t)
+        (-let* ((leading-space (match-string 1))
+                (leading-number (match-string 2))
+                (new-leading-number (+ 1 (string-to-number leading-number))))
+          (replace-match (s-concat leading-space (number-to-string new-leading-number))))))))
+
 (provide 'defuns)
 ;;; defuns.el ends here
