@@ -675,39 +675,6 @@
 
   (general-define-key :keymap 'eglot-mode-map "C-h ." 'eldoc-doc-buffer))
 
-(use-package flyspell
-  :defer
-  :init
-  ;; Use Aspell for spellcheck
-  (setq ispell-program-name "aspell")
-  (setq ispell-list-command "--list")
-  (setq ispell-dictionary "english")
-
-  ;; Flyspell messages slow down the spellchecking process
-  (setq flyspell-issue-message-flag nil)
-
-  ;; Don't spell check embedded snippets in org-mode
-  ;; Source: http://emacs.stackexchange.com/a/9347
-  (defun org-mode-flyspell-verify-ignore-blocks (return-value)
-    (let ((rlt return-value)
-          (begin-regexp "^[ \t]*#\\+BEGIN_\\(SRC\\|HTML\\|LATEX\\)")
-          (end-regexp "^[ \t]*#\\+END_\\(SRC\\|HTML\\|LATEX\\)")
-          old-flag
-          b e)
-      (when return-value
-        (save-excursion
-          (setq old-flag case-fold-search)
-          (setq case-fold-search t)
-          (setq b (re-search-backward begin-regexp nil t))
-          (if b (setq e (re-search-forward end-regexp nil t)))
-          (setq case-fold-search old-flag))
-        (if (and b e (< (point) e)) (setq rlt nil)))
-      return-value))
-  (advice-add 'org-mode-flyspell-verify :filter-return 'org-mode-flyspell-verify-ignore-blocks))
-
-(use-package flyspell-correct
-     :after flyspell)
-
 ;; Misc
 (use-package my-misc :straight nil :ensure nil)
 
@@ -1508,6 +1475,9 @@ Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
     ("p" #'(lambda () (interactive) (git-gutter:previous-hunk 1) (recenter)) "previous")
     ("q" nil "quit" :color blue))
   (general-evil-leader-define-key "j" #'hydra-git-hunk-navigation/body))
+
+(use-package jinx
+  :hook (text-mode . jinx-mode))
 
 (use-package server
   :defer 2
