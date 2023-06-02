@@ -654,7 +654,8 @@
               ("C-c C-c" . cargo-transient)))
 
 (use-package eglot
-  :hook ((rust-mode kotlin-mode ruby-mode enh-ruby-mode) . eglot-ensure)
+  :straight nil
+  :hook ((rust-mode kotlin-mode ruby-base-mode) . eglot-ensure)
   :bind (:map eglot-mode-map
               ("M-RET" . eglot-code-actions))
   :config
@@ -832,13 +833,13 @@ unnecessary."
               #'meqif/ruby-delete-trailing-comma-before-closing-bracket)
   (setq ruby-deep-ident-paren nil
         ruby-insert-encoding-magic-comment nil)
-  (add-hook 'ruby-mode-hook
+  (add-hook 'ruby-base-mode-hook
             #'(lambda ()
                 (setq mode-name "💎")
                 (setq-local tab-width 2)
                 (setq-local evil-shift-width 2)))
 
-  (add-hook 'ruby-mode-hook #'meqif/set-fill-column-to-rubocop-max-line-length)
+  (add-hook 'ruby-base-mode-hook #'meqif/set-fill-column-to-rubocop-max-line-length)
 
   (defun meqif/rename-rails-migration ()
     "Rename a Rails migration to the current moment."
@@ -867,7 +868,7 @@ unnecessary."
     (-when-let (cwd (guess-docker-cwd))
       (setq rspec-docker-cwd cwd)))
 
-  (add-hook 'ruby-mode-hook #'maybe-set-docker-cwd))
+  (add-hook 'ruby-base-mode-hook #'maybe-set-docker-cwd))
 
 (use-package rspec-mode
   :functions (rspec-verify
@@ -876,7 +877,7 @@ unnecessary."
               rspec-toggle-spec-and-target-find-example
               rspec-run-test-subset
               hydra-rspec/body)
-  :after (:any ruby-mode enh-ruby-mode)
+  :after ruby-mode
   :config
   (setq rspec-command-options "--format progress"
         rspec-use-docker-when-possible t
@@ -889,15 +890,16 @@ unnecessary."
                              (_ (error "Unknown test subset type"))))
             (path (concat (-some-> (project-current) (project-root)) relative-path)))
       (rspec-run-single-file path (rspec-core-options)))))
+
 ;; Handy functions to run rubocop from Emacs
 (use-package rubocop
-  :after (:any ruby-mode enh-ruby-mode)
+  :hook (ruby-base-mode . rubocop-mode)
   :config
   (setq rubocop-check-command "rubocop --format emacs --parallel"))
 
 ;; Automatically expand # to #{} inside double-quoted strings
 (use-package ruby-tools
-  :after (:any ruby-mode enh-ruby-mode)
+  :hook (ruby-base-mode . ruby-tools-mode)
   :delight "🛠")
 
 (use-package inf-ruby
