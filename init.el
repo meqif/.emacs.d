@@ -660,7 +660,6 @@
               ("M-RET" . eglot-code-actions))
   :config
   (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
-  (add-to-list 'eglot-server-programs '(enh-ruby-mode "solargraph" "socket" "--port" :autoport))
   (add-to-list 'eglot-server-programs '(terraform-mode "terraform-ls" "serve" "-port" :autoport))
   (add-to-list 'eglot-server-programs '(python-mode "pyright-langserver" "--stdio"))
   (setq eglot-autoshutdown t
@@ -902,13 +901,6 @@ unnecessary."
   :hook (ruby-base-mode . ruby-tools-mode)
   :delight "🛠")
 
-(use-package inf-ruby
-  :defer
-  :config
-  (setq inf-ruby-default-implementation "ruby")
-  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode)
-  (general-define-key :keymap 'ruby-mode-map "C-c C-c" 'ruby-send-buffer))
-
 (use-package blacken
   :after python
   :hook (python-mode . blacken-mode))
@@ -970,19 +962,7 @@ unnecessary."
       ("do" cargo-process-doc-open "build and open documentation"))
      "Extra"
      (("y" cargo-process-clippy "clippy")
-      ("f" cargo-process-fmt "format"))))
-
-  (major-mode-hydra-define enh-ruby-mode
-    (:quit-key "q")
-    ("RSpec"
-     (("a" rspec-verify-all "run all specs")
-      ("s" rspec-verify-single "run specs for this context")
-      ("v" rspec-verify "run specs for this buffer")
-      ("t" rspec-toggle-spec-and-target-find-example "toggle between spec and class"))
-     ""
-     (("f" rspec-run-last-failed "rerun last failed specs")
-      ("A" (lambda () (interactive) (rspec-run-test-subset 'acceptance)) "run acceptance tests")
-      ("u" (lambda () (interactive) (rspec-run-test-subset 'unit)) "run unit tests")))))
+      ("f" cargo-process-fmt "format")))))
 
 (use-package which-key
   :config
