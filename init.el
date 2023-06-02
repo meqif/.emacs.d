@@ -812,7 +812,7 @@ unnecessary."
   (set-face-attribute 'diff-refine-removed nil :bold t :background 'unspecified))
 
 (use-package subword
-  :hook ((rust-mode ruby-mode enh-ruby-mode kotlin-mode python-mode j2-mode) . subword-mode)
+  :hook (prog-mode . subword-mode)
   :delight "_")
 
 ;; Ruby mode
