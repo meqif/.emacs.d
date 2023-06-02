@@ -48,8 +48,7 @@
   (when (eq window-system 'mac)
     (mac-auto-operator-composition-mode))
 
-  (set-face-attribute 'default nil :font "Jetbrains Mono 15")
-  (set-face-attribute 'variable-pitch nil :font "Georgia 18"))
+  (set-face-attribute 'default nil :font "MonoLisa 1.1 11"))
 
 ;; Highlight current line
 (global-hl-line-mode 1)
