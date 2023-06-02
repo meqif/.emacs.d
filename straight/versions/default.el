@@ -96,7 +96,7 @@
  ("markdown-toc" . "9565eeaa1d26bc0ab83eb65bd30470888f724044")
  ("melpa" . "870901c45fb35384953568a972aa36ad445e1ad9")
  ("modus-themes" . "f26c6bdf2375ff926191ebc9e4e165da615b2d80")
- ("no-littering" . "f14d5548211109b0e5e850706d8d2cc182dc60be")
+ ("no-littering" . "2d7237a49ad6a9b6425e68fa4d3245cbe5a7169d")
  ("olivetti" . "f4499948d12190cdc4272fb3c8bb0dc268d84efb")
  ("orderless" . "44935d8962be5724d8a3a4358ce0a4222450ee26")
  ("org" . "a9f38b1c2279fec0604a4474de891f88af6b205e")
