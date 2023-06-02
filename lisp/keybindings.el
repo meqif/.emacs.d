@@ -9,7 +9,9 @@
 (setq ns-right-option-modifier 'none)
 
 ;; Imitate mac keyboard layout in Linux
-(when (eq window-system 'pgtk)
+(when (and
+       (-contains? '(pgtk x) window-system)
+       (not (s-equals? "wayland" (getenv "XDG_SESSION_TYPE"))))
   (setq x-meta-keysym 'super
         x-super-keysym 'meta))
 
