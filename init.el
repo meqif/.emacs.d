@@ -391,6 +391,7 @@
   :hook (company-mode . company-posframe-mode))
 
 (use-package corfu
+  :straight (:files (:defaults "extensions/*"))
   :demand
   :bind
   (:map corfu-map
@@ -398,15 +399,13 @@
         ([tab] . corfu-next)
         ("S-TAB" . corfu-previous)
         ([backtab] . corfu-previous))
+  :hook (corfu-mode . corfu-popupinfo-mode)
   :config
   (global-corfu-mode)
   (setq corfu-auto t
         corfu-preselect-first nil
-        corfu-cycle t))
-
-(use-package corfu-doc
-  :after corfu
-  :hook (corfu-mode . corfu-doc-mode))
+        corfu-cycle t
+        corfu-popupinfo-delay 0.2))
 
 (use-package svg-lib
   :defer
