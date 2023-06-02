@@ -50,9 +50,6 @@
 
   (set-face-attribute 'default nil :font "MonoLisa 1.1 11"))
 
-;; Highlight current line
-(global-hl-line-mode 1)
-
 (defun font-lock-comment-annotations ()
   "Highlight a bunch of well known comment annotations."
   (font-lock-add-keywords
