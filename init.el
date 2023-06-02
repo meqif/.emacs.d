@@ -86,6 +86,13 @@
 
 (use-package no-littering)
 
+(use-package treesit
+  :ensure nil
+  :straight nil
+  :config
+  ;; Not covered by no-littering yet
+  (setq treesit-extra-load-path (list (f-join no-littering-var-directory "tree-sitter"))))
+
 ;; Fix path
 (use-package exec-path-from-shell
   :config
