@@ -1060,6 +1060,7 @@ unnecessary."
   :config (evil-commentary-mode))
 
 (use-package evil-textobj-tree-sitter
+  :disabled
   :after (:all evil tree-sitter)
   :config
   ;; bind `function.outer`(entire function block) to `f` for use in things like `vaf`, `yaf`
@@ -1294,106 +1295,6 @@ unnecessary."
   :straight (vundo :type git :host github :repo "casouri/vundo")
   :config
   (general-evil-leader-define-key "u" #'vundo))
-
-(use-package tree-sitter
-  :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
-(use-package tree-sitter-langs
-  :after tree-sitter
-  :config
-
-  ;; Manually set up jsonnet language parser if it exists
-  (when (-any? #'file-exists-p (--map (f-join it "jsonnet.so") tree-sitter-load-path))
-    (add-to-list 'tree-sitter-major-mode-language-alist '(jsonnet-mode . jsonnet)))
-
-  (when (-any? #'file-exists-p (--map (f-join it "graphql.so") tree-sitter-load-path))
-    (add-to-list 'tree-sitter-major-mode-language-alist '(graphql-mode . graphql)))
-
-  (setq meqif/tree-sitter-imenu-queries
-        '((yaml-mode . "(block_mapping_pair (flow_node) @key (_)) @item")
-          (json-mode . "(object (pair (string (string_content) @key) (_)) @item)")
-          (jsonnet-mode .  "(expr (member (field (fieldname) @key) @item))")
-          (graphql-mode . "(selection (field (name) @key)) @item")))
-
-  ;; Add helpers to parse YAML files using tree-sitter and populate imenu.
-  ;; Heavily borrowed from meain's code. Refactored and commented by me for readability.
-  ;;
-  ;; References:
-  ;;   - https://blog.meain.io/2022/navigating-config-files-using-tree-sitter/
-  ;;   - https://github.com/meain/dotfiles/blob/278f863cb687c63ce3a9e0f419ca5ad16be2da2e/emacs/.config/emacs/init.el
-
-  (defun meqif/tree-sitter-matches-for-current-buffer (&optional query)
-    "Get tree-sitter matches (user pointers) for the current buffer.
-Uses the queries defined in `meqif/tree-sitter-imenu-queries' and the current
-`major-mode' to decide the appropriate tree-sitter query."
-    (when-let* ((query-s (or query (alist-get major-mode meqif/tree-sitter-imenu-queries)))
-                (root-node (tsc-root-node tree-sitter-tree))
-                (query (tsc-make-query tree-sitter-language query-s))
-                (matches (tsc-query-matches query root-node #'tsc--buffer-substring-no-properties)))
-      matches))
-
-  (defun meain/get-config-nesting-paths (&optional query)
-    "Get out all the nested paths in a config file."
-    (when-let* ((matches (meqif/tree-sitter-matches-for-current-buffer query))
-                ;; Convert match vectors to lists
-                (entries (--map (append (cdr it) nil) matches))
-                ;; Convert each match (key and item) into list with key text and positions
-                ;;
-                ;; Each entry looks like:
-                ;; ("os"
-                ;;  [349 351 (24 . 8) (24 . 10)]
-                ;;  [349 368 (24 . 8) (24 . 27)])
-                ;;
-                ;; That is,
-                ;; (key
-                ;;  [START-BYTEPOS END-BYTEPOS START-POINT END-POINT]  ;; key
-                ;;  [START-BYTEPOS END-BYTEPOS START-POINT END-POINT]) ;; item
-                ;;
-                ;;  Each tree-sitter "point" is a (LINE-NUMBER . BYTE-COLUMN) pair.
-                (item-ranges (--map
-                              (-let* (((&alist 'item item 'key key) it))
-                                (list (tsc-node-text key)
-                                      (tsc-node-range key)
-                                      (tsc-node-range item)))
-                              entries))
-                (parent-nodes '(("#" 0))))
-      ;; Build a list of paths where each element is a (path, position) pair like `(("parent" "child") 123)'
-      (mapcar (lambda (x)
-                (-let* (((current-key key-data item-data) x)
-                        ([key-start-bytepos _ _ _] key-data)
-                        ([_ current-end _ _] item-data)     ;; item end bytepos
-                        (parent-end (cadar parent-nodes)))  ;; position of the most recent child
-                  ;; Get only likely ancestors from `parent-nodes' so that we can get their keys to build the current node's path
-                  (when (> current-end parent-end)
-                    (setq parent-nodes
-                          (--filter (<= current-end (cadr it)) parent-nodes)))
-                  (setq parent-nodes (cons (list current-key current-end) parent-nodes))
-                  (list (reverse (mapcar #'car parent-nodes))
-                        key-start-bytepos)))
-              item-ranges)))
-
-  (defun meain/imenu-config-nesting-path (&optional separator query)
-    "Return config-nesting paths for use in imenu"
-    (let ((separator (or separator ".")))
-      (--map (cons (string-join (car it) separator) (cadr it))
-             (meain/get-config-nesting-paths query))))
-
-  (defun meqif/imenu-ruby-test ()
-    (let ((query "(call (((identifier) @id (#match? @id \"x?(describe|context|it)\")) (argument_list [(string (string_content) @key) ((constant) @key)]))) @item"))
-      (meain/imenu-config-nesting-path "." query)))
-
-  (add-hook 'ruby-mode-hook
-            (lambda () (when (or (s-suffix? "_test.rb" (buffer-name))
-                            (s-suffix? "_spec.rb" (buffer-name)))
-                    (setq-local imenu-create-index-function #'meqif/imenu-ruby-test))))
-
-  ;; Set up tree-sitter-based imenu index function for the major modes with registered queries
-  (-each meqif/tree-sitter-imenu-queries
-    (-lambda ((major-mode . _))
-      (add-hook (intern (s-concat (symbol-name major-mode) "-hook"))
-                (lambda () (setq imenu-create-index-function #'meain/imenu-config-nesting-path))))))
 
 ;; Annotate files without polluting them!
 (use-package annotate)
