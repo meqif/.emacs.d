@@ -31,7 +31,6 @@
  ("dumb-jump" . "97b0dfb617533cce128dcfe4956da5d88de07bca")
  ("doom-modeline" . "b66d5e5006df4cedb1119da3d83fd6c08965b830")
  ("easy-escape" . "a6449f22cb97160ee1c90121968de89e193268df")
- ("eglot" . "000b7fdce93ed29c505a7fa75baaf87094fd690a")
  ("eldoc" . "9bd5c80cf5f0ad215073581be15a2d7e0bbf224f")
  ("eldoc-eval" . "f6e639047d9b3695877e63dd3de8f24e704d6d23")
  ("elisp-refs" . "8f84280997d8b233d66fb9958a34b46078c58b03")
