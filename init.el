@@ -1331,6 +1331,11 @@ unnecessary."
 (use-package jinx
   :hook (text-mode . jinx-mode))
 
+(use-package treesit-auto
+  :config
+  (setq treesit-auto-install 'prompt)
+  (global-treesit-auto-mode))
+
 (use-package server
   :defer 2
   :delight server-buffer-clients
