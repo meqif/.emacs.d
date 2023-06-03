@@ -360,36 +360,6 @@
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude no-littering-etc-directory))
 
-;; Misery loves this
-(use-package company
-  :disabled
-  :hook ((prog-mode comint-mode docker-compose-mode ess-mode cider-repl-mode) . company-mode)
-  :delight
-  :config
-  (setq
-   ;; Offer completions quickly
-   company-idle-delay 0.3
-   ;; Align tooltips
-   company-tooltip-align-annotations t
-   ;; Start completing after two chars
-   company-minimum-prefix-length 2
-   ;; Wrap around candidate list
-   company-selection-wrap-around t
-   ;; Fix lowercase candidates
-   company-dabbrev-downcase nil
-   ;; Ignore case in completion popup
-   completion-ignore-case t)
-
-  (setq company-format-margin-function #'company-vscode-light-icons-margin)
-
-  (with-eval-after-load 'evil-collection
-    (progn
-      (evil-collection-company-setup)
-      (define-key company-active-map (kbd "RET") 'company-complete))))
-
-(use-package company-posframe
-  :hook (company-mode . company-posframe-mode))
-
 (use-package corfu
   :straight (:files (:defaults "extensions/*"))
   :demand
