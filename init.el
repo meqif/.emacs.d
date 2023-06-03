@@ -666,10 +666,13 @@
   :init
   (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
   (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode)
-  :config
-  (set-face-attribute 'diff-hl-insert nil :foreground "#98971a" :background "#98971a")
-  (set-face-attribute 'diff-hl-change nil :foreground "#458588" :background "#458588")
-  (set-face-attribute 'diff-hl-delete nil :foreground "#cc241d" :background "#cc241d"))
+
+  (defun fix-diff-hl-faces (&rest _)
+    (-each '(diff-hl-insert diff-hl-change diff-hl-delete)
+      (lambda (face-name)
+        (let ((background-color (face-attribute face-name :background nil t)))
+          (set-face-attribute face-name nil :foreground background-color)))))
+  (advice-add 'enable-theme :after #'fix-diff-hl-faces))
 
 (use-package magit
   :bind ("C-x g" . magit-status)
