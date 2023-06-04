@@ -51,7 +51,7 @@
  ("evil-multiedit" . "9f271e0e6048297692f80ed6c5ae8994ac523abc")
  ("evil-org-mode" . "80ef38fb378541937f6ddfe836809e76eda1e355")
  ("evil-surround" . "346d4d85fcf1f9517e9c4991c1efe68b4130f93a")
- ("evil-textobj-tree-sitter" . "9dce8dab68c954ae32095328cf898eb856fc341a")
+ ("evil-textobj-tree-sitter" . "fa40ec4c3e0dcf2d21b304b57f16e653043243ef")
  ("exec-path-from-shell" . "18cad603c45c5544e8a9666be64d0c51bbc1af90")
  ("f.el" . "1814209e2ff43cf2e6d38c4cd476218915f550fb")
  ("flymake" . "999af0e0f46a2cd8c8940b4cac3a9791ba2d8c1b")

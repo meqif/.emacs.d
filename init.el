@@ -1032,8 +1032,12 @@ unnecessary."
   :config (evil-commentary-mode))
 
 (use-package evil-textobj-tree-sitter
-  :disabled
-  :after (:all evil tree-sitter)
+  :straight (evil-textobj-tree-sitter
+             :host github
+             :repo "meain/evil-textobj-tree-sitter"
+             :files (:defaults "queries" "treesit-queries")
+             :branch "treesit")
+  :after evil
   :config
   ;; bind `function.outer`(entire function block) to `f` for use in things like `vaf`, `yaf`
   (define-key evil-outer-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.outer"))
