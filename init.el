@@ -672,7 +672,9 @@
       (lambda (face-name)
         (let ((background-color (face-attribute face-name :background nil t)))
           (set-face-attribute face-name nil :foreground background-color)))))
-  (advice-add 'enable-theme :after #'fix-diff-hl-faces))
+  (advice-add 'enable-theme :after #'fix-diff-hl-faces)
+  :config
+  (fix-diff-hl-faces))
 
 (use-package magit
   :bind ("C-x g" . magit-status)
