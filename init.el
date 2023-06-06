@@ -1031,7 +1031,9 @@ unnecessary."
 
 ;; Better % jumping
 (use-package evil-matchit
-  :init (global-evil-matchit-mode))
+  :init (global-evil-matchit-mode)
+  :config
+  (evilmi-load-plugin-rules '(ruby-ts-mode) '(simple ruby)))
 
 ;; Convenient bindings for align functions
 (use-package evil-lion
