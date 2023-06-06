@@ -808,11 +808,18 @@ unnecessary."
               #'meqif/ruby-delete-trailing-comma-before-closing-bracket)
   (setq ruby-deep-ident-paren nil
         ruby-insert-encoding-magic-comment nil)
+
   (add-hook 'ruby-base-mode-hook
             #'(lambda ()
                 (setq mode-name "💎")
                 (setq-local tab-width 2)
                 (setq-local evil-shift-width 2)))
+
+  ;; Ensure new RSpec buffers have `rspec-mode' enabled
+  (add-hook 'ruby-base-mode-hook
+            #'(lambda ()
+                (when (s-ends-with? "_spec.rb" (buffer-file-name))
+                  (rspec-mode +1))))
 
   (add-hook 'ruby-base-mode-hook #'meqif/set-fill-column-to-rubocop-max-line-length)
 
@@ -852,7 +859,7 @@ unnecessary."
               rspec-toggle-spec-and-target-find-example
               rspec-run-test-subset
               hydra-rspec/body)
-  :after ruby-mode
+  :after ruby-base-mode
   :config
   (setq rspec-command-options "--format progress"
         rspec-use-docker-when-possible t
