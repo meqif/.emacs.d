@@ -305,7 +305,9 @@
   ;; commands which rely on dynamic completion tables, e.g., completion-table-dynamic or completion-table-in-turn, work
   ;; correctly.
   (setq completion-styles '(orderless basic)
-        completion-category-overrides '((file (styles partial-completion))))
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion))
+                                        (project-file (styles partial-completion))))
 
   (defun without-if-bang (pattern _index _total)
     (when (string-prefix-p "!" pattern)
