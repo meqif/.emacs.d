@@ -689,6 +689,14 @@
   ;; Make fine-grained changes more obvious
   (setq magit-diff-refine-hunk 'all)
   :config
+  ;; git-spr integration
+  (defun meqif/git-spr-update ()
+    (interactive)
+    (magit-shell-command "git spr update"))
+
+  ;; Add git-spr to the "push" transient menu
+  (transient-append-suffix 'magit-push "p" '("s" "spr update" meqif/git-spr-update))
+
 
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
