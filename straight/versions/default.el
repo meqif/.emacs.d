@@ -114,6 +114,7 @@
  ("pulsar" . "57010e2c6cdee14acfd87b4c2bd75c796f04a75e")
  ("queue" . "52206c0f78afc0dfb9a287cb928c1e725103336d")
  ("rainbow-delimiters" . "f43d48a24602be3ec899345a3326ed0247b960c6")
+ ("rbs-mode" . "fd766a943d5f1f0624e10ffce096b9aaba14a5f4")
  ("rjsx-mode" . "b697fe4d92cc84fa99a7bcb476f815935ea0d919")
  ("rspec-mode" . "f1029cad2a8d9fd096e9a0f1ae9e7d7e2c8bd1ec")
  ("rubocop-emacs" . "03bf15558a6eb65e4f74000cab29412efd46660e")

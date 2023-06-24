@@ -891,6 +891,8 @@ unnecessary."
   :hook (ruby-base-mode . ruby-tools-mode)
   :delight "🛠")
 
+(use-package rbs-mode)
+
 (use-package blacken
   :after python
   :hook (python-mode . blacken-mode))
