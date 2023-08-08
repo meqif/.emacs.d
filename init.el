@@ -525,21 +525,8 @@
   :after org)
 
 (use-package yasnippet
-  :config
-  (yas-global-mode)
-  (general-define-key :keymaps 'yas-minor-mode-map "TAB" yas-maybe-expand)
+  :config (yas-global-mode))
 
-  ;; Don't mess with the indentation
-  (setq yas-indent-line 'fixed)
-
-  ;; No need to be so verbose
-  (setq yas-verbosity 1)
-
-  (add-hook 'snippet-mode-hook
-            (lambda ()
-              ;; Temporarily disable required newline at the end of file
-              ;; This fixes the problem with an extra newline when expanding snippets
-              (setq-local require-final-newline nil))))
 
 ;; Language-specific setup files
 (use-package markdown-mode
