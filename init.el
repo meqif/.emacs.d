@@ -125,7 +125,8 @@
   :hook (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-major-mode-icon nil
-        doom-modeline-lsp nil))
+        doom-modeline-lsp t
+        doom-modeline-vcs-max-length 30))
 
 (use-package rainbow-delimiters
   :defer
