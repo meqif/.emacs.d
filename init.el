@@ -212,7 +212,7 @@
   (setq imenu-auto-rescan-maxout 120000)
 
   ;; Extend the maximum length of entries
-  (setq imenu-max-item-length 120)
+  (setq imenu-max-item-length 200)
 
   ;; Recenter buffer after jumping
   (add-hook 'imenu-after-jump-hook 'recenter))
