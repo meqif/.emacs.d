@@ -244,6 +244,7 @@
     "tm" 'meqif/create-meeting-note))
 
 (use-package vertico
+  :straight (:files (:defaults "extensions/*"))
   :init
   ;; Use consult-completion-in-region to get completion in minibuffer a la selectrum-completion-in-region
   ;;
@@ -258,8 +259,59 @@
                  args)))
   :config
   (vertico-mode)
+  ;; Allow vertico to be customized depending on context
+  (vertico-multiform-mode)
+
   ;; Allow completion-at-point while in minibuffer
-  (setq enable-recursive-minibuffers t))
+  (setq enable-recursive-minibuffers t)
+
+  (setq vertico-multiform-commands
+        '(("magit-branch*" (vertico-sort-override-function . meqif/sort-git-branches))
+          ("magit-rebase-\\(subset\\|branch\\)" (vertico-sort-override-function . meqif/sort-git-branches))
+          (project-find-file (vertico-sort-override-function . meqif/sort-project-files))))
+
+  ;; Sorting order for magit branch commands:
+  ;; - First origin/main or origin/master, if available
+  ;; - Then local branches, sorted by name (or creation date, if possible?)
+  ;; - Then remote branches, sorted by name (or creation date, if possible?)
+  (defun meqif/sort-git-branches (branches)
+    (let* ((main-or-master (seq-filter (lambda (branch)
+                                         (member branch '("origin/main" "origin/master")))
+                                       branches))
+           (main-or-master (if main-or-master (list (car main-or-master)) nil))
+           (local (seq-filter (lambda (branch)
+                                (and (not (string-prefix-p "origin/" branch))
+                                     (not (string-prefix-p "0000000" branch))
+                                     (not (string-equal "HEAD" branch))
+                                     (not (string-equal "FETCH_HEAD" branch))
+                                     (not (string-equal "ORIG_HEAD" branch))
+                                     (not (member branch main-or-master))))
+                              branches))
+           (remote (seq-filter (lambda (branch)
+                                 (and (string-prefix-p "origin/" branch)
+                                      (not (string-prefix-p "0000000" branch))
+                                      (not (string-equal "HEAD" branch))
+                                      (not (string-equal "FETCH_HEAD" branch))
+                                      (not (string-equal "ORIG_HEAD" branch))
+                                      (not (member branch main-or-master))))
+                               branches)))
+      (append main-or-master
+              (vertico-sort-alpha local)
+              (vertico-sort-alpha remote))))
+
+  ;; app -> spec -> sig
+  (defun meqif/sort-project-files (files)
+    (let* ((project-files (seq-filter (lambda (file) (not (or (string-prefix-p "." file)
+                                                              (string-prefix-p "spec/" file)
+                                                              (string-prefix-p "sig/" file))))
+                                      files))
+           (spec-files (seq-filter (lambda (file) (string-prefix-p "spec/" file)) files))
+           (sig-files (seq-filter (lambda (file) (string-prefix-p "sig/" file)) files))
+           (hidden-files (seq-filter (lambda (file) (string-prefix-p "." file)) files)))
+      (append (vertico-sort-alpha project-files)
+              (vertico-sort-alpha spec-files)
+              (vertico-sort-alpha sig-files)
+              (vertico-sort-alpha hidden-files)))))
 
 (use-package savehist
   :init
