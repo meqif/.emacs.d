@@ -288,14 +288,16 @@
   ;; app -> spec -> sig
   (defun meqif/sort-project-files (files)
     (let ((grouped-files (-group-by (lambda (file)
-                                      (cond ((not (string-prefix-p "." file)) 'project)
-                                            ((string-prefix-p "spec/" file) 'spec)
+                                      (cond ((string-prefix-p "spec/" file) 'spec)
                                             ((string-prefix-p "sig/" file) 'sig)
+                                            ((string-prefix-p "sorbet/" file) 'sorbet)
+                                            ((not (string-prefix-p "." file)) 'project)
                                             (t 'hidden)))
                                     files)))
       (append (vertico-sort-alpha (alist-get 'project grouped-files))
               (vertico-sort-alpha (alist-get 'spec grouped-files))
               (vertico-sort-alpha (alist-get 'sig grouped-files))
+              (vertico-sort-alpha (alist-get 'sorbet grouped-files))
               (vertico-sort-alpha (alist-get 'hidden grouped-files))))))
 
 (use-package savehist
