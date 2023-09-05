@@ -899,6 +899,16 @@ unnecessary."
         rspec-use-docker-when-possible t
         rspec-docker-container "tests")
 
+  (defun rspec-run-current-file-in-devspace ()
+    (interactive)
+    (when (not rspec-mode)
+      (error "Not an rspec-mode buffer!"))
+    (-let* ((target-file (-when-let* ((buffer-name (buffer-file-name)))
+                            (f-relative buffer-name (project-root (project-current)))))
+             (iterm-command (format "bundle exec rspec %s" target-file))
+             (main-command "python3 ~/.emacs.d/python/iterm2_remote_control.py"))
+      (shell-command (format "%s %s" main-command iterm-command))))
+
   (defun rspec-run-test-subset (type)
     (-let* ((relative-path (pcase type
                              ('unit "spec/unit")
