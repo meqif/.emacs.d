@@ -656,6 +656,9 @@
   :bind (:map eglot-mode-map
               ("M-RET" . eglot-code-actions))
   :config
+  ;; Big performance boost?
+  (fset #'jsonrpc--log-event #'ignore)
+
   (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
   (add-to-list 'eglot-server-programs '(terraform-mode "terraform-ls" "serve" "-port" :autoport))
   (add-to-list 'eglot-server-programs '(python-mode "pyright-langserver" "--stdio"))
