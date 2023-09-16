@@ -327,7 +327,7 @@
   :config
   (consult-customize
    consult-recent-file :preview-key nil
-   consult-buffer :preview-key (kbd "s-p"))
+   consult-buffer :preview-key "s-p")
   (setq consult-project-root-function #'(lambda () (-some-> (project-current) (project-root)))))
 
 (use-package marginalia
