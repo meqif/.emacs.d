@@ -798,13 +798,6 @@ unnecessary."
   :config
   (with-eval-after-load 'evil-collection-magit
     (evil-define-key evil-collection-magit-state magit-mode-map "\\" nil))
-  (setq evil-collection-mode-list
-        '((occur replace)
-          magit
-          vterm
-          deadgrep
-          xref
-          helpful))
   (evil-collection-init))
 
 (use-package browse-at-remote
