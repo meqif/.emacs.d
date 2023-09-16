@@ -1,8 +1,3 @@
-;; Mark start point for load time measurement
-(defconst emacs-start-time (current-time))
-(unless noninteractive
-  (message "Loading %s..." load-file-name))
-
 (setq user-init-file (or load-file-name buffer-file-name))
 (setq user-emacs-directory (file-name-directory user-init-file))
 
@@ -1217,20 +1212,6 @@ unnecessary."
   :defer
   :init
   (evil-set-initial-state 'deadgrep-mode 'normal))
-
-;; Post initialization -- calculate loading time
-;; Copied from jwiegley's configuration
-(when (display-graphic-p)
-  (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time))))
-    (message "Loading %s...done (%.3fs)" load-file-name elapsed))
-
-  (add-hook 'after-init-hook
-            `(lambda ()
-               (let ((elapsed (float-time
-                               (time-subtract (current-time) emacs-start-time))))
-                 (message "Loading %s...done (%.3fs) [after-init]"
-                          ,load-file-name elapsed)))
-            t))
 
 (use-package tramp
   :defer
