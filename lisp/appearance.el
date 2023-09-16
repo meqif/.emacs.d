@@ -35,20 +35,23 @@
   (set-face-attribute 'org-todo nil :inverse-video t))
 
 (use-package circadian
+  :hook (after-init . circadian-setup)
   :config
   (setq circadian-themes
         `(("8:00" . ,(if (version< emacs-version "30.0") 'modus-operandi 'modus-operandi-tinted))
-          ("17:00" . ,(if (version< emacs-version "30.0") 'modus-vivendi 'modus-vivendi-tinted))))
-  (circadian-setup))
+          ("17:00" . ,(if (version< emacs-version "30.0") 'modus-vivendi 'modus-vivendi-tinted)))))
 
 (when window-system
-  (set-fringe-mode '(4 . 4))
+  (add-hook 'after-init-hook
+            #'(lambda ()
+                (set-fringe-mode '(4 . 4))
 
-  ;; Use font with ligatures and enable them in Emacs-Mac
-  (when (eq window-system 'mac)
-    (mac-auto-operator-composition-mode))
+                ;; Use font with ligatures and enable them in Emacs-Mac
+                (when (eq window-system 'mac)
+                  (mac-auto-operator-composition-mode))
 
-  (set-face-attribute 'default nil :font "MonoLisa 1.1 11"))
+                (set-face-attribute 'default nil :font "MonoLisa 1.1 11")
+                (shrink-modeline-font))))
 
 (defun font-lock-comment-annotations ()
   "Highlight a bunch of well known comment annotations."
