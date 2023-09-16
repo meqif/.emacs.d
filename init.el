@@ -3,20 +3,53 @@
 
 (setq package-archives nil)
 
-;; straight package manager
-(setq straight-use-package-by-default t)
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+;; Elpaca package manager!
+(defvar elpaca-installer-version 0.5)
+(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+(defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+(defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+(defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+                              :ref nil
+                              :files (:defaults (:exclude "extensions"))
+                              :build (:not elpaca--activate-package)))
+(let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+       (build (expand-file-name "elpaca/" elpaca-builds-directory))
+       (order (cdr elpaca-order))
+       (default-directory repo))
+  (add-to-list 'load-path (if (file-exists-p build) build repo))
+  (unless (file-exists-p repo)
+    (make-directory repo t)
+    (when (< emacs-major-version 28) (require 'subr-x))
+    (condition-case-unless-debug err
+        (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+                 ((zerop (call-process "git" nil buffer t "clone"
+                                       (plist-get order :repo) repo)))
+                 ((zerop (call-process "git" nil buffer t "checkout"
+                                       (or (plist-get order :ref) "--"))))
+                 (emacs (concat invocation-directory invocation-name))
+                 ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+                                       "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+                 ((require 'elpaca))
+                 ((elpaca-generate-autoloads "elpaca" repo)))
+            (progn (message "%s" (buffer-string)) (kill-buffer buffer))
+          (error "%s" (with-current-buffer buffer (buffer-string))))
+      ((error) (warn "%s" err) (delete-directory repo 'recursive))))
+  (unless (require 'elpaca-autoloads nil t)
+    (require 'elpaca)
+    (elpaca-generate-autoloads "elpaca" repo)
+    (load "./elpaca-autoloads")))
+(add-hook 'after-init-hook #'elpaca-process-queues)
+(elpaca `(,@elpaca-order))
+
+;; Install use-package support
+(elpaca elpaca-use-package
+  ;; Enable :elpaca use-package keyword.
+  (elpaca-use-package-mode)
+  ;; Assume :elpaca t unless otherwise specified.
+  (setq elpaca-use-package-by-default t))
+
+;; Block until current queue processed.
+(elpaca-wait)
 
 ;; Refuse to work with old Emacsen
 (when (version< emacs-version "24.4")
@@ -60,7 +93,6 @@
 ;; Packages
 (setq use-package-enable-imenu-support t
       use-package-always-ensure t)
-(straight-use-package 'use-package)
 (setq use-package-compute-statistics t)
 
 ;; Answering just 'y' or 'n' will do
@@ -69,7 +101,7 @@
   (setq use-short-answers t))
 
 ;; Bring better defaults
-(use-package better-defaults :straight nil :ensure nil)
+(use-package better-defaults :elpaca nil :ensure nil)
 
 ;; Essential utility libraries!
 (use-package f)
@@ -78,12 +110,14 @@
 (use-package dash
   :defer t
   :config (dash-enable-font-lock))
+(elpaca-wait)
 
 (use-package no-littering)
+(elpaca-wait)
 
 (use-package treesit
   :ensure nil
-  :straight nil
+  :elpaca nil
   :config
   ;; Not covered by no-littering yet
   (setq treesit-extra-load-path (list (f-join no-littering-var-directory "tree-sitter"))))
@@ -107,7 +141,7 @@
 
 ;; Appearance
 (use-package appearance
-  :straight nil
+  :elpaca nil
   :ensure nil)
 
 ;; Load local-only settings, not tracked by VCS
@@ -130,12 +164,13 @@
 ;; Display clock in modeline
 (use-package time
   :defer t
+  :elpaca nil
   :config
   (setq display-time-24hr-format t
         display-time-default-load-average nil))
 
 (use-package prog-mode
-  :straight nil
+  :elpaca nil
   :ensure nil
   :config
   ;; Enable prettify symbols mode globally
@@ -159,9 +194,11 @@
 (use-package delight)
 
 (use-package autorevert
+  :elpaca nil
   :delight auto-revert-mode)
 
 (use-package eldoc
+  :elpaca nil
   :defer t
   :delight
   :hook (eldoc-mode . visual-line-mode)
@@ -181,11 +218,11 @@
   ;; Fix single quote behavior in minibuffer
   (sp-with-modes '(minibuffer-inactive-mode minibuffer-mode) (sp-local-pair "'" nil :actions nil)))
 
-;; Setup extensions
-(use-package setup-evil
-  :straight nil
-  :ensure nil
+(use-package evil
   :init (setq evil-want-keybinding nil))
+(elpaca-wait)
+
+(require 'setup-evil)
 
 (use-package undo-fu
   :after evil
@@ -199,6 +236,7 @@
   (global-evil-surround-mode 1))
 
 (use-package imenu
+  :elpaca nil
   :config
   ;; Make imenu rescan automatically
   (setq imenu-auto-rescan t)
@@ -214,6 +252,7 @@
 
 ;; compilation-mode
 (use-package compile
+  :elpaca nil
   :defer
   :config
   (add-hook 'compilation-mode-hook 'visual-line-mode)
@@ -239,7 +278,7 @@
     "tm" 'meqif/create-meeting-note))
 
 (use-package vertico
-  :straight (:files (:defaults "extensions/*"))
+  :elpaca (:files (:defaults "extensions/*"))
   :init
   ;; Use consult-completion-in-region to get completion in minibuffer a la selectrum-completion-in-region
   ;;
@@ -296,6 +335,7 @@
               (vertico-sort-alpha (alist-get 'hidden grouped-files))))))
 
 (use-package savehist
+  :elpaca nil
   :init
   (savehist-mode))
 
@@ -387,6 +427,7 @@
 
 ;; Save a list of recent files visited
 (use-package recentf
+  :elpaca nil
   :after f
   :init
   ;; Increase recent entries list from default (20)
@@ -397,7 +438,7 @@
   (add-to-list 'recentf-exclude no-littering-etc-directory))
 
 (use-package corfu
-  :straight (:files (:defaults "extensions/*"))
+  :elpaca (:files (:defaults "extensions/*"))
   :demand
   :bind
   (:map corfu-map
@@ -432,7 +473,7 @@
 
 ;; Unique buffer names
 (use-package uniquify
-  :straight nil
+  :elpaca nil
   :ensure nil
   ;; Make uniquify rename buffers like in path name notation
   :config (setq uniquify-buffer-name-style 'forward))
@@ -510,33 +551,17 @@
     (general-define-key :keymaps 'org-mode-map
                         :states 'normal
                         "C-j" #'org-next-visible-heading
-                        "C-k" #'org-previous-visible-heading)))
+                        "C-k" #'org-previous-visible-heading))
 
-;; Org-latex configuration
-(use-package ox-latex
-    :after org
-    :straight org
-    :config
-    ;; Use latexmk and xelatex to generate PDFs
-    (setq org-latex-pdf-process '("latexmk -pdflatex=xelatex -pdf -f %f"))
-    ;; Default packages
-    (add-to-list 'org-latex-packages-alist
-                 '("" "MinionPro" nil))
-    (add-to-list 'org-latex-packages-alist
-                 '("" "microtype" nil)))
+  ;; Allow editing html blocks
+  (require 'ox-html))
 
 ;; Add Github-Flavored Markdown exporter
-(use-package ox-gfm
-  :after org)
-
-;; Allow editing html blocks
-(use-package ox-html
-  :after org
-  :straight org)
+(use-package ox-gfm :after org)
 
 ;; Use org-mode tables in any mode
 (use-package org-table
-  :straight nil
+  :elpaca nil
   :ensure nil
   :commands orgtbl-mode
   :init
@@ -560,7 +585,6 @@
 
 (use-package yasnippet
   :config (yas-global-mode))
-
 
 ;; Language-specific setup files
 (use-package markdown-mode
@@ -603,12 +627,14 @@
   :mode "Dockerfile\\'")
 
 (use-package cc-mode
+  :elpaca nil
   :defer t
   :config
   (setq c-basic-offset 4
         c-default-style "linux"))
 
 (use-package sgml-mode
+  :elpaca nil
   :defer t
   :config
   ;; Enable tagedit
@@ -646,7 +672,7 @@
               ("C-c C-c" . cargo-transient)))
 
 (use-package eglot
-  :straight nil
+  :elpaca nil
   :hook ((rust-mode kotlin-mode ruby-base-mode) . eglot-ensure)
   :bind (:map eglot-mode-map
               ("M-RET" . eglot-code-actions))
@@ -671,15 +697,15 @@
   (general-define-key :keymap 'eglot-mode-map "C-h ." 'eldoc-doc-buffer))
 
 ;; Misc
-(use-package my-misc :straight nil :ensure nil)
+(use-package my-misc :elpaca nil :ensure nil)
 
-(use-package make-mode
+(use-package make-mode :elpaca nil
   :defer
   ;; Use normal tabs in makefiles
   :hook (makefile-mode . (lambda () (setq indent-tabs-mode t))))
 
 ;; Highlight excessively long lines
-(use-package whitespace
+(use-package whitespace :elpaca nil
   :defer
   :delight
   :config
@@ -804,7 +830,7 @@ unnecessary."
 
 (use-package diff-mode
   :defer t
-  :straight nil
+  :elpaca nil
   :ensure nil
   :config
   ;; Make fine grained changes more obvious
@@ -813,11 +839,12 @@ unnecessary."
   (set-face-attribute 'diff-refine-removed nil :bold t :background 'unspecified))
 
 (use-package subword
+  :elpaca nil
   :hook (prog-mode . subword-mode)
   :delight "_")
 
 ;; Ruby mode
-(use-package ruby-mode
+(use-package ruby-mode :elpaca nil
   :mode ("\\.rb\\'"
          "\\.rbi\\'"
          "\\.rake\\'"
@@ -940,7 +967,7 @@ unnecessary."
   (add-hook 'lispy-mode-hook #'lispyville-mode))
 
 (use-package default-text-scale
-  :straight (default-text-scale :type git :host github :repo "purcell/default-text-scale"))
+  :elpaca (default-text-scale :type git :host github :repo "purcell/default-text-scale"))
 
 ;; Group reusable keyboard bindings behind a common prefix
 (use-package hydra
@@ -998,14 +1025,14 @@ unnecessary."
   (evil-define-key 'normal macrostep-keymap "q" 'macrostep-collapse-all))
 
 (use-package dired
-  :straight nil
+  :elpaca nil
   :ensure nil
   :defer t
   :config
   ;; Show human-friendly file sizes and sort numbers properly
   (setq-default dired-listing-switches "-alhv"))
 
-(use-package ibuffer
+(use-package ibuffer :elpaca nil
   :bind ("C-x C-b" . ibuffer))
 
 (use-package ibuffer-vc
@@ -1035,6 +1062,7 @@ unnecessary."
                       "q" #'quit-window))
 
 (use-package xref
+  :elpaca nil
   :init
   (evil-set-initial-state 'xref-mode 'normal)
   :config
@@ -1083,11 +1111,6 @@ unnecessary."
   :config (evil-commentary-mode))
 
 (use-package evil-textobj-tree-sitter
-  :straight (evil-textobj-tree-sitter
-             :host github
-             :repo "meain/evil-textobj-tree-sitter"
-             :files (:defaults "queries" "treesit-queries")
-             :branch "treesit")
   :after evil
   :config
   ;; bind `function.outer`(entire function block) to `f` for use in things like `vaf`, `yaf`
@@ -1101,7 +1124,7 @@ unnecessary."
 (unbind-key (kbd "s-p"))
 
 (use-package faun-mode
-  :straight nil
+  :elpaca nil
   :ensure nil
   :after 'org
   :load-path "lisp/"
@@ -1131,7 +1154,7 @@ unnecessary."
   :config
   (setq ediff-split-window-function 'split-window-horizontally))
 
-(use-package smerge-mode
+(use-package smerge-mode :elpaca nil
   :defer)
 
 (use-package ess
@@ -1149,6 +1172,7 @@ unnecessary."
   :hook ((lisp-mode emacs-lisp-mode) . easy-escape-minor-mode))
 
 (use-package autoinsert
+  :elpaca nil
   :hook ((prog-mode yaml-mode org-mode) . auto-insert-mode)
   :config
   (setq auto-insert-query nil)
@@ -1242,7 +1266,7 @@ unnecessary."
           (?s "Vterm" vterm))))
 
 (use-package replace
-  :straight nil
+  :elpaca nil
   :ensure nil
   :config
   ;; Make jumping from occur results easier to follow visually
@@ -1272,7 +1296,7 @@ unnecessary."
 
 (use-package bookmark
   :ensure nil
-  :straight nil
+  :elpaca nil
   :config
   ;; Persist bookmarks to file after every change
   (setq bookmark-save-flag 1))
@@ -1286,8 +1310,8 @@ unnecessary."
   :commands display-pending-pull-requests filtered-pending-pull-requests
   ;; :after (:all ghub dash s ts)
   :ensure nil
-  ;; :straight (dipper :host github :repo "meqif/.emacs.d" :files ("lisp/dipper.el"))
-  :straight nil
+  ;; :elpaca (dipper :host github :repo "meqif/.emacs.d" :files ("lisp/dipper.el"))
+  :elpaca nil
   :load-path "lisp/"
   :config
   (defun dipper-filtered ()
@@ -1305,7 +1329,7 @@ unnecessary."
 
 (use-package vundo
   :after general
-  :straight (vundo :type git :host github :repo "casouri/vundo")
+  :elpaca (vundo :type git :host github :repo "casouri/vundo")
   :config
   (general-evil-leader-define-key "u" #'vundo))
 
@@ -1355,7 +1379,7 @@ unnecessary."
   (add-hook 'imenu-after-jump-hook #'pulsar-reveal-entry))
 
 (use-package substitute
-  :straight (substitute :type git :host sourcehut :repo "meqif/substitute")
+  :elpaca (substitute :type git :host sourcehut :repo "meqif/substitute")
   :config
   (setq substitute-highlight t))
 
@@ -1380,7 +1404,7 @@ unnecessary."
   (setq treesit-auto-install 'prompt)
   (global-treesit-auto-mode))
 
-(use-package server
+(use-package server :elpaca nil
   :defer 2
   :delight server-buffer-clients
   ;; Start server if it isn't already running

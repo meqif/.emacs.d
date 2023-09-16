@@ -1,6 +1,5 @@
 ;;; setup-evil.el -*- lexical-binding: t; -*-
 
-(use-package evil)
 (require 'my-misc)
 (require 'dash)
 
