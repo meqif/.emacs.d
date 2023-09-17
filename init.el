@@ -2,6 +2,9 @@
 (setq user-emacs-directory (file-name-directory user-init-file))
 
 (setq package-archives nil)
+(setq use-package-enable-imenu-support t
+      use-package-always-ensure t
+      use-package-compute-statistics t)
 
 ;; Elpaca package manager!
 (defvar elpaca-installer-version 0.5)
@@ -89,11 +92,6 @@
 
 ;; Always load most recent version of required files
 (setq load-prefer-newer t)
-
-;; Packages
-(setq use-package-enable-imenu-support t
-      use-package-always-ensure t)
-(setq use-package-compute-statistics t)
 
 ;; Answering just 'y' or 'n' will do
 (if (version< emacs-version "28.1")
