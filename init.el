@@ -857,6 +857,7 @@ unnecessary."
   (advice-add 'join-line :after
               #'meqif/ruby-delete-trailing-comma-before-closing-bracket)
   (setq ruby-deep-ident-paren nil
+        ruby-method-call-indent nil
         ruby-insert-encoding-magic-comment nil)
 
   (add-hook 'ruby-base-mode-hook
