@@ -1091,6 +1091,9 @@ unnecessary."
   ;; Use default bindings
   (evil-multiedit-default-keybinds)
 
+  ;; Esc also aborts
+  (evil-define-key 'normal evil-multiedit-mode-map [escape] 'evil-multiedit-abort)
+
   ;; Jump to new matches
   (setq evil-multiedit-follow-matches t))
 
