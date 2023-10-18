@@ -1029,7 +1029,12 @@ unnecessary."
   :defer t
   :config
   ;; Show human-friendly file sizes and sort numbers properly
-  (setq-default dired-listing-switches "-alhv"))
+  (setq-default dired-listing-switches "-alhv")
+
+  (let ((gnu-ls-path "/usr/local/bin/gls"))
+    (when (and (s-equals? system-type "darwin") (f-exists? gnu-ls-path))
+      (setq dired-use-ls-dired t
+            insert-directory-program gnu-ls-path))))
 
 (use-package ibuffer :elpaca nil
   :bind ("C-x C-b" . ibuffer))
