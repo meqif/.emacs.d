@@ -15,6 +15,8 @@
 (when (version< emacs-version "29.0")
     (use-package modus-themes))
 
+(use-package ef-themes)
+
 (when (version< emacs-version "30.0")
   (setq modus-themes-operandi-color-overrides
         '((bg-main . "#fefcf4")
@@ -35,11 +37,18 @@
   (set-face-attribute 'org-todo nil :inverse-video t))
 
 (use-package circadian
-  :hook (after-init . circadian-setup)
   :config
+  (add-hook 'circadian-after-load-theme-hook
+            #'(lambda (theme)
+                (cond ((eq theme 'modus-operandi)
+                       (set-face-attribute 'default nil :font "MonoLisa 1.1 14"))
+                      ((eq theme 'ef-melissa-dark)
+                       (set-face-attribute 'default nil :font "MonoLisa 1.1 17")))))
   (setq circadian-themes
-        `(("8:00" . ,(if (version< emacs-version "30.0") 'modus-operandi 'modus-operandi-tinted))
-          ("17:00" . ,(if (version< emacs-version "30.0") 'modus-vivendi 'modus-vivendi-tinted)))))
+        '(("8:00" . modus-operandi)
+          ("17:00" . ef-melissa-dark)))
+
+  (circadian-setup))
 
 (when window-system
   (add-hook 'after-init-hook
@@ -50,7 +59,6 @@
                 (when (eq window-system 'mac)
                   (mac-auto-operator-composition-mode))
 
-                (set-face-attribute 'default nil :font "MonoLisa 1.1 11")
                 (shrink-modeline-font))))
 
 (defun font-lock-comment-annotations ()
