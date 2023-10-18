@@ -671,13 +671,14 @@
 
 (use-package eglot
   :elpaca nil
-  :hook ((rust-mode kotlin-mode ruby-base-mode) . eglot-ensure)
+  :hook ((rust-mode kotlin-mode ruby-base-mode elixir-ts-mode) . eglot-ensure)
   :bind (:map eglot-mode-map
               ("M-RET" . eglot-code-actions))
   :config
   ;; Big performance boost?
   (fset #'jsonrpc--log-event #'ignore)
 
+  (add-to-list 'eglot-server-programs '((elixir-ts-mode) "elixir-ls"))
   (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
   (add-to-list 'eglot-server-programs '(terraform-mode "terraform-ls" "serve" "-port" :autoport))
   (add-to-list 'eglot-server-programs '(python-mode "pyright-langserver" "--stdio"))
@@ -687,7 +688,8 @@
 
   ;; Fix "proc macro Deserialize not expanded"
   (setq-default eglot-workspace-configuration
-                `((:rust-analyzer . (:procMacro
+                `((:elixirLS . (:dialyzerEnabled :json-false))
+                  (:rust-analyzer . (:procMacro
                                      (:enable t)
                                      :cargo
                                      (:loadOutDirsFromCheck t)))))
@@ -1410,6 +1412,8 @@ unnecessary."
   :config
   (setq treesit-auto-install 'prompt)
   (global-treesit-auto-mode))
+
+(use-package elixir-ts-mode)
 
 (use-package server :elpaca nil
   :defer 2
