@@ -9,7 +9,6 @@
   (let ((height (round (* (face-attribute 'default :height) 0.85))))
     (set-face-attribute 'mode-line nil :height height)
     (set-face-attribute 'mode-line-inactive nil :height height)))
-(advice-add 'enable-theme :after #'shrink-modeline-font)
 
 ;; Load theme
 (when (version< emacs-version "29.0")
@@ -57,9 +56,7 @@
 
                 ;; Use font with ligatures and enable them in Emacs-Mac
                 (when (eq window-system 'mac)
-                  (mac-auto-operator-composition-mode))
-
-                (shrink-modeline-font))))
+                  (mac-auto-operator-composition-mode)))))
 
 (defun font-lock-comment-annotations ()
   "Highlight a bunch of well known comment annotations."
