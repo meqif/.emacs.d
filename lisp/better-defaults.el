@@ -93,4 +93,12 @@
 ;; Reduce delay before deleting pair
 (setq delete-pair-blink-delay 0.1)
 
+;; We're in 2023, sir.
+(setq pixel-scroll-precision-mode t)
+
+;; When I maximize the frame, I don't care about fitting the frame to the
+;; characters, I want Emacs to maximize the whole frame like any other
+;; application does.
+(setq frame-resize-pixelwise t)
+
 (provide 'better-defaults)
