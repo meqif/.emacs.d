@@ -110,7 +110,10 @@
   :config (dash-enable-font-lock))
 (elpaca-wait)
 
-(use-package no-littering)
+(use-package no-littering
+  :config
+  (setq lock-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 (elpaca-wait)
 
 (use-package treesit
