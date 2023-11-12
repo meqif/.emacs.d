@@ -585,7 +585,11 @@
   :after org)
 
 (use-package yasnippet
-  :config (yas-global-mode))
+  :defer 1
+  :config
+  ;; Prevent yasnippet from logging that it loaded the snippets
+  (setq yas-verbosity 2)
+  (yas-global-mode))
 
 ;; Language-specific setup files
 (use-package markdown-mode
