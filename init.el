@@ -755,12 +755,14 @@
   ;; Add git-spr to the "push" transient menu
   (transient-append-suffix 'magit-push "p" '("s" "spr update" meqif/git-spr-update))
 
-
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
   (add-hook 'magit-status-mode-hook 'visual-line-mode)
 
   (add-to-list 'magit-repository-directories '("~/.emacs.d/" . 0))
+
+  ;; Take over entire frame when displaying status
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
 
   ;; Disable the new section indicators
   (setq magit-section-visibility-indicator nil)
