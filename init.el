@@ -1310,10 +1310,6 @@ unnecessary."
   (ctrlf-mode +1)
   (setq ctrlf-auto-recenter t))
 
-(use-package origami
-  :config
-  (global-origami-mode +1))
-
 (use-package bookmark
   :ensure nil
   :elpaca nil
