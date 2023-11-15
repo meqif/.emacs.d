@@ -628,6 +628,8 @@
 (use-package rjsx-mode
   :defer)
 
+(use-package typescript-ts-mode :elpaca nil)
+
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")
 
@@ -678,7 +680,7 @@
 
 (use-package eglot
   :elpaca nil
-  :hook ((rust-mode kotlin-mode ruby-base-mode elixir-ts-mode) . eglot-ensure)
+  :hook ((rust-mode kotlin-mode ruby-base-mode elixir-ts-mode typescript-ts-mode) . eglot-ensure)
   :bind (:map eglot-mode-map
               ("M-RET" . eglot-code-actions))
   :config
