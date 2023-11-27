@@ -1422,6 +1422,10 @@ unnecessary."
 
 (use-package elixir-ts-mode)
 
+(use-package gleam-ts-mode
+  :mode "\\.gleam\\'"
+  :elpaca (:repo "https://github.com/gleam-lang/gleam-mode.git" :branch "gleam-ts-mode"))
+
 (use-package server :elpaca nil
   :defer 2
   :delight server-buffer-clients
