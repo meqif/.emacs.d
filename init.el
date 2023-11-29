@@ -55,7 +55,7 @@
 (elpaca-wait)
 
 ;; Refuse to work with old Emacsen
-(when (version< emacs-version "24.4")
+(when (version< emacs-version "29.0")
   (error "This Emacs is too old!"))
 
 ;; Cargo culting stuff to make new windows open faster
@@ -71,11 +71,9 @@
   (unless (frame-focus-state)
     (garbage-collect)))
 
-(if (version< emacs-version "27.0")
-    (add-hook 'focus-out-hook 'garbage-collect)
-  (add-function :after
-                after-focus-change-function
-                #'garbage-collect-when-frame-is-unfocused))
+(add-function :after
+              after-focus-change-function
+              #'garbage-collect-when-frame-is-unfocused)
 
 ;; Disable splash screen
 (setq inhibit-startup-message t)
@@ -94,9 +92,7 @@
 (setq load-prefer-newer t)
 
 ;; Answering just 'y' or 'n' will do
-(if (version< emacs-version "28.1")
-    (defalias 'yes-or-no-p 'y-or-n-p)
-  (setq use-short-answers t))
+(setq use-short-answers t)
 
 ;; Bring better defaults
 (use-package better-defaults :elpaca nil :ensure nil)

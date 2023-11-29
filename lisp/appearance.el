@@ -11,9 +11,6 @@
     (set-face-attribute 'mode-line-inactive nil :height height)))
 
 ;; Load theme
-(when (version< emacs-version "29.0")
-    (use-package modus-themes))
-
 (use-package ef-themes)
 
 (when (version< emacs-version "30.0")
