@@ -587,6 +587,11 @@
   (setq yas-verbosity 2)
   (yas-global-mode))
 
+(use-package yasnippet-capf
+  :after yasnippet
+  :config
+  (add-to-list 'completion-at-point-functions #'yasnippet-capf))
+
 ;; Language-specific setup files
 (use-package markdown-mode
   :mode ("\\.md\\'" . gfm-mode)
