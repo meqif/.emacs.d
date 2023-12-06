@@ -392,6 +392,21 @@
   (setq orderless-style-dispatchers '(without-if-bang exact-match-if-equals-suffix)
         orderless-matching-styles '(orderless-initialism orderless-prefixes orderless-regexp)))
 
+;; Even greater control over completion
+(use-package fussy
+  :config
+  ;; Use orderless for filtering, flx-rs for fuzzy match scoring
+  (setq completion-styles '(fussy basic)
+        fussy-filter-fn 'fussy-filter-orderless))
+
+;; Vroom vroom
+(use-package flx-rs
+  :ensure t
+  :elpaca (flx-rs :repo "jcs-elpa/flx-rs" :host github :files (:defaults "bin"))
+  :config
+  (setq fussy-score-fn 'fussy-flx-rs-score)
+  (flx-rs-load-dyn))
+
 (use-package embark
   :demand
   :bind (:map minibuffer-local-map
