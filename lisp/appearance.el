@@ -38,11 +38,11 @@
             #'(lambda (theme)
                 (cond ((eq theme 'modus-operandi)
                        (set-face-attribute 'default nil :font "MonoLisa 1.1 14"))
-                      ((eq theme 'ef-melissa-dark)
-                       (set-face-attribute 'default nil :font "MonoLisa 1.1 17")))))
+                      ((eq theme 'ef-elea-dark)
+                       (set-face-attribute 'default nil :font "MonoLisa 1.1 15")))))
   (setq circadian-themes
         '(("8:00" . modus-operandi)
-          ("17:00" . ef-melissa-dark)))
+          ("17:00" . ef-elea-dark)))
 
   (circadian-setup))
 
