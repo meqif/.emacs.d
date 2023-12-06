@@ -447,7 +447,18 @@
   :config
   (recentf-mode +1)
   (add-to-list 'recentf-exclude no-littering-var-directory)
-  (add-to-list 'recentf-exclude no-littering-etc-directory))
+  (add-to-list 'recentf-exclude no-littering-etc-directory)
+
+  (defun recentf-cleanup-quiet ()
+    (interactive)
+    (let ((message-log-max nil))
+      (with-temp-message ""
+        (recentf-cleanup))))
+
+  ;; Clean up recent files list when focus changes
+  (add-function :after
+                after-focus-change-function
+                #'recentf-cleanup-quiet))
 
 (use-package corfu
   :elpaca (:files (:defaults "extensions/*"))
