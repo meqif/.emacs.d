@@ -842,6 +842,7 @@ unnecessary."
   :config
   (with-eval-after-load 'evil-collection-magit
     (evil-define-key evil-collection-magit-state magit-mode-map "\\" nil))
+  (setq evil-collection-mode-list (-remove-item 'lispy evil-collection-mode-list))
   (evil-collection-init))
 
 (use-package browse-at-remote
