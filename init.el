@@ -607,6 +607,9 @@
   :mode ("\\.md\\'" . gfm-mode)
   :config
   (setq markdown-command "marked --gfm")
+  (setq markdown-fontify-code-blocks-natively t)
+  (add-to-list 'markdown-code-lang-modes '("elixir" . elixir-ts-mode))
+  (add-to-list 'markdown-code-lang-modes '("ruby" . ruby-ts-mode))
   (add-hook 'gfm-mode-hook #'visual-line-mode))
 
 (use-package markdown-toc
