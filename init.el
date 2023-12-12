@@ -378,8 +378,7 @@
   ;; correctly.
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion))
-                                        (project-file (styles partial-completion))))
+        completion-category-overrides nil)
 
   (defun without-if-bang (pattern _index _total)
     (when (string-prefix-p "!" pattern)
@@ -390,7 +389,7 @@
       `(orderless-literal . ,(s-chop-suffix "=" pattern))))
 
   (setq orderless-style-dispatchers '(without-if-bang exact-match-if-equals-suffix)
-        orderless-matching-styles '(orderless-initialism orderless-prefixes)))
+        orderless-matching-styles '(orderless-initialism orderless-prefixes orderless-literal)))
 
 (use-package embark
   :demand
