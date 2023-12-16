@@ -1272,13 +1272,6 @@ unnecessary."
   :init
   (evil-set-initial-state 'deadgrep-mode 'normal))
 
-(use-package tramp
-  :defer
-  :config
-  (setq tramp-default-method "ssh")
-  (setq vc-ignore-dir-regexp
-        (format "%s\\|%s" vc-ignore-dir-regexp tramp-file-name-regexp)))
-
 (use-package project
   :commands project-root
   :init
