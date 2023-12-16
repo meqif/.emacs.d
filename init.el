@@ -198,7 +198,7 @@
   :elpaca nil
   :defer t
   :delight
-  :hook (eldoc-mode . visual-line-mode)
+  :hook (special-mode . visual-line-mode)
   :config
   (with-eval-after-load 'evil (evil-set-initial-state 'eldoc-mode 'emacs)))
 
