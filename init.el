@@ -701,6 +701,20 @@
   ;; Big performance boost?
   (fset #'jsonrpc--log-event #'ignore)
 
+  (add-to-list 'eglot-server-programs
+             `((js-mode js-ts-mode tsx-ts-mode typescript-ts-mode typescript-mode)
+               .
+               ("typescript-language-server" "--stdio"
+                :initializationOptions
+                (:preferences
+                 (:includeInlayParameterNameHints "all"
+                  :includeInlayParameterNameHintsWhenArgumentMatchesName t
+                  :includeInlayFunctionParameterTypeHints t
+                  :includeInlayVariableTypeHints t
+                  :includeInlayVariableTypeHintsWhenTypeMatchesName t
+                  :includeInlayPropertyDeclarationTypeHints t
+                  :includeInlayFunctionLikeReturnTypeHints t
+                  :includeInlayEnumMemberValueHints t)))))
   (add-to-list 'eglot-server-programs '((elixir-ts-mode) "elixir-ls"))
   (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
   (add-to-list 'eglot-server-programs '(terraform-mode "terraform-ls" "serve" "-port" :autoport))
