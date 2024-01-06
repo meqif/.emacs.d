@@ -1455,6 +1455,12 @@ unnecessary."
   :config
   (unless (server-running-p) (server-start)))
 
+(use-package svg-tag-mode
+  :config
+  (global-svg-tag-mode)
+  (setq svg-tag-tags
+        '(("TODO:" .  ((lambda (tag) (svg-tag-make "TODO" :face 'org-todo :inverse t :margin 0)))))))
+
 ;; After startup, set reasonable values for garbage collection
 (add-hook 'emacs-startup-hook
           (lambda () (setq gc-cons-threshold 16777216
