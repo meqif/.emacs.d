@@ -904,7 +904,6 @@ unnecessary."
 
   (add-hook 'ruby-base-mode-hook
             #'(lambda ()
-                (setq mode-name "💎")
                 (setq-local tab-width 2)
                 (setq-local evil-shift-width 2)))
 
