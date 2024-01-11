@@ -475,9 +475,6 @@
   :config
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
-(use-package docker-compose-mode
-  :defer)
-
 ;; Unique buffer names
 (use-package uniquify
   :elpaca nil
@@ -694,7 +691,7 @@
 
 (use-package eglot
   :elpaca nil
-  :hook ((rust-mode kotlin-mode ruby-base-mode elixir-ts-mode typescript-ts-mode) . eglot-ensure)
+  :hook ((rust-mode kotlin-mode ruby-base-mode elixir-ts-mode typescript-ts-mode yaml-ts-mode) . eglot-ensure)
   :bind (:map eglot-mode-map
               ("M-RET" . eglot-code-actions))
   :config
@@ -1221,7 +1218,7 @@ unnecessary."
 
 (use-package autoinsert
   :elpaca nil
-  :hook ((prog-mode yaml-mode org-mode) . auto-insert-mode)
+  :hook ((prog-mode yaml-mode yaml-ts-mode org-mode) . auto-insert-mode)
   :config
   (setq auto-insert-query nil)
   (assoc-delete-all '("\\.el\\'" . "Emacs Lisp header") auto-insert-alist)
