@@ -730,6 +730,15 @@
 
   (general-define-key :keymap 'eglot-mode-map "C-h ." 'eldoc-doc-buffer))
 
+;; Use https://github.com/blahgeek/emacs-lsp-booster to speed up communication between
+;; LSP server and Emacs
+(use-package eglot-booster
+  :if (executable-find "emacs-lsp-booster")
+  :after eglot
+  :elpaca (eglot-booster :type git :host github :repo "jdtsmith/eglot-booster")
+  :init (message "Enabling LSP booster for eglot")
+  :config (eglot-booster-mode))
+
 ;; Misc
 (use-package my-misc :elpaca nil :ensure nil)
 
