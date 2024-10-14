@@ -7,12 +7,12 @@
       use-package-compute-statistics t)
 
 ;; Elpaca package manager!
-(defvar elpaca-installer-version 0.6)
+(defvar elpaca-installer-version 0.7)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
 (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
-                              :ref nil
+                              :ref nil :depth 1
                               :files (:defaults "elpaca-test.el" (:exclude "extensions"))
                               :build (:not elpaca--activate-package)))
 (let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
@@ -25,8 +25,10 @@
     (when (< emacs-major-version 28) (require 'subr-x))
     (condition-case-unless-debug err
         (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
-                 ((zerop (call-process "git" nil buffer t "clone"
-                                       (plist-get order :repo) repo)))
+                 ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+                                                 ,@(when-let ((depth (plist-get order :depth)))
+                                                     (list (format "--depth=%d" depth) "--no-single-branch"))
+                                                 ,(plist-get order :repo) ,repo))))
                  ((zerop (call-process "git" nil buffer t "checkout"
                                        (or (plist-get order :ref) "--"))))
                  (emacs (concat invocation-directory invocation-name))
@@ -95,11 +97,13 @@
 (setq use-short-answers t)
 
 ;; Bring better defaults
-(use-package better-defaults :elpaca nil :ensure nil)
+(use-package better-defaults :ensure nil)
 
 ;; Essential utility libraries!
 (use-package f)
 (use-package s)
+
+(elpaca project)
 
 (use-package dash
   :defer t
@@ -114,7 +118,6 @@
 
 (use-package treesit
   :ensure nil
-  :elpaca nil
   :config
   ;; Not covered by no-littering yet
   (setq treesit-extra-load-path (list (f-join no-littering-var-directory "tree-sitter"))))
@@ -138,7 +141,6 @@
 
 ;; Appearance
 (use-package appearance
-  :elpaca nil
   :ensure nil)
 
 ;; Load local-only settings, not tracked by VCS
@@ -161,13 +163,12 @@
 ;; Display clock in modeline
 (use-package time
   :defer t
-  :elpaca nil
+  :ensure nil
   :config
   (setq display-time-24hr-format t
         display-time-default-load-average nil))
 
 (use-package prog-mode
-  :elpaca nil
   :ensure nil
   :config
   ;; Enable prettify symbols mode globally
@@ -191,11 +192,11 @@
 (use-package delight)
 
 (use-package autorevert
-  :elpaca nil
+  :ensure nil
   :delight auto-revert-mode)
 
 (use-package eldoc
-  :elpaca nil
+  :ensure (:host github :repo "emacs-mirror/emacs")
   :defer t
   :delight
   :hook (special-mode . visual-line-mode)
@@ -233,7 +234,7 @@
   (global-evil-surround-mode 1))
 
 (use-package imenu
-  :elpaca nil
+  :ensure nil
   :config
   ;; Make imenu rescan automatically
   (setq imenu-auto-rescan t)
@@ -249,7 +250,7 @@
 
 ;; compilation-mode
 (use-package compile
-  :elpaca nil
+  :ensure nil
   :defer
   :config
   (add-hook 'compilation-mode-hook 'visual-line-mode)
@@ -275,7 +276,7 @@
     "tm" 'meqif/create-meeting-note))
 
 (use-package vertico
-  :elpaca (:files (:defaults "extensions/*"))
+  :ensure (:files (:defaults "extensions/*"))
   :init
   ;; Use consult-completion-in-region to get completion in minibuffer a la selectrum-completion-in-region
   ;;
@@ -332,7 +333,7 @@
               (vertico-sort-alpha (alist-get 'hidden grouped-files))))))
 
 (use-package savehist
-  :elpaca nil
+  :ensure nil
   :init
   (savehist-mode))
 
@@ -423,7 +424,7 @@
 
 ;; Save a list of recent files visited
 (use-package recentf
-  :elpaca nil
+  :ensure nil
   :after f
   :init
   ;; Increase recent entries list from default (20)
@@ -445,7 +446,7 @@
                 #'recentf-cleanup-quiet))
 
 (use-package corfu
-  :elpaca (:files (:defaults "extensions/*"))
+  :ensure (:files (:defaults "extensions/*"))
   :demand
   :bind
   (:map corfu-map
@@ -477,7 +478,6 @@
 
 ;; Unique buffer names
 (use-package uniquify
-  :elpaca nil
   :ensure nil
   ;; Make uniquify rename buffers like in path name notation
   :config (setq uniquify-buffer-name-style 'forward))
@@ -565,7 +565,6 @@
 
 ;; Use org-mode tables in any mode
 (use-package org-table
-  :elpaca nil
   :ensure nil
   :commands orgtbl-mode
   :init
@@ -639,20 +638,20 @@
 (use-package rjsx-mode
   :defer)
 
-(use-package typescript-ts-mode :elpaca nil)
+(use-package typescript-ts-mode :ensure nil)
 
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")
 
 (use-package cc-mode
-  :elpaca nil
+  :ensure nil
   :defer t
   :config
   (setq c-basic-offset 4
         c-default-style "linux"))
 
 (use-package sgml-mode
-  :elpaca nil
+  :ensure nil
   :defer t
   :config
   ;; Enable tagedit
@@ -690,7 +689,7 @@
               ("C-c C-c" . cargo-transient)))
 
 (use-package eglot
-  :elpaca nil
+  :ensure nil
   :hook ((rust-mode kotlin-mode ruby-base-mode elixir-ts-mode typescript-ts-mode yaml-ts-mode) . eglot-ensure)
   :bind (:map eglot-mode-map
               ("M-RET" . eglot-code-actions))
@@ -735,20 +734,22 @@
 (use-package eglot-booster
   :if (executable-find "emacs-lsp-booster")
   :after eglot
-  :elpaca (eglot-booster :type git :host github :repo "jdtsmith/eglot-booster")
+  :ensure (eglot-booster :type git :host github :repo "jdtsmith/eglot-booster")
   :init (message "Enabling LSP booster for eglot")
   :config (eglot-booster-mode))
 
 ;; Misc
-(use-package my-misc :elpaca nil :ensure nil)
+(use-package my-misc :ensure nil)
 
-(use-package make-mode :elpaca nil
+(use-package make-mode
+  :ensure nil
   :defer
   ;; Use normal tabs in makefiles
   :hook (makefile-mode . (lambda () (setq indent-tabs-mode t))))
 
 ;; Highlight excessively long lines
-(use-package whitespace :elpaca nil
+(use-package whitespace
+  :ensure nil
   :defer
   :delight
   :config
@@ -770,6 +771,8 @@
   (advice-add 'enable-theme :after #'fix-diff-hl-faces)
   :config
   (fix-diff-hl-faces))
+
+(use-package transient :ensure (:host github :repo "emacs-mirror/emacs"))
 
 (use-package magit
   :bind ("C-x g" . magit-status)
@@ -876,7 +879,6 @@ unnecessary."
 
 (use-package diff-mode
   :defer t
-  :elpaca nil
   :ensure nil
   :config
   ;; Make fine grained changes more obvious
@@ -885,12 +887,13 @@ unnecessary."
   (set-face-attribute 'diff-refine-removed nil :bold t :background 'unspecified))
 
 (use-package subword
-  :elpaca nil
+  :ensure nil
   :hook (prog-mode . subword-mode)
   :delight "_")
 
 ;; Ruby mode
-(use-package ruby-mode :elpaca nil
+(use-package ruby-mode
+  :ensure nil
   :mode ("\\.rb\\'"
          "\\.rbi\\'"
          "\\.rake\\'"
@@ -1013,7 +1016,7 @@ unnecessary."
   (add-hook 'lispy-mode-hook #'lispyville-mode))
 
 (use-package default-text-scale
-  :elpaca (default-text-scale :type git :host github :repo "purcell/default-text-scale"))
+  :ensure (default-text-scale :type git :host github :repo "purcell/default-text-scale"))
 
 ;; Group reusable keyboard bindings behind a common prefix
 (use-package hydra
@@ -1071,7 +1074,6 @@ unnecessary."
   (evil-define-key 'normal macrostep-keymap "q" 'macrostep-collapse-all))
 
 (use-package dired
-  :elpaca nil
   :ensure nil
   :defer t
   :config
@@ -1083,7 +1085,8 @@ unnecessary."
       (setq dired-use-ls-dired t
             insert-directory-program gnu-ls-path))))
 
-(use-package ibuffer :elpaca nil
+(use-package ibuffer
+  :ensure nil
   :bind ("C-x C-b" . ibuffer))
 
 (use-package ibuffer-vc
@@ -1113,7 +1116,7 @@ unnecessary."
                       "q" #'quit-window))
 
 (use-package xref
-  :elpaca nil
+  :ensure nil
   :init
   (evil-set-initial-state 'xref-mode 'normal)
   :config
@@ -1178,7 +1181,6 @@ unnecessary."
 (unbind-key (kbd "s-p"))
 
 (use-package faun-mode
-  :elpaca nil
   :ensure nil
   :after 'org
   :load-path "lisp/"
@@ -1208,8 +1210,7 @@ unnecessary."
   :config
   (setq ediff-split-window-function 'split-window-horizontally))
 
-(use-package smerge-mode :elpaca nil
-  :defer)
+(use-package smerge-mode :ensure nil :defer)
 
 (use-package ess
   :defer t)
@@ -1226,7 +1227,7 @@ unnecessary."
   :hook ((lisp-mode emacs-lisp-mode) . easy-escape-minor-mode))
 
 (use-package autoinsert
-  :elpaca nil
+  :ensure nil
   :hook ((prog-mode yaml-mode yaml-ts-mode org-mode) . auto-insert-mode)
   :config
   (setq auto-insert-query nil)
@@ -1313,7 +1314,6 @@ unnecessary."
           (?s "Vterm" vterm))))
 
 (use-package replace
-  :elpaca nil
   :ensure nil
   :config
   ;; Make jumping from occur results easier to follow visually
@@ -1339,7 +1339,6 @@ unnecessary."
 
 (use-package bookmark
   :ensure nil
-  :elpaca nil
   :config
   ;; Persist bookmarks to file after every change
   (setq bookmark-save-flag 1))
@@ -1354,7 +1353,6 @@ unnecessary."
   ;; :after (:all ghub dash s ts)
   :ensure nil
   ;; :elpaca (dipper :host github :repo "meqif/.emacs.d" :files ("lisp/dipper.el"))
-  :elpaca nil
   :load-path "lisp/"
   :config
   (defun dipper-filtered ()
@@ -1372,7 +1370,7 @@ unnecessary."
 
 (use-package vundo
   :after general
-  :elpaca (vundo :type git :host github :repo "casouri/vundo")
+  :ensure (vundo :type git :host github :repo "casouri/vundo")
   :config
   (general-evil-leader-define-key "u" #'vundo))
 
@@ -1422,7 +1420,7 @@ unnecessary."
   (add-hook 'imenu-after-jump-hook #'pulsar-reveal-entry))
 
 (use-package substitute
-  :elpaca (substitute :type git :host sourcehut :repo "meqif/substitute")
+  :ensure (substitute :type git :host sourcehut :repo "meqif/substitute")
   :config
   (setq substitute-highlight t))
 
@@ -1451,9 +1449,10 @@ unnecessary."
 
 (use-package gleam-ts-mode
   :mode "\\.gleam\\'"
-  :elpaca (:repo "https://github.com/gleam-lang/gleam-mode.git" :branch "gleam-ts-mode"))
+  :ensure (:repo "https://github.com/gleam-lang/gleam-mode.git" :branch "gleam-ts-mode"))
 
-(use-package server :elpaca nil
+(use-package server
+  :ensure nil
   :defer 2
   :delight server-buffer-clients
   ;; Start server if it isn't already running
