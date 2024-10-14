@@ -28,3 +28,7 @@
 ;; compiled ahead-of-time when they are installed and site files are compiled
 ;; when gccemacs is installed.
 (setq comp-deferred-compilation nil)
+
+(when (featurep 'native-compile)
+  ;; Silence compiler warnings as they can be pretty disruptive
+  (setq native-comp-async-report-warnings-errors nil))
