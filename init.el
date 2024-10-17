@@ -583,9 +583,6 @@
   (setq org-superstar-leading-bullet ?\s
         org-superstar-headline-bullets-list '(?① ?② ?③ ?④ ?⑤ ?⑥)))
 
-(use-package org-ql
-  :after org)
-
 (use-package yasnippet
   :defer 1
   :config
@@ -1180,12 +1177,6 @@ unnecessary."
 (unbind-key (kbd "s-k"))
 (unbind-key (kbd "s-p"))
 
-(use-package faun-mode
-  :ensure nil
-  :after 'org
-  :load-path "lisp/"
-  :delight "👹")
-
 ;; Wrap lines in visual-line-mode at the fill column
 (use-package visual-fill-column
   :disabled
@@ -1344,25 +1335,6 @@ unnecessary."
   (setq bookmark-save-flag 1))
 
 (use-package burly)
-
-(use-package ts :defer)
-(use-package ghub :defer)
-(use-package dipper
-  :defer
-  :commands display-pending-pull-requests filtered-pending-pull-requests
-  ;; :after (:all ghub dash s ts)
-  :ensure nil
-  ;; :elpaca (dipper :host github :repo "meqif/.emacs.d" :files ("lisp/dipper.el"))
-  :load-path "lisp/"
-  :config
-  (defun dipper-filtered ()
-    (interactive)
-    (org-ql-search
-      (list (get-buffer "*Pending pull requests*"))
-      '(and (todo) (not (tags "stale")))
-      :sort '(date)
-      :narrow nil
-      :super-groups '((:auto-parent)))))
 
 ;; First try to indent the current line, and if the line
 ;; was already indented, then try `completion-at-point'
