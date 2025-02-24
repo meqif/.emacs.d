@@ -446,6 +446,7 @@
                 #'recentf-cleanup-quiet))
 
 (use-package corfu
+  :if (version< emacs-version "30.1")
   :ensure (:files (:defaults "extensions/*"))
   :demand
   :bind
@@ -461,6 +462,12 @@
         corfu-preselect-first nil
         corfu-cycle t
         corfu-popupinfo-delay 0.2))
+
+(use-package completion-preview
+  :unless (version< emacs-version "30.1")
+  :ensure nil
+  :config
+  (global-completion-preview-mode))
 
 (use-package svg-lib
   :defer
