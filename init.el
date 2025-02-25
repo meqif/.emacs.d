@@ -781,6 +781,10 @@
 (use-package magit
   :bind ("C-x g" . magit-status)
   :init
+  ;; Fix evenp not being available in Emacs 30
+  (when (not (functionp 'evenp))
+    (require 'cl-lib)
+    (defalias 'evenp 'cl-evenp))
   (general-evil-leader-define-key "g" #'magit-status)
   ;; Mark setup instructions as read
   (setq magit-last-seen-setup-instructions "1.4.0"
