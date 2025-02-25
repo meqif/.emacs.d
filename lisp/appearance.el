@@ -32,17 +32,22 @@
   (set-face-attribute 'org-done nil :inverse-video t)
   (set-face-attribute 'org-todo nil :inverse-video t))
 
+(defvar day-theme
+  (if (version< emacs-version "30.0")
+      'modus-operandi
+    'modus-operandi-tinted))
+
+(defvar night-theme 'ef-elea-dark)
+
 (use-package circadian
   :config
   (add-hook 'circadian-after-load-theme-hook
             #'(lambda (theme)
-                (cond ((eq theme 'modus-operandi)
-                       (set-face-attribute 'default nil :font "MonoLisa 1.1 14"))
-                      ((eq theme 'ef-elea-dark)
-                       (set-face-attribute 'default nil :font "MonoLisa 1.1 15")))))
+                (cond ((eq theme day-theme)
+                       (set-face-attribute 'default nil :font "MonoLisa 1.2 v3 14")))))
   (setq circadian-themes
-        '(("8:00" . modus-operandi)
-          ("17:00" . ef-elea-dark)))
+        `(("8:00" . ,day-theme)
+          ("17:00" . ,night-theme)))
 
   (circadian-setup))
 
