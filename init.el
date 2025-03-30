@@ -398,6 +398,9 @@
               ("C-u C-c C-o" . embark-collect)
               ("C-c C-o" . embark-export)
               ("C-c C-c" . embark-act))
+  :init
+  (defvar ffap-c-path '("/usr/include" "/usr/local/include")
+    "List of directories to search for include files.")
   :config
   (general-define-key :keymaps 'embark-collect-mode-map
                       "M-n" #'(lambda () (interactive) (forward-button 1) (push-button))
