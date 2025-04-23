@@ -1427,6 +1427,7 @@ unnecessary."
   :hook (text-mode . jinx-mode))
 
 (use-package treesit-auto
+  :disabled
   :config
   (setq treesit-auto-install 'prompt)
   (global-treesit-auto-mode))
