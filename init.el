@@ -105,6 +105,13 @@
 
 (elpaca project)
 
+(require 'cl-lib)
+;; Provide cl-lib function aliases for compatibility
+(unless (fboundp 'evenp)
+  (defalias 'evenp 'cl-evenp))
+(unless (fboundp 'incf)
+  (defalias 'incf 'cl-incf))
+
 (use-package dash
   :defer t
   :config (dash-enable-font-lock))
