@@ -724,7 +724,8 @@
   (add-to-list 'eglot-server-programs '(python-mode "pyright-langserver" "--stdio"))
   (setq eglot-autoshutdown t
         eglot-sync-connect nil
-        eglot-autoreconnect nil)
+        eglot-autoreconnect nil
+        eglot-connection-timeout nil)
 
   ;; Fix "proc macro Deserialize not expanded"
   (setq-default eglot-workspace-configuration
