@@ -1438,6 +1438,15 @@ unnecessary."
   :mode "\\.gleam\\'"
   :ensure (:repo "https://github.com/gleam-lang/gleam-mode.git" :branch "gleam-ts-mode"))
 
+(use-package eat
+  :hook (eat-mode . (lambda () (setq-local nobreak-char-display nil))))
+
+(use-package claude-code-ide
+  :ensure (claude-code-ide :type git :host github :repo "manzaltu/claude-code-ide.el"
+                           :files (:defaults "*"))
+  :config
+  (setq claude-code-ide-terminal-backend 'eat))
+
 (use-package server
   :ensure nil
   :defer 2
